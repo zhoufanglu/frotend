@@ -13,7 +13,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="scss" type="text/scss">
     .home {
         .head {
             color: red;
