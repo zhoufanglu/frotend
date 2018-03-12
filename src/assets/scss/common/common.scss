@@ -1,0 +1,97 @@
+@import "./color.scss";
+@mixin vertical-center { // 垂直水平居中
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin ellipsis($line){ // 超出行显示...
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+    overflow: hidden;
+}
+
+@mixin navbar-style($navbar-height){ //标题栏
+    display: flex;
+    color: $white;
+    padding-right: 15px;
+    background: linear-gradient(to right, $theme, $theme_lighter);
+    height: $navbar-height;
+}
+
+@mixin navbar($navbar-height:50px) {
+    @include navbar-style($navbar-height);
+    justify-content: center;
+    align-items: center;
+    .back{
+        position: absolute;
+        left: 10px;
+        .iconfont{
+            font-size: 22px;
+            cursor: pointer;
+        }
+    }
+}
+
+@mixin caret($margin-left:8px) {
+    margin-left: $margin-left;
+    margin-top: 2px;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+
+.ezi-icon-file {
+    background-position: -64px 0;
+}
+
+.vis-hidden{
+    visibility: hidden;
+}
+
+@mixin small-round-theme($color){ //小圆点
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border: 1px solid $color;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 10px;
+}
+/* 向上的箭头 */
+.arrow{
+    font-size: 0;
+    line-height: 0;
+    border: 4px dashed $dark;
+    vertical-align: middle;
+}
+.arrow-top {
+    border-top-width: 0;
+    border-bottom-style: solid;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+/* 向右的箭头 */
+.arrow-right {
+    border-right-width: 0;
+    border-left-style: solid;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}
+/* 向下的箭头 */
+.arrow-bottom {
+    border-bottom-width: 0;
+    border-top-style: solid;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+/* 向左的箭头 */
+.arrow-left {
+    border-left-width: 0;
+    border-right-style: solid;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}

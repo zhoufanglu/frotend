@@ -1,17 +1,18 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+    <div id="app">
+        <router-view/>
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+    //import "@/assets/scss/common/common.scss"
+    export default {
+        name: 'App'
+    }
 </script>
 
-<style>
-#app {
-
-}
+<style lang="scss">
+    #app {
+    
+    }
 </style>

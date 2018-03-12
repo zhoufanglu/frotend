@@ -11,6 +11,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
 
+//定义全局components
+import '@/assets/js/golbalTemplate.js'
+
 new Vue({
   el: '#app',
   router,
