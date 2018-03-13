@@ -1,4 +1,7 @@
 @charset "UTF-8";
+//定义主题颜色
+$theme-type : "teachep"; //教学管理系统
+//$theme-type : "tog";
 //灰度分成6个等级
 $white: #fff;
 $light: #ddd;
@@ -6,6 +9,7 @@ $stable: #999;
 $dark: #666;
 $darker: #333;
 $black: #000;
+$border-color:#f7f7f7;
 //提示色
 $positive: #3399ff;
 $danger: #fe575c;
@@ -13,3 +17,16 @@ $warning: #ffe002;
 $balanced: #8ad350;
 $calm: #00aaaf;
 $theme: #3399ff;
+
+@if $theme-type == "teachep" {
+  $theme: #2B333B;
+}
+
+@if $theme-type == "boc" {  //中国银行主体颜色
+  $theme: #B6012E;
+}
+
+//提亮
+$theme_lighter: lighten($theme,10%);
+//变暗
+$theme_darker: darken($theme,10%);

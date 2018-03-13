@@ -1,0 +1,25 @@
+.home{
+  .content{
+    .content-top{
+      box-shadow: 0 4px 8px 0 rgba(7,17,27,.1);
+      border-radius: 12px;
+      background-color: $theme;
+      color: $white;
+      .el-col-6{
+        padding: 10px 0 10px 10px;
+        .s-row{
+          height: 60px;
+          @include vertical-center;
+          justify-content: space-around;
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+          padding-left: 10px;
+          &:hover{
+            cursor: pointer;
+            background-color:$theme_lighter;
+          }
+        }
+      }
+    }
+  }
+}
