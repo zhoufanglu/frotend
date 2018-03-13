@@ -5,9 +5,8 @@
 </template>
 
 <script>
-    //import "@/assets/scss/common/common.scss"
     export default {
-        name: 'App'
+        name: 'App',
     }
 </script>
 

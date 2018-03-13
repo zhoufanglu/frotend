@@ -16,6 +16,9 @@
         },
         components: {
         
+        },
+        created() {
+            console.log()
         }
     }
 </script>

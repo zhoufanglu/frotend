@@ -1,5 +1,5 @@
 <template>
-    <div class="teachHead">
+    <div class="teach-head">
         我是头
     </div>
 </template>
@@ -11,7 +11,7 @@
 </script>
 
 <style scoped lang="scss">
-    .head{
-       //color: $theme;
+    .teach-head{
+       color: $theme;
     }
 </style>

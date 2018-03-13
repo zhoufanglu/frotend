@@ -10,7 +10,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
-
+//全局scss-在util中引入了---common.scss
 //定义全局components
 import '@/assets/js/golbalTemplate.js'
 
