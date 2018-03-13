@@ -8,7 +8,9 @@ Vue.config.productionTip = false
 //element
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import '@/assets/scss/common/element_modify.scss';
 Vue.use(ElementUI);
+
 
 //全局scss-在util中引入了---common.scss
 //定义全局components
