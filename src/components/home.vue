@@ -80,6 +80,7 @@
                                 <!--背景图片-->
                                 <div class="bg-img">
                                     <img :src="headSrcLink2" alt="" width="100%" height="100%">
+                                    <div class="lesson-type">{{j.type}}</div>
                                 </div>
                                 <div class="name">{{j.name}}</div>
                                 <div class="small-item">
