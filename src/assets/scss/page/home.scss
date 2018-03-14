@@ -1,25 +1,118 @@
-.home{
-  .content{
-    .content-top{
-      box-shadow: 0 4px 8px 0 rgba(7,17,27,.1);
-      border-radius: 12px;
-      background-color: $theme;
-      color: $white;
-      .el-col-6{
-        padding: 10px 0 10px 10px;
-        .s-row{
-          height: 60px;
-          @include vertical-center;
-          justify-content: space-around;
-          border-top-left-radius: 10px;
-          border-bottom-left-radius: 10px;
-          padding-left: 10px;
-          &:hover{
-            cursor: pointer;
-            background-color:$theme_lighter;
-          }
+$content-top-height:300px;
+.home {
+    .content {
+        padding-bottom: 30px;
+        .content-top {
+            box-shadow: 0 4px 8px 0 rgba(7, 17, 27, .1);
+            border-radius: 12px;
+            background-color: $theme;
+            color: $white;
+            min-height:$content-top-height;
+            .el-col-6 {
+                padding: 0 0 0 16px;
+                .grid-content{
+                    height: $content-top-height;
+                }
+                .s-row {
+                    height: calc(#{$content-top-height}/4);
+                    @include vertical-center;
+                    .left-title {
+                        background-color: $theme;
+                        width: 100%;
+                        height: 100%;
+                        border: none;
+                        justify-content: space-around;
+                        border-top-left-radius: 10px;
+                        border-bottom-left-radius: 10px;
+                        padding-left: 10px;
+                        font-size: 20px;
+                        color: $light;
+                        cursor: pointer;
+                        &:hover {
+                            background-color: $theme_lighter;
+                        }
+                    }
+                    .hover {
+                        background-color: $theme_lighter;
+                    }
+                }
+            }
         }
-      }
+        .content-panel{
+            .title{
+                margin-top: 20px;
+                text-align: center;
+                height: $head-height;
+                line-height: $head-height;
+                @include bold-font(20px);
+            }
+            .body{
+
+            }
+        }
     }
-  }
+}
+//element 组件初始化
+.el-popover {
+    background-color: $white!important;
+    position: absolute!important;
+    top:calc(#{$head-height} + 10px)!important;
+    width: 40%;
+    padding: 0;
+    margin: 0;
+    height: calc(#{$content-top-height} - 24px);
+}
+.lesson-row:not(:first-of-type){
+    margin-top: 30px;
+}
+.lesson-item{
+    display: flex;
+    flex-direction: column;
+    color: $theme;
+    cursor: pointer;
+    height: 200px;
+    &:hover{
+        .bg-img{
+            box-shadow: 0 4px 8px 0 rgba(7, 17, 27, .1);
+        }
+        .small-item{
+            color: $darker;
+        }
+    }
+    .bg-img{
+        border-radius: 12px;
+        height: 80%;
+        border: solid 1px $stable;
+        overflow: hidden;
+        position: relative;
+        .lesson-type{
+            position: absolute;
+            color: $light;
+            bottom: 4%;
+            left: 6%;
+            font-size: 14px;
+            width: 50px;
+            border-radius: 20px;
+            text-align: center;
+            padding: 2px 0;
+            background-color: rgba(0,0,0,0.6);
+            @include ellipsis(1);
+        }
+    }
+    .name{
+        margin-top: 6px;
+        padding-left: 10px;
+    }
+    .small-item{
+        color: $stable;
+        font-size: 12px;
+        margin-top: 6px;
+        padding-left: 10px;
+        span:last-of-type{
+            margin-left: 10px;
+        }
+        i{
+            margin-left: 10px;
+        }
+    }
 }

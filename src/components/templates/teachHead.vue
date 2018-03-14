@@ -32,7 +32,7 @@
        @include vertical-center;
         justify-content: space-between;
         padding: 0 40px;
-        height: 80px;
+        height: $head-height;
         border-bottom: solid 1px $stable;
         .name{
             font-size: 24px;

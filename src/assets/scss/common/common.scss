@@ -1,9 +1,12 @@
 @import "./color.scss";
 @import "./layout.scss";
+@import "../icon_font/icon_font.scss";
 body{
     margin: 0;
     padding: 0;
 }
+//动态数据
+$head-height:80px;
 @mixin vertical-center { // 垂直水平居中
     display: flex;
     align-items: center;
@@ -45,6 +48,13 @@ body{
     border-top: 4px dashed;
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
+}
+
+@mixin bold-font($size){
+    color: $darker;
+    font-weight: 600;
+    font-size: $size;
+    letter-spacing: 6px;
 }
 
 
