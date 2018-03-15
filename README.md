@@ -27,7 +27,11 @@ npm run e2e
 npm test
 
 ```
-## 换肤实现
+### 换肤实现
  主题的设置  改变`color.scss`中的 `$theme-type` 这个参数 就可以修改主题颜色，目前只有`teachep`  
+ 
+### mock.js 
+用法,找到main.js的useMock(' ')里面的参数，ture为打开，false为关闭
+ 
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
