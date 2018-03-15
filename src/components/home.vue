@@ -143,6 +143,13 @@
         },
         created() {
             console.log(122,this.lessons);
+            this.$http.get('/api/cc/json/mobile_tel_segment.htm?tel=18551235280')
+                .then( response => {
+                    console.log(148,response);
+                })
+                .catch( err => {
+                    console.log(err);
+                });
         }
     }
 </script>
