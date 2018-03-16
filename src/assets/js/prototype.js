@@ -1,14 +1,25 @@
 //此js定义VUE原型链上的方法
 import Vue from 'vue'
-import axios from 'axios' //axios
+import axios from 'axios'
+import {post,fetch,patch,put} from '@/assets/js/http'             //axios封装
 
 let usePrototype = () =>{
 
     Vue.prototype.$http = axios;
-    //需要使用axios的其他组件调用时可以通过两种方法
-    //Vue.$http.get(`url${params}`)
-    //this.$http.get(`url${params}`)
-    //但是这样使用会出现一个问题，在单独的js文件中这样做调用不了$http,原因是没有Vue的实例。大多数情况下用这种方法就可以满足大部分需求了
+    //定义全局变量
+    Vue.prototype.$post = post;
+    Vue.prototype.$fetch = fetch;
+    Vue.prototype.$patch = patch;
+    Vue.prototype.$put = put;
+    /**
+     * 请求头设置
+     */
+    Vue.prototype._axios = axios.create({
+        headers: {
+            'Content-Type': 'application/json',
+            timeout: 3000,
+        },
+    });
 }
 
 export default usePrototype;

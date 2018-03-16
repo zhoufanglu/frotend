@@ -111,7 +111,7 @@
                 isHover4:false,
                 //content-panel
                 lessonTitle:'类别标题',
-                lessons:[
+                lessons:[/*
                     {
                         lesson:[
                             {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666'},
@@ -131,7 +131,7 @@
                             {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666'},
                             {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666'},
                         ]
-                    },
+                    },*/
                 ]
             }
         },
@@ -142,26 +142,13 @@
 
         },
         created() {
-            console.log(122,this.lessons);
-            /*this.$http.get('/api/cc/json/mobile_tel_segment.htm?tel=18551235280')
-                .then( response => {
-                    console.log(148,response);
+            this.$post('/api/data')
+                .then((response) => {
+                    this.lessons = response.lessons;
+                    console.log(response);
                 })
-                .catch( err => {
+                .catch(error =>{
                     console.log(err);
-                });*/
-            this.$http.post(
-                '/api/data',
-                {
-                    params:{
-
-                    }
-                })
-                .then(function (data) {
-                    console.log(58,data)
-                })
-                .catch(function (error) {
-                    console.log(error);
                 });
         }
     }
