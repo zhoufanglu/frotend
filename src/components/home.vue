@@ -37,8 +37,8 @@
                             <div class="grid-content">
                                 <div class="shuffling">
                                     <el-carousel>
-                                        <el-carousel-item v-for="item in 4" :key="item">
-                                            <img :src="headSrcLink" alt="" height="100%" width="100%">
+                                        <el-carousel-item v-for="item in shuffling_img_link" :key="item">
+                                            <img :src="item" alt="" height="100%" width="100%">
                                             <div>{{ item }}</div>
                                         </el-carousel-item>
                                     </el-carousel>
@@ -51,14 +51,14 @@
                 </div>
             </div>
             <div class="content-panel">
-                <div class="title">{{lessonTitle}}</div>
+                <div class="title">{{lesson_title[0]}}</div>
                 <div content="body">
                     <el-row class="lesson-row" :gutter="40"type="flex" justify="center" v-for="(i,index) in lessons" :key="index" >
                         <el-col :span="4" v-for="(j,index) in i.lesson" :key="index">
                             <a class="grid-content lesson-item bg-purple">
                                 <!--背景图片-->
                                 <div class="bg-img">
-                                    <img :src="headSrcLink2" alt="" width="100%" height="100%">
+                                    <img :src="j.img_link" alt="" width="100%" height="100%">
                                     <div class="lesson-type">{{j.type}}</div>
                                 </div>
                                 <div class="name">{{j.name}}</div>
@@ -72,14 +72,14 @@
             </div>
 
             <div class="content-panel">
-                <div class="title">{{lessonTitle}}</div>
+                <div class="title">{{lesson_title[1]}}</div>
                 <div content="body">
                     <el-row class="lesson-row" :gutter="40"type="flex" justify="center" v-for="(i,index) in lessons" :key="index" >
                         <el-col :span="4" v-for="(j,index) in i.lesson" :key="index">
                             <a class="grid-content lesson-item bg-purple">
                                 <!--背景图片-->
                                 <div class="bg-img">
-                                    <img :src="headSrcLink2" alt="" width="100%" height="100%">
+                                    <img :src="j.img_link" alt="" width="100%" height="100%">
                                     <div class="lesson-type">{{j.type}}</div>
                                 </div>
                                 <div class="name">{{j.name}}</div>
@@ -110,46 +110,30 @@
                 isHover3:false,
                 isHover4:false,
                 //content-panel
-                lessonTitle:'类别标题',
-                lessons:[/*
-                    {
-                        lesson:[
-                            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666'},
-                            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666'},
-                            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666'},
-                            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666'},
-                            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666'},
-                            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666'},
-                        ]
-                    },
-                    {
-                        lesson:[
-                            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666'},
-                            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666'},
-                            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666'},
-                            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666'},
-                            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666'},
-                            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666'},
-                        ]
-                    },*/
-                ]
+                shuffling_img_link:[],    //轮播图
+                lesson_title:[],          //一级课题标题
+                lessons:[]                //课程信息
             }
         },
         components: {
         
         },
         methods:{
-
+            getLessons(){
+                this.$post('/api/data')
+                    .then((response) => {
+                        this.lessons = response.lessons;
+                        this.shuffling_img_link = response.shuffling_img_link;
+                        this.lesson_title = response.lesson_title;
+                        console.log(response);
+                    })
+                    .catch(error =>{
+                        console.log(err);
+                    });
+            }
         },
         created() {
-            this.$post('/api/data')
-                .then((response) => {
-                    this.lessons = response.lessons;
-                    console.log(response);
-                })
-                .catch(error =>{
-                    console.log(err);
-                });
+            this.getLessons();  //获取课程信息
         }
     }
 </script>

@@ -7,14 +7,16 @@ let useMock = (isOpenMock) =>{
     let Random = Mock.Random;
 
     Mock.mock('/api/data',{
+        'lesson_title|2':[()=>Random.ctitle()],
+        'shuffling_img_link|4':[()=>Random.dataImage()],
         'lessons|2': [{
             'lesson|6':[{
                 name:()=>Random.ctitle(),
                 type:'类别',
                 introduction:()=>Random.ctitle(),
                 level:'初级 ',
-                imgLink:Random.dataImage(),
-                number:Random.integer( 1, 9999 )
+                img_link:()=>Random.dataImage(),
+                number:()=>Random.integer( 1, 9999 )
             }],
         }]
     });
