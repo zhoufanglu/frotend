@@ -11,25 +11,25 @@
                                     <el-popover class="show-panel"  :visible-arrow="false" trigger="hover" ref="popover1" placement="right" @show="isHover1=true" @hide="isHover1=false" >
                                         <div>内容1</div>
                                     </el-popover>
-                                    <el-button :open-delay="0" v-popover:popover1 class="left-title" :class="{hover:isHover1}">渗透测试1<i class="el-icon-arrow-right"></i></el-button>
+                                    <el-button :open-delay="0" v-popover:popover1 class="left-title" :class="{hover:isHover1}">{{top_title[0]}}<i class="el-icon-arrow-right"></i></el-button>
                                 </div>
                                 <div class="s-row">
                                     <el-popover class="show-panel"  :visible-arrow="false" trigger="hover" ref="popover2" placement="right" @show="isHover2=true" @hide="isHover2=false" >
                                         <div>内容2</div>
                                     </el-popover>
-                                    <el-button :open-delay="0" v-popover:popover2 class="left-title" :class="{hover:isHover2}">渗透测试2<i class="el-icon-arrow-right"></i></el-button>
+                                    <el-button :open-delay="0" v-popover:popover2 class="left-title" :class="{hover:isHover2}">{{top_title[1]}}<i class="el-icon-arrow-right"></i></el-button>
                                 </div>
                                 <div class="s-row">
                                     <el-popover class="show-panel"  :visible-arrow="false" trigger="hover" ref="popover3" placement="right" @show="isHover3=true" @hide="isHover3=false" >
                                         <div>内容3</div>
                                     </el-popover>
-                                    <el-button :open-delay="0" v-popover:popover3 class="left-title" :class="{hover:isHover3}">渗透测试3<i class="el-icon-arrow-right"></i></el-button>
+                                    <el-button :open-delay="0" v-popover:popover3 class="left-title" :class="{hover:isHover3}">{{top_title[2]}}<i class="el-icon-arrow-right"></i></el-button>
                                 </div>
                                 <div class="s-row">
                                     <el-popover class="show-panel"  :visible-arrow="false" trigger="hover" ref="popover4" placement="right" @show="isHover4=true" @hide="isHover4=false" >
                                         <div>内容4</div>
                                     </el-popover>
-                                    <el-button :open-delay="0" v-popover:popover4 class="left-title" :class="{hover4:isHover4}">渗透测试4<i class="el-icon-arrow-right"></i></el-button>
+                                    <el-button :open-delay="0" v-popover:popover4 class="left-title" :class="{hover4:isHover4}">{{top_title[3]}}<i class="el-icon-arrow-right"></i></el-button>
                                 </div>
                             </div>
                         </el-col>
@@ -110,6 +110,7 @@
                 isHover3:false,
                 isHover4:false,
                 //content-panel
+                top_title:[],             //轮播左边的标题
                 shuffling_img_link:[],    //轮播图
                 lesson_title:[],          //一级课题标题
                 lessons:[]                //课程信息
@@ -125,6 +126,7 @@
                         this.lessons = response.lessons;
                         this.shuffling_img_link = response.shuffling_img_link;
                         this.lesson_title = response.lesson_title;
+                        this.top_title = response.top_title;
                         console.log(response);
                     })
                     .catch(error =>{

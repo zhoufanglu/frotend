@@ -7,6 +7,7 @@ let useMock = (isOpenMock) =>{
     let Random = Mock.Random;
 
     Mock.mock('/api/data',{
+        'top_title|4':[()=>Random.ctitle()],
         'lesson_title|2':[()=>Random.ctitle()],
         'shuffling_img_link|4':[()=>Random.dataImage()],
         'lessons|2': [{
