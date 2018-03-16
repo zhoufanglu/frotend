@@ -22,6 +22,12 @@ let useMock = (isOpenMock) =>{
         }]
     });
 
+    Mock.mock('/api/lesson/lesson_type',{
+        'direction|6':[{name:()=>Random.ctitle(),id:()=>Random.integer( 1, 9999 )}], //方向
+        'classify|20':[{name:()=>Random.ctitle(),id:()=>Random.integer( 1, 9999 )}],   //分类
+        'type|7':[{name:()=>Random.ctitle(),id:()=>Random.integer( 1, 9999 )}]
+    });
+
 
 
 }

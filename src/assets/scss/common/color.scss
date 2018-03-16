@@ -30,3 +30,23 @@ $theme: #3399ff;
 $theme_lighter: lighten($theme,10%);
 //变暗
 $theme_darker: darken($theme,10%);
+
+//常用功能样式
+.fn-text-center{text-align:center !important;}
+.fn-text-right{text-align:right !important;}
+.fn-text-left{text-align:left !important;}
+.fn-color-theme{color:$theme !important;}
+.fn-color-notStart{color:#3399ff !important;}
+.fn-color-calm{color:$calm !important;}
+.fn-color-black{color:$black !important;}
+.fn-color-dark{color:$dark !important;}
+.fn-color-warning{color:$warning !important;}
+.fn-color-danger{color:$danger !important;}
+.fn-color-stable{color:$stable !important;}
+.fn-color-light{color:$light !important;}
+.fn-color-balanced{color: $balanced !important;}
+.fn-bg-white{background-color:$white !important;}
+.fn-bg-warning{background-color:$warning !important;}
+.fn-bg-danger{background-color:$danger !important;}
+.fn-bg-stable{background-color:$stable !important;}
+.fn-bg-theme{background-color:$theme !important;}

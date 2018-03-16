@@ -110,3 +110,17 @@ $head-height:80px;
     border-top-color: transparent;
     border-bottom-color: transparent;
 }
+
+.show-vis{
+    visibility: visible;
+}
+.hide-vis{
+    visibility: hidden;
+}
+.remove-a-css{
+    text-decoration: none;
+    color: $stable;
+    &:visited{
+        color: $stable;
+    }
+}

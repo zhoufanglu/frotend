@@ -1,0 +1,32 @@
+.lesson{
+    .content-head{
+        margin-top: 30px;
+        .top {
+
+        }
+    }
+}
+//element初始化
+.el-radio-button{
+    span{
+        border: none!important;
+        border-radius: 6px;
+        color: $darker;
+        font-size: 18px;
+        font-weight: 600;
+    }
+}
+.item-title{
+    border: none!important;
+    span{
+        color: $darker!important;
+        &:hover{
+            cursor: auto!important;
+        }
+    }
+}
+.el-radio-group:not(:last-of-type){
+    border-bottom: solid 1px $light;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+}
