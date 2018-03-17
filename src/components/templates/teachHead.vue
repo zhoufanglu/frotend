@@ -1,12 +1,12 @@
 <template>
     <div class="teach-head" :class="bg_color" >
         <div class="name">
-            <router-link to="/home" :class="text_color">教学管理系统</router-link>
+            <router-link class="remove-a-css" to="/home" :class="text_color">教学管理系统</router-link>
         </div>
         <div class="is-show-head" :class="show_hide_vis">
-            <span><router-link to="/lesson_center">课程中心</router-link></span>
-            <span><router-link to="/find">发现</router-link></span>
-            <span><router-link to="/help">帮助</router-link></span>
+            <span><router-link class="remove-a-css" to="/lesson_center">课程中心</router-link></span>
+            <span><router-link class="remove-a-css" to="/find">发现</router-link></span>
+            <span><router-link class="remove-a-css" to="/help">帮助</router-link></span>
             <el-input class="head-search"
                     placeholder="搜索"
                     prefix-icon="el-icon-search"
@@ -49,7 +49,7 @@
         .is-show-head{
             @include vertical-center;
             justify-content: space-between;
-            width: 30%;
+            width: 40%;
             height: 100%;
             padding: 0 10px;
             @extend .name;

@@ -119,8 +119,9 @@ $head-height:80px;
 }
 .remove-a-css{
     text-decoration: none;
-    color: $stable;
+    color: $white;
+    @include ellipsis(1);
     &:visited{
-        color: $stable;
+        color: $white;
     }
 }
