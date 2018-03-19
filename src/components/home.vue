@@ -53,10 +53,9 @@
             <div class="content-panel">
                 <div class="title">{{lesson_title[0]}}</div>
                 <div content="body">
-                    <el-row class="lesson-row" :gutter="40"type="flex" justify="center" v-for="(i,index) in lessons" :key="index" >
-                        <el-col :span="4" v-for="(j,index) in i.lesson" :key="index">
+                    <el-row class="lesson-row" :gutter="40" justify="center">
+                        <el-col :span="4" v-for="(j,index) in lesson_one" :key="index">
                             <a class="grid-content lesson-item bg-purple">
-                                <!--背景图片-->
                                 <div class="bg-img">
                                     <img :src="j.img_link" alt="" width="100%" height="100%">
                                     <div class="lesson-type">{{j.type}}</div>
@@ -74,8 +73,8 @@
             <div class="content-panel">
                 <div class="title">{{lesson_title[1]}}</div>
                 <div content="body">
-                    <el-row class="lesson-row" :gutter="40"type="flex" justify="center" v-for="(i,index) in lessons" :key="index" >
-                        <el-col :span="4" v-for="(j,index) in i.lesson" :key="index">
+                    <el-row class="lesson-row" :gutter="40" justify="center" >
+                        <el-col :span="4" v-for="(j,index) in lesson_two" :key="index">
                             <a class="grid-content lesson-item bg-purple">
                                 <!--背景图片-->
                                 <div class="bg-img">
@@ -117,7 +116,8 @@
                 top_title:[],             //轮播左边的标题
                 shuffling_img_link:[],    //轮播图
                 lesson_title:[],          //一级课题标题
-                lessons:[]                //课程信息
+                lesson_one:[],            //课程信息
+                lesson_two:[]             //课程信息
             }
         },
         components: {
@@ -127,7 +127,8 @@
             getLessons(){
                 this.$post('/api/data')
                     .then((response) => {
-                        this.lessons = response.lessons;
+                        this.lesson_one = response.lesson_one;
+                        this.lesson_two = response.lesson_two;
                         this.shuffling_img_link = response.shuffling_img_link;
                         this.lesson_title = response.lesson_title;
                         this.top_title = response.top_title;

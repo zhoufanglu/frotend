@@ -71,6 +71,7 @@ $content-top-height:300px;
     color: $theme;
     cursor: pointer;
     height: 200px;
+    margin-top: 30px;
     &:hover{
         .bg-img{
             box-shadow: 0 4px 8px 0 rgba(7, 17, 27, .1);
@@ -100,6 +101,7 @@ $content-top-height:300px;
         }
     }
     .name{
+        @include ellipsis(1);
         margin-top: 6px;
         padding-left: 10px;
     }

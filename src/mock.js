@@ -10,15 +10,21 @@ let useMock = (isOpenMock) =>{
         'top_title|4':[()=>Random.ctitle()],
         'lesson_title|2':[()=>Random.ctitle()],
         'shuffling_img_link|4':[()=>Random.dataImage()],
-        'lessons|2': [{
-            'lesson|6':[{
-                name:()=>Random.ctitle(),
-                type:'类别',
-                introduction:()=>Random.ctitle(),
-                level:'初级 ',
-                img_link:()=>Random.dataImage(),
-                number:()=>Random.integer( 1, 9999 )
-            }],
+        'lesson_one|12':[{
+            name:()=>Random.ctitle(),
+            type:'类别',
+            introduction:()=>Random.ctitle(),
+            level:'初级 ',
+            img_link:()=>Random.dataImage(),
+            number:()=>Random.integer( 1, 9999 )
+        }],
+        'lesson_two|12':[{
+            name:()=>Random.ctitle(),
+            type:'类别',
+            introduction:()=>Random.ctitle(),
+            level:'初级 ',
+            img_link:()=>Random.dataImage(),
+            number:()=>Random.integer( 1, 9999 )
         }]
     });
 

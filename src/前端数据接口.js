@@ -15,28 +15,34 @@ ajax({
       top_title:['渗透测试1','渗透测试1','渗透测试1','渗透测试1','渗透测试1'],  //轮播左边的标题内容，个数需要固定
       lesson_title:['一级标题1','一级标题2'],//一级课题标题
       shuffling_img_link:['img_link'],//轮播图片路径
-      lessons:[                       //课程信息
-        {
-          lesson:[
-            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
-            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
-            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
-            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
-            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
-            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
-          ]
-        },
-        {
-          lesson:[
-            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
-            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
-            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
-            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
-            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
-            {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
-          ]
-        },
-      ]
+      lesson_one: [ // 12项  一级标题1下的课程
+          {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+          {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+          {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+          {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+          {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+          {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+          {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+          {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+          {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+          {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+          {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+          {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+      ],
+      lesson_two: [ // 12项 一级标题2下的课程
+            {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+            {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+            {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+            {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+            {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+            {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+            {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+            {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+            {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+            {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+            {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+            {name: '渗透测试入门基础', type: '课程类别', introduction: '入门', level: '初级', imgLink: '', number: '666', id: 123},
+        ]
     },
     err:{
       msg:'报错信息'
@@ -71,5 +77,33 @@ ajax({
       msg:'报错信息'
     }
   }
+});
+
+ajax({
+    title:'获取课程信息接口',
+    url:'',
+    type:'get',
+    request:{
+        filter_direction: 12, //传的是id,如果为空,就是全部
+        filter_classify:'' , //传的是id,如果为空,就是全部
+        filter_type: 12, //传的是id,如果为空,就是全部
+        sort:'last/pop',//排序----默认是最新，最新/最热
+        is_easy:' ,1,2,3'//难度----默认全部(为空),分为初级，中级，高级
+    },
+    res:{
+        ok:{
+            lesson:[
+                {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
+                {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
+                {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
+                {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
+                {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
+                {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
+            ]
+        },
+        err:{
+            msg:'报错信息'
+        }
+    }
 });
 
