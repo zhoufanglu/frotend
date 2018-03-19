@@ -62,10 +62,10 @@ $content-top-height:300px;
     margin: 0;
     height: calc(#{$content-top-height} - 24px);
 }
-.lesson-row:not(:first-of-type){
+.course-row:not(:first-of-type){
     margin-top: 30px;
 }
-.lesson-item{
+.course-item{
     display: flex;
     flex-direction: column;
     color: $theme;
@@ -86,7 +86,7 @@ $content-top-height:300px;
         border: solid 1px $stable;
         overflow: hidden;
         position: relative;
-        .lesson-type{
+        .course-type{
             position: absolute;
             bottom: 4%;
             left: 6%;

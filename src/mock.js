@@ -8,7 +8,7 @@ let useMock = (isOpenMock) =>{
 
     Mock.mock('/api/data',{
         'top_title|4':[()=>Random.ctitle()],
-        'module|2':[{id:()=>Random.integer( 1, 100 ),name:()=>Random.ctitle()}],
+        'module|2':[{'id':()=>Random.integer( 1, 100 ),'name':()=>Random.ctitle()}],
         'shuffling_img_link|4':[()=>Random.dataImage()],
         'course_one|12':[{
             id:()=>Random.integer( 1, 100 ),
@@ -30,7 +30,7 @@ let useMock = (isOpenMock) =>{
         }]
     });
 
-    Mock.mock('/api/lesson/lesson_type',{
+    Mock.mock('/api/course/course_type',{
         'direction|6':[{name:()=>Random.ctitle(),id:()=>Random.integer( 1, 9999 )}], //方向
         'classify|20':[{name:()=>Random.ctitle(),id:()=>Random.integer( 1, 9999 )}],   //分类
         'type|7':[{name:()=>Random.ctitle(),id:()=>Random.integer( 1, 9999 )}]

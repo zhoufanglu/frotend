@@ -1,0 +1,107 @@
+.course{
+    .content-head{
+        margin-top: 30px;
+    }
+    .content-body{
+        .top{
+            margin: 40px 15%;
+            @include vertical-center;
+            justify-content: space-between;
+            padding: 30px;
+            background-color: $light;
+        }
+    }
+}
+//element初始化
+.el-radio-button{
+    span{
+        border: none!important;
+        border-radius: 6px;
+        color: $darker;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    span:not(:first-child){
+        font-weight: normal;
+    }
+}
+.item-title{
+    border: none!important;
+    span{
+        color: $darker!important;
+        font-weight: 600!important;
+        &:hover{
+            cursor: auto!important;
+        }
+    }
+}
+//element 组件初始化
+.el-radio-group:not(:last-of-type){
+    border-bottom: solid 1px $light;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+}
+
+
+.course-row:not(:first-of-type){
+    margin-top: 30px;
+}
+.course-item{
+    display: flex;
+    flex-direction: column;
+    color: $theme;
+    cursor: pointer;
+    height: 200px;
+    margin-top: 30px;
+    &:hover{
+        .bg-img{
+            box-shadow: 0 4px 8px 0 rgba(7, 17, 27, .1);
+        }
+        .small-item{
+            color: $darker;
+        }
+    }
+    .bg-img{
+        border-radius: 12px;
+        height: 80%;
+        border: solid 1px $stable;
+        overflow: hidden;
+        position: relative;
+        .course-type{
+            position: absolute;
+            bottom: 4%;
+            left: 6%;
+            font-size: 14px;
+            @include vertical-center;
+            span{
+                @include ellipsis(1);
+                text-align: center;
+                color: $light;
+                width: 50px;
+                border-radius: 20px;
+                background-color: rgba(0,0,0,0.6);
+                padding: 2px 0;
+            }
+            span:not(:first-of-type){
+                margin-left: 10px;
+            }
+        }
+    }
+    .name{
+        @include ellipsis(1);
+        margin-top: 6px;
+        padding-left: 10px;
+    }
+    .small-item{
+        color: $stable;
+        font-size: 12px;
+        margin-top: 6px;
+        padding-left: 10px;
+        span:last-of-type{
+            margin-left: 10px;
+        }
+        i{
+            margin-left: 10px;
+        }
+    }
+}
