@@ -1,5 +1,5 @@
 <template>
-    <div class="lesson-center">
+    <div class="course-center">
         <teach-head :nickName="nickName" :headSrcLink="headSrcLink" :show_hide_vis="show_hide_vis" ></teach-head>
         这是课程中心
     </div>

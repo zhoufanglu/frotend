@@ -4,7 +4,7 @@
             <router-link class="remove-a-css" to="/home" :class="text_color">教学管理系统</router-link>
         </div>
         <div class="is-show-head" :class="show_hide_vis">
-            <span><router-link class="remove-a-css" to="/lesson_center">课程中心</router-link></span>
+            <span><router-link class="remove-a-css" to="/course_center">课程中心</router-link></span>
             <span><router-link class="remove-a-css" to="/find">发现</router-link></span>
             <span><router-link class="remove-a-css" to="/help">帮助</router-link></span>
             <el-input class="head-search"

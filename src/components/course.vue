@@ -1,10 +1,10 @@
 <template>
-    <div class="lesson">
+    <div class="course">
         <teach-head :nickName="nickName" :headSrcLink="headSrcLink" :show_hide_vis="show_hide_vis" ></teach-head>
         <div class="content">
             <!--筛选部分-->
             <div class="content-head">
-                <el-radio-group v-model="filter.direction" @change="lessonTypeChange()">
+                <el-radio-group v-model="filter.direction" @change="courseTypeChange()">
                     <el-radio-button  :disabled="true" class="item-title" label="方向"></el-radio-button>
                     <el-radio-button class="item" label="">全部</el-radio-button>
                     <el-radio-button class="item" v-for="i in types.direction" :key="i.id" :label="i.id">{{i.name+i.id}}</el-radio-button>
@@ -20,24 +20,31 @@
                     <el-radio-button class="item" v-for="i in types.type" :key="i.id" :label="i.id">{{i.name}}</el-radio-button>
                 </el-radio-group>
             </div>
-            <!--课程展示部分-->
-            <div class="content-body">
-                <div class="top">
-                    <div class="sort">
-
-                    </div>
-                    <div class="hard">
-
-                    </div>
+        </div>
+        <!--课程展示部分-->
+        <div class="content-body">
+            <div class="top">
+                <div class="sort">
+                    <el-radio v-model="sort" label="1">最新</el-radio>
+                    <el-radio v-model="sort" label="2">最热</el-radio>
                 </div>
+                <div class="filter.difficult">
+                    <el-radio v-model="filter.difficult" label="">全部</el-radio>
+                    <el-radio v-model="filter.difficult" label="1">初级</el-radio>
+                    <el-radio v-model="filter.difficult" label="2">中级</el-radio>
+                    <el-radio v-model="filter.difficult" label="3">高级</el-radio>
+                </div>
+            </div>
+            <div class="panel">
+
             </div>
         </div>
     </div>
 </template>
 <script>
-    import '@/assets/scss/page/lesson.scss'
+    import '@/assets/scss/page/course.scss'
     export default {
-        name: 'lesson',
+        name: 'course',
         data () {
             return{
                 nickName:'tog',
@@ -51,13 +58,16 @@
                 filter: {
                     direction: '',
                     classify: '',
-                    type: ''
+                    type: '',
+                    difficult:''
                 },
+                sort:'1',
+
             }
         },
         methods:{
-            getLessonTypes(){
-                this.$fetch('/api/lesson/lesson_type').then((response) => {
+            getCourseTypes(){
+                this.$fetch('/api/course/course_type').then((response) => {
                     this.types = response;
                     console.log(30,response);
                 })
@@ -65,12 +75,16 @@
                         console.log(err);
                     });;
             },
-            lessonTypeChange(){
+            courseTypeChange(){
                 //调用接口
+            },
+            getCourse(){
+
             }
         },
         created() {
-            this.getLessonTypes();  //获取课程信息
+            this.getCourseTypes();  //获取课程类别信息
+            this.getCourse();  //获取课程类别信息
         }
     }
 </script>

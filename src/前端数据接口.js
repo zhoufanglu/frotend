@@ -30,18 +30,18 @@ ajax({
               img:'img_src',        //图片路径
               learn_people:'',      //所学习人数
               type:['a类','b类'],             //所属类别
-              difficult:'初级',    //难度级别xxx
-              introduction:'入门'   //入门xxxxx
+              difficult:'初级',    //难度级别
+              introduction:'入门'   //入门
           },
 
       ],
-      lesson_two: [ // 12项 一级标题2下的课程
+      course_two: [ // 12项 一级标题2下的课程
           {
               id:'',
               name:'我是课程',       //名字
               img:'img_src',        //图片路径
               learn_people:'',      //所学习人数
-              type:'A类',             //所属类别
+              type:'A类',           //所属类别
               difficult:'初级',    //难度级别
               introduction:'入门'   //入门
           },
@@ -55,7 +55,7 @@ ajax({
 
 
 /**
- * lesson.html
+ * course.html
  */
 ajax({
   title:'获取课程所有类别接口',
@@ -95,7 +95,7 @@ ajax({
     },
     res:{
         ok:{
-            lesson:[
+            course:[
                 {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
                 {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
                 {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},

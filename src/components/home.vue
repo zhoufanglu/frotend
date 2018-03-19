@@ -53,12 +53,12 @@
             <div class="content-panel">
                 <div class="title">{{module[0].name}}</div>
                 <div content="body">
-                    <el-row class="lesson-row" :gutter="40" justify="center">
+                    <el-row class="course-row" :gutter="40" justify="center">
                         <el-col :span="4" v-for="(j,index) in course_one" :key="index">
-                            <a class="grid-content lesson-item bg-purple">
+                            <a class="grid-content course-item bg-purple">
                                 <div class="bg-img">
                                     <img :src="j.img" alt="" width="100%" height="100%">
-                                    <div class="lesson-type">
+                                    <div class="course-type">
                                         <span v-for="k in j.type">{{k}}</span>
                                     </div>
                                 </div>
@@ -73,15 +73,15 @@
             </div>
 
             <div class="content-panel">
-                <div class="title">{{module[1].name}}</div>
+                <div class="title">{{module[0].name}}</div>
                 <div content="body">
-                    <el-row class="lesson-row" :gutter="40" justify="center" >
+                    <el-row class="course-row" :gutter="40" justify="center" >
                         <el-col :span="4" v-for="(j,index) in course_two" :key="index">
-                            <a class="grid-content lesson-item bg-purple">
+                            <a class="grid-content course-item bg-purple">
                                 <!--背景图片-->
                                 <div class="bg-img">
                                     <img :src="j.img" alt="" width="100%" height="100%">
-                                    <div class="lesson-type">
+                                    <div class="course-type">
                                         <span v-for="k in j.type">{{k}}</span>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
                 //content-panel
                 top_title:[],             //轮播左边的标题
                 shuffling_img_link:[],    //轮播图
-                module:[],          //一级课题标题
+                module:[],                //一级课题标题
                 course_one:[],            //课程信息
                 course_two:[]             //课程信息
             }
@@ -128,7 +128,7 @@
         
         },
         methods:{
-            getLessons(){
+            getCourse(){
                 this.$post('/api/data')
                     .then((response) => {
                         this.course_one = response.course_one;
@@ -144,7 +144,7 @@
             }
         },
         created() {
-            this.getLessons();  //获取课程信息
+            this.getCourse();  //获取课程信息
         }
     }
 </script>

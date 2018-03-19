@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import home from '@/components/home'
-import lesson from '@/components/lesson'
+import course from '@/components/course'
 //top
-import lesson_center from '@/components/top/lesson_center'
+import course_center from '@/components/top/course_center'
 import find from '@/components/top/find'
 import help from '@/components/top/help'
 
@@ -17,14 +17,14 @@ export default new Router({
             component: home
         },
         {
-            path: '/lesson',
-            name: 'lesson',
-            component: lesson
+            path: '/course',
+            name: 'course',
+            component: course
         },
         {
-            path: '/lesson_center',
-            name: 'lesson_center',
-            component: lesson_center
+            path: '/course_center',
+            name: 'course_center',
+            component: course_center
         },
         {
             path: '/find',
