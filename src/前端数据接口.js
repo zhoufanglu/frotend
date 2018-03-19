@@ -12,9 +12,17 @@ ajax({
   },
   res:{
     ok:{
-      top_title:['渗透测试1','渗透测试1','渗透测试1','渗透测试1','渗透测试1'],  //轮播左边的标题内容，个数需要固定
+      top_title:[{//(三级菜单)
+          id:'课程分类id',
+          couser_type_name:'课程分类名称',
+      }],  //轮播左边的标题内容，个数需要固定
       module:[{id:1,name:'一级标题1'},{id:2,name:'一级标题2'}],//一级课题标题
-      shuffling_img_link:['img_link'],//轮播图片路径
+      shuffling_img_link:[{
+          id:"",
+          picture_name:"图片名称",
+          picture_address:"图片地址",
+          picture_href:"图片链接",
+      }],//轮播图片路径
       course_one: [ // 12项  一级标题1下的课程
           {
               id:'',
