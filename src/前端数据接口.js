@@ -30,8 +30,8 @@ ajax({
               img:'img_src',        //图片路径
               learn_people:'',      //所学习人数
               type:['a类','b类'],             //所属类别
-              difficult:'初级',    //难度级别
-              introduction:'入门'   //入门
+              difficult:'初级',    //难度级别xxx
+              introduction:'入门'   //入门xxxxx
           },
 
       ],
