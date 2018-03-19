@@ -51,18 +51,20 @@
                 </div>
             </div>
             <div class="content-panel">
-                <div class="title">{{lesson_title[0]}}</div>
+                <div class="title">{{module[0].name}}</div>
                 <div content="body">
                     <el-row class="lesson-row" :gutter="40" justify="center">
-                        <el-col :span="4" v-for="(j,index) in lesson_one" :key="index">
+                        <el-col :span="4" v-for="(j,index) in course_one" :key="index">
                             <a class="grid-content lesson-item bg-purple">
                                 <div class="bg-img">
-                                    <img :src="j.img_link" alt="" width="100%" height="100%">
-                                    <div class="lesson-type">{{j.type}}</div>
+                                    <img :src="j.img" alt="" width="100%" height="100%">
+                                    <div class="lesson-type">
+                                        <span v-for="k in j.type">{{k}}</span>
+                                    </div>
                                 </div>
                                 <div class="name">{{j.name}}</div>
                                 <div class="small-item">
-                                    <span>{{j.level}}</span><span>{{j.type}}</span><i class="icon-font">&#xe623;</i>{{j.number}}
+                                    <span>{{j.difficult}}</span><span>{{j.introduction}}</span><i class="icon-font">&#xe623;</i>{{j.learn_people}}
                                 </div>
                             </a>
                         </el-col>
@@ -71,19 +73,21 @@
             </div>
 
             <div class="content-panel">
-                <div class="title">{{lesson_title[1]}}</div>
+                <div class="title">{{module[1].name}}</div>
                 <div content="body">
                     <el-row class="lesson-row" :gutter="40" justify="center" >
-                        <el-col :span="4" v-for="(j,index) in lesson_two" :key="index">
+                        <el-col :span="4" v-for="(j,index) in course_two" :key="index">
                             <a class="grid-content lesson-item bg-purple">
                                 <!--背景图片-->
                                 <div class="bg-img">
-                                    <img :src="j.img_link" alt="" width="100%" height="100%">
-                                    <div class="lesson-type">{{j.type}}</div>
+                                    <img :src="j.img" alt="" width="100%" height="100%">
+                                    <div class="lesson-type">
+                                        <span v-for="k in j.type">{{k}}</span>
+                                    </div>
                                 </div>
                                 <div class="name">{{j.name}}</div>
                                 <div class="small-item">
-                                    <span>{{j.level}}</span><span>{{j.introduction}}</span><i class="icon-font">&#xe623;</i>{{j.number}}
+                                    <span>{{j.difficult}}</span><span>{{j.introduction}}</span><i class="icon-font">&#xe623;</i>{{j.learn_people}}
                                 </div>
                             </a>
                         </el-col>
@@ -115,9 +119,9 @@
                 //content-panel
                 top_title:[],             //轮播左边的标题
                 shuffling_img_link:[],    //轮播图
-                lesson_title:[],          //一级课题标题
-                lesson_one:[],            //课程信息
-                lesson_two:[]             //课程信息
+                module:[],          //一级课题标题
+                course_one:[],            //课程信息
+                course_two:[]             //课程信息
             }
         },
         components: {
@@ -127,10 +131,10 @@
             getLessons(){
                 this.$post('/api/data')
                     .then((response) => {
-                        this.lesson_one = response.lesson_one;
-                        this.lesson_two = response.lesson_two;
+                        this.course_one = response.course_one;
+                        this.course_two = response.course_two;
                         this.shuffling_img_link = response.shuffling_img_link;
-                        this.lesson_title = response.lesson_title;
+                        this.module = response.module;
                         this.top_title = response.top_title;
                         console.log(response);
                     })
