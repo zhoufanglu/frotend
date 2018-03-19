@@ -8,23 +8,25 @@ let useMock = (isOpenMock) =>{
 
     Mock.mock('/api/data',{
         'top_title|4':[()=>Random.ctitle()],
-        'lesson_title|2':[()=>Random.ctitle()],
+        'module|2':[{id:()=>Random.integer( 1, 100 ),name:()=>Random.ctitle()}],
         'shuffling_img_link|4':[()=>Random.dataImage()],
-        'lesson_one|12':[{
+        'course_one|12':[{
+            id:()=>Random.integer( 1, 100 ),
             name:()=>Random.ctitle(),
-            type:'类别',
+            'type|3':[()=>Random.ctitle()],
             introduction:()=>Random.ctitle(),
-            level:'初级 ',
-            img_link:()=>Random.dataImage(),
-            number:()=>Random.integer( 1, 9999 )
+            difficult:'初级 ',
+            img:()=>Random.dataImage(),
+            learn_people:()=>Random.integer( 1, 9999 )
         }],
-        'lesson_two|12':[{
+        'course_two|12':[{
+            id:()=>Random.integer( 1, 100 ),
             name:()=>Random.ctitle(),
-            type:'类别',
+            'type|2':[()=>Random.ctitle()],
             introduction:()=>Random.ctitle(),
-            level:'初级 ',
-            img_link:()=>Random.dataImage(),
-            number:()=>Random.integer( 1, 9999 )
+            difficult:'初级 ',
+            img:()=>Random.dataImage(),
+            learn_people:()=>Random.integer( 1, 9999 )
         }]
     });
 

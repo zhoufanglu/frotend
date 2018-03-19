@@ -88,16 +88,22 @@ $content-top-height:300px;
         position: relative;
         .lesson-type{
             position: absolute;
-            color: $light;
             bottom: 4%;
             left: 6%;
             font-size: 14px;
-            width: 50px;
-            border-radius: 20px;
-            text-align: center;
-            padding: 2px 0;
-            background-color: rgba(0,0,0,0.6);
-            @include ellipsis(1);
+            @include vertical-center;
+            span{
+                @include ellipsis(1);
+                text-align: center;
+                color: $light;
+                width: 50px;
+                border-radius: 20px;
+                background-color: rgba(0,0,0,0.6);
+                padding: 2px 0;
+            }
+            span:not(:first-of-type){
+                margin-left: 10px;
+            }
         }
     }
     .name{

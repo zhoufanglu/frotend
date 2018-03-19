@@ -1,8 +1,11 @@
 .lesson{
     .content-head{
         margin-top: 30px;
-        .top {
-
+    }
+    .content-body{
+        .top{
+            @include vertical-center;
+            justify-content: space-around;
         }
     }
 }

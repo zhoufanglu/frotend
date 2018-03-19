@@ -2,12 +2,8 @@
     <div class="lesson">
         <teach-head :nickName="nickName" :headSrcLink="headSrcLink" :show_hide_vis="show_hide_vis" ></teach-head>
         <div class="content">
+            <!--筛选部分-->
             <div class="content-head">
-                <!--<el-row :gutter="0" class="top">
-                    <el-col :span="1" class="item-title"><div class="grid-content ">方向:</div></el-col>
-                    <el-col :span="2" class="item"><div class="grid-content ">全部</div></el-col>
-                    <el-col :span="2" class="item" v-for="i in types.direction" :key="i"><div class="grid-content ">{{i}}</div></el-col>
-                </el-row>-->
                 <el-radio-group v-model="filter.direction" @change="lessonTypeChange()">
                     <el-radio-button  :disabled="true" class="item-title" label="方向"></el-radio-button>
                     <el-radio-button class="item" label="">全部</el-radio-button>
@@ -23,6 +19,17 @@
                     <el-radio-button class="item" label="">全部</el-radio-button>
                     <el-radio-button class="item" v-for="i in types.type" :key="i.id" :label="i.id">{{i.name}}</el-radio-button>
                 </el-radio-group>
+            </div>
+            <!--课程展示部分-->
+            <div class="content-body">
+                <div class="top">
+                    <div class="sort">
+
+                    </div>
+                    <div class="hard">
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
