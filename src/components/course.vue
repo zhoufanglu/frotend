@@ -47,7 +47,8 @@
                                 </div>
                                 <div class="name">{{j.course_name}}</div>
                                 <div class="small-item">
-                                    <span>{{j.course_difficult}}</span><span>{{j.course_introduction}}</span><i class="icon-font">&#xe623;</i>{{j.course_learn_people}}
+                                    <span>{{j.course_difficult}}</span><i class="icon-font">&#xe623;</i>{{j.course_learn_people}}
+                                    <div class="introduction" :title="j.course_introduction">{{j.course_introduction}}</div>
                                 </div>
                             </router-link>
                         </el-col>

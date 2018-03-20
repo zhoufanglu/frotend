@@ -37,7 +37,7 @@ ajax({
                 },
 
             ],
-            lesson_two: [ // 12项 一级标题2下的课程
+            course_two: [ // 12项 一级标题2下的课程
                 {
                     id:'',
                     course_name:'我是课程',       //名字

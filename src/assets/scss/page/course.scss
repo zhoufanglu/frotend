@@ -97,7 +97,6 @@
         }
     }
     .name{
-        @include ellipsis(1);
         margin-top: 6px;
         padding-left: 10px;
     }
@@ -109,5 +108,9 @@
         i{
             margin-left: 10px;
         }
+    }
+    .introduction{
+        //@include ellipsis(1);
+        overflow: hidden;text-overflow: ellipsis;white-space: nowrap;
     }
 }

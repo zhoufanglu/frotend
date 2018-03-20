@@ -47,7 +47,7 @@ let useMock = (isOpenMock) =>{
                 id: () => Random.integer(1, 100),
                 course_name: () => Random.ctitle(),
                 'course_type|3': [() => Random.ctitle()],
-                course_introduction: () => Random.ctitle(),
+                'course_introduction': () => Random.ctitle() ,
                 course_difficult: '初级 ',
                 course_img: () => Random.dataImage(),
                 course_learn_people: () => Random.integer(1, 9999)
