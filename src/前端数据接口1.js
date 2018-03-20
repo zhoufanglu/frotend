@@ -94,11 +94,8 @@ ajax({
         filter_type: 12, //传的是id,如果为空,就是全部（类型-->三级分类）
         sort:'last/pop',//排序----默认是最新，最新/最热（这个最新最热数据没有这个标签）
         hard:' ,1,2,3',//难度----默认全部(为空),分为初级，中级，高级
-        page_list:{
-            nowpage:1,//当前页码
-            pagenum:10,//一共多少页
-            pageallnum:100//一共多少条数据
-        }
+        nowpage:1,//当前页码
+        nowpagenum:10//每页多少数据
     },
     res:{
         ok:{
@@ -109,7 +106,8 @@ ajax({
                 {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
                 {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
                 {name:'渗透测试入门基础',type:'课程类别',introduction:'入门',level:'初级',imgLink:'',number:'666',id:123},
-            ]
+            ],
+            pageallnum:100//一共多少条数据
         },
         err:{
             msg:'报错信息'
