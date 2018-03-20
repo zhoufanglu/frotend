@@ -45,7 +45,7 @@ ajax({
                     course_learn_people:'',      //所学习人数
                     course_type:['A类'],             //所属类别
                     course_difficult:'初级',    //难度级别
-                    course_introduction:'入门'   //入门1
+                    course_introduction:'入门'   //入门
                 },
             ]
         },
