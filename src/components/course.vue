@@ -36,13 +36,32 @@
                 </div>
             </div>
             <div class="panel">
-
+                    <el-row class="course-row" :gutter="40" justify="center">
+                        <el-col :span="4" v-for="(j,index) in course" :key="index">
+                            <router-link :to="{path:'/course_detail', query:{id:j.id}}" class="grid-content course-item bg-purple" >
+                                <div class="bg-img">
+                                    <img :src="j.course_img" alt="" width="100%" height="100%">
+                                    <div class="course-type">
+                                        <span v-for="k in j.course_type">{{k}}</span>
+                                    </div>
+                                </div>
+                                <div class="name">{{j.course_name}}</div>
+                                <div class="small-item">
+                                    <span>{{j.course_difficult}}</span><span>{{j.course_introduction}}</span><i class="icon-font">&#xe623;</i>{{j.course_learn_people}}
+                                </div>
+                            </router-link>
+                        </el-col>
+                    </el-row>
+            </div>
+            <!--分页-->
+            <div class="paging">
+                <el-pagination background layout="prev, pager, next"@current-change="pageChange()" :page-size="page_all_num" :current-page.sync="now_page"  :total="data_number"></el-pagination>
             </div>
         </div>
+        <teach-foot></teach-foot>
     </div>
 </template>
 <script>
-    import '@/assets/scss/page/course.scss'
     export default {
         name: 'course',
         data () {
@@ -62,7 +81,12 @@
                     difficult:''
                 },
                 sort:'1',
-
+                //body
+                course:[],
+                //分页
+                page_all_num:30,//一页多少数据
+                now_page:1,     //当前页码
+                data_number:300 //一共多少数据
             }
         },
         methods:{
@@ -79,7 +103,18 @@
                 //调用接口
             },
             getCourse(){
-
+                this.$post('/api/course/all_course')
+                    .then((response) => {
+                        this.course = response.course;
+                        console.log(101,response.course);
+                    })
+                    .catch(error =>{
+                        console.log(err);
+                    });
+            },
+            pageChange(){
+                console.log(113,this.now_page);
+                console.log(117,this.page_all_num)
             }
         },
         created() {
@@ -88,4 +123,6 @@
         }
     }
 </script>
-<style></style>
+<style scope type="text/scss" lang="scss">
+    @import "~@/assets/scss/page/course.scss";
+</style>

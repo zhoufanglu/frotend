@@ -72,9 +72,10 @@ $content-top-height:300px;
     cursor: pointer;
     height: 200px;
     margin-top: 30px;
+    text-decoration: none;
     &:hover{
         .bg-img{
-            box-shadow: 0 4px 8px 0 rgba(7, 17, 27, .1);
+            box-shadow: 0 20px 20px 0 rgba(7, 17, 27, .1);
         }
         .small-item{
             color: $darker;
@@ -116,9 +117,6 @@ $content-top-height:300px;
         font-size: 12px;
         margin-top: 6px;
         padding-left: 10px;
-        span:last-of-type{
-            margin-left: 10px;
-        }
         i{
             margin-left: 10px;
         }

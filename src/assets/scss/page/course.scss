@@ -3,12 +3,20 @@
         margin-top: 30px;
     }
     .content-body{
+        background-color: #F6F7FB;
+        padding-bottom: 30px;
         .top{
             margin: 40px 15%;
             @include vertical-center;
             justify-content: space-between;
             padding: 30px;
-            background-color: $light;
+        }
+        .panel{
+            @extend .top;
+            margin-top: -90px;
+        }
+        .paging{
+            text-align: center;
         }
     }
 }
@@ -53,6 +61,7 @@
     cursor: pointer;
     height: 200px;
     margin-top: 30px;
+    text-decoration: none;
     &:hover{
         .bg-img{
             box-shadow: 0 4px 8px 0 rgba(7, 17, 27, .1);
@@ -97,9 +106,6 @@
         font-size: 12px;
         margin-top: 6px;
         padding-left: 10px;
-        span:last-of-type{
-            margin-left: 10px;
-        }
         i{
             margin-left: 10px;
         }

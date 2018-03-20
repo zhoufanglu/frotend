@@ -51,45 +51,44 @@
                 </div>
             </div>
             <div class="content-panel">
-                <div class="title">{{module[0].name}}</div>
+                <div class="title">{{module[0]&&module[0].module_name}}</div>
                 <div content="body">
                     <el-row class="course-row" :gutter="40" justify="center">
                         <el-col :span="4" v-for="(j,index) in course_one" :key="index">
-                            <a class="grid-content course-item bg-purple">
+                            <router-link :to="{path:'/course_detail', query:{id:j.id}}" class="grid-content course-item bg-purple" >
                                 <div class="bg-img">
-                                    <img :src="j.img" alt="" width="100%" height="100%">
+                                    <img :src="j.course_img" alt="" width="100%" height="100%">
                                     <div class="course-type">
-                                        <span v-for="k in j.type">{{k}}</span>
+                                        <span v-for="k in j.course_type">{{k}}</span>
                                     </div>
                                 </div>
-                                <div class="name">{{j.name}}</div>
+                                <div class="name">{{j.course_name}}</div>
                                 <div class="small-item">
-                                    <span>{{j.difficult}}</span><span>{{j.introduction}}</span><i class="icon-font">&#xe623;</i>{{j.learn_people}}
+                                    <span>{{j.course_difficult}}</span><i class="icon-font">&#xe623;</i>{{j.course_learn_people}}
                                 </div>
-                            </a>
+                            </router-link>
                         </el-col>
                     </el-row>
                 </div>
             </div>
 
             <div class="content-panel">
-                <div class="title">{{module[0].name}}</div>
+                <div class="title">{{module[1]&&module[1].module_name}}</div>
                 <div content="body">
-                    <el-row class="course-row" :gutter="40" justify="center" >
-                        <el-col :span="4" v-for="(j,index) in course_two" :key="index">
-                            <a class="grid-content course-item bg-purple">
-                                <!--背景图片-->
+                    <el-row class="course-row" :gutter="40" justify="center">
+                        <el-col :span="4" v-for="(j,index) in course_one" :key="index">
+                            <router-link :to="{path:'/course_detail',params:{id:j.id}}" class="grid-content course-item bg-purple" >
                                 <div class="bg-img">
-                                    <img :src="j.img" alt="" width="100%" height="100%">
+                                    <img :src="j.course_img" alt="" width="100%" height="100%">
                                     <div class="course-type">
-                                        <span v-for="k in j.type">{{k}}</span>
+                                        <span v-for="k in j.course_type">{{k}}</span>
                                     </div>
                                 </div>
-                                <div class="name">{{j.name}}</div>
+                                <div class="name">{{j.course_name}}</div>
                                 <div class="small-item">
-                                    <span>{{j.difficult}}</span><span>{{j.introduction}}</span><i class="icon-font">&#xe623;</i>{{j.learn_people}}
+                                    <span>{{j.course_difficult}}</span><i class="icon-font">&#xe623;</i>{{j.course_learn_people}}
                                 </div>
-                            </a>
+                            </router-link>
                         </el-col>
                     </el-row>
                 </div>
@@ -100,7 +99,6 @@
 </template>
 
 <script>
-    import '@/assets/scss/page/home.scss';
     export default {
         data() {
             return {
@@ -148,3 +146,6 @@
         }
     }
 </script>
+<style scope type="text/scss" lang="scss">
+    @import "~@/assets/scss/page/home.scss";
+</style>
