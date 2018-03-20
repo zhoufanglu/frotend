@@ -4,17 +4,17 @@
         <div class="content">
             <!--筛选部分-->
             <div class="content-head">
-                <el-radio-group v-model="filter.direction" @change="courseTypeChange()">
+                <el-radio-group v-model="filter.direction" @change="getCourse()">
                     <el-radio-button  :disabled="true" class="item-title" label="方向"></el-radio-button>
                     <el-radio-button class="item" label="">全部</el-radio-button>
                     <el-radio-button class="item" v-for="i in types.direction" :key="i.id" :label="i.id">{{i.name+i.id}}</el-radio-button>
                 </el-radio-group>
-                <el-radio-group v-model="filter.classify">
+                <el-radio-group v-model="filter.classify" @change="getCourse()">
                     <el-radio-button :disabled="true" class="item-title" label="分类:"></el-radio-button>
                     <el-radio-button class="item" label="">全部</el-radio-button>
                     <el-radio-button class="item" v-for="i in types.classify" :key="i.id" :label="i.id">{{i.name+i.id}}</el-radio-button>
                 </el-radio-group>
-                <el-radio-group v-model="filter.type">
+                <el-radio-group v-model="filter.type" @change="getCourse()">
                     <el-radio-button :disabled="true" class="item-title" label="类型:"></el-radio-button>
                     <el-radio-button class="item" label="">全部</el-radio-button>
                     <el-radio-button class="item" v-for="i in types.type" :key="i.id" :label="i.id">{{i.name}}</el-radio-button>
@@ -25,14 +25,14 @@
         <div class="content-body">
             <div class="top">
                 <div class="sort">
-                    <el-radio v-model="sort" label="1">最新</el-radio>
-                    <el-radio v-model="sort" label="2">最热</el-radio>
+                    <el-radio v-model="sort" @change="getCourse()" label="1">最新</el-radio>
+                    <el-radio v-model="sort" @change="getCourse()" label="2">最热</el-radio>
                 </div>
                 <div class="filter.difficult">
-                    <el-radio v-model="filter.difficult" label="">全部</el-radio>
-                    <el-radio v-model="filter.difficult" label="1">初级</el-radio>
-                    <el-radio v-model="filter.difficult" label="2">中级</el-radio>
-                    <el-radio v-model="filter.difficult" label="3">高级</el-radio>
+                    <el-radio @change="getCourse()" v-model="filter.difficult" label="">全部</el-radio>
+                    <el-radio @change="getCourse()" v-model="filter.difficult" label="1">初级</el-radio>
+                    <el-radio @change="getCourse()" v-model="filter.difficult" label="2">中级</el-radio>
+                    <el-radio @change="getCourse()" v-model="filter.difficult" label="3">高级</el-radio>
                 </div>
             </div>
             <div class="panel">
@@ -56,7 +56,7 @@
             </div>
             <!--分页-->
             <div class="paging">
-                <el-pagination background layout="prev, pager, next"@current-change="pageChange()" :page-size="page_all_num" :current-page.sync="now_page"  :total="data_number"></el-pagination>
+                <el-pagination background layout="prev, pager, next"@current-change="getCourse()" :page-size="page_all_num" :current-page.sync="now_page"  :total="data_number"></el-pagination>
             </div>
         </div>
         <teach-foot></teach-foot>
@@ -104,19 +104,18 @@
                 //调用接口
             },
             getCourse(){
+                console.log(107,this.filter,this.sort);
+                console.log(108,this.now_page);
+                console.log(109,this.page_all_num);
                 this.$post('/api/course/all_course')
                     .then((response) => {
                         this.course = response.course;
-                        console.log(101,response.course);
+                        //console.log(101,response.course);
                     })
                     .catch(error =>{
                         console.log(err);
                     });
             },
-            pageChange(){
-                console.log(113,this.now_page);
-                console.log(117,this.page_all_num)
-            }
         },
         created() {
             this.getCourseTypes();  //获取课程类别信息
