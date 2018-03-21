@@ -1,4 +1,4 @@
-//前端数据接口文档 我删了
+//前端数据接口文档111
 
 /**
  * home.html
@@ -37,7 +37,7 @@ ajax({
                 },
 
             ],
-            course_two: [ // 12项 一级标题2下的课程
+            lesson_two: [ // 12项 一级标题2下的课程
                 {
                     id:'',
                     course_name:'我是课程',       //名字
@@ -117,4 +117,120 @@ ajax({
         }
     }
 });
+//课程详情页面的数据接口
+/*1.课程详情*/
 
+ajax({
+    title:'获取课程详情',
+    url:'',
+    type:'get',
+    request:{
+        id:id//课程ID
+    },
+    res:{
+        ok:[ {
+            course: [// 课程基本信息
+                {
+                    id: '',
+                    course_name: '我是课程',       //课程名字
+                    course_img: 'img_src',        //课程图片路径
+                    course_learn_people: '',      //课程所学习人数
+                    course_type: ['a类', 'b类'],             //所属类别(s数组)
+                    course_difficult: '初级',    //难度级别
+                    course_introduction: '简介'   //简介
+                }
+            ],
+            chapterlist: [{//章节列表
+                id: "章节id",
+                chapter_name: "章节名称",
+                detaillist:[
+                    {
+                        id: "1",
+                        name: "2",//章节里面小章节就是（1.1,1.2）
+                        type: "1"//1代表文章 2代表视频
+                    }
+                ]
+
+            }],
+        }],
+        err:{
+              msg:'报错信息'
+        }
+    }
+});
+//课程文件接口
+ajax({
+    title:'获取课程文件列表',
+    url:'',
+    type:'get',
+    request:{
+        id:id//课程ID
+    },
+    res:{
+        ok:{
+            filelsit: [ // 课程文件信息
+                {
+                    id:'',
+                    file_name:'文件名称',       //文件名称
+                    file_address:'文件地址',        //文件地址
+                }
+            ]
+        },
+        err:{
+            msg:'报错信息'
+        }
+    }
+});
+//课程相似课程接口
+ajax({
+    title:'获取课程文件列表',
+    url:'',
+    type:'get',
+    request:{
+        id:id,//课程ID
+        num:num//几条数据
+    },
+    res:{
+        ok:{
+            course: [ // 课程基本信息
+                {
+                    id:'',
+                    course_name:'我是课程',       //名字
+                    course_img:'img_src',        //图片路径
+                    course_learn_people:'',      //所学习人数
+                    course_type:['a类','b类'],             //所属类别(s数组)
+                    course_difficult:'初级',    //难度级别
+                    course_introduction:'简介'   //简介
+                }
+            ]
+        },
+        err:{
+            msg:'报错信息'
+        }
+    }
+});
+//会员排行接口
+ajax({
+    title:'获取课程文件列表',
+    url:'',
+    type:'get',
+    request:{
+        id:id,//课程ID
+        num:num//几条数据
+    },
+    res:{
+        ok:{
+            user: [ // 课程基本信息
+                {
+                    id:'',
+                    user_name:'会员',       //名字
+                    score:'积分',        //图片路径
+
+                }
+            ]
+        },
+        err:{
+            msg:'报错信息'
+        }
+    }
+});
