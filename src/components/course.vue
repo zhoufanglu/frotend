@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="panel">
-                    <el-row class="course-row" :gutter="40" justify="center">
+                    <el-row class="course-row s-course-panel" :gutter="40" justify="center">
                         <el-col :span="4" v-for="(j,index) in course" :key="index">
                             <router-link :to="{path:'/course_detail', query:{id:j.id}}" class="grid-content course-item bg-purple" >
                                 <div class="bg-img">
@@ -96,9 +96,9 @@
                     this.types = response;
                     console.log(30,response);
                 })
-                    .catch(error =>{
+                    .catch(err =>{
                         console.log(err);
-                    });;
+                    });
             },
             courseTypeChange(){
                 //调用接口
@@ -112,7 +112,7 @@
                         this.course = response.course;
                         //console.log(101,response.course);
                     })
-                    .catch(error =>{
+                    .catch(err =>{
                         console.log(err);
                     });
             },

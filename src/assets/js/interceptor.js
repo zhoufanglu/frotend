@@ -7,7 +7,11 @@ axios.defaults.timeout = 5000;
 // http请求拦截器
 axios.interceptors.request.use(config => {
     // element ui Loading方法
-    loadinginstace = Loading.service({fullscreen: true})
+    loadinginstace = Loading.service({
+        fullscreen: true ,
+        /*target: document.querySelector('.s-course-panel') ,
+        text: '拼命加载中....'*/
+    })
     //console.log('加载前',);
     return config
 }, error => {
@@ -22,7 +26,10 @@ axios.interceptors.request.use(config => {
 // http响应拦截器
 axios.interceptors.response.use(data => {// 响应成功关闭loading
     //console.log('成功关闭结束',);
-    loadinginstace.close();
+    setTimeout(()=>{
+        loadinginstace.close();
+    },300);
+
     return data
 }, error => {
     loadinginstace.close();
