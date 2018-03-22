@@ -108,9 +108,9 @@ ajax({
                     course_type:['a类','b类'],             //所属类别(s数组)
                     course_difficult:'初级',    //难度级别
                     course_introduction:'入门'   //入门
-                },
-
-            ]
+                }
+            ],
+            pageallnum:"100",//一共多少条数据
         },
         err:{
             msg:'报错信息'
@@ -154,7 +154,7 @@ ajax({
             }],
         }],
         err:{
-              msg:'报错信息'
+            msg:'报错信息'
         }
     }
 });
@@ -220,14 +220,41 @@ ajax({
     },
     res:{
         ok:{
-            user: [ // 课程基本信息
+            user: [ // 会员信息
                 {
                     id:'',
                     user_name:'会员',       //名字
-                    score:'积分',        //图片路径
+                    score:'积分',        //积分
 
                 }
             ]
+        },
+        err:{
+            msg:'报错信息'
+        }
+    }
+});
+//课程评论接口
+ajax({
+    title:'获取课程评论列表',
+    url:'',
+    type:'get',
+    request:{
+        id:id,//课程ID
+        num:num,//几条数据
+        pagenow:""//当前页面
+    },
+    res:{
+        ok:{
+            commentList: [ // 评论列表信息
+                {
+                    user_name:'会员名称',
+                    image_text_name:'来自的章节名称',
+                    praise_num:'点赞数',
+                    created_at:'评论时间',
+                }
+            ],
+            pageallnum:"100",//一共多少条数据
         },
         err:{
             msg:'报错信息'
