@@ -94,7 +94,7 @@
                 </div>
             </div>
         </div>
-        <teach-foot></teach-foot>
+        <teach-foot :bg_color="bg_color" :text_color="text_color" ></teach-foot>
     </div>
 </template>
 
