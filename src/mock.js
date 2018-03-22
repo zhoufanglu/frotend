@@ -5,7 +5,9 @@ let useMock = (isOpenMock) =>{
     if(isOpenMock === false) return false;
 
     let Random = Mock.Random;
-    //home.html
+    /**
+     * home.html
+     */
     Mock.mock('/api/data',{
         'top_title|4':[()=>Random.ctitle()],
         'module|2': [
@@ -34,7 +36,10 @@ let useMock = (isOpenMock) =>{
             course_learn_people:()=>Random.integer( 1, 9999 )
         }]
     });
-    //lesson.html
+
+    /**
+     * course.html
+     */
     Mock.mock('/api/course/course_type',{
         'direction|6':[{name:()=>Random.ctitle(),id:()=>Random.integer( 1, 9999 )}], //方向
         'classify|20':[{name:()=>Random.ctitle(),id:()=>Random.integer( 1, 9999 )}],   //分类
@@ -55,6 +60,22 @@ let useMock = (isOpenMock) =>{
         ]
     });
 
+    /**
+     * course_detail.html
+     */
+    Mock.mock('/api/course/all_course',{
+        'course': [
+            {
+                id: () => Random.integer(1, 100),
+                course_name: () => Random.ctitle(),
+                'course_type|3': [() => Random.ctitle()],
+                'course_introduction': () => Random.ctitle() ,
+                course_difficult: '初级 ',
+                course_img: () => Random.dataImage(),
+                course_learn_people: () => Random.integer(1, 9999)
+            }
+        ]
+    });
 
 }
 export default useMock;

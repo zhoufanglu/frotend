@@ -118,7 +118,9 @@ ajax({
     }
 });
 //课程详情页面的数据接口
-/*1.课程详情*/
+/**
+ * 1.课程详情
+ * */
 
 ajax({
     title:'获取课程详情',
@@ -128,8 +130,8 @@ ajax({
         id:id//课程ID
     },
     res:{
-        ok:[ {
-            course: [// 课程基本信息
+        ok:{
+            course: // 课程基本信息
                 {
                     id: '',
                     course_name: '我是课程',       //课程名字
@@ -138,21 +140,18 @@ ajax({
                     course_type: ['a类', 'b类'],             //所属类别(s数组)
                     course_difficult: '初级',    //难度级别
                     course_introduction: '简介'   //简介
-                }
-            ],
-            chapterlist: [{//章节列表
+                },
+            chapterlist: {//章节列表
                 id: "章节id",
                 chapter_name: "章节名称",
-                detaillist:[
+                detaillist:
                     {
                         id: "1",
                         name: "2",//章节里面小章节就是（1.1,1.2）
                         type: "1"//1代表文章 2代表视频
                     }
-                ]
-
-            }],
-        }],
+            },
+        },
         err:{
               msg:'报错信息'
         }
