@@ -1,12 +1,71 @@
 .course_detail{
     .content-top{
-        margin-top: 20px;
+        padding:20px 0 20px 0;
+        border-bottom: solid 1px $light;
         .title{
             margin-top: 20px;
             font-size: 26px;
             font-weight: bolder;
             letter-spacing: 6px;
             color: $darker;
+            .title-b{
+                display: flex;
+                margin-top: 15px;
+                .start{
+                    @include vertical-center;
+                    .start-btn{
+                        font-size: 18px;
+                    }
+                }
+                .course-info{
+                    margin-left: 30px;
+                    @include vertical-center;
+                    font-size: 15px;
+                    font-weight: normal;
+                    >div{
+                        border-right: solid 1px $stable;
+                        padding: 10px 20px 10px 20px;
+                        display: flex;
+                        flex-direction: column;
+                        span:not(:first-child){
+                            margin-top: 6px;
+                            text-align: center;
+                        }
+                    }
+                    >div:last-child{
+                        border: none!important;
+                    }
+                }
+            }
         }
     }
+    .content-body{
+        .el-row{
+            width: 100%;
+        }
+        .content-body-l{
+            padding: 10px;
+            .introduction{
+                min-height: 50px;
+            }
+            .router-link-c{
+                display: flex;
+                padding-bottom: 20px;
+                border-bottom: solid 1px $light;
+            }
+        }
+        .content-body-r{
+            padding: 10px;
+        }
+    }
+}
+.remove-a-css{
+    color: $darker!important;
+}
+.remove-a-css:not(:first-child){
+    margin-left: 10px;
+    font-size: 16px;
+}
+.router-link-active{
+    color: red!important;
 }

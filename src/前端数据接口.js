@@ -141,7 +141,7 @@ ajax({
                     course_difficult: '初级',    //难度级别
                     course_introduction: '简介'   //简介
                 },
-            chapterlist: {//章节列表
+            chapterlist: { //章节列表
                 id: "章节id",
                 chapter_name: "章节名称",
                 detaillist:

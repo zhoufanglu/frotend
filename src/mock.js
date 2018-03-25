@@ -63,16 +63,26 @@ let useMock = (isOpenMock) =>{
     /**
      * course_detail.html
      */
-    Mock.mock('/api/course/all_course',{
-      'course|30':[{
-        id:()=>Random.integer( 1, 100 ),
-        course_name:()=>Random.ctitle(),
-        'course_type|3':[()=>Random.ctitle()],
-        course_introduction:()=>Random.ctitle(),
-        course_difficult:'初级 ',
-        course_img:()=>Random.dataImage(),
-        course_learn_people:()=>Random.integer( 1, 9999 )
-      }]
+    Mock.mock('/api/course_detail/course',{
+      'course':{
+          id: '',
+          course_name: () => Random.ctitle(),       //课程名字
+          course_img: [() => Random.ctitle()],        //课程图片路径
+          course_learn_people: () => Random.integer(1, 9999),      //课程所学习人数
+          course_type: ['a类', 'b类'],  //所属类别(s数组)
+          course_difficult: '初级',    //难度级别
+          'course_introduction': () => Random.ctitle()    //简介
+      },
+        chapterlist: { //章节列表
+            id: () => Random.integer(1, 100),
+            course_name: () => Random.ctitle(),
+            detaillist:
+                {
+                    id: "1",
+                    name: "2",//章节里面小章节就是（1.1,1.2）
+                    type: "1"//1代表文章 2代表视频
+                }
+        },
     });
 
 }
