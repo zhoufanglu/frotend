@@ -123,7 +123,7 @@
             }
         },
         components: {
-        
+
         },
         methods:{
             getCourse(){
@@ -146,6 +146,6 @@
         }
     }
 </script>
-<style scope type="text/scss" lang="scss">
+<style scoped type="text/scss" lang="scss">
     @import "~@/assets/scss/page/home.scss";
 </style>

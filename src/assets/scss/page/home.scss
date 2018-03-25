@@ -89,10 +89,12 @@ $content-top-height:300px;
         position: relative;
         .course-type{
             position: absolute;
-            bottom: 4%;
-            left: 6%;
+            width: 100%;
+            bottom: 2%;
             font-size: 14px;
-            @include vertical-center;
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap-reverse;
             span{
                 @include ellipsis(1);
                 text-align: center;
@@ -101,9 +103,8 @@ $content-top-height:300px;
                 border-radius: 20px;
                 background-color: rgba(0,0,0,0.6);
                 padding: 2px 0;
-            }
-            span:not(:first-of-type){
-                margin-left: 10px;
+                margin-bottom: 10px;
+                margin-left: 4%;
             }
         }
     }
@@ -111,6 +112,7 @@ $content-top-height:300px;
         @include ellipsis(1);
         margin-top: 6px;
         padding-left: 10px;
+        font-size: 15px;
     }
     .small-item{
         color: $stable;
