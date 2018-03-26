@@ -5,7 +5,7 @@
  */
 ajax({
     title:'获取课程信息接口',
-    url:'',
+    url:'http://127.0.0.1/teachep/public/indexRotation',
     type:'get',
     request:{
 
@@ -13,11 +13,11 @@ ajax({
     res:{
         ok:{
             /*
-            和获取分类接口数据相同请求数据分类接口
-          top_title:[{//(三级菜单)
+            和获取分类接口数据相同请求数据分类接口*/
+            top_title:[{//(三级菜单)
               id:'课程分类id',
               couser_type_name:'课程分类名称',
-          }],  //轮播左边的标题内容，个数需要固定*/
+            }],  //轮播左边的标题内容，个数需要固定
             module:[{id:1,name:'一级标题1'},{id:2,name:'一级标题2'}],//一级课题标题（模块列表）
             shuffling_img_link:[{
                 id:"",
@@ -61,7 +61,7 @@ ajax({
  */
 ajax({
     title:'获取课程所有类别接口',
-    url:'',
+    url:'http://127.0.0.1/teachep/public/indexCourseTypeList',
     type:'get',
     request:{
 
@@ -86,7 +86,7 @@ ajax({
 
 ajax({
     title:'获取课程信息接口',//课程列表页面使用
-    url:'',
+    url:'http://127.0.0.1/teachep/public/getCourseList',
     type:'get',
     request:{
         filter_direction: 12, //传的是id,如果为空,就是全部（方向-->一级分类）
@@ -124,7 +124,7 @@ ajax({
 
 ajax({
     title:'获取课程详情',
-    url:'',
+    url:'http://127.0.0.1/teachep/public/course/getHomeCourseDetail',
     type:'get',
     request:{
         id:id//课程ID
@@ -172,18 +172,19 @@ ajax({
 //课程文件接口
 ajax({
     title:'获取课程文件列表',
-    url:'',
+    url:'http://127.0.0.1/teachep/public/course/getFileList',
     type:'get',
     request:{
         id:id//课程ID
     },
     res:{
         ok:{
-            filelsit: [ // 课程文件信息
+            filelist: [ // 课程文件信息
                 {
                     id:'',
                     file_name:'文件名称',       //文件名称
                     file_address:'文件地址',        //文件地址
+                    created_at:'上传时间',        //文件地址
                 }
             ]
         },
@@ -195,7 +196,7 @@ ajax({
 //课程相似课程接口
 ajax({
     title:'获取课程文件列表',
-    url:'',
+    url:'http://127.0.0.1/teachep/public/course/getCourseSortList',
     type:'get',
     request:{
         id:id,//课程ID
@@ -222,11 +223,10 @@ ajax({
 });
 //会员排行接口
 ajax({
-    title:'获取课程文件列表',
-    url:'',
+    title:'获取会员排行接口列表',
+    url:'http://127.0.0.1/teachep/public/course/getUserSortList',
     type:'get',
     request:{
-        id:id,//课程ID
         num:num//几条数据
     },
     res:{
@@ -234,6 +234,7 @@ ajax({
             user: [ // 会员信息
                 {
                     id:'',
+                    headimg:'会员头像地址',
                     user_name:'会员',       //名字
                     score:'积分',        //积分
 
@@ -248,7 +249,7 @@ ajax({
 //课程评论接口
 ajax({
     title:'获取课程评论列表',
-    url:'',
+    url:'http://127.0.0.1/teachep/public/course/getCommentList',
     type:'get',
     request:{
         id:id,//课程ID
@@ -260,6 +261,7 @@ ajax({
             commentList: [ // 评论列表信息
                 {
                     user_name:'会员名称',
+                    headimg:'会员头像地址',
                     image_text_name:'来自的章节名称',
                     praise_num:'点赞数',
                     created_at:'评论时间',
