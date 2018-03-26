@@ -141,16 +141,28 @@ ajax({
                     course_difficult: '初级',    //难度级别
                     course_introduction: '简介'   //简介
                 },
-            chapterlist: { //章节列表
-                id: "章节id",
-                chapter_name: "章节名称",
-                detaillist:
-                    {
-                        id: "1",
-                        name: "2",//章节里面小章节就是（1.1,1.2）
-                        type: "1"//1代表文章 2代表视频
-                    }
-            },
+            chapter_list: [
+                { //章节列表
+                    id: "章节id",
+                    chapter_name: "章节名称",
+                    detail_list:
+                        [
+                            {id: "1", name: "2",type: "1"},
+                            {id: "1", name: "2",type: "1"},
+                            {id: "1", name: "2",type: "1"},/*章节里面小章节就是（1.1,1.2）*//*1代表文章 2代表视频*/
+                        ]
+                },
+                { //章节列表
+                    id: "章节id",
+                    chapter_name: "章节名称",
+                    detail_list:
+                        [
+                            {id: "1", name: "2",type: "1"},
+                            {id: "1", name: "2",type: "1"},
+                            {id: "1", name: "2",type: "1"},/*章节里面小章节就是（1.1,1.2）*//*1代表文章 2代表视频*/
+                        ]
+                }
+            ],
         },
         err:{
             msg:'报错信息'
