@@ -64,8 +64,23 @@
                             </div>
                         </el-col>
                         <el-col class="content-body-r":span="6">
-                            <div class="list">
-                                排行榜
+                            <div class="rank-list">
+                                <table cellspacing="0" cellpadding="8">
+                                    <tr>
+                                        <td colspan="5">排行榜</td>
+                                    </tr>
+                                    <tr v-for="(i,index) in right_data.user_rank">
+                                        <td>{{index + 1}}</td>
+                                        <td>img</td>
+                                        <td>{{i.user_name}}</td>
+                                        <td>{{i.score}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <a href="" class="remove-a-css">查看更多&nbsp;></a>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </el-col>
                     </el-row>
@@ -90,6 +105,9 @@
                 tab_items:{
                     chapter_list:[],
                 },
+                right_data:{
+                  user_rank:[]
+                },
                 activeName:'chapter'
             }
         },
@@ -108,6 +126,11 @@
                         console.log(err);
                     });
             },
+            getUserRank(){
+                this.$fetch('/api/course_detail/user_rank').then((response) => {
+                   this.right_data.user_rank = response.user;
+                })
+            },
             handleClick(tab, event) {
                 console.log( 105,tab, event);
             }
@@ -115,6 +138,7 @@
         created(){
             this.getCourseInfo();
             console.log(this.course);
+            this.getUserRank();
         }
     }
 </script>

@@ -56,6 +56,9 @@
                    span{
                        margin-left: 10px;
                    }
+                   .remove-a-css{
+                       color: $darker!important;
+                   }
                    .detail-list{
                        cursor: pointer;
                        padding-left: 30px;
@@ -82,13 +85,31 @@
             }
         }
         .content-body-r{
+            .remove-a-css{
+                color: $darker!important;
+            }
             padding: 10px;
+            .rank-list{
+                table{
+                    border: solid 1px $light;
+                    width: 100%;
+                    tr:first-child{
+                        td{
+                            border-bottom: solid 1px $light ;
+                        }
+                    }
+                    tr:last-child{
+                        td{
+                            text-align: center;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
         }
     }
 }
-.remove-a-css{
-    color: $darker!important;
-}
+
 
 //element-ui reset
 .content-tab{

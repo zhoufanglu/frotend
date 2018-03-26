@@ -85,5 +85,16 @@ let useMock = (isOpenMock) =>{
         }],
     });
 
+    //会员排行接口
+    Mock.mock('/api/course_detail/user_rank',{
+        'user|5':[
+            {
+                id:()=>Random.integer( 1, 100 ),
+                user_name:()=>Random.ctitle(),
+                score:()=>Random.integer( 1, 100 ),
+            }
+        ]
+    });
+
 }
 export default useMock;
