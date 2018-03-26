@@ -146,6 +146,6 @@
         }
     }
 </script>
-<style scoped type="text/scss" lang="scss">
+<style  type="text/scss" lang="scss">
     @import "~@/assets/scss/page/home.scss";
 </style>

@@ -49,7 +49,7 @@ export default new Router({
             path: '/course_detail',
             name: 'course_detail',
             component: course_detail,
-            children:[
+            /*children:[
                 {
                     path:'/course_detail/chapter',
                     name:'chapter',
@@ -65,7 +65,7 @@ export default new Router({
                     name:'course_file',
                     component: course_file
                 }
-            ]
+            ]*/
         }
     ]
 })

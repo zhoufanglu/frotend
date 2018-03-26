@@ -73,16 +73,16 @@ let useMock = (isOpenMock) =>{
           course_difficult: '初级',    //难度级别
           'course_introduction': () => Random.ctitle()    //简介
       },
-        chapterlist: { //章节列表
+        'chapter_list|3': [{ //章节列表
             id: () => Random.integer(1, 100),
-            course_name: () => Random.ctitle(),
-            detaillist:
+            chapter_name: () => Random.ctitle(),
+            'detail_list|3':[
                 {
-                    id: "1",
-                    name: "2",//章节里面小章节就是（1.1,1.2）
+                    id: () => Random.integer(1, 100),
+                    name: () => Random.ctitle(),//章节里面小章节就是（1.1,1.2）
                     type: "1"//1代表文章 2代表视频
-                }
-        },
+                }]
+        }],
     });
 
 }

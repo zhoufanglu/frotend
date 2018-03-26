@@ -49,9 +49,36 @@
                 min-height: 50px;
             }
             .router-link-c{
-                display: flex;
-                padding-bottom: 20px;
-                border-bottom: solid 1px $light;
+               .chapter-list{
+                   font-size: 18px;
+                   border-top: solid 1px $light;
+                   padding: 20px 0;
+                   span{
+                       margin-left: 10px;
+                   }
+                   .detail-list{
+                       cursor: pointer;
+                       padding-left: 30px;
+                       .row{
+                           padding-left: 20px!important;
+                           height: 46px;
+                           line-height: 46px;
+                           border-radius: 6px;
+                           padding: 6px;
+                           background-color: #F6F7FB;
+                           margin-top: 16px;
+                           i{
+                               font-size: 20px!important;
+                           }
+                       }
+                   }
+               }
+                .chapter-list:last-child{
+                    border-bottom: solid 1px $light;
+                }
+            }
+            .content-panel{
+                padding: 30px;
             }
         }
         .content-body-r{
@@ -62,10 +89,36 @@
 .remove-a-css{
     color: $darker!important;
 }
-.remove-a-css:not(:first-child){
-    margin-left: 10px;
-    font-size: 16px;
+
+//element-ui reset
+.content-tab{
+    .is-top{
+        border: none!important;
+    }
+    .el-tabs__nav-wrap{
+        position: relative;
+        left: -20px!important;
+    }
+    .el-tabs__nav{
+        border: none!important;
+        #tab-chapter{
+            font-weight: 600;
+            font-size: 18px;
+        }
+        #tab-comments{
+            @extend #tab-chapter
+        }
+        #tab-file{
+            @extend #tab-chapter
+        }
+    }
+    .is-active{
+        color: red!important;
+    }
 }
-.router-link-active{
-    color: red!important;
+ul li{
+    list-style-type:none;
+    margin:0;
+    font-size: 16px;
+    font-weight: normal;
 }

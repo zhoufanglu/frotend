@@ -42,11 +42,26 @@
                                 简介: {{course.course_introduction}}
                             </div>
                             <div class="router-link-c">
-                                <router-link class="remove-a-css" to="/course_detail/chapter">章节</router-link>
-                                <router-link class="remove-a-css" to="/course_detail/comments">评论</router-link>
-                                <router-link class="remove-a-css" to="/course_detail/course_file">文件</router-link>
+                                <template>
+                                    <el-tabs class="content-tab" v-model="activeName" type="card" @tab-click="handleClick">
+                                        <el-tab-pane label="章节" name="chapter">
+                                            <div class="chapter-list" v-for=" (i,index) in tab_items.chapter_list">
+                                                <i class="icon-font">&#xe60a;</i><span>第{{index + 1}}章&nbsp;&nbsp;&nbsp;{{i.chapter_name}}</span>
+                                                <a href="#" class="detail-list remove-a-css ">
+                                                    <div class="row" v-for="j in i.detail_list">
+                                                        <i class="icon-font">&#xe6b7;</i><span>{{j.name}}</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </el-tab-pane>
+                                        <el-tab-pane label="评论" name="comments">评论</el-tab-pane>
+                                        <el-tab-pane label="文件" name="file">文件</el-tab-pane>
+                                    </el-tabs>
+                                </template>
                             </div>
-                            <router-view></router-view>
+                            <div class="content-panel">
+                                <!--<router-view></router-view>-->
+                            </div>
                         </el-col>
                         <el-col class="content-body-r":span="6">
                             <div class="list">
@@ -72,9 +87,10 @@
                 course: {
                     id: this.$route.query.id,
                 },
-                chapter_list:{
-
-                }
+                tab_items:{
+                    chapter_list:[],
+                },
+                activeName:'chapter'
             }
         },
         methods: {
@@ -86,11 +102,14 @@
                     this.types = response;
                     console.log(45,response);
                     this.course = response.course;
-                    this.chapter_list = response.chapter_list;
+                    this.tab_items.chapter_list = response.chapter_list;
                 })
                     .catch(err =>{
                         console.log(err);
                     });
+            },
+            handleClick(tab, event) {
+                console.log( 105,tab, event);
             }
         },
         created(){
@@ -99,6 +118,6 @@
         }
     }
 </script>
-<style scoped type="text/scss" lang="scss">
+<style type="text/scss" lang="scss">
     @import "~@/assets/scss/page/course_detail.scss";
 </style>
