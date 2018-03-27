@@ -65,22 +65,35 @@
                         </el-col>
                         <el-col class="content-body-r":span="6">
                             <div class="rank-list">
-                                <table cellspacing="0" cellpadding="8">
-                                    <tr>
-                                        <td colspan="5">排行榜</td>
-                                    </tr>
-                                    <tr v-for="(i,index) in right_data.user_rank">
-                                        <td>{{index + 1}}</td>
-                                        <td>img</td>
-                                        <td>{{i.user_name}}</td>
-                                        <td>{{i.score}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5">
-                                            <a href="" class="remove-a-css">查看更多&nbsp;></a>
-                                        </td>
-                                    </tr>
-                                </table>
+                                <div class="panel">
+                                    <div class="list-title">排行榜</div>
+                                    <router-link target="_blank" :to="{path:'/course_detail', query:{id:i.id}}" class="item remove-a-css" v-for="(i,index) in right_data.user_rank" :key="index">
+                                        <div>{{index + 1}}</div>
+                                        <div>
+                                            <div class="rank-head-img"><img :src="i.head_img" height="100%" width="100%"></div>
+                                        </div>
+                                        <div class="user-name" >{{i.user_name}}</div>
+                                        <div>{{i.score}}分</div>
+                                    </router-link>
+                                    <div class="see-more">
+                                        <router-link to="/course" class="remove-a-css" target="_blank">查看更多&nbsp;></router-link>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="similar-course-list">
+                                <div class="panel">
+                                    <div class="list-title">相似课程推荐</div>
+                                    <router-link target="_blank" :to="{path:'/course_detail', query:{id:i.id}}" class="item remove-a-css" v-for="(i,index) in right_data.similar_course" :key="index">
+                                        <div class="item-l"><img :src="i.course_img" width="100%" height="100%" alt=""></div>
+                                        <div class="item-r">
+                                            <div class="list-title">{{i.course_name}}</div>
+                                            <div>{{i.course_introduction}}</div>
+                                        </div>
+                                    </router-link>
+                                    <div class="see-more">
+                                        <router-link  to="/course" class="remove-a-css" target="_blank">查看更多&nbsp;></router-link>
+                                    </div>
+                                </div>
                             </div>
                         </el-col>
                     </el-row>
@@ -106,7 +119,8 @@
                     chapter_list:[],
                 },
                 right_data:{
-                  user_rank:[]
+                  user_rank:[],
+                  similar_course:[]
                 },
                 activeName:'chapter'
             }
@@ -129,16 +143,23 @@
             getUserRank(){
                 this.$fetch('/api/course_detail/user_rank').then((response) => {
                    this.right_data.user_rank = response.user;
+                   console.log('user_rank',this.right_data.user_rank);
                 })
             },
             handleClick(tab, event) {
                 console.log( 105,tab, event);
-            }
+            },
+            getSimilarCourse(){
+                this.$fetch('http://127.0.0.1/teachep/public/course/getCourseSortList').then((response) => {
+                    this.right_data.similar_course = response.course;
+                    console.log('similar_course',this.right_data.similar_course);
+                })
+            },
         },
         created(){
             this.getCourseInfo();
-            console.log(this.course);
             this.getUserRank();
+            this.getSimilarCourse();
         }
     }
 </script>

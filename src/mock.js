@@ -21,7 +21,7 @@ let useMock = (isOpenMock) =>{
             id:()=>Random.integer( 1, 100 ),
             course_name:()=>Random.ctitle(),
             'course_type|3':[()=>Random.ctitle()],
-            course_introduction:()=>Random.ctitle(),
+            course_introduction:()=>Random.ctitle(30,50),
             course_difficult:'初级 ',
             course_img:()=>Random.dataImage(),
             course_learn_people:()=>Random.integer( 1, 9999 )
@@ -30,7 +30,7 @@ let useMock = (isOpenMock) =>{
             id:()=>Random.integer( 1, 100 ),
             course_name:()=>Random.ctitle(),
             'course_type|3':[()=>Random.ctitle()],
-            course_introduction:()=>Random.ctitle(),
+            course_introduction:()=>Random.ctitle(30,50),
             course_difficult:'初级 ',
             course_img:()=>Random.dataImage(),
             course_learn_people:()=>Random.integer( 1, 9999 )
@@ -52,7 +52,7 @@ let useMock = (isOpenMock) =>{
                 id: () => Random.integer(1, 100),
                 course_name: () => Random.ctitle(),
                 'course_type|3': [() => Random.ctitle()],
-                'course_introduction': () => Random.ctitle() ,
+                'course_introduction': () => Random.ctitle(30,50) ,
                 course_difficult: '初级 ',
                 course_img: () => Random.dataImage(),
                 course_learn_people: () => Random.integer(1, 9999)
@@ -67,11 +67,11 @@ let useMock = (isOpenMock) =>{
       'course':{
           id: '',
           course_name: () => Random.ctitle(),       //课程名字
-          course_img: [() => Random.ctitle()],        //课程图片路径
+          course_img: () => Random.dataImage(),        //课程图片路径
           course_learn_people: () => Random.integer(1, 9999),      //课程所学习人数
           course_type: ['a类', 'b类'],  //所属类别(s数组)
           course_difficult: '初级',    //难度级别
-          'course_introduction': () => Random.ctitle()    //简介
+          'course_introduction': () => Random.ctitle(30,50)    //简介
       },
         'chapter_list|3': [{ //章节列表
             id: () => Random.integer(1, 100),
@@ -90,8 +90,24 @@ let useMock = (isOpenMock) =>{
         'user|5':[
             {
                 id:()=>Random.integer( 1, 100 ),
+                head_img:() => Random.dataImage(),
                 user_name:()=>Random.ctitle(),
                 score:()=>Random.integer( 1, 100 ),
+            }
+        ]
+    });
+
+    //相似课程接口
+    Mock.mock('http://127.0.0.1/teachep/public/course/getCourseSortList',{
+        "course|5": [ // 课程基本信息
+            {
+                id:()=>Random.integer( 1, 100 ),
+                course_name:()=>Random.ctitle(),       //名字
+                course_img:Random.dataImage('200x100', 'tog'),        //图片路径
+                course_learn_people:'',      //所学习人数
+                course_type:['a类','b类'],             //所属类别(s数组)
+                course_difficult:'初级',    //难度级别
+                course_introduction:()=>Random.ctitle(30,50)   //简介
             }
         ]
     });

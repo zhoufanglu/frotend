@@ -195,7 +195,7 @@ ajax({
 });
 //课程相似课程接口
 ajax({
-    title:'获取课程文件列表',
+    title:'课程相似课程接口',
     url:'http://127.0.0.1/teachep/public/course/getCourseSortList',
     type:'get',
     request:{
