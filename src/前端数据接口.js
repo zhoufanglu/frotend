@@ -234,7 +234,7 @@ ajax({
             user: [ // 会员信息
                 {
                     id:'',
-                    headimg:'会员头像地址',
+                    head_img:'会员头像地址',
                     user_name:'会员',       //名字
                     score:'积分',        //积分
 
