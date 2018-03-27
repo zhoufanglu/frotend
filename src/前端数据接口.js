@@ -258,16 +258,17 @@ ajax({
     },
     res:{
         ok:{
-            commentList: [ // 评论列表信息
+            comment_list: [ // 评论列表信息
                 {
                     user_name:'会员名称',
-                    headimg:'会员头像地址',
+                    head_img:'会员头像地址',
                     image_text_name:'来自的章节名称',
                     praise_num:'点赞数',
                     created_at:'评论时间',
+                    comment_text:''
                 }
             ],
-            pageallnum:"100",//一共多少条数据
+            page_all_num:"100",//一共多少条数据
         },
         err:{
             msg:'报错信息'

@@ -103,13 +103,28 @@ let useMock = (isOpenMock) =>{
             {
                 id:()=>Random.integer( 1, 100 ),
                 course_name:()=>Random.ctitle(),       //名字
-                course_img:Random.dataImage('200x100', 'tog'),        //图片路径
+                course_img:() =>Random.dataImage('200x100', 'tog'),        //图片路径
                 course_learn_people:'',      //所学习人数
                 course_type:['a类','b类'],             //所属类别(s数组)
                 course_difficult:'初级',    //难度级别
                 course_introduction:()=>Random.ctitle(30,50)   //简介
             }
         ]
+    });
+
+    //评论接口
+    Mock.mock('http://127.0.0.1/teachep/public/course/getCommentList',{
+        "comment_list|10": [ // 评论列表信息
+            {
+                user_name:()=>Random.ctitle(),
+                head_img:() =>Random.dataImage(),
+                image_text_name:()=>Random.ctitle(3,12),
+                praise_num:()=>Random.integer( 1, 1000 ),
+                created_at:Random.date('yyyy-MM-dd HH:mm:ss '),
+                comment_text:()=>Random.ctitle(60,100),
+            }
+        ],
+        page_all_num:"100",//一共多少条数据
     });
 
 }

@@ -54,13 +54,34 @@
                                                 </a>
                                             </div>
                                         </el-tab-pane>
-                                        <el-tab-pane label="评论" name="comments">评论</el-tab-pane>
+                                        <el-tab-pane label="评论" name="comments">
+                                            <div class="comments">
+                                                <div class="panel">
+                                                    <div class="item" v-for="i in tab_items.comment_list">
+                                                        <div class="rank-head-img item-l"><img :src="i.head_img" width="100%" height="100%" alt=""></div>
+                                                        <div class="item-r">
+                                                            <div class="row-1">{{i.user_name}}</div>
+                                                            <div class="row-2">{{i.comment_text}}</div>
+                                                            <div class="row-3">
+                                                                <div class="time-and-from">
+                                                                    <span>时间:{{i.created_at}}</span>
+                                                                    <span>源自:{{i.image_text_name}}</span>
+                                                                </div>
+                                                                <div class="praise-num">
+                                                                    <i class="icon-font">&#xe672;</i><span>{{i.praise_num}}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </el-tab-pane>
                                         <el-tab-pane label="文件" name="file">文件</el-tab-pane>
                                     </el-tabs>
                                 </template>
                             </div>
                             <div class="content-panel">
-                                <!--<router-view></router-view>-->
+
                             </div>
                         </el-col>
                         <el-col class="content-body-r":span="6">
@@ -117,6 +138,7 @@
                 },
                 tab_items:{
                     chapter_list:[],
+                    comment_list:[]
                 },
                 right_data:{
                   user_rank:[],
@@ -155,11 +177,18 @@
                     console.log('similar_course',this.right_data.similar_course);
                 })
             },
+            getCommentList(){
+                this.$fetch('http://127.0.0.1/teachep/public/course/getCommentList').then((response) => {
+                    this.tab_items.comment_list = response.comment_list;
+                    console.log('comment_list',this.tab_items.comment_list);
+                })
+            },
         },
         created(){
             this.getCourseInfo();
             this.getUserRank();
             this.getSimilarCourse();
+            this.getCommentList();
         }
     }
 </script>
