@@ -118,7 +118,7 @@ ajax({
         }
     }
 });
-//课程详情页面的数据接口
+/************************课程详情页面的数据接口********************************/
 /**
  * 1.课程详情 course_detail
  * */
@@ -236,7 +236,7 @@ ajax({
     },
     res:{
         ok:{
-            user: [ // 会员信息
+            user:  // 会员信息
                 {
                     id:'',
                     head_img:'会员头像地址',
@@ -244,7 +244,31 @@ ajax({
                     score:'积分',        //积分
 
                 }
-            ]
+        },
+        err:{
+            msg:'报错信息'
+        }
+    }
+});
+/************************子章节详情页面的数据接口********************************/
+//子章节详情接口
+ajax({
+    title:'获取子章节详情接口',
+    url:'http://127.0.0.1/teachep/public/course/getChapterDetail',
+    type:'get',
+    request:{
+        id:id,//子章节ID
+    },
+    res:{
+        ok:{
+            chapter_detail:  // 评论列表信息
+                {
+                    id:'子章节id',
+                    chapter_name:'子章节名称',
+                    chapter_introduction:'介绍',
+                    chapter_text:'点赞数',
+                    created_at:'评论时间',
+                },
         },
         err:{
             msg:'报错信息'
@@ -276,6 +300,77 @@ ajax({
         },
         err:{
             msg:'报错信息'
+        }
+    }
+});
+//收藏课程接口
+ajax({
+    title:'收藏课程接口',
+    url:'http://127.0.0.1/teachep/public/course/setUserCollection',
+    type:'post',
+    request:{
+        course_id:"课程id",
+        user_id:"课程id",
+    },
+    res:{
+        ok:{
+        },
+        err:{
+            msg:''
+        }
+    }
+});
+//完成课程接口
+ajax({
+    title:'收藏课程接口',
+    url:'http://127.0.0.1/teachep/public/course/setUserFinish',
+    type:'post',
+    request:{
+        id:"子章节（图文视频）id",
+        user_id:"课程id",
+    },
+    res:{
+        ok:{
+        },
+        err:{
+            msg:''
+        }
+    }
+});
+//课程评论接口
+ajax({
+    title:'课程评论接口',
+    url:'http://127.0.0.1/teachep/public/course/setUserComment',
+    type:'post',
+    request:{
+        id:"子章节（图文视频）id",
+        user_id:"课程id",
+        comment_text:"评论内容",
+    },
+    res:{
+        ok:{
+        },
+        err:{
+            msg:''
+        }
+    }
+});
+//课程回复操作接口
+ajax({
+    title:'课程评论回复操作接口',
+    url:'http://127.0.0.1/teachep/public/course/setUserReply',
+    type:'post',
+    request:{
+        id:"子章节（图文视频）id",
+        user_id:"用户id",
+        comment_id:"评论id",
+        comment_text:"回复内容",
+    },
+    res:{
+        ok:{
+        },
+        err:{
+            msg:''
         }
     }
 });
@@ -349,7 +444,7 @@ ajax({
     },
     res:{
         ok:{
-            user_data: [ // 个人信息获取信息
+            user_data:  // 个人信息获取信息
                 {
                     id:'用户id',
                     user_name:'用户名字',
@@ -362,7 +457,7 @@ ajax({
                     is_identity:'是否认证',
                     user_learning_course_num:"学习课程数"
                 }
-            ],
+            ,
             page_all_num:"100",//一共多少条数据
         },
         err:{
@@ -388,6 +483,76 @@ ajax({
     res:{
         ok:{
 
+        },
+        err:{
+            msg:''
+        }
+    }
+});
+//认证信息获取接口
+ajax({
+    title:'认证信息获取接口',
+    url:'http://127.0.0.1/teachep/public/user/getMyIdentity',
+    type:'post',
+    request:{
+        id:"用户id",
+    },
+    res:{
+        ok:{
+            id:"认证信息id",
+            user_id:"用户id",//用户ID
+            identity_name:'真实名字',
+            school_name:'学校名字',
+            school_id:'学校id',
+            identiy_education:'学历（1中专 2大专 3本科）<直接传的数字>',
+            graduation_time:'毕业时间',
+            identity_file:'认证文件资料地址',
+            identity_status:'认证状态（0 不合格 1合格 2待审核）'
+        },
+        err:{
+            msg:''
+        }
+    }
+});
+//获取学校列表
+ajax({
+    title:'获取学校列表',
+    url:'http://127.0.0.1/teachep/public/user/getSchoolList',
+    type:'post',
+    request:{
+    },
+    res:{
+        ok:{
+           school_list:[
+               {
+                 id:id,//学校ID
+                 school_name:'学校名字',
+               }
+           ]
+        },
+        err:{
+            msg:''
+        }
+    }
+});
+//认证信息修改接口
+ajax({
+    title:'认证信息获取接口',
+    url:'http://127.0.0.1/teachep/public/user/setMyIdentity',
+    type:'post',
+    request:{
+        id:"认证信息id",
+        user_id:"用户id",//用户ID
+        identity_name:'真实名字',
+        school_name:'学校名字',
+        school_id:'学校id',
+        identiy_education:'学历（1中专 2大专 3本科）<直接传的数字>',
+        graduation_time:'毕业时间',
+        identity_file:'认证文件资料地址',
+
+    },
+    res:{
+        ok:{
         },
         err:{
             msg:''
