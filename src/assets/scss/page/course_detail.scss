@@ -133,6 +133,18 @@
                         }
                     }
                 }
+                .file-table{
+                    border: solid 1px $light;
+                    .remove-a-css{
+                        color: $darker;
+                    }
+                    .grid-content{
+                        height: 66px;
+                        line-height: 66px;
+                        border-bottom: solid 1px $light;
+                        padding: 0 20px;
+                    }
+                }
             }
             .content-panel{
                 padding: 30px;

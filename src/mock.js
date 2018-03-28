@@ -127,5 +127,18 @@ let useMock = (isOpenMock) =>{
         page_all_num:"100",//一共多少条数据
     });
 
+    //文章接口
+    Mock.mock('http://127.0.0.1/teachep/public/course/getFileList',{
+        "file_list|10": [
+            {
+                id:()=>Random.integer( 1, 100 ),
+                file_name:()=>Random.ctitle(4,8),       //文件名称
+                file_from:"第x章 ",                      //
+                file_address:'address',        //文件地址
+                file_size:'100kb',
+                created_at:Random.date('yyyy-MM-dd HH:mm:ss '),        //文件地址
+            }
+        ]
+    });
 }
 export default useMock;

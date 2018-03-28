@@ -76,7 +76,44 @@
                                                 </div>
                                             </div>
                                         </el-tab-pane>
-                                        <el-tab-pane label="文件" name="file">文件</el-tab-pane>
+                                        <el-tab-pane label="文件" name="file">
+                                            <div class="file-table">
+                                                <el-row>
+                                                    <el-col :span="4">
+                                                        <div class="grid-content">所属章节</div>
+                                                    </el-col>
+                                                    <el-col :span="4">
+                                                        <div class="grid-content ">资料名称</div>
+                                                    </el-col>
+                                                    <el-col :span="8">
+                                                        <div class="grid-content "> &nbsp;</div>
+                                                    </el-col>
+                                                    <el-col :span="4">
+                                                        <div class="grid-content ">文件大小</div>
+                                                    </el-col>
+                                                    <el-col :span="4">
+                                                        <div class="grid-content ">下载地址</div>
+                                                    </el-col>
+                                                </el-row>
+                                                <el-row v-for="(i,index) in tab_items.file_list" :key="index">
+                                                    <el-col :span="4">
+                                                        <div class="grid-content">{{i.file_from}}</div>
+                                                    </el-col>
+                                                    <el-col :span="4">
+                                                        <div class="grid-content ">{{i.file_name}}</div>
+                                                    </el-col>
+                                                    <el-col :span="8">
+                                                        <div class="grid-content ">&nbsp;</div>
+                                                    </el-col>
+                                                    <el-col :span="4">
+                                                        <div class="grid-content ">{{i.file_size}}</div>
+                                                    </el-col>
+                                                    <el-col :span="4">
+                                                        <router-link  to="/course"target="_blank" class="grid-content remove-a-css">{{i.file_address}}</router-link>
+                                                    </el-col>
+                                                </el-row>
+                                            </div>
+                                        </el-tab-pane>
                                     </el-tabs>
                                 </template>
                             </div>
@@ -138,7 +175,8 @@
                 },
                 tab_items:{
                     chapter_list:[],
-                    comment_list:[]
+                    comment_list:[],
+                    file_list:[]
                 },
                 right_data:{
                   user_rank:[],
@@ -183,12 +221,19 @@
                     console.log('comment_list',this.tab_items.comment_list);
                 })
             },
+            getFileList(){
+                this.$fetch('http://127.0.0.1/teachep/public/course/getFileList').then((response) => {
+                    this.tab_items.file_list = response.file_list;
+                    console.log('file_list',this.tab_items.file_list);
+                })
+            }
         },
         created(){
-            this.getCourseInfo();
-            this.getUserRank();
-            this.getSimilarCourse();
-            this.getCommentList();
+            this.getCourseInfo();   //获取课程基本信息
+            this.getUserRank();     //获取用户排名列表
+            this.getSimilarCourse();//类似课程
+            this.getCommentList();  //获取评论
+            this.getFileList();
         }
     }
 </script>
