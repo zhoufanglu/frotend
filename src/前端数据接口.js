@@ -1,8 +1,9 @@
-//前端数据接口文档111
+文档111
 
 /**
  * home.html
  */
+//接口ip地址
 ajax({
     title:'获取课程信息接口',
     url:'http://127.0.0.1/teachep/public/indexRotation',
@@ -15,8 +16,8 @@ ajax({
             /*
             和获取分类接口数据相同请求数据分类接口*/
             top_title:[{//(三级菜单)
-              id:'课程分类id',
-              couser_type_name:'课程分类名称',
+                id:'课程分类id',
+                couser_type_name:'课程分类名称',
             }],  //轮播左边的标题内容，个数需要固定
             module:[{id:1,name:'一级标题1'},{id:2,name:'一级标题2'}],//一级课题标题（模块列表）
             shuffling_img_link:[{
@@ -175,13 +176,15 @@ ajax({
     url:'http://127.0.0.1/teachep/public/course/getFileList',
     type:'get',
     request:{
-        id:id//课程ID
+        id:id,//课程ID
+        type:1
     },
     res:{
         ok:{
             file_list: [ // 课程文件信息
                 {
                     id:'',
+                    chapter_name:'所属章节名称',       //文件名称
                     file_name:'文件名称',       //文件名称
                     file_address:'文件地址',        //文件地址
                     file_from:'第一章',        //所属章节
@@ -260,20 +263,134 @@ ajax({
     },
     res:{
         ok:{
-            comment_list: [ // 评论列表信息
+            commentList: [ // 评论列表信息
                 {
                     user_name:'会员名称',
-                    head_img:'会员头像地址',
+                    headimg:'会员头像地址',
                     image_text_name:'来自的章节名称',
                     praise_num:'点赞数',
                     created_at:'评论时间',
-                    comment_text:''
+                }
+            ],
+            pageallnum:"100",//一共多少条数据
+        },
+        err:{
+            msg:'报错信息'
+        }
+    }
+});
+/************************个人中心页面接口********************************/
+//我的课程接口
+ajax({
+    title:'获取我的课程列表',
+    url:'http://127.0.0.1/teachep/public/user/getMyCourseList',
+    type:'get',
+    request:{
+        id:id,//课程ID
+        num:num,//几条数据
+        pagenow:""//当前页面
+    },
+    res:{
+        ok:{
+            course_list: [ // 我的课程列表信息
+                {
+                    id:'课程id',
+                    course_name:'课程名字',
+                    course_img:'课程封面图片',
+                    course_progress:'课程学习进度',
+                    course_introduction:'课程简介',
+                    chapter_name:'学至章节名称',
+                    created_at:'最近学习时间',
                 }
             ],
             page_all_num:"100",//一共多少条数据
         },
         err:{
             msg:'报错信息'
+        }
+    }
+});
+//我的收藏接口
+ajax({
+    title:'获取我的收藏列表',
+    url:'http://127.0.0.1/teachep/public/user/getMyCollectionList',
+    type:'get',
+    request:{
+        id:id,//课程ID
+        num:num,//几条数据
+        pagenow:""//当前页面
+    },
+    res:{
+        ok:{
+            collection_list: [ // 我的收藏列表信息
+                {
+                    id:'课程id',
+                    course_name:'课程名字',
+                    course_img:'课程封面图片',
+                    course_learn_people:'课程学习进度',
+                    course_introduction:'课程简介',
+                    created_at:'收藏时间',
+                }
+            ],
+            page_all_num:"100",//一共多少条数据
+        },
+        err:{
+            msg:'报错信息'
+        }
+    }
+});
+//个人信息获取接口
+ajax({
+    title:'个人信息获取',
+    url:'http://127.0.0.1/teachep/public/user/getMyUserData',
+    type:'post',
+    request:{
+        id:id,//用户ID
+    },
+    res:{
+        ok:{
+            user_data: [ // 个人信息获取信息
+                {
+                    id:'用户id',
+                    user_name:'用户名字',
+                    user_job:'用户工作',
+                    user_sex:'性别',
+                    user_city:'所在城市',
+                    user_autograph:'个性签名',
+                    user_score:'用户积分',
+                    user_headimg:'用户头像',
+                    is_identity:'是否认证',
+                    user_learning_course_num:"学习课程数"
+                }
+            ],
+            page_all_num:"100",//一共多少条数据
+        },
+        err:{
+            msg:'报错信息'
+        }
+    }
+});
+//个人信息修改接口
+ajax({
+    title:'个人信息修改',
+    url:'http://127.0.0.1/teachep/public/user/setMyUserData',
+    type:'post',
+    request:{
+        id:id,//用户ID
+        user_name:'用户名字',
+        user_job:'用户工作',
+        user_sex:'性别',
+        user_city:'所在城市',
+        user_autograph:'个性签名',
+        user_score:'用户积分',
+        user_headimg:'用户头像',
+    },
+    res:{
+        ok:{
+
+        },
+        err:{
+            msg:''
         }
     }
 });
