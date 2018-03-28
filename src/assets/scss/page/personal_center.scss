@@ -1,0 +1,125 @@
+.personal-center{
+    .content-top{
+        @include vertical-center;
+        justify-content: space-between;
+        height: 220px;
+        border-bottom: solid 1px $light;
+        .top-l{
+            @include vertical-center;
+            .head-img{
+                border-radius: 50%;
+                width: 76px;
+                height: 76px;
+                overflow: hidden;
+            }
+            .personal-info{
+                display: flex;
+                flex-direction: column;
+                margin-left: 30px;
+                height: 76px;
+                justify-content: space-around;
+                font-size: 18px;
+            }
+        }
+        .top-r{
+            font-size: 18px;
+            @include vertical-center;
+            >div{
+                @include vertical-center;
+                flex-direction: column;
+                justify-content: space-around;
+                height: 76px;
+                >span:first-child{
+                    font-weight: 600;
+                }
+            }
+            >div:first-child{
+                margin-right: 30px;
+            }
+        }
+    }
+    .content-main{
+        @include vertical-center;
+        margin-top: 30px;
+        .main{
+            width: 100%;
+            .nav-content{
+                padding: 30px;
+                .nav-course-row:not(:first-child){
+                    margin-top: 30px;
+                }
+                .nav-course-row{
+                    border-bottom: solid 1px $light;
+                    padding-bottom: 30px;
+                    .item-left{
+                        height: 140px;
+                        padding-right: 30px;
+                    }
+                    .item-mid{
+                        display: flex;
+                        flex-direction: column;
+                        height: 140px;
+                        justify-content: space-around;
+                        padding-left: 10px;
+                        padding-right: 50px;
+                        .title{
+                            font-size: 20px;
+                        }
+                        .introduction{
+                            @include ellipsis(3);
+                        }
+                        .study-state{
+                            span:first-child{
+                                color: $selectColor;
+                            }
+                            span:last-child{
+                                margin-left: 30px;
+                            }
+                        }
+                    }
+                    .item-right{
+                        @extend .item-mid;
+                        justify-content: space-between;
+                        align-items: flex-end;
+                        padding-right: 0;
+                        .start-time{
+                            @include ellipsis(1);
+                        }
+                        .continue-study{
+                            color: $selectColor;
+                            height: 50px;
+                            width: 140px;
+                            @include vertical-center;
+                            border: solid 1px $selectColor;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+//element
+.left-nav{
+    .el-tabs__nav{
+        min-height: 800px;
+    }
+    .el-tabs__item{
+        height: 100px;
+        line-height: 100px;
+        font-size: 20px;
+        font-weight: 600;
+        width: 180px;
+        text-align: center!important;
+    }
+    .el-tabs__active-bar{
+        background-color: $selectColor;
+    }
+    .is-active{
+        color: $selectColor;
+    }
+    .is-left{
+
+    }
+}

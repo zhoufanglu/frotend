@@ -125,3 +125,11 @@ $head-height:80px;
         color: $white;
     }
 }
+.remove-a-css-darker{
+    text-decoration: none;
+    color: $darker;
+    @include ellipsis(1);
+    &:visited{
+        color: $darker;
+    }
+}
