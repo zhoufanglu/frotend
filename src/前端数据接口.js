@@ -363,7 +363,6 @@ ajax({
                     user_learning_course_num:"学习课程数"
                 }
             ],
-            page_all_num:"100",//一共多少条数据
         },
         err:{
             msg:'报错信息'

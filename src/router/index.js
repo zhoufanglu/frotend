@@ -7,6 +7,7 @@ import course_center from '@/components/top/course_center'
 import find from '@/components/top/find'
 import help from '@/components/top/help'
 import course_detail from '@/components/course_detail'
+import personal_center from '@/components/personal_center'
 
 
 Vue.use(Router)
@@ -42,6 +43,11 @@ export default new Router({
             path: '/course_detail',
             name: 'course_detail',
             component: course_detail,
+        },
+        {
+            path: '/personal_center',
+            name: 'personal_center',
+            component: personal_center,
         }
     ]
 })

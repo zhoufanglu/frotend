@@ -22,7 +22,7 @@
                      <span class="nick-name" :class="text_color">{{nickName}}</span>
                   </span>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>个人信息</el-dropdown-item>
+                    <el-dropdown-item><router-link to="/personal_center" class="remove-a-css-darker">个人中心</router-link></el-dropdown-item>
                     <el-dropdown-item>注销</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>

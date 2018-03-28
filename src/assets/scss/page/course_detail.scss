@@ -194,10 +194,10 @@
                             width: 5%;
                         }
                         >div:nth-child(2){
-                            width: 10%;
+                            width: 5%;
                         }
                         >div:nth-child(3){
-                            width: 50%;
+                            width: 55%;
                             @include ellipsis(1);
                         }
                         >div:nth-child(4){
@@ -271,7 +271,7 @@
         }
     }
     .is-active{
-        color: red!important;
+        color: $selectColor!important;
     }
     .el-tabs__header{
         border-bottom: solid 1px $light!important;
