@@ -75,6 +75,10 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!--分页-->
+                                            <div class="paging">
+                                                <el-pagination background layout="prev, pager, next"@current-change="getCommentList()" :page-size="paging.page_all_num" :current-page.sync="paging.now_page"  :total="paging.data_number"></el-pagination>
+                                            </div>
                                         </el-tab-pane>
                                         <el-tab-pane label="文件" name="file">
                                             <div class="file-table">
@@ -182,7 +186,12 @@
                   user_rank:[],
                   similar_course:[]
                 },
-                activeName:'chapter'
+                activeName:'chapter',  //tab选中页面
+                paging:{
+                    page_all_num:30,//一页多少数据
+                    now_page:1,     //当前页码
+                    data_number:300 //一共多少数据
+                }
             }
         },
         methods: {
