@@ -179,12 +179,14 @@ ajax({
     },
     res:{
         ok:{
-            filelist: [ // 课程文件信息
+            file_list: [ // 课程文件信息
                 {
                     id:'',
                     file_name:'文件名称',       //文件名称
                     file_address:'文件地址',        //文件地址
+                    file_from:'第一章',        //所属章节
                     created_at:'上传时间',        //文件地址
+                    file_size:'100kb',              //文件大小
                 }
             ]
         },
