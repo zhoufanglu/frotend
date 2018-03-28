@@ -4,9 +4,9 @@
             <router-link class="remove-a-css" to="/home" :class="text_color">教学管理系统</router-link>
         </div>
         <div class="is-show-head" :class="show_hide_vis">
-            <span><router-link class="remove-a-css" to="/course_center">课程中心</router-link></span>
-            <span><router-link class="remove-a-css" to="/find">发现</router-link></span>
-            <span><router-link class="remove-a-css" to="/help">帮助</router-link></span>
+            <span><router-link class="remove-a-css no-warp" to="/course_center">课程中心</router-link></span>
+            <span><router-link class="remove-a-css no-warp" to="/find">发现</router-link></span>
+            <span><router-link class="remove-a-css no-warp" to="/help">帮助</router-link></span>
             <el-input class="head-search"
                     placeholder="搜索"
                     prefix-icon="el-icon-search"
@@ -52,6 +52,9 @@
             width: 40%;
             height: 100%;
             padding: 0 10px;
+            .no-warp{
+                white-space: nowrap;
+            }
             @extend .name;
             span{
                 @include vertical-center;
