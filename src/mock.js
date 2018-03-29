@@ -144,7 +144,7 @@ let useMock = (isOpenMock) =>{
      * personal_center.html
      */
     //个人信息接口
-    Mock.mock('http://127.0.0.1/teachep/public/course/getFileList',{
+    Mock.mock('http://127.0.0.1/teachep/public/user/getMyUserData',{
         user_data:  // 个人信息获取信息
             {
                 id:()=>Random.integer( 1, 100 ),
@@ -170,9 +170,22 @@ let useMock = (isOpenMock) =>{
                     course_progress:'20%',
                     course_introduction:()=>Random.ctitle(15,40),
                     chapter_name:'第几章',
-                    created_at:Random.date('yyyy-MM-dd HH:mm:ss '),
+                    created_at:()=>Random.date('yyyy-MM-dd HH:mm:ss '),
                 }
             ],
+    });
+    //我的收藏
+    Mock.mock('http://127.0.0.1/teachep/public/user/getMyCollectionList',{
+        "collection_list|4": [ // 我的课程列表信息
+            {
+                id:()=>Random.integer( 1, 100 ),
+                course_name:()=>Random.ctitle(2,4),
+                course_img:() =>Random.dataImage(),
+                course_learn_people:()=>Random.integer( 1, 100 ),
+                course_introduction:()=>Random.ctitle(15,40),
+                created_at:()=>Random.date('yyyy-MM-dd HH:mm:ss '),
+            }
+        ],
     });
 
 }

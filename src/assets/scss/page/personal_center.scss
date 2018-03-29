@@ -1,4 +1,7 @@
 .personal-center{
+    .paging{
+        text-align: center;
+    }
     .content-top{
         @include vertical-center;
         justify-content: space-between;
@@ -44,7 +47,7 @@
         .main{
             width: 100%;
             .nav-content{
-                padding: 30px;
+                padding: 30px 0 0 10px;
                 .nav-course-row:not(:first-child){
                     margin-top: 30px;
                 }
@@ -91,6 +94,84 @@
                             width: 140px;
                             @include vertical-center;
                             border: solid 1px $selectColor;
+                        }
+                    }
+                }
+            }
+            .personal-info{
+                padding: 30px 0;
+                .top{
+                    padding: 0 30px 30px 30px;
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 20px;
+                    border-bottom: solid 1px $light;
+                    .edit-info{
+                        cursor: pointer;
+                    }
+                    i{
+                        margin-right: 10px;
+                    }
+                }
+                .main{
+                    padding: 30px;
+                    font-size: 22px;
+                    .row{
+                        height: 80px;
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+            }
+            .real-name{
+                padding: 30px 0;
+                .top{
+                    padding: 0 30px 30px 30px;
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 20px;
+                    border-bottom: solid 1px $light;
+                    .edit-info{
+                        cursor: pointer;
+                    }
+                    i{
+                        margin-right: 10px;
+                    }
+                }
+                .main{
+                    padding: 30px;
+                    font-size: 22px;
+                    .left{
+                        .top-tip{
+                            color: $danger;
+                            font-size: 20px;
+                        }
+                        .real-name-data{
+                            min-height: 600px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-around;
+                            border-right: solid 1px $light;
+                            padding-right: 60px;
+                            .name{
+                                white-space: nowrap;
+                            }
+                        }
+                        .commit-btn{
+                            width: 30%;
+                            margin: 0 auto;
+                        }
+                    }
+                    .right{
+                        padding-left:60px;
+                        padding-right: 60px;
+                        ul{
+                            width: 90%;
+                            li{
+                                padding-bottom: 30px;
+                                font-weight: normal;
+                                font-size: 18px;
+                            }
                         }
                     }
                 }
