@@ -254,20 +254,22 @@ ajax({
 //子章节详情接口
 ajax({
     title:'获取子章节详情接口',
-    url:'http://127.0.0.1/teachep/public/course/getChapterDetail',
+    url:'http://127.0.0.1/teachep/public/course/getImageTextDetail',
     type:'get',
     request:{
         id:id,//子章节ID
     },
     res:{
         ok:{
-            chapter_detail:  // 评论列表信息
+            image_text_detail:  // 子章节信息
                 {
                     id:'子章节id',
-                    chapter_name:'子章节名称',
-                    chapter_introduction:'介绍',
-                    chapter_text:'点赞数',
-                    created_at:'评论时间',
+                    image_text_name:'子章节名称',
+                    image_text_introduction:'介绍',
+                    image_text_detail:'子章节详情',
+                    image_text_video:'视频地址',
+                    image_text_type:'1<图文>2<视频>',
+                    finish_score:"完成分数"
                 },
         },
         err:{
@@ -275,13 +277,13 @@ ajax({
         }
     }
 });
-//课程评论接口
+//子章节评论接口
 ajax({
     title:'获取课程评论列表',
     url:'http://127.0.0.1/teachep/public/course/getCommentList',
     type:'get',
     request:{
-        id:id,//课程ID
+        id:id,//子章节ID（图文或视频id）
         num:num,//几条数据
         pagenow:""//当前页面
     },
@@ -289,11 +291,19 @@ ajax({
         ok:{
             commentList: [ // 评论列表信息
                 {
+                    id:"评论id",
                     user_name:'会员名称',
                     headimg:'会员头像地址',
-                    image_text_name:'来自的章节名称',
+                    image_text_name:'来自的子章节名称',
                     praise_num:'点赞数',
                     created_at:'评论时间',
+                    reply_list:[{
+                        id:"回复id",
+                        user_name:"会员名称",
+                        headimg:'会员头像地址',
+                        reply_text:'回复内容',
+                        created_at:"回复时间"
+                    }],
                 }
             ],
             pageallnum:"100",//一共多少条数据
@@ -303,14 +313,14 @@ ajax({
         }
     }
 });
-//收藏课程接口
+//开始学习课程接口
 ajax({
-    title:'收藏课程接口',
-    url:'http://127.0.0.1/teachep/public/course/setUserCollection',
+    title:'开始学习课程接口',
+    url:'http://127.0.0.1/teachep/public/course/setUserStartCourse',
     type:'post',
     request:{
         course_id:"课程id",
-        user_id:"课程id",
+        user_id:"用户id",
     },
     res:{
         ok:{
@@ -320,6 +330,7 @@ ajax({
         }
     }
 });
+
 //完成课程接口
 ajax({
     title:'收藏课程接口',
@@ -327,7 +338,7 @@ ajax({
     type:'post',
     request:{
         id:"子章节（图文视频）id",
-        user_id:"课程id",
+        user_id:"用户id",
     },
     res:{
         ok:{
@@ -346,6 +357,7 @@ ajax({
         id:"子章节（图文视频）id",
         user_id:"课程id",
         comment_text:"评论内容",
+        project_class:"1:图文视频 2文章"//评论对象的类型
     },
     res:{
         ok:{
@@ -361,10 +373,9 @@ ajax({
     url:'http://127.0.0.1/teachep/public/course/setUserReply',
     type:'post',
     request:{
-        id:"子章节（图文视频）id",
         user_id:"用户id",
         comment_id:"评论id",
-        comment_text:"回复内容",
+        reply_text:"回复内容",
     },
     res:{
         ok:{
@@ -422,7 +433,7 @@ ajax({
                     id:'课程id',
                     course_name:'课程名字',
                     course_img:'课程封面图片',
-                    course_learn_people:'课程学习进度',
+                    course_progress:'课程学习进度',
                     course_introduction:'课程简介',
                     created_at:'收藏时间',
                 }
@@ -549,7 +560,6 @@ ajax({
         identiy_education:'学历（1中专 2大专 3本科）<直接传的数字>',
         graduation_time:'毕业时间',
         identity_file:'认证文件资料地址',
-
     },
     res:{
         ok:{
