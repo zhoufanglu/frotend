@@ -9,6 +9,7 @@ import help from '@/components/top/help'
 import course_detail from '@/components/course_detail'
 import personal_center from '@/components/personal_center'
 
+import login from '@/components/login'
 
 Vue.use(Router)
 
@@ -48,6 +49,11 @@ export default new Router({
             path: '/personal_center',
             name: 'personal_center',
             component: personal_center,
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: login,
         }
     ]
 })

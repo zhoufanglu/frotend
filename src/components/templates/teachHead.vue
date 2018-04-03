@@ -19,11 +19,11 @@
                      <span class="head-img">
                          <img :src="headSrcLink" alt="" width="100%" height="100%">
                      </span>
-                     <span class="nick-name" :class="text_color">{{userInfo.nick_name}}</span>
+                     <span class="nick-name" :class="text_color">{{user_info.nick_name}}</span>
                   </span>
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item><router-link to="/personal_center" class="remove-a-css-darker">个人中心</router-link></el-dropdown-item>
-                    <el-dropdown-item>注销</el-dropdown-item>
+                    <el-dropdown-item @click.native="logout">注销</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -32,16 +32,45 @@
 
 <script>
     import { mapGetters } from 'vuex'
+    import { mapMutations } from 'vuex'
     export default {
         name: "teachHead",
         props:['nickName','headSrcLink','head_search','show_hide_vis','bg_color','text_color'],
         computed:{
             ...mapGetters({
-                userInfo:'getUserInfo'
-            })
+                user_info: 'getUserInfo',
+                is_login: 'getLoginState'
+            }),
+
         },
-        created(){
-            console.log(43,this.userInfo);
+        methods:{
+            ...mapMutations({
+                setUserInfo: 'setUserInfo',
+                setLoginState: 'setLoginState'
+            }),
+            logout(){
+                this.setLoginState(false);
+                this.$router.push({path:'/login'})
+            },
+            checkIsLogin(){
+                this.setLoginState(JSON.parse(window.localStorage.getItem('is_login')));
+                console.log(43,this.user_info,this.is_login);
+                if(this.is_login === false){
+                    console.log('666');
+                    this._alert({
+                        title :'提示',
+                        msg : '你还未登录,请先登录',
+                        type : 'warning',
+                        confirm:()=>{
+                            console.log('xxx');
+                            this.$router.push({path:'/login'})
+                        }
+                    });
+                }
+            }
+        },
+        mounted(){
+            this.checkIsLogin();
         }
     }
 </script>

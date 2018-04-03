@@ -1,0 +1,8 @@
+#Vue nodes <br/>
+###router<br/>
+####1.路由跳转  
+**this.$router.go('/login')**  
+**this.$router.push({path:'/index'})**  
+**<router-link to="/personal_center"></router-link>**   
+###常规细节  
+1.就是当你给一个vue组件绑定事件时候，要加上native！如果是普通的html元素！就不需要
