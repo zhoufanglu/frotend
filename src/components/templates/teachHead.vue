@@ -19,7 +19,7 @@
                      <span class="head-img">
                          <img :src="headSrcLink" alt="" width="100%" height="100%">
                      </span>
-                     <span class="nick-name" :class="text_color">{{nickName}}</span>
+                     <span class="nick-name" :class="text_color">{{userInfo.nick_name}}</span>
                   </span>
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item><router-link to="/personal_center" class="remove-a-css-darker">个人中心</router-link></el-dropdown-item>
@@ -31,9 +31,18 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
     export default {
         name: "teachHead",
-        props:['nickName','headSrcLink','head_search','show_hide_vis','bg_color','text_color']
+        props:['nickName','headSrcLink','head_search','show_hide_vis','bg_color','text_color'],
+        computed:{
+            ...mapGetters({
+                userInfo:'getUserInfo'
+            })
+        },
+        created(){
+            console.log(43,this.userInfo);
+        }
     }
 </script>
 

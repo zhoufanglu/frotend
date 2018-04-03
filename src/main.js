@@ -10,7 +10,6 @@ import ElementUI from 'element-ui';                               //element
 import usePrototype from '@/assets/js/prototype';                 //定义全局的prototype
 import axiosInterceptor from '@/assets/js/interceptor';           //拦截器
 import useMock from "@/mock";                                     //mock模拟数据
-
 useMock(true);                                                     //mock开关
 
 Vue.use(usePrototype);

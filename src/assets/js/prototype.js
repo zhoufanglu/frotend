@@ -2,7 +2,6 @@
 import Vue from 'vue'
 import axios from 'axios'
 import {post,fetch,patch,put} from '@/assets/js/http'             //axios封装
-
 let usePrototype = () =>{
 
     Vue.prototype.$http = axios;
@@ -11,6 +10,8 @@ let usePrototype = () =>{
     Vue.prototype.$fetch = fetch;
     Vue.prototype.$patch = patch;
     Vue.prototype.$put = put;
+    //vuex
+    Vue.prototype.$store = store;
     /**
      * 请求头设置
      */
