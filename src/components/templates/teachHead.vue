@@ -57,15 +57,10 @@
                 console.log(43,this.user_info,this.is_login);
                 if(this.is_login === false){
                     console.log('666');
-                    this._alert({
-                        title :'提示',
-                        msg : '你还未登录,请先登录',
-                        type : 'warning',
-                        confirm:()=>{
-                            console.log('xxx');
-                            this.$router.push({path:'/login'})
-                        }
+                    this._message("登录过期，请重新登录",{
+                        type : "warning"
                     });
+                    this.$router.push({path:'/login'});
                 }
             }
         },

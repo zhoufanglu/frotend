@@ -78,7 +78,9 @@
                                 <div class="personal-info">
                                     <div class="top">
                                         <span>个人信息</span>
-                                        <span class="edit-info"><i class="icon-font">&#xe624;</i>编辑</span>
+                                        <el-button type="text" @click="personal_mask = true">
+                                            <span class="edit-info"><i class="icon-font">&#xe624;</i>编辑</span>
+                                        </el-button>
                                     </div>
                                     <div class="main">
                                         <el-row class="row">
@@ -175,6 +177,30 @@
                 </div>
             </div>
         </div>
+        <!--dialog-->
+        <el-dialog class="personal-dialog" title="编辑个人信息" :visible.sync="personal_mask" width="30%">
+            <el-form label-position="right" label-width="80px" :model="user_edit_data">
+                <el-form-item label="昵称">
+                    <el-input v-model="user_edit_data.name"></el-input>
+                </el-form-item>
+                <el-form-item label="职位">
+                    <el-input v-model="user_edit_data.job"></el-input>
+                </el-form-item>
+                <el-form-item label="所在地区">
+                    <el-input v-model="user_edit_data.city"></el-input>
+                </el-form-item>
+                <el-form-item label="性别">
+                    <el-input v-model="user_edit_data.sex"></el-input>
+                </el-form-item>
+                <el-form-item label="个性签名">
+                    <el-input v-model="user_edit_data.autograph"></el-input>
+                </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="personal_mask = false">取 消</el-button>
+                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -194,6 +220,7 @@
                 show_hide_vis:'show-vis',
                 //用户信息
                 user_data:{},
+                user_edit_data:{},
                 //left_nav
                 activeName:'course',
                 course_list:[],
@@ -235,7 +262,8 @@
                         url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
                         status: 'finished'
                     }],
-                }
+                },
+                personal_mask:false
             }
         },
         methods:{
@@ -270,6 +298,9 @@
             //文件上传
             fileChange(file, fileList) {
                 this.real_name.fileList3 = fileList.slice(-3);
+            },
+            showInfoMask(){
+                this.personal_mask = true;
             }
         },
         created(){
