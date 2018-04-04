@@ -9,7 +9,7 @@
                     </div>
                     <div class="personal-info">
                         <span>{{user_data.user_name}}</span>
-                        <span>{{user_data.user_sex}}&nbsp;&nbsp;{{user_data.user_city}}</span>
+                        <span>{{user_data.user_sex}}&nbsp;&nbsp;{{getCity}}</span>
                     </div>
                 </div>
                 <div class="top-r">
@@ -93,7 +93,9 @@
                                         </el-row >
                                         <el-row class="row">
                                             <el-col class="title" :span="4">所在城市</el-col>
-                                            <el-col class="row-content" :span="20">{{user_data.user_city}}</el-col>
+                                            <el-col class="row-content" :span="20">
+                                                {{getCity}}
+                                            </el-col>
                                         </el-row>
                                         <el-row class="row">
                                             <el-col class="title" :span="4">用户性别</el-col>
@@ -181,24 +183,26 @@
         <el-dialog class="personal-dialog" title="编辑个人信息" :visible.sync="personal_mask" width="30%">
             <el-form label-position="right" label-width="80px" :model="user_edit_data">
                 <el-form-item label="昵称">
-                    <el-input v-model="user_edit_data.name"></el-input>
+                    <el-input v-model="user_edit_data.user_name"></el-input>
                 </el-form-item>
                 <el-form-item label="职位">
-                    <el-input v-model="user_edit_data.job"></el-input>
+                    <el-input v-model="user_edit_data.user_job"></el-input>
                 </el-form-item>
                 <el-form-item label="所在地区">
-                    <el-input v-model="user_edit_data.city"></el-input>
+                    <el-cascader size="large" :options="options" v-model="user_edit_data.user_city">
+                    </el-cascader>
                 </el-form-item>
                 <el-form-item label="性别">
-                    <el-input v-model="user_edit_data.sex"></el-input>
+                    <el-radio v-model="user_edit_data.user_sex" label="男">男</el-radio>
+                    <el-radio v-model="user_edit_data.user_sex" label="女">女</el-radio>
                 </el-form-item>
                 <el-form-item label="个性签名">
-                    <el-input v-model="user_edit_data.autograph"></el-input>
+                    <el-input type="textarea" v-model="user_edit_data.user_autograph"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="personal_mask = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+                <el-button type="primary" @click="editPersonalInfo()">确 定</el-button>
             </span>
         </el-dialog>
     </div>
@@ -206,7 +210,7 @@
 <script>
     import ElCol from "element-ui/packages/col/src/col";
     import ElRow from "element-ui/packages/row/src/row";
-
+    import { provinceAndCityData, regionData, CodeToText, TextToCode } from 'element-china-area-data'
     export default {
         components: {
             ElRow,
@@ -219,8 +223,11 @@
                 //css
                 show_hide_vis:'show-vis',
                 //用户信息
+                options:provinceAndCityData,
                 user_data:{},
-                user_edit_data:{},
+                user_edit_data:{
+                    user_city:[]
+                },
                 //left_nav
                 activeName:'course',
                 course_list:[],
@@ -269,7 +276,8 @@
         methods:{
             getUserList(){
                 this.$fetch('http://127.0.0.1/teachep/public/user/getMyUserData').then((response) => {
-                    this.user_data = response.user_data;
+                    this.user_data = response.user_data;                                     //直接赋值
+                    this.user_edit_data = JSON.parse(JSON.stringify( response.user_data));  //开辟了新的赋值地址
                     console.log('user_data',this.user_data);
                 })
             },
@@ -299,14 +307,40 @@
             fileChange(file, fileList) {
                 this.real_name.fileList3 = fileList.slice(-3);
             },
-            showInfoMask(){
-                this.personal_mask = true;
+            editPersonalInfo(){
+                this.personal_mask = false;
+                this.user_data = this.user_edit_data;
+                //sendAjax
+                let sendData = {
+                    id:this.user_data.id,//用户ID
+                    user_name:this.user_data.user_name,
+                    user_job:this.user_data.user_job,
+                    user_sex:this.user_data.user_sex,
+                    user_city:this.user_data.user_city,//数组格式，省市区
+                    user_autograph:this.user_data.user_autograph,
+                    user_headimg:'用户头像',
+                }
+                this.$post('/api/user/setMyUserData',sendData).then((response) => {
+                    console.log(response);
+                    this._message("修改成功",{
+                        type: 'success'
+                    })
+                })
             }
         },
         created(){
             this.getUserList();         //获取用户信息
             this.getMyCourseList();     //我的课程
             this.getCollectionList();   //我的收藏
+        },
+        computed:{
+            getCity(){
+                let city_name = "";
+                for(let i in this.user_data.user_city){
+                    city_name += CodeToText[this.user_data.user_city[i]] + "/";
+                }
+                return city_name.substring(0,city_name.length-1);
+            },
         }
     }
 </script>
