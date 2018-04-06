@@ -461,7 +461,7 @@ ajax({
                     user_name:'用户名字',
                     user_job:'用户工作',
                     user_sex:'性别',
-                    user_city:'所在城市',
+                    user_city:[],//数组格式，省市区
                     user_autograph:'个性签名',
                     user_score:'用户积分',
                     user_headimg:'用户头像',
@@ -486,9 +486,9 @@ ajax({
         user_name:'用户名字',
         user_job:'用户工作',
         user_sex:'性别',
-        user_city:'所在城市',
+        user_city:[],//数组格式，省市区
         user_autograph:'个性签名',
-        user_score:'用户积分',
+        //user_score:'用户积分',
         user_headimg:'用户头像',
     },
     res:{

@@ -150,8 +150,8 @@ let useMock = (isOpenMock) =>{
                 id:()=>Random.integer( 1, 100 ),
                 user_name:()=>Random.ctitle(2,4),
                 user_job:()=>Random.ctitle(2,4),
-                user_sex:()=>Random.ctitle(1),
-                user_city:()=>Random.ctitle(2,4),
+                user_sex:"男",
+                user_city:["320000","320500"],
                 user_autograph:()=>Random.ctitle(15,50),
                 user_score:()=>Random.integer( 1, 100 ),
                 user_headimg:() =>Random.dataImage(),
@@ -186,6 +186,10 @@ let useMock = (isOpenMock) =>{
                 created_at:()=>Random.date('yyyy-MM-dd HH:mm:ss '),
             }
         ],
+    });
+    //修改个人信息接口
+    Mock.mock('http://127.0.0.1/teachep/public/user/setMyUserData',{
+        "data": "success"
     });
 
 }
