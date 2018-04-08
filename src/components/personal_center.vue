@@ -5,7 +5,11 @@
             <div class="content-top">
                 <div class="top-l">
                     <div class="head-img">
-                        <img :src="user_data.user_headimg" height="100%" width="100%" alt="">
+                        <el-upload  class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                            <img v-if="user_data.user_headimg" :src="user_data.user_headimg" width="100%" height="100%" class="avatar">
+                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                        </el-upload>
+                        <div class="head-img-tip">点击上传头像</div>
                     </div>
                     <div class="personal-info">
                         <span>{{user_data.user_name}}</span>
@@ -112,7 +116,7 @@
                                 <div class="real-name">
                                     <div class="top">
                                         <span>实名认证</span>
-                                        <span class="edit-info"><i class="icon-font">&#xe624;</i>编辑</span>
+                                        <!--<span class="edit-info"><i class="icon-font">&#xe624;</i>编辑</span>-->
                                     </div>
                                     <div class="main">
                                         <el-row>
@@ -134,7 +138,8 @@
                                                     <el-row>
                                                         <el-col class="name" :span="8">入学时间</el-col>
                                                         <el-col :span="16">
-                                                            <el-input placeholder="请输入院校" v-model="real_name.graduation_time" clearable></el-input>
+                                                            <el-date-picker v-model="real_name.graduation_time" align="right" type="date" placeholder="选择日期" :picker-options="pickerDateOptions">
+                                                            </el-date-picker>
                                                         </el-col>
                                                     </el-row>
                                                     <el-row>
@@ -150,13 +155,13 @@
                                                     <el-row>
                                                         <el-col class="name" :span="8">学籍证明</el-col>
                                                         <el-col :span="16">
-                                                            <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" :on-change="fileChange" :file-list="real_name.fileList">
+                                                            <el-upload :auto-upload="false" ref="upload"  class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" :on-preview="handlePreview" :on-remove="handleRemove" :file-list="real_name.fileList" list-type="picture">
                                                                 <el-button size="small" type="primary">点击上传</el-button>
                                                                 <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
                                                             </el-upload>
                                                         </el-col>
                                                     </el-row>
-                                                    <el-button type="danger" class="commit-btn" round>提交审核</el-button>
+                                                    <el-button type="danger" class="commit-btn" round @click="submitRealName()">提交审核</el-button>
                                                 </div>
                                             </el-col>
                                             <el-col :span="12" class="right">
@@ -260,17 +265,15 @@
                     }],//学历（1中专 2大专 3本科）
                     graduation_time:'',
                     identity_file:'',
-                    fileList: [{
-                        name: 'food.jpeg',
-                        url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-                        status: 'finished'
-                    }, {
-                        name: 'food2.jpeg',
-                        url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-                        status: 'finished'
-                    }],
+                    fileList: [],
                 },
-                personal_mask:false
+                personal_mask:false,
+                //时间选择器
+                pickerDateOptions:{
+                    disabledDate(time) {
+                        return time.getTime() > Date.now();
+                    },
+                }
             }
         },
         methods:{
@@ -304,12 +307,15 @@
                 this.getCollectionList();
             },
             //文件上传
-            fileChange(file, fileList) {
-                this.real_name.fileList3 = fileList.slice(-3);
+            handleRemove(file, fileList) {
+                console.log(file, fileList);
             },
+            handlePreview(file) {
+                console.log(file);
+            },
+            //修改个人信息
             editPersonalInfo(){
                 this.personal_mask = false;
-                this.user_data = this.user_edit_data;
                 //sendAjax
                 let sendData = {
                     id:this.user_data.id,//用户ID
@@ -319,13 +325,62 @@
                     user_city:this.user_data.user_city,//数组格式，省市区
                     user_autograph:this.user_data.user_autograph,
                     user_headimg:'用户头像',
-                }
-                this.$post('/api/user/setMyUserData',sendData).then((response) => {
+                };
+                this.user_data = JSON.parse(JSON.stringify( this.user_edit_data));;
+                /*this.$post('/api/user/setMyUserData',sendData).then((response) => {
                     console.log(response);
                     this._message("修改成功",{
                         type: 'success'
                     })
-                })
+                }).catch((err)=>{
+                    console.log(329,err);
+                })*/
+            },
+            //提交审核
+            submitRealName(){
+                let flag = true,msg = "";
+                if(this.real_name.identity_name === ''){
+                    msg="请输入真实姓名";
+                    flag = false;
+                }else if(this.real_name.school_name === ''){
+                    msg="请输入学校名称";
+                    flag = false;
+                }else if(this.real_name.graduation_time === ''){
+                    msg="请输入学时间";
+                    flag = false;
+                }else if(this.real_name.identiy_education === ''){
+                    msg="请输入学历";
+                    flag = false;
+                }else if(this.real_name.fileList.length === 0){
+                    msg="请上传学历证明";
+                    flag = false;
+                }
+                if(flag === false){
+                    this._message(msg,{
+                        type: 'error'
+                    })
+                }else{
+                    //sendAjax;
+                }
+                this.$refs.upload.submit();
+                console.log(342,this.real_name);
+            },
+            //头像
+            handleAvatarSuccess(res, file) {
+                this.imageUrl = URL.createObjectURL(file.raw);
+            },
+            beforeAvatarUpload(file) {
+                const isJPG = file.type === 'image/jpeg';
+                const isPNG = file.type === 'image/png';
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isJPG && !isPNG) {
+                    this.$message.error('上传头像图片只能是 JPG 和 PNG 格式!');
+                }
+                if (!isLt2M) {
+                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                return isJPG && isLt2M;
             }
         },
         created(){

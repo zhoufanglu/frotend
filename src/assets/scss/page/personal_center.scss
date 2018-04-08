@@ -10,10 +10,33 @@
         .top-l{
             @include vertical-center;
             .head-img{
+                position: relative;
                 border-radius: 50%;
-                width: 76px;
-                height: 76px;
+                width: 90px;
+                height: 90px;
                 overflow: hidden;
+                .el-upload{
+                    border-radius: 50%;
+                    width: 90px;
+                    height: 90px;
+                    overflow: hidden;
+                }
+                .head-img-tip{
+                    visibility: visible;
+                    position: absolute;
+                    background-color: rgba(0,0,0,.2);
+                    bottom: 0;
+                    font-size: 15px;
+                    height: 100%;
+                    @include vertical-center;
+                    color: white;
+                }
+                &:hover{
+                    .head-img-tip{
+                        visibility: visible;
+                        cursor: pointer;
+                    }
+                }
             }
             .personal-info{
                 display: flex;
@@ -215,7 +238,4 @@
     .el-form{
         padding-right: 30px;
     }
-}
-//省市区
-.area-select-wrap{
 }

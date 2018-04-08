@@ -8,6 +8,7 @@ import find from '@/components/top/find'
 import help from '@/components/top/help'
 import course_detail from '@/components/course_detail'
 import personal_center from '@/components/personal_center'
+import chapter from '@/components/chapter'
 
 import login from '@/components/login'
 
@@ -54,6 +55,11 @@ export default new Router({
             path: '/login',
             name: 'login',
             component: login,
+        },
+        {
+            path: '/chapter',
+            name: 'chapter',
+            component: chapter,
         }
     ]
 })

@@ -191,6 +191,9 @@ let useMock = (isOpenMock) =>{
     Mock.mock('http://127.0.0.1/teachep/public/user/setMyUserData',{
         "data": "success"
     });
+    /**
+     * chapter.html
+     */
 
 }
 export default useMock;
