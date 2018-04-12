@@ -1,4 +1,4 @@
-文档111
+
 
 /**
  * home.html
@@ -560,6 +560,48 @@ ajax({
         identiy_education:'学历（1中专 2大专 3本科）<直接传的数字>',
         graduation_time:'毕业时间',
         identity_file:'认证文件资料地址',
+    },
+    res:{
+        ok:{
+        },
+        err:{
+            msg:''
+        }
+    }
+});
+/****************************登陆注册接口**********************/
+//注册信息接口
+ajax({
+    title:'注册信息接口',
+    url:'http://127.0.0.1/teachep/public/User/register',
+    type:'post',
+    request:{
+
+        user_name:"用户名",//用户ID
+        user_tel:'用户电话',
+        user_job:'用户工作',
+        user_password:'用户密码',
+        user_province:'省份',
+        user_city:'城市',
+        user_sex:'性别',
+        user_email:'毕业时间',
+    },
+    res:{
+        ok:{
+        },
+        err:{
+            msg:''
+        }
+    }
+});
+//登陆接口
+ajax({
+    title:'登陆接口',
+    url:'http://127.0.0.1/teachep/public/User/login',
+    type:'post',
+    request:{
+        user_name:"用户名或者邮箱",
+        user_password:'用户密码',
     },
     res:{
         ok:{
