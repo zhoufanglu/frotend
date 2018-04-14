@@ -12,7 +12,6 @@
 </template>
 <script>
     import { mapMutations } from 'vuex'
-    import { mapGetters } from 'vuex'
     export default {
         name: '',
         data(){
@@ -33,13 +32,9 @@
         },
         mounted(){
             this.setLoginState(false);
-            console.log(35,this.is_login);
+            console.log(35,this.$state.user.is_login);
         },
         computed:{
-            ...mapGetters({
-                user_info: 'getUserInfo',
-                is_login: 'getLoginState'
-            }),
 
         }
     }

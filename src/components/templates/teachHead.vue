@@ -4,7 +4,7 @@
             <router-link class="remove-a-css" to="/home" :class="text_color">教学管理系统</router-link>
         </div>
         <div class="is-show-head" :class="show_hide_vis">
-            <span><router-link class="remove-a-css no-warp" to="/course_center">课程中心</router-link></span>
+            <span><router-link class="remove-a-css no-warp" to="/course">课程中心</router-link></span>
             <span><router-link class="remove-a-css no-warp" to="/find">发现</router-link></span>
             <span><router-link class="remove-a-css no-warp" to="/help">帮助</router-link></span>
             <el-input class="head-search"
@@ -31,17 +31,16 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
     import { mapMutations } from 'vuex'
     export default {
         name: "teachHead",
         props:['nickName','headSrcLink','head_search','show_hide_vis','bg_color','text_color'],
+        data(){
+            return{
+                user_info:'',
+            }
+        },
         computed:{
-            ...mapGetters({
-                user_info: 'getUserInfo',
-                is_login: 'getLoginState'
-            }),
-
         },
         methods:{
             ...mapMutations({
@@ -53,10 +52,9 @@
                 this.$router.push({path:'/login'})
             },
             checkIsLogin(){
-                this.setLoginState(JSON.parse(window.localStorage.getItem('is_login')));
-                console.log(43,this.user_info,this.is_login);
-                if(this.is_login === false){
-                    console.log('666');
+                let is_login = this.$state.user.is_login;
+                this.user_info = this.$state.user;
+                if(is_login === false){
                     this._message("登录过期，请重新登录",{
                         type : "warning"
                     });
