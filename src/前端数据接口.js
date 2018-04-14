@@ -263,6 +263,8 @@ ajax({
             image_text_detail:  // 子章节信息
                 {
                     id:'子章节id',
+                    course_name:"课程名称",
+                    chapter_name:"章节名称",
                     image_text_name:'子章节名称',
                     image_text_introduction:'介绍',
                     image_text_detail:'子章节详情',
