@@ -52,7 +52,7 @@
                 //css
                 show_hide_vis:'show-vis',
                 course: {
-                    id: this.$route.query.id,
+                    id: this.$route.params.course_id,
                 },
             }
         },
@@ -65,7 +65,7 @@
                     this.types = response;
                     console.log(45,response);
                     this.course = response.course;
-                    this.tab_items.chapter_list = response.chapter_list;
+                    //this.tab_items.chapter_list = response.chapter_list;
                 })
                     .catch(err =>{
                         console.log(err);
@@ -73,9 +73,9 @@
             },
         },
         created(){
-            this.getCourseInfo();   //获取课程基本信息
+            //this.getCourseInfo();   //获取课程基本信息
         },
-        components:{chapter_comment_file}
+        components:{chapter_comment_file},
     }
 </script>
 <style type="text/scss" lang="scss">

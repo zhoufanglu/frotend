@@ -38,7 +38,7 @@
             <div class="panel">
                     <el-row class="course-row s-course-panel" :gutter="40" justify="center">
                         <el-col :span="4" v-for="(j,index) in course" :key="index">
-                            <router-link :to="{path:'/course_detail', query:{id:j.id}}" class="grid-content course-item bg-purple" >
+                            <router-link :to="{name:'course_detail',params:{course_id:j.id}}" class="grid-content course-item bg-purple" >
                                 <div class="bg-img">
                                     <img :src="j.course_img" alt="" width="100%" height="100%">
                                     <div class="course-type">
@@ -94,7 +94,6 @@
             getCourseTypes(){
                 this.$fetch('/api/course/course_type').then((response) => {
                     this.types = response;
-                    console.log(30,response);
                 })
                     .catch(err =>{
                         console.log(err);
@@ -104,9 +103,9 @@
                 //调用接口
             },
             getCourse(){
-                console.log(107,this.filter,this.sort);
+               /* console.log(107,this.filter,this.sort);
                 console.log(108,this.now_page);
-                console.log(109,this.page_all_num);
+                console.log(109,this.page_all_num);*/
                 this.$post('/api/course/all_course')
                     .then((response) => {
                         this.course = response.course;

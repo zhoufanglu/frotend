@@ -194,6 +194,20 @@ let useMock = (isOpenMock) =>{
     /**
      * chapter.html
      */
-
+    //获取子章节详情接口
+    Mock.mock('http://127.0.0.1/teachep/public/course/getImageTextDetail',{
+        image_text_detail:  // 子章节信息
+            {
+                id:()=>Random.integer( 1, 100 ),
+                course_name:"课程名称",
+                chapter_name:"章节名称",
+                image_text_name:'子章节名称',
+                image_text_introduction:()=>Random.ctitle(15,40),
+                image_text_detail:()=>Random.ctitle(100,300),
+                image_text_video:'视频地址',
+                image_text_type:1,
+                finish_score:()=>Random.integer( 1, 100 )
+            },
+    });
 }
 export default useMock;

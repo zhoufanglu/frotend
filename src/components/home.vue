@@ -55,7 +55,7 @@
                 <div content="body">
                     <el-row class="course-row" :gutter="40" justify="center">
                         <el-col :span="4" v-for="(j,index) in course_one" :key="index">
-                            <router-link :to="{path:'/course_detail', query:{id:j.id}}" class="grid-content course-item bg-purple" >
+                            <router-link :to="{name:'course_detail', params:{course_id:j.id}}" class="grid-content course-item bg-purple" >
                                 <div class="bg-img">
                                     <img :src="j.course_img" alt="" width="100%" height="100%">
                                     <div class="course-type">
@@ -77,7 +77,7 @@
                 <div content="body">
                     <el-row class="course-row" :gutter="40" justify="center">
                         <el-col :span="4" v-for="(j,index) in course_one" :key="index">
-                            <router-link :to="{path:'/course_detail',params:{id:j.id}}" class="grid-content course-item bg-purple" >
+                            <router-link :to="{name:'course_detail',params:{course_id:j.id}}" class="grid-content course-item bg-purple" >
                                 <div class="bg-img">
                                     <img :src="j.course_img" alt="" width="100%" height="100%">
                                     <div class="course-type">
