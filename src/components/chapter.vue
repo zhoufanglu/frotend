@@ -22,7 +22,7 @@
                                             您的浏览器不支持 video 标签。
                                         </video>
                                     </div>
-                                    <div>{{chapter_child.image_text_detail}}</div>
+                                    <div class="body-vm">{{chapter_child.image_text_detail}}</div>
                                 </div>
                             </div>
                         </div>
@@ -99,6 +99,7 @@
             width: 50%;
             display: flex;
             flex-direction: column;
+            padding: 16px;
             .title{
                 @include vertical-center;
                 justify-content: flex-start;
@@ -123,7 +124,6 @@
                     font-size: 18px;
                 }
                 .bottom{
-                    padding: 12px;
                     font-size: 18px;
                     letter-spacing: 6px;
                     display: flex;
@@ -133,6 +133,10 @@
         }
         .chapter-r{
             width: 50%;
+            padding: 16px;
+            border-left: solid 1px $light;
+            .body-vm{
+            }
         }
     }
 </style>
