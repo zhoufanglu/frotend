@@ -95,6 +95,7 @@
             </div>
         </div>
         <teach-foot :bg_color="bg_color" :text_color="text_color" ></teach-foot>
+        <login-or-register></login-or-register>
     </div>
 </template>
 

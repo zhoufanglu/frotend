@@ -13,9 +13,17 @@ const store = new Vuex.Store({
             course_id:'',
             chapter_id:'',
             chapter_child_id:'',
-        }
+        },
+        isShowLoginMask:false,//是否显示登录注册弹窗
+        maskType:''
     },
     mutations: {
+        setLoginMask(state,status){
+            state.isShowLoginMask = status;
+        },
+        setMaskType(state,type){
+            state.maskType = type;
+        },
         setUserInfo(state,name,img_path){
             state.user.nick_name = name;
             state.user.head_img = img_path;

@@ -14,7 +14,7 @@
             </el-input>
         </div>
         <div class="user-info">
-            <el-dropdown trigger="click">
+            <el-dropdown trigger="click" v-if="user_info.is_login == true">
                 <span class="el-dropdown-link">
                      <span class="head-img">
                          <img :src="headSrcLink" alt="" width="100%" height="100%">
@@ -26,6 +26,14 @@
                     <el-dropdown-item @click.native="logout">注销</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
+            <div v-else  class="login-or-register-btn">
+                <el-button type="text" @click="showLoginMask('login')">
+                    <span class="login-open-mask">登录</span>
+                </el-button>
+                <el-button type="text" @click="showLoginMask('register')">
+                    <span class="register-open-mask">/&nbsp;&nbsp;&nbsp;&nbsp;注册</span>
+                </el-button>
+            </div>
         </div>
     </div>
 </template>
@@ -45,11 +53,14 @@
         methods:{
             ...mapMutations({
                 setUserInfo: 'setUserInfo',
-                setLoginState: 'setLoginState'
+                setLoginState: 'setLoginState',
+                setLoginMaskState: 'setLoginMask',
+                setMaskType:'setMaskType'
             }),
             logout(){
                 this.setLoginState(false);
-                this.$router.push({path:'/login'})
+                this.user_info.is_login = false;
+                //this.$router.push({path:'/login'});
             },
             checkIsLogin(){
                 let is_login = this.$state.user.is_login;
@@ -58,7 +69,16 @@
                     this._message("登录过期，请重新登录",{
                         type : "warning"
                     });
-                    this.$router.push({path:'/login'});
+                    //this.$router.push({path:'/login'});
+                }
+            },
+            showLoginMask(type){
+                this.setLoginMaskState(true);
+                this.setMaskType(type);
+                if(type === 'login'){
+
+                }else if(type === 'register'){
+
                 }
             }
         },
@@ -121,6 +141,17 @@
                     color: $white;
                 }
             }
+        }
+    }
+    .login-or-register-btn  span{
+        font-size: 16px;
+        .login-open-mask{
+            &:hover{
+                color: $danger;
+            }
+        }
+        .register-open-mask{
+            @extend .login-open-mask
         }
     }
     .el-dropdown-link{
