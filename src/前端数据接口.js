@@ -608,7 +608,16 @@ ajax({
         ok:{
             state:'success/err',//success,密码或用户名错误
             msg:'登录成功/错误信息',
-            user_info:'',
+            user_info:{
+                id:id,//用户ID
+                user_name:'用户名字',
+                user_job:'用户工作',
+                user_sex:'性别',
+                user_city:[],//数组格式，省市区
+                user_autograph:'个性签名',
+                //user_score:'用户积分',
+                user_headimg:'用户头像',
+            }
         },
         err:{
             msg:''
