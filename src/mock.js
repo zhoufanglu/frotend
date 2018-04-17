@@ -209,5 +209,36 @@ let useMock = (isOpenMock) =>{
                 finish_score:()=>Random.integer( 1, 100 )
             },
     });
+    /**
+     * login-register
+     */
+    //login
+    Mock.mock('http://127.0.0.1/teachep/public/User/login',{
+        data:  // 子章节信息
+            {
+                state:'success',
+                mgs:'登录成功',
+                user_data:  // 个人信息获取信息
+                    {
+                        id:()=>Random.integer( 1, 100 ),
+                        user_name:()=>Random.ctitle(2,4),
+                        user_job:'用户工作',
+                        user_sex:'性别',
+                        user_city:[],//数组格式，省市区
+                        user_autograph:'个性签名',
+                        // user_score:'用户积分',
+                        user_headimg:() =>Random.dataImage(),
+                        is_identity:'是否认证',
+                        user_learning_course_num:"学习课程数"
+                    }
+            },
+    });
+    //register
+    Mock.mock('http://127.0.0.1/teachep/public/User/register',{
+        data:  // 子章节信息
+            {
+                state:'success',
+            },
+    });
 }
 export default useMock;

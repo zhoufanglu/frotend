@@ -15,12 +15,12 @@ let usePrototype = () =>{
     /**
      * 请求头设置
      */
-    Vue.prototype._axios = axios.create({
+    /*Vue.prototype._axios = axios.create({
         headers: {
             'Content-Type': 'application/json',
             timeout: 3000,
         },
-    });
+    });*/
     /*
         * 项目的comfirm弹出框
         * 将element组件里的MessageBox弹框适当封装的方法

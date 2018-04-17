@@ -1,8 +1,7 @@
 <template>
     <div class="login-or-register-f">
         <el-dialog :title="$state.maskType == 'login'?'登录':'注册'" :visible.sync="$state.isShowLoginMask" width="30%" center class="login-or-register">
-
-            <el-tabs v-model="maskTitleName" @tab-click="loginTitleClick()">
+            <el-tabs v-model="$state.maskType" @tab-click="loginTitleClick()">
                 <el-tab-pane label="登录" name="login">
                     <div class="mask-login">
                         <el-input v-model="user_name" placeholder="请输入用户名"></el-input>
@@ -12,13 +11,21 @@
                 </el-tab-pane>
                 <el-tab-pane label="注册" name="register">
                     <div class="mask-register">
-
+                        <el-input v-model="r_user_name"  placeholder="请输入注册邮箱，昵称"><i slot="suffix" class="icon-font el-input__icon">&#xe6b3;</i></el-input>
+                        <el-input type="password" v-model="r_password" placeholder="密码长度为8-16个字符,不能使用中文、空格"><i slot="suffix" class="icon-font el-input__icon">&#xe625;</i><</el-input>
+                        <el-input type="password" v-model="r_check_password" placeholder="请再次输入密码"><i style="font-size: 22px" slot="suffix" class="icon-font el-input__icon">&#xe69e;</i></el-input>
+                        <div class="code-panel">
+                            <el-input  v-model="code" placeholder="请输入验证码"></el-input>
+                            <div class="code">验证码</div>
+                        </div>
                     </div>
                 </el-tab-pane>
             </el-tabs>
-            <div><el-button type="danger" round>登录</el-button></div>
-            <!--<el-button @click="closeLoginMask()">取 消</el-button>
-            <el-button type="primary" @click="maskSure()">确 定</el-button>-->
+            <div class="login-btn">
+                <el-button v-if="$state.maskType=='login'" type="danger" round @click="login()">登录</el-button>
+                <el-button v-if="$state.maskType=='register'" type="danger" round @click="register()">注册</el-button>
+            </div>
+
 
         </el-dialog>
     </div>
@@ -35,35 +42,114 @@
                 password:'',
                 //css
                 show_hide_vis:'show-vis',
-                maskTitleName:'login'
+                maskTitleName:'login',
+                //register
+                r_user_name:'',
+                r_password:'',
+                r_check_password:'',
+                code:'',
             }
         },
         methods:{
             ...mapMutations({
-                setLoginMaskState: 'setLoginMask'
+                setLoginMaskState: 'setLoginMask',
+                setIsShowLoginMask:'setIsShowLoginMask',
+                setLoginState:'setLoginState',
+                setUserInfo:'setUserInfo'
             }),
+            login(){
+                let postData = {
+                    user_name:this.user_name,
+                    user_password:this.password
+                };
+                /*if(postData.user_name === "" || postData.user_password ===""){
+                    this.$message.error('用户名和密码不能为空！');
+                    return false;
+                }*/
+                //http://111.230.100.91/teachep/public/user/login
+                ///User/login
+                this.$post('http://127.0.0.1/teachep/public/User/login',postData).then((response) => {
+                    if(response.data.state === 'success'){
+                        console.log(response.data);
+                        let user_data = response.data.user_data;
+                        this.$message.success('登录成功！');
+                        this.setIsShowLoginMask(false);
+                        //设置登录状态
+                        this.setLoginState(true);
+                        console.log(user_data.id,user_data.user_name);
+                        this.setUserInfo(
+                            user_data
+                        );
+                    }else{
+                        this.$message.error('用户名或密码错误！');
+                    }
+                })
+                    .catch(err =>{
+                        console.log(err);
+                    });
+            },
+            register(){
+                let flag = this.checkRegisterUserInfo();
+                if(flag === true){
+                    //sendAjax
+                    let post_data = {
+                        user_name:this.r_user_name,
+                        password:this.r_password,
+                        c_password:this.r_check_password,
+                        code:this.code
+                    };
+                    this.$post('http://127.0.0.1/teachep/public/User/register',post_data).then((response) => {
+                        this.setIsShowLoginMask(false);
+                        this.$message.success('注册成功！');
+                    })
+                        .catch(err =>{
+                            console.log(err);
+                        });
+                }
+            },
             closeLoginMask(){
-                this.$state.isShowLoginMask = false;
+                //this.$state.isShowLoginMask = false;
             },
             maskSure(){
-                this.$state.isShowLoginMask = false;
+                //this.$state.isShowLoginMask = false;
             },
             loginTitleClick(){
-
+            },
+            checkRegisterUserInfo(){
+                let reg = /^[a-zA-Z\d\_\u2E80-\u9FFF]{0,16}$/;
+                if(!reg.test(this.r_user_name) || this.r_user_name === ''){
+                    this.$message.error('昵称只能使用字母、数字、下划线、汉字且长度不能超过16！');
+                    return false;
+                }
+                let password_reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,21}$/
+                if(!password_reg.test(this.r_password) || this.r_password === ''){
+                    this.$message.error('密码必须由6-21字母和数字组成！');
+                    return false;
+                }
+                if(this.r_password !== this.r_check_password){
+                    this.$message.error('两次密码必须一致');
+                    return false;
+                }
+                return true;
             }
         },
         created(){
-            this.maskTitleName = this.$state.maskType;
+
         }
     }
 </script>
 <style  lang="scss" type="text/scss">
     .login-or-register-f{
         .el-dialog{
-            width: 360px!important;
+            width: 380px!important;
         }
         .el-dialog__header{
-            display: none;
+            .el-dialog__title{
+                display: none;
+            }
+        }
+        .el-dialog__body{
+            margin-top: -30px;
         }
         .el-tabs__nav-scroll{
             #tab-login{
@@ -72,12 +158,6 @@
             #tab-register{
                 @extend #tab-login;
             }
-            /*#pane-login{
-                border: solid red;
-            }
-            #pane-register{
-
-            }*/
         }
         .mask-login{
             padding-bottom: 30px;
@@ -89,7 +169,32 @@
             }
         }
         .mask-register{
-
+            @extend .mask-login;
+            .code-panel{
+                margin-top: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .el-input{
+                    width: 70%;
+                    margin-top: 0;
+                }
+                .code{
+                    @include vertical-center;
+                    height: 40px;
+                }
+            }
+            .el-input{
+                i{
+                    font-size: 20px;
+                }
+            }
+        }
+        .login-btn{
+            @include vertical-center;
+            .el-button{
+                width: 80%;
+            }
         }
     }
 </style>

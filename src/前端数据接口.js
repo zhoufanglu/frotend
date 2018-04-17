@@ -577,18 +577,14 @@ ajax({
     url:'http://127.0.0.1/teachep/public/User/register',
     type:'post',
     request:{
-
         user_name:"用户名",//用户ID
-        user_tel:'用户电话',
-        user_job:'用户工作',
-        user_password:'用户密码',
-        user_province:'省份',
-        user_city:'城市',
-        user_sex:'性别',
-        user_email:'毕业时间',
+        password:'密码',
+        c_password:'再次输入密码',
+        code:'验证码'
     },
     res:{
         ok:{
+            state:'success'
         },
         err:{
             msg:''

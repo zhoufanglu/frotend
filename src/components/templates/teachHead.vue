@@ -17,7 +17,7 @@
             <el-dropdown trigger="click" v-if="user_info.is_login == true">
                 <span class="el-dropdown-link">
                      <span class="head-img">
-                         <img :src="headSrcLink" alt="" width="100%" height="100%">
+                         <img :src="user_info.head_img" alt="" width="100%" height="100%">
                      </span>
                      <span class="nick-name" :class="text_color">{{user_info.nick_name}}</span>
                   </span>
@@ -42,7 +42,7 @@
     import { mapMutations } from 'vuex'
     export default {
         name: "teachHead",
-        props:['nickName','headSrcLink','head_search','show_hide_vis','bg_color','text_color'],
+        props:['head_search','show_hide_vis','bg_color','text_color'],
         data(){
             return{
                 user_info:'',
@@ -52,14 +52,15 @@
         },
         methods:{
             ...mapMutations({
-                setUserInfo: 'setUserInfo',
+                //setUserInfo: 'setUserInfo',
                 setLoginState: 'setLoginState',
-                setLoginMaskState: 'setLoginMask',
+                setIsShowLoginMask: 'setIsShowLoginMask',
                 setMaskType:'setMaskType'
             }),
             logout(){
                 this.setLoginState(false);
                 this.user_info.is_login = false;
+                this.$message.success('注销成功！');
                 //this.$router.push({path:'/login'});
             },
             checkIsLogin(){
@@ -73,13 +74,8 @@
                 }
             },
             showLoginMask(type){
-                this.setLoginMaskState(true);
+                this.setIsShowLoginMask(true);
                 this.setMaskType(type);
-                if(type === 'login'){
-
-                }else if(type === 'register'){
-
-                }
             }
         },
         mounted(){

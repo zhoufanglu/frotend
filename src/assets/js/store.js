@@ -5,6 +5,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         user:{
+            user_id:'',
             nick_name:'vuex',
             head_img:'path',
             is_login:false,
@@ -15,18 +16,19 @@ const store = new Vuex.Store({
             chapter_child_id:'',
         },
         isShowLoginMask:false,//是否显示登录注册弹窗
-        maskType:''
+        maskType:'login'
     },
     mutations: {
-        setLoginMask(state,status){
+        setIsShowLoginMask(state,status){
             state.isShowLoginMask = status;
         },
         setMaskType(state,type){
             state.maskType = type;
         },
-        setUserInfo(state,name,img_path){
-            state.user.nick_name = name;
-            state.user.head_img = img_path;
+        setUserInfo(state,user_data){
+            state.user.user_id = user_data.id,
+            state.user.nick_name = user_data.user_name;
+            state.user.head_img = user_data.user_headimg;
         },
         setLoginState(state,status){
             state.user.is_login = status;
