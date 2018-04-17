@@ -606,6 +606,9 @@ ajax({
     },
     res:{
         ok:{
+            state:'success/err',//success,密码或用户名错误
+            msg:'登录成功/错误信息',
+            user_info:'',
         },
         err:{
             msg:''
