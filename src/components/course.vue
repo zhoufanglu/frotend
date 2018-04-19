@@ -7,12 +7,12 @@
                 <el-radio-group v-model="filter.direction" @change="getCourse()">
                     <el-radio-button  :disabled="true" class="item-title" label="方向"></el-radio-button>
                     <el-radio-button class="item" label="">全部</el-radio-button>
-                    <el-radio-button class="item" v-for="i in types.direction" :key="i.id" :label="i.id">{{i.name+i.id}}</el-radio-button>
+                    <el-radio-button class="item" v-for="i in types.direction" :key="i.id" :label="i.id">{{i.name}}</el-radio-button>
                 </el-radio-group>
                 <el-radio-group v-model="filter.classify" @change="getCourse()">
                     <el-radio-button :disabled="true" class="item-title" label="分类:"></el-radio-button>
                     <el-radio-button class="item" label="">全部</el-radio-button>
-                    <el-radio-button class="item" v-for="i in types.classify" :key="i.id" :label="i.id">{{i.name+i.id}}</el-radio-button>
+                    <el-radio-button class="item" v-for="i in types.classify" :key="i.id" :label="i.id">{{i.name}}</el-radio-button>
                 </el-radio-group>
                 <el-radio-group v-model="filter.type" @change="getCourse()">
                     <el-radio-button :disabled="true" class="item-title" label="类型:"></el-radio-button>
@@ -122,8 +122,17 @@
                         console.log(err);
                     });
             },
+            initFilter(){
+                if(this.$route.params.hasOwnProperty('couser_level_name')){
+                    let filter_name = this.$route.params.couser_level_name;
+                    let id = this.$route.params.couser_level_id;
+                    this.filter[filter_name] = id;
+                    console.log(126,this.filter);
+                }
+            }
         },
         created() {
+            this.initFilter();
             this.getCourseTypes();  //获取课程类别信息
             this.getCourse();  //获取课程类别信息
         }

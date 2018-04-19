@@ -63,7 +63,7 @@ let useMock = (isOpenMock) =>{
     /**
      * course_detail.html
      */
-    Mock.mock('/api/course_detail/course',{
+    Mock.mock('/course_detail/course',{
       'course':{
           id: '',
           course_name: () => Random.ctitle(),       //课程名字
@@ -86,7 +86,7 @@ let useMock = (isOpenMock) =>{
     });
 
     //会员排行接口
-    Mock.mock('/api/course_detail/user_rank',{
+    Mock.mock('/course_detail/user_rank',{
         'user|5':[
             {
                 id:()=>Random.integer( 1, 100 ),
@@ -95,6 +95,22 @@ let useMock = (isOpenMock) =>{
                 score:()=>Random.integer( 1, 100 ),
             }
         ]
+    });
+    //会员排行接口all
+    Mock.mock('/course_detail/user_rank_all',{
+        'user|30':[
+            {
+                id:()=>Random.integer( 1, 100 ),
+                head_img:() => Random.dataImage(),
+                user_name:()=>Random.ctitle(1,4),
+                score:()=>Random.integer( 1, 100 ),
+                unit:()=>Random.ctitle(2,6),
+                completed_course_number:()=>Random.integer( 1, 100 ),//完成课程数
+                join_time:()=>Random.date('yyyy-MM-dd HH:mm:ss '),
+                rank_number:()=>Random.integer(1,100)
+            },
+        ],
+        "pageallnum":()=>Random.integer( 1, 100 ),//一共多少条数据
     });
 
     //相似课程接口

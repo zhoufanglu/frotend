@@ -11,7 +11,7 @@
                                     <el-popover class="show-panel"  :visible-arrow="false" trigger="hover" ref="popover1" placement="right" @show="isHover1=true" @hide="isHover1=false" >
                                         <div class="top-title-detail">
                                             <template v-for="j in top_title[0].couser_type_detail">
-                                                <div>{{j.couser_type_name}}</div>
+                                                <div @click="link('course',j.id,j.couser_level)">{{j.couser_type_name}}</div>
                                             </template>
                                         </div>
                                     </el-popover>
@@ -21,7 +21,7 @@
                                     <el-popover class="show-panel"  :visible-arrow="false" trigger="hover" ref="popover2" placement="right" @show="isHover2=true" @hide="isHover2=false" >
                                         <div class="top-title-detail">
                                             <template v-for="j in top_title[1].couser_type_detail">
-                                                <div>{{j.couser_type_name}}</div>
+                                                <div @click="link('course',j.id,j.couser_level)">{{j.couser_type_name}}</div>
                                             </template>
                                         </div>
                                     </el-popover>
@@ -162,9 +162,22 @@
                         console.log(147,err);
                     })*/
             },
-            link(url_name){
-                this.$router.push('/'+url_name+'');
-            }
+            link(url_name,couser_level_id,couser_level_name){
+                if(couser_level_id === undefined){
+                    this.$router.push('/'+url_name+'');
+                }else{
+                    this.$router.push({
+                        path: '/'+url_name+'',
+                        name: 'course',
+                        params: {
+                            couser_level_id:couser_level_id,
+                            couser_level_name:couser_level_name,
+                        }
+                    })
+                }
+
+            },
+
         },
         created() {
             this.getCourse();  //获取课程信息

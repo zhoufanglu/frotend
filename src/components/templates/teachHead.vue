@@ -168,4 +168,8 @@
             margin-right: 20px;
         }
     }
+    .router-link-active{
+        background-color: $white;
+        color: $theme!important;
+    }
 </style>

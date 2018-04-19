@@ -235,7 +235,8 @@ ajax({
     url:'http://127.0.0.1/teachep/public/course/getUserSortList',
     type:'get',
     request:{
-        num:num//几条数据
+        num:num,//几条数据
+        pagenow:""//当前页面
     },
     res:{
         ok:{
@@ -245,8 +246,12 @@ ajax({
                     head_img:'会员头像地址',
                     user_name:'会员',       //名字
                     score:'积分',        //积分
-
-                }
+                    unit:'单位',
+                    completed_course_number:6,//完成课程数
+                    join_time:'加入时间',
+                    rank_number:'名次',
+                },
+            pageallnum:"100",//一共多少条数据
         },
         err:{
             msg:'报错信息'

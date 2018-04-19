@@ -159,7 +159,7 @@
                 let data = {
                     id:this.course.id
                 }
-                this.$fetch('/api/course_detail/course').then((response) => {
+                this.$fetch('/course/getHomeCourseDetail',{id:data.id}).then((response) => {
                     this.types = response;
                     //console.log(45,response);
                     this.course = response.course;
@@ -170,7 +170,7 @@
                     });
             },
             getUserRank(){
-                this.$fetch('/api/course_detail/user_rank').then((response) => {
+                this.$fetch('course_detail/user_rank').then((response) => {
                     this.right_data.user_rank = response.user;
                     //console.log('user_rank',this.right_data.user_rank);
                 })
@@ -204,9 +204,9 @@
             console.log(197,'course_id:',this.$state.current.course_id);
             this.getCourseInfo();   //获取课程基本信息
             this.getUserRank();     //获取用户排名列表
-            this.getSimilarCourse();//类似课程
-            this.getCommentList();  //获取评论
-            this.getFileList();
+            //this.getSimilarCourse();//类似课程
+            //this.getCommentList();  //获取评论
+            //this.getFileList();
         },
         computed:{
 
