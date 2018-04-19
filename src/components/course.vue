@@ -92,21 +92,28 @@
         },
         methods:{
             getCourseTypes(){
-                this.$fetch('/api/course/course_type').then((response) => {
+                this.$fetch('/indexCourseTypeList').then((response) => {
                     this.types = response;
                 })
                     .catch(err =>{
                         console.log(err);
                     });
             },
-            courseTypeChange(){
-                //调用接口
-            },
             getCourse(){
                /* console.log(107,this.filter,this.sort);
                 console.log(108,this.now_page);
                 console.log(109,this.page_all_num);*/
-                this.$post('/api/course/all_course')
+               console.log(106,this.filter);
+               let data={
+                   filter_direction: this.filter.direction, //传的是id,如果为空,就是全部（方向-->一级分类）
+                   filter_classify:this.filter.classify , //传的是id,如果为空,就是全部（分类-->二级级分类）
+                   filter_type: this.filter.type, //传的是id,如果为空,就是全部（类型-->三级分类）
+                   sort:this.sort,//排序----默认是最新，最新/最热（这个最新最热数据没有这个标签）
+                   hard:this.filter.difficult,//难度----默认全部(为空),分为初级，中级，高级
+                   now_page:this.now_page,//当前页码
+                   page_num:this.page_all_num//每页多少数据
+                };
+                this.$fetch('/getCourseList',data)
                     .then((response) => {
                         this.course = response.course;
                         //console.log(101,response.course);

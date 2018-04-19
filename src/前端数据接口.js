@@ -16,7 +16,11 @@ ajax({
             和获取分类接口数据相同请求数据分类接口*/
             top_title:[{//(三级菜单)
                 id:'课程分类id',
-                couser_type_name:'课程分类名称',
+                course_type_name:'课程分类名称',
+                courser_type_detail:[
+                    {id:1,couser_type_name:''},
+                    {id:1,couser_type_name:''}
+                ]
             }],  //轮播左边的标题内容，个数需要固定
             module:[{id:1,name:'一级标题1'},{id:2,name:'一级标题2'}],//一级课题标题（模块列表）
             shuffling_img_link:[{
@@ -37,7 +41,7 @@ ajax({
                 },
 
             ],
-            lesson_two: [ // 12项 一级标题2下的课程
+            course_two: [ // 12项 一级标题2下的课程
                 {
                     id:'',
                     course_name:'我是课程',       //名字
@@ -86,7 +90,7 @@ ajax({
 
 ajax({
     title:'获取课程信息接口',//课程列表页面使用
-    url:'http://127.0.0.1/teachep/public/getCourseList',
+    url:'getCourseList',
     type:'get',
     request:{
         filter_direction: 12, //传的是id,如果为空,就是全部（方向-->一级分类）

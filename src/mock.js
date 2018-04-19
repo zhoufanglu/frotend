@@ -8,12 +8,12 @@ let useMock = (isOpenMock) =>{
     /**
      * home.html
      */
-    Mock.mock('/api/data',{
+    Mock.mock('indexRotation',{
         'top_title|4':[()=>Random.ctitle()],
         'module|2': [
             {
                 id: () => Random.integer(1, 100),
-                module_name: () => Random.ctitle()
+                name: () => Random.ctitle()
             }
         ],
         'shuffling_img_link|4':[()=>Random.dataImage()],
@@ -40,13 +40,13 @@ let useMock = (isOpenMock) =>{
     /**
      * course.html
      */
-    Mock.mock('/api/course/course_type',{
+    Mock.mock('/indexCourseTypeList',{
         'direction|6':[{name:()=>Random.ctitle(),id:()=>Random.integer( 1, 9999 )}], //方向
         'classify|20':[{name:()=>Random.ctitle(),id:()=>Random.integer( 1, 9999 )}],   //分类
         'type|7':[{name:()=>Random.ctitle(),id:()=>Random.integer( 1, 9999 )}]
     });
 
-    Mock.mock('/api/course/all_course',{
+    Mock.mock('/getCourseList',{
         'course|30': [
             {
                 id: () => Random.integer(1, 100),

@@ -1,5 +1,7 @@
 .course{
     .content-head{
+        display: flex;
+        flex-direction: column;
         margin-top: 30px;
     }
     .content-body{

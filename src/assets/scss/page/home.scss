@@ -39,12 +39,29 @@ $content-top-height:300px;
             }
         }
         .content-panel{
+            box-shadow: 0 4px 8px 0 rgba(7, 17, 27, .1);
+            padding: 30px!important;
+            border-radius: 12px;
+            margin-top: 40px;
             .title{
                 margin-top: 20px;
                 text-align: center;
                 height: $head-height;
                 line-height: $head-height;
                 @include bold-font(20px);
+                display: flex;
+                div:first-child{
+                    width: 95%;
+                }
+                div:last-child{
+                    display: flex;
+                    justify-content: flex-end;
+                    width: 5%;
+                    cursor: pointer;
+                    &:hover{
+                        color: $selectColor;
+                    }
+                }
             }
             .body{
 
@@ -58,9 +75,21 @@ $content-top-height:300px;
     position: absolute!important;
     top:calc(#{$head-height} + 10px)!important;
     width: 40%;
-    padding: 0;
+    padding: 30px;
     margin: 0;
-    height: calc(#{$content-top-height} - 24px);
+    height: calc(#{$content-top-height} - 64px);
+    .top-title-detail{
+        display: flex;
+        align-items: center;
+        >div{
+           margin-left: 30px;
+            cursor: pointer;
+            font-size: 18px;
+            &:hover{
+                color: $danger;
+            }
+        }
+    }
 }
 .course-row:not(:first-of-type){
     margin-top: 30px;

@@ -9,36 +9,44 @@
                             <div class="grid-content">
                                 <div class="s-row">
                                     <el-popover class="show-panel"  :visible-arrow="false" trigger="hover" ref="popover1" placement="right" @show="isHover1=true" @hide="isHover1=false" >
-                                        <div>内容1</div>
+                                        <div class="top-title-detail">
+                                            <template v-for="j in top_title[0].couser_type_detail">
+                                                <div>{{j.couser_type_name}}</div>
+                                            </template>
+                                        </div>
                                     </el-popover>
-                                    <el-button :open-delay="0" v-popover:popover1 class="left-title" :class="{hover:isHover1}">{{top_title[0]}}<i class="el-icon-arrow-right"></i></el-button>
+                                    <el-button :open-delay="0" v-popover:popover1 class="left-title" :class="{hover:isHover1}">{{top_title[0].couser_type_name}}<i class="el-icon-arrow-right"></i></el-button>
                                 </div>
                                 <div class="s-row">
                                     <el-popover class="show-panel"  :visible-arrow="false" trigger="hover" ref="popover2" placement="right" @show="isHover2=true" @hide="isHover2=false" >
-                                        <div>内容2</div>
+                                        <div class="top-title-detail">
+                                            <template v-for="j in top_title[1].couser_type_detail">
+                                                <div>{{j.couser_type_name}}</div>
+                                            </template>
+                                        </div>
                                     </el-popover>
-                                    <el-button :open-delay="0" v-popover:popover2 class="left-title" :class="{hover:isHover2}">{{top_title[1]}}<i class="el-icon-arrow-right"></i></el-button>
+                                    <el-button :open-delay="0" v-popover:popover2 class="left-title" :class="{hover:isHover2}">{{top_title[1].couser_type_name}}<i class="el-icon-arrow-right"></i></el-button>
                                 </div>
-                                <div class="s-row">
+                                <!--<div class="s-row">
                                     <el-popover class="show-panel"  :visible-arrow="false" trigger="hover" ref="popover3" placement="right" @show="isHover3=true" @hide="isHover3=false" >
                                         <div>内容3</div>
                                     </el-popover>
-                                    <el-button :open-delay="0" v-popover:popover3 class="left-title" :class="{hover:isHover3}">{{top_title[2]}}<i class="el-icon-arrow-right"></i></el-button>
+                                    <el-button :open-delay="0" v-popover:popover3 class="left-title" :class="{hover:isHover3}">{{top_title[2].couser_type_name}}<i class="el-icon-arrow-right"></i></el-button>
                                 </div>
                                 <div class="s-row">
                                     <el-popover class="show-panel"  :visible-arrow="false" trigger="hover" ref="popover4" placement="right" @show="isHover4=true" @hide="isHover4=false" >
                                         <div>内容4</div>
                                     </el-popover>
-                                    <el-button :open-delay="0" v-popover:popover4 class="left-title" :class="{hover4:isHover4}">{{top_title[3]}}<i class="el-icon-arrow-right"></i></el-button>
-                                </div>
+                                    <el-button :open-delay="0" v-popover:popover4 class="left-title" :class="{hover4:isHover4}">{{top_title[3].couser_type_name}}<i class="el-icon-arrow-right"></i></el-button>
+                                </div>-->
                             </div>
                         </el-col>
                         <el-col :span="18">
                             <div class="grid-content">
                                 <div class="shuffling">
                                     <el-carousel>
-                                        <el-carousel-item v-for="item in shuffling_img_link" :key="item">
-                                            <img :src="item" alt="" height="100%" width="100%">
+                                        <el-carousel-item v-for="(item,index) in shuffling_img_link" :key="index">
+                                            <img @click="link(item.picture_href)" :src="$imgPath+item.picture_address" alt="" height="100%" width="100%">
                                             <div>{{ item }}</div>
                                         </el-carousel-item>
                                     </el-carousel>
@@ -51,15 +59,18 @@
                 </div>
             </div>
             <div class="content-panel">
-                <div class="title">{{module[0]&&module[0].module_name}}</div>
+                <div class="title">
+                    <div>{{module[0]&&module[0].name}}</div>
+                    <div @click="link('course')">···</div>
+                </div>
                 <div content="body">
                     <el-row class="course-row" :gutter="40" justify="center">
                         <el-col :span="4" v-for="(j,index) in course_one" :key="index">
                             <router-link :to="{name:'course_detail', params:{course_id:j.id}}" class="grid-content course-item bg-purple" >
                                 <div class="bg-img">
-                                    <img :src="j.course_img" alt="" width="100%" height="100%">
+                                    <img :src="$imgPath+j.course_img" alt="" width="100%" height="100%">
                                     <div class="course-type">
-                                        <span v-for="k in j.course_type">{{k}}</span>
+                                        <span :title="k" v-for="k in j.course_type">{{k}}</span>
                                     </div>
                                 </div>
                                 <div class="name">{{j.course_name}}</div>
@@ -73,15 +84,18 @@
             </div>
 
             <div class="content-panel">
-                <div class="title">{{module[1]&&module[1].module_name}}</div>
+                <div class="title">
+                    <div>{{module[1]&&module[1].name}}</div>
+                    <div @click="link('course_center')">···</div>
+                </div>
                 <div content="body">
                     <el-row class="course-row" :gutter="40" justify="center">
-                        <el-col :span="4" v-for="(j,index) in course_one" :key="index">
+                        <el-col :span="4" v-for="(j,index) in course_two" :key="index">
                             <router-link :to="{name:'course_detail',params:{course_id:j.id}}" class="grid-content course-item bg-purple" >
                                 <div class="bg-img">
-                                    <img :src="j.course_img" alt="" width="100%" height="100%">
+                                    <img :src="$imgPath+j.course_img" alt="" width="100%" height="100%">
                                     <div class="course-type">
-                                        <span v-for="k in j.course_type">{{k}}</span>
+                                        <span :title="k" v-for="k in j.course_type">{{k}}</span>
                                     </div>
                                 </div>
                                 <div class="name">{{j.course_name}}</div>
@@ -128,7 +142,8 @@
         },
         methods:{
             getCourse(){
-                this.$post('/api/data')
+                //http://111.230.100.91/teachep/public/indexRotation
+                this.$fetch('/indexRotation')
                     .then((response) => {
                         this.course_one = response.course_one;
                         this.course_two = response.course_two;
@@ -137,9 +152,18 @@
                         this.top_title = response.top_title;
                         console.log(response);
                     })
-                    .catch(error =>{
+                    .catch(err =>{
                         console.log(err);
                     });
+                /*this.$fetch('http://111.230.100.91/teachep/public/indexRotation').then((res)=>{
+                    console.log(144,res);
+                })
+                    .catch(err =>{
+                        console.log(147,err);
+                    })*/
+            },
+            link(url_name){
+                this.$router.push('/'+url_name+'');
             }
         },
         created() {
