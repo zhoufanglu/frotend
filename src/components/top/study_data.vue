@@ -1,5 +1,5 @@
 <template>
-    <div>这是发现</div>
+    <div>这是学习资料</div>
 </template>
 <script>
     export default {

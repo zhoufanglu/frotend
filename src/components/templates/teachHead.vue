@@ -5,8 +5,8 @@
         </div>
         <div class="is-show-head" :class="show_hide_vis">
             <span><router-link class="remove-a-css no-warp" to="/course">课程中心</router-link></span>
-            <span><router-link class="remove-a-css no-warp" to="/find">发现</router-link></span>
-            <span><router-link class="remove-a-css no-warp" to="/help">帮助</router-link></span>
+            <span><router-link class="remove-a-css no-warp" to="/study_data">学习资料</router-link></span>
+            <span><router-link class="remove-a-css no-warp" to="/user_rank">排行榜</router-link></span>
             <el-input class="head-search"
                     placeholder="搜索"
                     prefix-icon="el-icon-search"

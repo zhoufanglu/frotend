@@ -8,7 +8,7 @@ ajax({
     url:'http://127.0.0.1/teachep/public/indexRotation',
     type:'get',
     request:{
-
+        id:''
     },
     res:{
         ok:{

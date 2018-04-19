@@ -1,5 +1,5 @@
 <template>
-    <div>这是帮助</div>
+    <div>排行榜</div>
 </template>
 <script>
     export default {

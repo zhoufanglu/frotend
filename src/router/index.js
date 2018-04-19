@@ -4,8 +4,8 @@ import home from '@/components/home'
 import course from '@/components/course'
 //top
 import course_center from '@/components/top/course_center'
-import find from '@/components/top/find'
-import help from '@/components/top/help'
+import study_data from '@/components/top/study_data'
+import user_rank from '@/components/top/user_rank'
 import course_detail from '@/components/course_detail'
 import personal_center from '@/components/personal_center'
 import chapter from '@/components/chapter'
@@ -32,14 +32,14 @@ export default new Router({
             component: course_center
         },
         {
-            path: '/find',
-            name: 'find',
-            component: find
+            path: '/study_data',
+            name: 'study_data',
+            component: study_data
         },
         {
-            path: '/help',
-            name: 'help',
-            component: help
+            path: '/user_rank',
+            name: 'user_rank',
+            component: user_rank
         },
         {
             path: '/course_detail',
