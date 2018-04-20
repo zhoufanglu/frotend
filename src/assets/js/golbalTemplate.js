@@ -6,3 +6,4 @@ import Vue from 'vue'
 Vue.component('teach-head',require('@/components/templates/teachHead.vue').default);
 Vue.component('teach-foot',require('@/components/templates/foot.vue').default);
 Vue.component('login-or-register',require('@/components/templates/login_or_register.vue').default);
+Vue.component('no-data-panel',require('@/components/templates/no_data_panel').default);

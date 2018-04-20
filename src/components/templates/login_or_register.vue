@@ -1,5 +1,5 @@
 <template>
-    <div class="login-or-register-f">
+    <div class="login-or-register-f" v-show="$state.isShowLoginMask">
         <el-dialog :title="$state.maskType == 'login'?'登录':'注册'" :visible.sync="$state.isShowLoginMask" width="30%" center class="login-or-register">
             <el-tabs v-model="$state.maskType" @tab-click="loginTitleClick()">
                 <el-tab-pane label="登录" name="login">
@@ -25,8 +25,6 @@
                 <el-button v-if="$state.maskType=='login'" type="danger" round @click="login()">登录</el-button>
                 <el-button v-if="$state.maskType=='register'" type="danger" round @click="register()">注册</el-button>
             </div>
-
-
         </el-dialog>
     </div>
 
@@ -68,7 +66,7 @@
                 }*/
                 //http://111.230.100.91/teachep/public/user/login
                 ///User/login
-                this.$post('http://127.0.0.1/teachep/public/User/login',postData).then((response) => {
+                this.$post('/user/login',postData).then((response) => {
                     if(response.data.state === 'success'){
                         console.log(response.data);
                         let user_data = response.data.user_data;
@@ -98,7 +96,7 @@
                         c_password:this.r_check_password,
                         code:this.code
                     };
-                    this.$post('http://127.0.0.1/teachep/public/User/register',post_data).then((response) => {
+                    this.$post('/user/register',post_data).then((response) => {
                         this.setIsShowLoginMask(false);
                         this.$message.success('注册成功！');
                     })

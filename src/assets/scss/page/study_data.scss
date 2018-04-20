@@ -1,0 +1,114 @@
+.content{
+    display: flex;
+    .content-l{
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        border: solid 1px $light;
+        padding: 30px;
+        .filter-title{
+            border-bottom: solid 1px $light;
+            padding-bottom: 30px;
+        }
+        .study-data{
+            .row{
+                border-bottom: solid 1px $light;
+                padding: 30px;
+            }
+            .data-r{
+                display: flex;
+                flex-direction: column;
+                >div:not(:first-child){
+                    margin-top: 16px;
+                }
+                >div:first-child{
+                    font-weight: bolder;
+                    font-size: 18px;
+                }
+                >div:nth-child(2){
+                    display: flex;
+                    align-items: center;
+                    i{
+                        font-weight: bolder;
+                        margin-right: 6px;
+                    }
+                    .name{
+                        margin-right: 60px;
+                    }
+                }
+                .type-and-comment{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .type{
+                        display: flex;
+                        >div{
+                            padding: 3px 6px;
+                            border: solid 1px $light;
+                            margin-right: 16px;
+                        }
+                    }
+                    .comment{
+                        display: flex;
+                        >span:first-child{
+                            margin-right: 16px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .content-r{
+        width: 30%;
+        margin-left: 30px;
+        display: flex;
+        flex-direction: column;
+        .hot-recommended{
+            .head{
+                padding: 30px;
+                border: solid 1px $light;
+                border-bottom: none;
+                font-size: 20px;
+            }
+            .body{
+                border: solid 1px $light;
+                padding: 30px;
+                .row{
+                    display: flex;
+                    div:first-child{
+                        margin-right: 16px;
+                    }
+                }
+            }
+        }
+        .last-comment{
+            margin-top: 60px;
+            .head{
+                padding: 30px;
+                border: solid 1px $light;
+                border-bottom: none;
+                font-size: 20px;
+            }
+            .body{
+                border: solid 1px $light;
+                .row{
+                    padding: 20px;
+                    display: flex;
+                    border-bottom: solid 1px $light;
+                    align-items: center;
+                    .head-img{
+                        border-radius: 50%;
+                        height: 60px;
+                        width: 60px;
+                        border: solid 1px $stable;
+                        overflow: hidden;
+                    }
+                    .person-info{
+                        display: flex;
+                        flex-direction: column;
+                    }
+                }
+            }
+        }
+    }
+}

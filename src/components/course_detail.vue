@@ -35,7 +35,7 @@
                         </div>
                     </div>
                 </div>
-                <chapter_comment_file></chapter_comment_file>
+                <chapter_comment_file @transferCourse="getCourseInfoFromChapter"></chapter_comment_file>
             </div>
         </div>
         <teach-foot></teach-foot>
@@ -57,23 +57,12 @@
             }
         },
         methods: {
-            getCourseInfo(){
-                let data = {
-                    id:this.course.id
-                }
-                this.$fetch('/api/course_detail/course').then((response) => {
-                    this.types = response;
-                    console.log(45,response);
-                    this.course = response.course;
-                    //this.tab_items.chapter_list = response.chapter_list;
-                })
-                    .catch(err =>{
-                        console.log(err);
-                    });
-            },
+            getCourseInfoFromChapter(data){
+                this.course = data;
+            }
         },
         created(){
-            //this.getCourseInfo();   //获取课程基本信息
+
         },
         components:{chapter_comment_file},
     }

@@ -22,7 +22,7 @@
                                 <div class="comments">
                                     <div class="panel">
                                         <div class="item" v-for="i in tab_items.comment_list">
-                                            <div class="rank-head-img item-l"><img :src="i.head_img" width="100%" height="100%" alt=""></div>
+                                            <div class="rank-head-img item-l"><img :src="$imgPath+i.headimg" width="100%" height="100%" alt=""></div>
                                             <div class="item-r">
                                                 <div class="row-1">{{i.user_name}}</div>
                                                 <div class="row-2">{{i.comment_text}}</div>
@@ -37,6 +37,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <template v-if="tab_items.comment_list.length == 0">
+                                            <no-data-panel tip="暂无评论"></no-data-panel>
+                                        </template>
                                     </div>
                                 </div>
                                 <!--分页-->
@@ -80,6 +83,9 @@
                                             <router-link  to="/course"target="_blank" class="grid-content remove-a-css">{{i.file_address}}</router-link>
                                         </el-col>
                                     </el-row>
+                                    <template v-if="tab_items.file_list.length == 0">
+                                        <no-data-panel tip="暂无文件"></no-data-panel>
+                                    </template>
                                 </div>
                             </el-tab-pane>
                         </el-tabs>
@@ -96,11 +102,14 @@
                         <router-link target="_blank" :to="{path:'/course_detail', query:{id:i.id}}" class="item remove-a-css" v-for="(i,index) in right_data.user_rank" :key="index">
                             <div>{{index + 1}}</div>
                             <div>
-                                <div class="rank-head-img"><img :src="i.head_img" height="100%" width="100%"></div>
+                                <div class="rank-head-img"><img :src="$imgPath+i.head_img" height="100%" width="100%"></div>
                             </div>
                             <div class="user-name" :title="i.user_name">{{i.user_name}}</div>
                             <div>{{i.score}}分</div>
                         </router-link>
+                        <template v-if="right_data.user_rank.length == 0">
+                            <no-data-panel tip="暂无用户信息"></no-data-panel>
+                        </template>
                         <div class="see-more">
                             <router-link to="/course" class="remove-a-css" target="_blank">查看更多&nbsp;></router-link>
                         </div>
@@ -110,12 +119,15 @@
                     <div class="panel">
                         <div class="list-title">相似课程推荐</div>
                         <router-link target="_blank" :to="{path:'/course', query:{id:i.id}}" class="item remove-a-css" v-for="(i,index) in right_data.similar_course" :key="index">
-                            <div class="item-l"><img :src="i.course_img" width="100%" height="100%" alt=""></div>
+                            <div class="item-l"><img :src="$imgPath+i.course_img" width="100%" height="100%" alt=""></div>
                             <div class="item-r">
                                 <div class="list-title">{{i.course_name}}</div>
                                 <div>{{i.course_introduction}}</div>
                             </div>
                         </router-link>
+                        <template v-if="right_data.similar_course.length == 0">
+                            <no-data-panel tip="暂无相关课程"></no-data-panel>
+                        </template>
                         <div class="see-more">
                             <router-link  to="/course" class="remove-a-css" target="_blank">查看更多&nbsp;></router-link>
                         </div>
@@ -129,10 +141,11 @@
     import { mapMutations } from 'vuex'
     export default {
         name: '',
+        props: ['course_info'],
         data(){
             return{
                 course: {
-                    id: this.$route.params.course_id,
+                    id: this.$state.current.course_id,
                 },
                 tab_items:{
                     chapter_list:[],
@@ -156,13 +169,11 @@
                 setCourseId: 'setCourseId',
             }),
             getCourseInfo(){
-                let data = {
-                    id:this.course.id
-                }
-                this.$fetch('/course/getHomeCourseDetail',{id:data.id}).then((response) => {
+                this.$fetch('/course/getHomeCourseDetail',{id:this.$state.current.course_id}).then((response) => {
                     this.types = response;
                     //console.log(45,response);
                     this.course = response.course;
+                    this.$emit('transferCourse',response.course);//把课程信息传输给course_detail路由
                     this.tab_items.chapter_list = response.chapter_list;
                 })
                     .catch(err =>{
@@ -170,7 +181,7 @@
                     });
             },
             getUserRank(){
-                this.$fetch('course_detail/user_rank').then((response) => {
+                this.$fetch('course/getUserSortList',{num:5}).then((response) => {
                     this.right_data.user_rank = response.user;
                     //console.log('user_rank',this.right_data.user_rank);
                 })
@@ -179,23 +190,29 @@
                 //console.log( 105,tab, event);
             },
             getSimilarCourse(){
-                this.$fetch('http://127.0.0.1/teachep/public/course/getCourseSortList').then((response) => {
+                this.$fetch('/course/getCourseSortList',{num:5}).then((response) => {
                     this.right_data.similar_course = response.course;
                     //console.log('similar_course',this.right_data.similar_course);
                 })
             },
             getCommentList(){
-                this.$fetch('http://127.0.0.1/teachep/public/course/getCommentList').then((response) => {
+                this.$fetch('/course/getCommentList',{
+                    id: this.course.id,
+                    num: this.paging.page_all_num,
+                    pagenow:this.paging.now_page
+                    })
+                    .then((response) => {
                     this.tab_items.comment_list = response.comment_list;
+                    this.data_number = response.pageallnum;
                     //console.log('comment_list',this.tab_items.comment_list);
                 })
             },
             getFileList(){
-                this.$fetch('http://127.0.0.1/teachep/public/course/getFileList').then((response) => {
+                this.$fetch('/course/getFileList',{ id:this.course.id}).then((response) => {
                     this.tab_items.file_list = response.file_list;
                     //console.log('file_list',this.tab_items.file_list);
                 })
-            }
+            },
         },
         created(){
             if(this.$route.params.course_id){
@@ -203,10 +220,10 @@
             }
             console.log(197,'course_id:',this.$state.current.course_id);
             this.getCourseInfo();   //获取课程基本信息
-            this.getUserRank();     //获取用户排名列表
+            //this.getUserRank();     //获取用户排名列表
             //this.getSimilarCourse();//类似课程
-            //this.getCommentList();  //获取评论
-            //this.getFileList();
+            this.getCommentList();  //获取评论
+            this.getFileList();
         },
         computed:{
 

@@ -6,7 +6,7 @@
                 <div class="top-l">
                     <div class="head-img">
                         <el-upload  class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-                            <img v-if="user_data.user_headimg" :src="user_data.user_headimg" width="100%" height="100%" class="avatar">
+                            <img v-if="user_data.user_headimg" :src="$imgPath+user_data.user_headimg" width="100%" height="100%" class="avatar">
                             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                         <div class="head-img-tip">点击上传头像</div>
@@ -34,7 +34,7 @@
                             <el-tab-pane label="我的课程" name="course">
                                 <div class="nav-content">
                                     <el-row class="nav-course-row" v-for="(i,index) in course_list" :key="index">
-                                        <el-col :span="6"><div class="grid-content item-left "><img :src="i.course_img" width="100%" height="100%" alt=""></div></el-col>
+                                        <el-col :span="6"><div class="grid-content item-left "><img :src="$imgPath+i.course_img" width="100%" height="100%" alt=""></div></el-col>
                                         <el-col :span="12"><div class="grid-content item-mid ">
                                             <span class="title">{{i.course_name}}</span>
                                             <span class="introduction">{{i.course_introduction}}</span>
@@ -58,7 +58,7 @@
                             <el-tab-pane label="我的收藏" name="book_marks">
                                 <div class="nav-content">
                                     <el-row class="nav-course-row" v-for="(i,index) in collection_list" :key="index">
-                                        <el-col :span="6"><div class="grid-content item-left "><img :src="i.course_img" width="100%" height="100%" alt=""></div></el-col>
+                                        <el-col :span="6"><div class="grid-content item-left "><img :src="$imgPath+i.course_img" width="100%" height="100%" alt=""></div></el-col>
                                         <el-col :span="12"><div class="grid-content item-mid ">
                                             <span class="title">{{i.course_name}}</span>
                                             <span class="introduction">{{i.course_introduction}}</span>
@@ -278,20 +278,20 @@
         },
         methods:{
             getUserList(){
-                this.$fetch('http://127.0.0.1/teachep/public/user/getMyUserData').then((response) => {
+                this.$fetch('/user/getMyUserData').then((response) => {
                     this.user_data = response.user_data;                                     //直接赋值
                     this.user_edit_data = JSON.parse(JSON.stringify( response.user_data));  //开辟了新的赋值地址
                     console.log('user_data',this.user_data);
                 })
             },
             getMyCourseList(){
-                this.$fetch('http://127.0.0.1/teachep/public/user/getMyCourseList').then((response) => {
+                this.$fetch('/user/getMyCourseList').then((response) => {
                     this.course_list = response.course_list;
                     console.log('course_list',this.course_list);
                 })
             },
             getCollectionList(){
-                this.$fetch('http://127.0.0.1/teachep/public/user/getMyCollectionList').then((response) => {
+                this.$fetch('/user/getMyCollectionList').then((response) => {
                     this.collection_list = response.collection_list;
                     console.log('collection_list',this.collection_list);
                 })

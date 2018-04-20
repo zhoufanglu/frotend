@@ -58,7 +58,7 @@
                 setChapterChildId: 'setChapterChildId',
             }),
             getChapterChildInfo(){
-                this.$fetch('http://127.0.0.1/teachep/public/course/getImageTextDetail')
+                this.$fetch('/course/getImageTextDetail')
                     .then((response) => {
                         this.chapter_child = response.image_text_detail;
                         console.log(51,response);

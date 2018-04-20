@@ -17,7 +17,7 @@
             <el-dropdown trigger="click" v-if="user_info.is_login == true">
                 <span class="el-dropdown-link">
                      <span class="head-img">
-                         <img :src="user_info.head_img" alt="" width="100%" height="100%">
+                         <img :src="$imgPath+user_info.head_img" alt="" width="100%" height="100%">
                      </span>
                      <span class="nick-name" :class="text_color">{{user_info.nick_name}}</span>
                   </span>
@@ -28,13 +28,14 @@
             </el-dropdown>
             <div v-else  class="login-or-register-btn">
                 <el-button type="text" @click="showLoginMask('login')">
-                    <span class="login-open-mask">登录</span>
+                    <span class="login-open-mask remove-a-css" :class="text_color">登录</span>
                 </el-button>
                 <el-button type="text" @click="showLoginMask('register')">
-                    <span class="register-open-mask">/&nbsp;&nbsp;&nbsp;&nbsp;注册</span>
+                    <span class="register-open-mask remove-a-css" :class="text_color">/&nbsp;&nbsp;&nbsp;&nbsp;注册</span>
                 </el-button>
             </div>
         </div>
+        <login-or-register></login-or-register>
     </div>
 </template>
 

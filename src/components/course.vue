@@ -25,8 +25,8 @@
         <div class="content-body">
             <div class="top">
                 <div class="sort">
-                    <el-radio v-model="sort" @change="getCourse()" label="1">最新</el-radio>
-                    <el-radio v-model="sort" @change="getCourse()" label="2">最热</el-radio>
+                    <el-radio v-model="sort" @change="getCourse()" label="last">最新</el-radio>
+                    <el-radio v-model="sort" @change="getCourse()" label="pop">最热</el-radio>
                 </div>
                 <div class="filter.difficult">
                     <el-radio @change="getCourse()" v-model="filter.difficult" label="">全部</el-radio>
@@ -40,7 +40,7 @@
                         <el-col :span="4" v-for="(j,index) in course" :key="index">
                             <router-link :to="{name:'course_detail',params:{course_id:j.id}}" class="grid-content course-item bg-purple" >
                                 <div class="bg-img">
-                                    <img :src="j.course_img" alt="" width="100%" height="100%">
+                                    <img :src="$imgPath+j.course_img" alt="" width="100%" height="100%">
                                     <div class="course-type">
                                         <span v-for="k in j.course_type">{{k}}</span>
                                     </div>
@@ -53,6 +53,9 @@
                             </router-link>
                         </el-col>
                     </el-row>
+                <template v-if="course.length == 0">
+                    <no-data-panel tip="暂无课程信息"></no-data-panel>
+                </template>
             </div>
             <!--分页-->
             <div class="paging">
@@ -81,7 +84,7 @@
                     type: '',
                     difficult:''
                 },
-                sort:'1',
+                sort:'last',
                 //body
                 course:[],
                 //分页
@@ -100,10 +103,6 @@
                     });
             },
             getCourse(){
-               /* console.log(107,this.filter,this.sort);
-                console.log(108,this.now_page);
-                console.log(109,this.page_all_num);*/
-               console.log(106,this.filter);
                let data={
                    filter_direction: this.filter.direction, //传的是id,如果为空,就是全部（方向-->一级分类）
                    filter_classify:this.filter.classify , //传的是id,如果为空,就是全部（分类-->二级级分类）
@@ -115,7 +114,7 @@
                 };
                 this.$fetch('/getCourseList',data)
                     .then((response) => {
-                        this.course = response.course;
+                        //this.course = response.course;
                         //console.log(101,response.course);
                     })
                     .catch(err =>{

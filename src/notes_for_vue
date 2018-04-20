@@ -1,6 +1,6 @@
 #Vue nodes <br/>
 ###router<br/>
-####1.路由跳转  
+####路由跳转  
 **this.$router.go('/login')**  
 **this.$router.push({path:'/index'})**  
 **<router-link to="/personal_center"></router-link>**   
@@ -23,4 +23,14 @@ this.$router.push({
                 dataObj: this.msg
             }*/
         }) 
-        decodeuricomponent
+        decodeuricomponent 
+         
+3.组件传值--子组件传值个给父组件  
+**子组件**  
+this.$emit('transferCourse',response.course);//把课程信息传输给course_detail路由 
+**父组件**  
+@transferCourse = 'getCourse' //记住 不要加括号
+
+###接口问题
+1.course_detail 
+ 接口都报404
