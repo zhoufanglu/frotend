@@ -1,4 +1,4 @@
-//111.230.100.91
+
 /**
  * home.html
  */
@@ -122,6 +122,36 @@ ajax({
     }
 });
 /************************课程详情页面的数据接口********************************/
+//课程评论接口
+ajax({
+    title:'获取课程评论列表',
+    url:'http://127.0.0.1/teachep/public/course/getCourseCommentList',
+    type:'get',
+    request:{
+        id:id,//课程ID
+        num:num,//几条数据
+        pagenow:""//当前页面
+    },
+    res:{
+        ok:{
+            commentList: [ // 评论列表信息
+                {
+                    id:"评论id",
+                    user_name:'会员名称',
+                    headimg:'会员头像地址',
+                    image_text_name:'来自的子章节名称',
+                    praise_num:'点赞数',
+                    created_at:'评论时间',
+
+                }
+            ],
+            pageallnum:"100",//一共多少条数据
+        },
+        err:{
+            msg:'报错信息'
+        }
+    }
+});
 /**
  * 1.课程详情 course_detail
  * */
@@ -180,7 +210,7 @@ ajax({
     type:'get',
     request:{
         id:id,//课程ID
-        type:1
+
     },
     res:{
         ok:{
