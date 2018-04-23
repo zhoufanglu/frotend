@@ -338,7 +338,7 @@ ajax({
 });
 //子章节评论接口
 ajax({
-    title:'获取章节评论列表',
+    title:'获取详细章节评论列表',
     url:'http://127.0.0.1/teachep/public/course/getCommentDetailList',
     type:'get',
     request:{
