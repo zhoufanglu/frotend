@@ -16,7 +16,9 @@
                         <el-input type="password" v-model="r_check_password" placeholder="请再次输入密码"><i style="font-size: 22px" slot="suffix" class="icon-font el-input__icon">&#xe69e;</i></el-input>
                         <div class="code-panel">
                             <el-input  v-model="code" placeholder="请输入验证码"></el-input>
-                            <div class="code">验证码</div>
+                            <div class="code">
+                                <img :src="$imgPath+'/user/captcha/1'" alt="" width="100%" height="100%">
+                            </div>
                         </div>
                     </div>
                 </el-tab-pane>
@@ -46,6 +48,7 @@
                 r_password:'',
                 r_check_password:'',
                 code:'',
+                code_img:''
             }
         },
         methods:{
@@ -60,10 +63,10 @@
                     user_name:this.user_name,
                     user_password:this.password
                 };
-                /*if(postData.user_name === "" || postData.user_password ===""){
+                if(postData.user_name === "" || postData.user_password ===""){
                     this.$message.error('用户名和密码不能为空！');
                     return false;
-                }*/
+                }
                 //http://111.230.100.91/teachep/public/user/login
                 ///User/login
                 this.$post('/user/login',postData).then((response) => {
@@ -93,7 +96,6 @@
                     let post_data = {
                         user_name:this.r_user_name,
                         password:this.r_password,
-                        c_password:this.r_check_password,
                         code:this.code
                     };
                     this.$post('/user/register',post_data).then((response) => {
@@ -111,8 +113,10 @@
             maskSure(){
                 //this.$state.isShowLoginMask = false;
             },
-            loginTitleClick(){
-            },
+            /*loginTitleClick(){
+                if(this.$state.maskType === 'register')
+                    this.getCode();
+            },*/
             checkRegisterUserInfo(){
                 let reg = /^[a-zA-Z\d\_\u2E80-\u9FFF]{0,16}$/;
                 if(!reg.test(this.r_user_name) || this.r_user_name === ''){
@@ -129,7 +133,13 @@
                     return false;
                 }
                 return true;
-            }
+            },
+            /*getCode(){
+                this.$fetch('/user/captcha/1').then((response) => {
+                    this.code_img = response;
+                    //console.log(134,response);
+                });
+            }*/
         },
         created(){
 
