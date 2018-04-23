@@ -5,6 +5,7 @@ import course from '@/components/course'
 //top
 import course_center from '@/components/top/course_center'
 import study_data from '@/components/top/study_data'
+import study_data_detail from '@/components/top/study_data_detail'
 import user_rank from '@/components/top/user_rank'
 import course_detail from '@/components/course_detail'
 import personal_center from '@/components/personal_center'
@@ -35,6 +36,11 @@ export default new Router({
             path: '/study_data',
             name: 'study_data',
             component: study_data
+        },
+        {
+            path: '/study_data_detail',
+            name: 'study_data_detail',
+            component: study_data_detail
         },
         {
             path: '/user_rank',

@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <div class="study-data">
-                    <el-row class="row" v-for="(i,index) in chapter_list" :key="index">
+                    <el-row class="row" @click.native="link('study_data_detail','study_data_id',i.id)" v-for="(i,index) in chapter_list" :key="index">
                         <el-col :span="8" class="bg-img">
                             <img :src="i.chapter_img" alt="" width="100%" height="100%">
                         </el-col>
@@ -125,6 +125,17 @@
                         this.last_comment_list = response.last_comment_list;
                         // console.log(114,response);
                     })
+            },
+            link(link_name,params_name,id){
+                console.log(link_name,params_name,id);
+                this.$router.push({
+                    path: link_name,
+                    name: link_name,
+                    query: {
+                        id: id,
+                    }
+                })
+
             }
         },
         created(){

@@ -31,7 +31,7 @@
                                                         <span>时间:{{i.created_at}}</span>
                                                         <span>源自:{{i.image_text_name}}</span>
                                                     </div>
-                                                    <div class="praise-num">
+                                                    <div class="praise-num" @click="praise(i.id)">
                                                         <i class="icon-font">&#xe672;</i><span>{{i.praise_num}}</span>
                                                     </div>
                                                 </div>
@@ -161,7 +161,7 @@
                 paging:{
                     page_all_num:30,//一页多少数据
                     now_page:1,     //当前页码
-                    data_number:300 //一共多少数据
+                    data_number:0 //一共多少数据
                 }
             }
         },
@@ -191,7 +191,7 @@
                 //console.log( 105,tab, event);
             },
             getSimilarCourse(){
-                this.$fetch('/course/getCourseSortList',{num:5}).then((response) => {
+                this.$fetch('/course/getCourseSortList',{num:5,id:this.course.id}).then((response) => {
                     this.right_data.similar_course = response.course;
                     //console.log('similar_course',this.right_data.similar_course);
                 })
@@ -204,7 +204,7 @@
                     })
                     .then((response) => {
                     this.tab_items.comment_list = response.comment_list;
-                    this.data_number = response.pageallnum;
+                    this.paging.data_number = response.pageallnum;
                     //console.log('comment_list',this.tab_items.comment_list);
                 })
             },
@@ -214,6 +214,14 @@
                     //console.log('file_list',this.tab_items.file_list);
                 })
             },
+            praise(comment_id){
+                this.$fetch('/course/praise',{comment_id:comment_id,user_id:this.$state.user.user_id}).then((response) => {
+                    this.$message.success('点赞成功！');
+                }).catch((err)=>{
+                    this.$message.error('您已经点赞过了！');
+                });
+                console.log(218,comment_id);
+            }
         },
         created(){
             if(this.$route.params.course_id){
@@ -222,7 +230,7 @@
             console.log(197,'course_id:',this.$state.current.course_id);
             this.getCourseInfo();   //获取课程基本信息
             this.getUserRank();     //获取用户排名列表
-            //this.getSimilarCourse();//类似课程
+            this.getSimilarCourse();//类似课程
             this.getCommentList();  //获取评论
             this.getFileList();
         },

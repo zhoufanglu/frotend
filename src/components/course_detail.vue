@@ -27,10 +27,10 @@
                                     <span>难度级别</span>
                                     <span>{{course.course_difficult}}</span>
                                 </div>
-                                <div>
+                                <!--<div>
                                     <span>综合评分</span>
                                     <span>{{course.course_difficult}}</span>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
