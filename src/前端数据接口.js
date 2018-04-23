@@ -265,6 +265,7 @@ ajax({
     url:'http://127.0.0.1/teachep/public/course/getUserSortList',
     type:'get',
     request:{
+        type:1/2,//1:会员排行榜
         num:num,//几条数据
         pagenow:""//当前页面
     },
@@ -291,7 +292,7 @@ ajax({
 //点赞接口
 ajax({
     title:'点赞接口',
-    url:'/course/praise',
+    url:'http://127.0.0.1/teachep/public/course/praise',
     type:'post',
     request:{
         comment_id:1,//评论id
@@ -338,7 +339,7 @@ ajax({
 //子章节评论接口
 ajax({
     title:'获取章节评论列表',
-    url:'http://127.0.0.1/teachep/public/course/getCommentList',
+    url:'http://127.0.0.1/teachep/public/course/getCommentDetailList',
     type:'get',
     request:{
         id:id,//子章节ID（图文或视频id）
@@ -347,7 +348,7 @@ ajax({
     },
     res:{
         ok:{
-            commentList: [ // 评论列表信息
+            comment_list: [ // 评论列表信息
                 {
                     id:"评论id",
                     user_name:'会员名称',
@@ -378,6 +379,23 @@ ajax({
     type:'post',
     request:{
         course_id:"课程id",
+        user_id:"用户id",
+    },
+    res:{
+        ok:{
+        },
+        err:{
+            msg:''
+        }
+    }
+});
+//开始学习课程接口
+ajax({
+    title:'开始学习课程接口',
+    url:'http://127.0.0.1/teachep/public/course/setUserStartCourse',
+    type:'post',
+    request:{
+        comment_id:"评论id",
         user_id:"用户id",
     },
     res:{
@@ -631,7 +649,7 @@ ajax({
 //注册信息接口
 ajax({
     title:'注册信息接口',
-    url:'http://127.0.0.1/teachep/public/User/register',
+    url:'http://127.0.0.1/teachep/public/user/register',
     type:'post',
     request:{
         user_name:"用户名",//用户ID
