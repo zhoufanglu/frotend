@@ -133,3 +133,9 @@ $head-height:80px;
         color: $darker;
     }
 }
+.need-hover{
+    cursor: pointer;
+    &:hover{
+        color: $darker;
+    }
+}

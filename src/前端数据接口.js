@@ -660,5 +660,99 @@ ajax({
     }
 });
 /***************************学习资料study_data******************************************/
-
+//获取文章类别接口
+ajax({
+    title:'获取文章类别接口',
+    url:'/getChapterTypeList',
+    type:'get',
+    request:{
+    },
+    res:{
+        ok:{
+            //文章
+            chapter_type_list:[
+                {id:11,name:'类别名称'}
+            ],
+        },
+        err:{
+            msg:''
+        }
+    }
+});
+//获取文章接口
+ajax({
+    title:'获取文章列表',
+    url:'/getChapterList',
+    type:'get',
+    request:{
+        index:0, //文章个数的索引  从0开始0,5,10  (后端每次取 索引之后的5个)
+        type_id:'id' //类型 空代表全部
+    },
+    res:{
+        ok:{
+            //文章
+            chapter_list:[
+                {
+                    id:'1',
+                    chapter_img:'图片路径',
+                    chapter_name:'文章名',
+                    chapter_writer:'作者',
+                    created_at:'创建时间',
+                    chapter_introduction:'简介',
+                    look_times:'查看数',
+                    comment_times:'评论数',
+                    chapter_type:['WEB安全','漏洞']
+                },
+            ],
+        },
+        err:{
+            msg:''
+        }
+    }
+});
+//获取热门推荐
+ajax({
+    title:'获取热门推荐',
+    url:'/getHotChapterList',
+    type:'post',
+    request:{
+       num:10//个数
+    },
+    res:{
+        ok:{
+            //热门推荐
+            hot_chapter_list:[
+                {id:1,chapter_name:'名称'}
+            ],
+        },
+        err:{
+            msg:''
+        }
+    }
+});
+//获取热门推荐
+ajax({
+    title:'最新评论',
+    url:'/getLastCommentList',
+    type:'post',
+    request:{
+        num:10//个数
+    },
+    res:{
+        ok:{
+            //最新评论
+            last_comment_list:[
+                {
+                    id:'',
+                    user_name:'',//昵称
+                    head_img:'',//头像
+                    content:''//评论内容
+                }
+            ]
+        },
+        err:{
+            msg:''
+        }
+    }
+});
 /***************************学习资料study_data_detail******************************************/

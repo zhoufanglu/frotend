@@ -5,38 +5,40 @@
             <div class="content-l">
                 <div class="filter-title">
                     <div>
-                        <el-radio-group v-model="filter_type">
-                            <el-radio-button label="1">安全意识</el-radio-button>
-                            <el-radio-button label="2">职业技能</el-radio-button>
+                        <el-radio-group v-model="filter_type" @change="getChapterList(0)">
+                            <el-radio-button label="">全部</el-radio-button>
+                            <el-radio-button :label="i.id" v-for="(i,index) in chapter_type_list" :key="index">{{i.name}}</el-radio-button>
                         </el-radio-group>
                     </div>
                 </div>
                 <div class="study-data">
-                    <el-row class="row">
-                        <el-col :span="8">
-                            <img src="" alt="">
+                    <el-row class="row" v-for="(i,index) in chapter_list" :key="index">
+                        <el-col :span="8" class="bg-img">
+                            <img :src="i.chapter_img" alt="" width="100%" height="100%">
                         </el-col>
                         <el-col :span="16">
                             <div class="data-r">
-                                <div>title</div>
+                                <div>{{i.chapter_name}}</div>
                                 <div>
-                                    <div class="name"><i class="icon-font">&#xe6b3;</i>名字</div>
-                                    <div class="time"><i class="icon-font">&#xe78b;</i>2018-4-18 12:30:16</div>
+                                    <div class="name"><i class="icon-font">&#xe6b3;</i>{{i.chapter_writer}}</div>
+                                    <div class="time"><i class="icon-font">&#xe78b;</i>{{i.created_at}}</div>
                                 </div>
-                                <div>CVE-2017-12542是一个CVSS 9.8的高分漏洞，漏洞利用条件简单，危害较大。近十年来，iLO是几乎所有惠普服务器中都嵌入的服务器管理解决方案。</div>
+                                <div>{{i.chapter_introduction}}</div>
                                 <div class="type-and-comment">
                                     <div class="type">
-                                        <div>web安全</div>
-                                        <div>漏洞</div>
+                                        <div v-for="j in i.chapter_type">{{j}}</div>
                                     </div>
                                     <div class="comment">
-                                        <span>x次查看</span>
-                                        <span>x次评论</span>
+                                        <span>{{i.look_times}}&nbsp;次查看</span>
+                                        <span>{{i.comment_times}}&nbsp;次评论</span>
                                     </div>
                                 </div>
                             </div>
                         </el-col>
                     </el-row>
+                    <div class="look-more" @click="getChapterList()">
+                        点击查看更多
+                    </div>
                 </div>
             </div>
             <div class="content-r">
@@ -45,9 +47,9 @@
                         热门推荐
                     </div>
                     <div class="body">
-                        <div class="row">
-                            <div>index</div>
-                            <div>内容</div>
+                        <div class="row" v-for="(i,index) in hot_chapter_list">
+                            <div>{{index+1}}</div>
+                            <div :title="i.chapter_name">{{i.chapter_name}}</div>
                             <!--<router-link class="remove-a-css">内容</router-link>-->
                         </div>
                     </div>
@@ -58,11 +60,13 @@
                         最新评论
                     </div>
                     <div class="body">
-                        <div class="row">
-                            <div class="head-img">头像</div>
+                        <div class="comment-row" v-for="(i,index) in last_comment_list">
+                            <div class="head-img">
+                                <img :src="i.head_img" alt="" width="100%" height="100%">
+                            </div>
                             <div class="person-info">
-                                <span>name</span>
-                                <span>内容</span>
+                                <span>{{i.user_name}}</span>
+                                <span>{{i.content}}</span>
                             </div>
                         </div>
                     </div>
@@ -79,14 +83,55 @@
             return{
                 //css
                 show_hide_vis:'show-vis',
-                filter_type:'1'
+                filter_type:"",
+                chapter_type_list:[],
+                chapter_list:[],
+                index:0,
+                hot_chapter_list:[],
+                last_comment_list:[],
             }
         },
         methods:{
-
+            getChapterTypeList(){
+                this.$fetch('/getChapterTypeList')
+                    .then((response) => {
+                        this.chapter_type_list = response.chapter_type_list;
+                    })
+            },
+            getChapterList(index){
+                if(index === 0){
+                    this.index = 0;
+                }
+                this.$fetch('/getChapterList'/*,{index:this.index}*/)
+                    .then((response) => {
+                        if(this.index === 0){
+                            this.chapter_list = response.chapter_list;
+                        }else{
+                            this.chapter_list = this.chapter_list.concat(response.chapter_list);
+                        }
+                        this.index += 5;
+                    })
+            },
+            getHotChapterList(){
+                this.$fetch('/getHotChapterList')
+                    .then((response) => {
+                        this.hot_chapter_list = response.hot_chapter_list;
+                       // console.log(114,response);
+                    })
+            },
+            getLastCommentList(){
+                this.$fetch('/getLastCommentList')
+                    .then((response) => {
+                        this.last_comment_list = response.last_comment_list;
+                        // console.log(114,response);
+                    })
+            }
         },
         created(){
-
+            this.getChapterTypeList();//章节类别list
+            this.getChapterList();//章节list
+            this.getHotChapterList();//热门文章
+            this.getLastCommentList();//最新评论
         }
     }
 </script>
@@ -95,15 +140,19 @@
 </style>
 <style type="text/scss" lang="scss">
     .filter-title{
-    .el-radio-group{
-    .el-radio-button:first-child{
-        margin-right: 60px;
-    }
-    .el-radio-button__inner{
-        border: solid 1px $stable;
-        border-radius: 0;
-        width: 100px;
-    }
-    }
+        .el-radio-group {
+            /*.el-radio-button:not(:first-child) {
+                margin-left: 30px;
+            }*/
+            .el-radio-button{
+                margin-top: 16px;
+                margin-left: 30px;
+            }
+            .el-radio-button__inner {
+                border: solid 1px $stable;
+                border-radius: 0;
+                width: 100px;
+            }
+        }
     }
 </style>

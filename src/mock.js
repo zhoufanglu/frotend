@@ -256,5 +256,58 @@ let useMock = (isOpenMock) =>{
                 state:'success',
             },
     });
+    /**
+     * study_data
+     */
+    //获取文章类别接口
+    Mock.mock('/getChapterTypeList',{
+        "chapter_type_list|8":  // 子章节信息
+            [
+                {
+                    id:()=>Random.integer( 1, 100 ),
+                    name:()=>Random.ctitle(2,4),
+                }
+            ]
+    });
+
+    //获取文章list
+    Mock.mock('/getChapterList',{
+        "chapter_list|5":[
+            {
+                id:()=>Random.integer( 1, 100 ),
+                chapter_img:() =>Random.dataImage(),
+                chapter_name:()=>Random.ctitle(10,20),
+                chapter_writer:()=>Random.ctitle(2,4),
+                created_at:()=>Random.date('yyyy-MM-dd HH:mm:ss '),
+                chapter_introduction:()=>Random.ctitle(20,30),
+                look_times:()=>Random.integer( 1, 100 ),
+                comment_times:()=>Random.integer( 1, 100 ),
+                chapter_type:['WEB安全','漏洞']
+            },
+        ],
+    });
+
+    //热门推荐
+    Mock.mock('/getHotChapterList',{
+        "hot_chapter_list|10":[
+            {
+                id:()=>Random.integer( 1, 100 ),
+                chapter_name:()=>Random.ctitle(10,20),
+            },
+        ],
+    });
+
+    //最新评论
+    Mock.mock('/getLastCommentList',{
+        "last_comment_list|10":[
+            {
+                id:()=>Random.integer( 1, 100 ),
+                user_name:()=>Random.ctitle(2,4),//昵称
+                head_img:() =>Random.dataImage(),//头像
+                content:()=>Random.ctitle(20,40)//评论内容
+            },
+        ],
+    });
+
 }
 export default useMock;

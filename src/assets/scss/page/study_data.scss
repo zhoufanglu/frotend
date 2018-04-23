@@ -12,8 +12,14 @@
         }
         .study-data{
             .row{
+                @extend .need-hover;
                 border-bottom: solid 1px $light;
                 padding: 30px;
+                cursor: pointer;
+                .bg-img{
+                    height: 160px;
+                    padding: 0 30px 16px 0;
+                }
             }
             .data-r{
                 display: flex;
@@ -57,6 +63,20 @@
                 }
             }
         }
+        .look-more{
+            @include vertical-center;
+            border: solid 1px $light;
+            border-radius: 6px;
+            padding: 16px;
+            width: 30%;
+            color: $dark;
+            margin: 46px auto 16px auto;
+            cursor: pointer;
+            &:hover{
+                color: $black;
+                border: solid 1px $dark;
+            }
+        }
     }
     .content-r{
         width: 30%;
@@ -65,47 +85,67 @@
         flex-direction: column;
         .hot-recommended{
             .head{
-                padding: 30px;
+                padding: 15px;
                 border: solid 1px $light;
                 border-bottom: none;
                 font-size: 20px;
             }
             .body{
                 border: solid 1px $light;
-                padding: 30px;
+                padding: 10px;
                 .row{
                     display: flex;
+                    cursor: pointer;
                     div:first-child{
                         margin-right: 16px;
                     }
+                    div:last-child{
+                        @include ellipsis(1)
+                    }
+                    &:hover{
+                        color: $black;
+                    }
+                }
+                .row:not(:first-child){
+                    margin-top: 16px;
                 }
             }
         }
         .last-comment{
             margin-top: 60px;
             .head{
-                padding: 30px;
+                padding: 15px;
                 border: solid 1px $light;
                 border-bottom: none;
                 font-size: 20px;
             }
             .body{
                 border: solid 1px $light;
-                .row{
-                    padding: 20px;
+                .comment-row{
+                    @extend .need-hover;
+                    padding: 10px;
                     display: flex;
                     border-bottom: solid 1px $light;
                     align-items: center;
                     .head-img{
                         border-radius: 50%;
-                        height: 60px;
-                        width: 60px;
+                        height: 60px!important;
+                        width: 60px!important;
                         border: solid 1px $stable;
                         overflow: hidden;
+                        margin: 0 16px;
+                        width: 20%
                     }
                     .person-info{
+                        width: 80%;
                         display: flex;
                         flex-direction: column;
+                        span:first-child{
+                            padding: 10px 0;
+                        }
+                        span:last-child{
+                            @include ellipsis(2);
+                        }
                     }
                 }
             }

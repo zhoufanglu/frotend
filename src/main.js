@@ -12,7 +12,7 @@ import axiosInterceptor from '@/assets/js/interceptor';           //拦截器
 import useMock from "@/mock";                                     //mock模拟数据
 import store from "@/assets/js/store"                             //vuex
 
-useMock(false);                                                     //mock开关
+useMock(true);                                                     //mock开关
 
 Vue.use(usePrototype);
 
