@@ -113,10 +113,10 @@
             maskSure(){
                 //this.$state.isShowLoginMask = false;
             },
-            /*loginTitleClick(){
-                if(this.$state.maskType === 'register')
-                    this.getCode();
-            },*/
+            loginTitleClick(){
+                /*if(this.$state.maskType === 'register')
+                    this.getCode();*/
+            },
             checkRegisterUserInfo(){
                 let reg = /^[a-zA-Z\d\_\u2E80-\u9FFF]{0,16}$/;
                 if(!reg.test(this.r_user_name) || this.r_user_name === ''){
