@@ -618,7 +618,6 @@ ajax({
     request:{
         user_name:"用户名",//用户ID
         password:'密码',
-        c_password:'再次输入密码',
         code:'验证码'
     },
     res:{

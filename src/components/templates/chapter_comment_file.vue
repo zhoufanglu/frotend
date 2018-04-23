@@ -68,7 +68,7 @@
                                     </el-row>
                                     <el-row v-for="(i,index) in tab_items.file_list" :key="index">
                                         <el-col :span="4">
-                                            <div class="grid-content">{{i.file_from}}</div>
+                                            <div class="grid-content">{{i.chapter_name}}</div>
                                         </el-col>
                                         <el-col :span="4">
                                             <div class="grid-content ">{{i.file_name}}</div>
@@ -77,7 +77,8 @@
                                             <div class="grid-content ">&nbsp;</div>
                                         </el-col>
                                         <el-col :span="4">
-                                            <div class="grid-content ">{{i.file_size}}</div>
+                                            <div class="grid-content" v-if="i.file_size">{{i.file_size}}</div>
+                                            <div class="grid-content" v-else>--</div>
                                         </el-col>
                                         <el-col :span="4">
                                             <router-link  to="/course"target="_blank" class="grid-content remove-a-css">{{i.file_address}}</router-link>
@@ -111,7 +112,7 @@
                             <no-data-panel tip="暂无用户信息"></no-data-panel>
                         </template>
                         <div class="see-more">
-                            <router-link to="/course" class="remove-a-css" target="_blank">查看更多&nbsp;></router-link>
+                            <router-link to="/user_rank" class="remove-a-css" target="_blank">查看更多&nbsp;></router-link>
                         </div>
                     </div>
                 </div>
@@ -181,7 +182,7 @@
                     });
             },
             getUserRank(){
-                this.$fetch('course/getUserSortList',{num:5}).then((response) => {
+                this.$fetch('course/getUserSortList',{num:5,type:1,pagenow:1}).then((response) => {
                     this.right_data.user_rank = response.user;
                     //console.log('user_rank',this.right_data.user_rank);
                 })
@@ -220,7 +221,7 @@
             }
             console.log(197,'course_id:',this.$state.current.course_id);
             this.getCourseInfo();   //获取课程基本信息
-            //this.getUserRank();     //获取用户排名列表
+            this.getUserRank();     //获取用户排名列表
             //this.getSimilarCourse();//类似课程
             this.getCommentList();  //获取评论
             this.getFileList();

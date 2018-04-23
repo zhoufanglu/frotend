@@ -70,9 +70,9 @@
                 //http://111.230.100.91/teachep/public/user/login
                 ///User/login
                 this.$post('/user/login',postData).then((response) => {
-                    if(response.data.state === 'success'){
-                        console.log(response.data);
-                        let user_data = response.data.user_data;
+                    console.log(73,response);
+                    if(response.state === 'success'){
+                        let user_data = response.user_info;
                         this.$message.success('登录成功！');
                         this.setIsShowLoginMask(false);
                         //设置登录状态
@@ -86,7 +86,7 @@
                     }
                 })
                     .catch(err =>{
-                        console.log(err);
+                        console.log(89,err);
                     });
             },
             register(){
