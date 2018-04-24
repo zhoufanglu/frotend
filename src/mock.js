@@ -256,9 +256,9 @@ let useMock = (isOpenMock) =>{
                 state:'success',
             },
     });
-    /**
-     * study_data
-     */
+
+    /** study_data.html  学习资料页面**/
+
     //获取文章类别接口
     Mock.mock('/getChapterTypeList',{
         "chapter_type_list|8":  // 子章节信息
@@ -308,6 +308,6 @@ let useMock = (isOpenMock) =>{
             },
         ],
     });
-
+    /** study_data_detail.html  学习资料详情页面**/
 }
 export default useMock;

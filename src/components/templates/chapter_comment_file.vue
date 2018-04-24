@@ -63,12 +63,27 @@
                                                         <el-popover placement="bottom" width="400" trigger="click" @show="reply.comment_text=''">
                                                             <div class="reply-panel">
                                                                 <span><span>{{i.user_name}}</span></span>
-                                                                <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="reply.comment_text"></el-input>
-                                                                <el-button type="success" size="mini" @click="">发表</el-button>
+                                                                <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="reply.comment_text_child"></el-input>
+                                                                <el-button type="primary" size="mini" @click="sendReply(i.id)">发表</el-button>
                                                             </div>
                                                                 <el-button slot="reference" size="mini">{{reply.btn_name}}</el-button>
                                                         </el-popover>
                                                     </span>
+                                                </div>
+                                                <!--评论下的回复-->
+                                                <div class="item-r-child" v-if="i.reply_list.length !== 0">
+                                                    <div class="item-r-child-panel">
+                                                        <div class="item-r-child-row" v-for="j in i.reply_list">
+                                                            <div class="row-l"><img :src="$imgPath+j.headimg" width="100%" height="100%" alt=""></div>
+                                                            <div class="row-r">
+                                                                <span class="user-name"> {{j.user_name}}</span>
+                                                                <span class="user-info">
+                                                                    <div>{{j.reply_text}}</div>
+                                                                    <div>{{j.created_at}}</div>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -81,7 +96,7 @@
                                 <div class="comment-textarea" v-if="router_type == 'chapter'">
                                     <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="reply.comment_text"></el-input>
                                     <div class="out-btn">
-                                        <el-button type="success" >发表评论</el-button>
+                                        <el-button type="primary" @click="sendComment()">发表评论</el-button>
                                     </div>
                                 </div>
                                 <!--分页-->
@@ -282,13 +297,50 @@
                     this.$message.warning('请先登陆！');
                     return false;
                 }
-                this.$fetch('/course/praise',{comment_id:comment_id,user_id:this.$state.user.user_id}).then((response) => {
+                this.$post('/course/praise',{comment_id:comment_id,user_id:this.$state.user.user_id}).then((response) => {
                     this.$message.success('点赞成功！');
                 }).catch((err)=>{
                     this.$message.warning('您已经点赞过了！');
                 });
                 console.log(218,comment_id);
             },
+            sendComment(){ //发表评论
+                let post_data = {
+                    id: this.$state.current.chapter_child_id,
+                    user_id: this.$state.user.user_id,
+                    comment_text: this.reply.comment_text,
+                    project_class:'1'
+                };
+                if(post_data.comment_text === ''){
+                    this.$message.warning('评论不能为空！');
+                    return false;
+                }
+                this.$post('/course/setUserComment',post_data).then((response) => {
+                        this.$message.success('评论成功！');
+                        this.reply.comment_text="";
+                        this.getCommentList();
+                }).catch((err)=>{
+
+                });
+            },
+            sendReply(comment_id){   //发表回复
+                let post_data = {
+                    comment_id: comment_id,
+                    user_id: this.$state.user.user_id,
+                    reply_text: this.reply.comment_text_child,
+                };
+                if(post_data.comment_text_child === ''){
+                    this.$message.warning('评论不能为空！');
+                    return false;
+                }else{
+                    this.$post('/course/setUserReply',post_data).then((response) => {
+                        this.$message.success('评论成功！');
+                        this.getCommentList();
+                    }).catch((err)=>{
+
+                    });
+                }
+            }
         },
         created(){
             if(this.$route.params.course_id){
@@ -363,12 +415,11 @@
                         }
                         .item{
                             display: flex;
-                            align-items: center;
+                            //align-items: center;
                             border-bottom: solid 1px $light;
-                            padding: 10px 10px 20px 0;
-                            height: 100px;
+                            padding: 20px 10px 20px 0;
                             .item-l{
-                                margin-top: -30px;
+                                //margin-top: -30px;
                             }
                             .item-r{
                                 display: flex;
@@ -391,9 +442,11 @@
                                     }
                                 }
                                 .row-2{
+                                    margin-top: 10px;
                                     font-size: 16px;
                                 }
                                 .row-3{
+                                    margin-top: 10px;
                                     font-size: 14px;
                                     .time-and-from{
                                         span:last-child{
@@ -410,6 +463,49 @@
                                     }
                                     display: flex;
                                     justify-content: space-between;
+                                }
+                                .item-r-child{
+                                    padding: 20px 0 20px 60px;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: flex-end;
+                                    font-size: 14px;
+                                    .item-r-child-panel{
+                                        border-radius: 4px;
+                                        background-color: #F7F8FA;
+                                        .item-r-child-row:not(:last-child){
+                                            border-bottom: dashed 1px $light;
+                                        }
+                                        .item-r-child-row{
+                                            padding: 10px;
+                                            padding-right: 0;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: flex-end;
+                                            width: 98%;
+                                            .row-l{
+                                                border-radius: 50%;
+                                                height: 46px;
+                                                width: 46px;
+                                                overflow: hidden;
+                                            }
+                                            .row-r{
+                                                display: flex;
+                                                flex-direction: column;
+                                                width: 100%;
+                                                padding-left: 16px;
+                                                .user-name{
+                                                    color: $positive;
+                                                    cursor: pointer;
+                                                }
+                                                .user-info{
+                                                    display: flex;
+                                                    justify-content: space-between;
+                                                    align-items: center;
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }

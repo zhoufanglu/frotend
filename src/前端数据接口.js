@@ -424,16 +424,16 @@ ajax({
         }
     }
 });
-//课程评论接口
+//章节评论接口
 ajax({
-    title:'课程评论接口',
+    title:'章节评论接口',
     url:'http://127.0.0.1/teachep/public/course/setUserComment',
     type:'post',
     request:{
         id:"子章节（图文视频）id",
-        user_id:"课程id",
+        user_id:"用户id",
         comment_text:"评论内容",
-        project_class:"1:图文视频 2文章"//评论对象的类型
+        project_class:"1:章节 2文章"//评论对象的类型
     },
     res:{
         ok:{
@@ -443,9 +443,9 @@ ajax({
         }
     }
 });
-//课程回复操作接口
+//章节回复操作接口
 ajax({
-    title:'课程评论回复操作接口',
+    title:'章节评论回复操作接口',
     url:'http://127.0.0.1/teachep/public/course/setUserReply',
     type:'post',
     request:{
