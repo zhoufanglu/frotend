@@ -16,7 +16,7 @@
                         </div>
                         <div class="title-b">
                             <div class="start">
-                                <el-button class="start-btn" type="danger">开始学习</el-button>
+                                <el-button class="start-btn" type="danger" @click="startStudy()">开始学习</el-button>
                             </div>
                             <div class="course-info">
                                 <div>
@@ -59,6 +59,16 @@
         methods: {
             getCourseInfoFromChapter(data){
                 this.course = data;
+            },
+            startStudy(){
+                if(this.$state.user.is_login === false){
+                    this.$message.warning('请先登陆后再开始学习！');
+                    return false;
+                }else{
+                    this.$post('/course/setUserStartCourse',{ course_id:this.course.id,user_id:this.$state.user.user_id}).then((response) => {
+                        //console.log('file_list',this.tab_items.file_list);
+                    })
+                }
             }
         },
         created(){

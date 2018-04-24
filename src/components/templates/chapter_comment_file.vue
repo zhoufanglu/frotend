@@ -11,7 +11,7 @@
                             <el-tab-pane label="章节" name="chapter">
                                 <div class="chapter-list" v-for=" (i,index) in tab_items.chapter_list">
                                     <i class="icon-font">&#xe60a;</i><span>第{{index + 1}}章&nbsp;&nbsp;&nbsp;{{i.chapter_name}}</span>
-                                    <router-link :to="{name:'chapter',params:{chapter_child_id:i.id}}"  class="detail-list remove-a-css "v-for="(j,index) in i.detail_list" :key="index">
+                                    <router-link  :to="{name:'chapter',params:{chapter_child_id:i.id}}"  class="detail-list remove-a-css "v-for="(j,index) in i.detail_list" :key="index">
                                         <div class="row">
                                             <i class="icon-font">&#xe6b7;</i><span>{{j.name}}</span>
                                         </div>
@@ -42,7 +42,7 @@
                                             </div>
                                         </div>
                                         <!--如果是chapter下的评论-->
-                                        <div class="item" v-for="i in tab_items.comment_list" v-if="router_type == 'chapter'">
+                                        <div class="item" v-for="(i,index) in tab_items.comment_list" v-if="router_type == 'chapter'">
                                             <div class="rank-head-img item-l"><img :src="$imgPath+i.headimg" width="100%" height="100%" alt=""></div>
                                             <div class="item-r">
                                                 <div class="row-1">
@@ -110,20 +110,20 @@
                                     </el-row>
                                     <el-row v-for="(i,index) in tab_items.file_list" :key="index">
                                         <el-col :span="4">
-                                            <div class="grid-content">{{i.chapter_name}}</div>
+                                            <div class="grid-content" :title="i.chapter_name">{{i.chapter_name}}</div>
                                         </el-col>
                                         <el-col :span="4">
-                                            <div class="grid-content ">{{i.file_name}}</div>
+                                            <div class="grid-content " :title="i.file_name">{{i.file_name}}</div>
                                         </el-col>
                                         <el-col :span="8">
                                             <div class="grid-content ">&nbsp;</div>
                                         </el-col>
                                         <el-col :span="4">
-                                            <div class="grid-content" v-if="i.file_size">{{i.file_size}}</div>
+                                            <div class="grid-content" v-if="i.file_size" :title="i.file_size">{{i.file_size}}</div>
                                             <div class="grid-content" v-else>--</div>
                                         </el-col>
                                         <el-col :span="4">
-                                            <router-link  to="/course"target="_blank" class="grid-content remove-a-css">{{i.file_address}}</router-link>
+                                            <router-link  to="/course"target="_blank" class="grid-content remove-a-css" :title="i.file_address">{{i.file_address}}</router-link>
                                         </el-col>
                                     </el-row>
                                     <template v-if="tab_items.file_list.length == 0">
@@ -261,7 +261,13 @@
                 this.$fetch(url, post_data)
                     .then((response) => {
                         this.tab_items.comment_list = response.comment_list;
+                        //初始化下数组
+                        let comments = this.tab_items.comment_list;
+                        for(let i in comments){
+                            Object.assign(comments[i],{'btn_name':'回复'});
+                        }
                         this.paging.data_number = response.pageallnum;
+                        this.tab_items.comment_list=comments;
                         //console.log('comment_list',this.tab_items.comment_list);
                     })
             },
@@ -272,13 +278,17 @@
                 })
             },
             praise(comment_id){
+                if(this.$state.user.is_login === false){
+                    this.$message.warning('请先登陆！');
+                    return false;
+                }
                 this.$fetch('/course/praise',{comment_id:comment_id,user_id:this.$state.user.user_id}).then((response) => {
                     this.$message.success('点赞成功！');
                 }).catch((err)=>{
                     this.$message.warning('您已经点赞过了！');
                 });
                 console.log(218,comment_id);
-            }
+            },
         },
         created(){
             if(this.$route.params.course_id){
@@ -390,6 +400,14 @@
                                             margin-left: 30px;
                                         }
                                     }
+                                    .praise-num{
+                                        cursor: pointer;
+                                        font-size: 14px;
+                                    }
+                                    i{
+                                        padding-right: 6px;
+                                        font-size: 14px;
+                                    }
                                     display: flex;
                                     justify-content: space-between;
                                 }
@@ -413,10 +431,12 @@
                 }
                 .file-table{
                     border: solid 1px $light;
+                    border-bottom: none;
                     .remove-a-css{
                         color: $darker;
                     }
                     .grid-content{
+                        @include ellipsis(1);
                         height: 66px;
                         line-height: 66px;
                         border-bottom: solid 1px $light;
