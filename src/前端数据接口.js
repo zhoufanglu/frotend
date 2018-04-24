@@ -174,7 +174,7 @@ ajax({
                     course_type: ['a类', 'b类'],             //所属类别(s数组)
                     course_difficult: '初级',    //难度级别
                     course_introduction: '简介',   //简介
-                    course_status:1/2/3//1:未开始 2：学习中  3已完成
+                    learn_status:1/2/3//1:未开始 2：学习中  3已完成
                 },
             chapter_list: [
                 { //章节列表
