@@ -1,6 +1,6 @@
 <template>
     <div class="course_detail">
-        <teach-head :nickName="nickName" :headSrcLink="headSrcLink" :show_hide_vis="show_hide_vis" ></teach-head>
+        <teach-head :show_hide_vis="show_hide_vis" ></teach-head>
         <div>
             <div class="content">
                 <div class="content-top">
@@ -17,7 +17,6 @@
                                 <div class="title">{{chapter_child.image_text_name}}</div>
                                 <div class="bottom">
                                     <div v-if="chapter_child.image_text_type == 1">
-                                        我是视频
                                         <video src="../assets/video/vue-2-power-model.mp4" style="width: 100%" controls="controls">
                                             您的浏览器不支持 video 标签。
                                         </video>
@@ -44,12 +43,10 @@
         name: 'chapter',
         data(){
             return{
-                nickName:'',
-                headSrcLink:require('@/assets/images/dogHead.jpg'),
                 //css
                 show_hide_vis:'show-vis',
                 chapter_child:{
-                    id:this.$route.params.chapter_child_id,
+                    id:this.$state.current.chapter_child_id,
                 },
             }
         },
@@ -58,7 +55,7 @@
                 setChapterChildId: 'setChapterChildId',
             }),
             getChapterChildInfo(){
-                this.$fetch('/course/getImageTextDetail')
+                this.$fetch('/course/getImageTextDetail',{id:this.chapter_child.id})
                     .then((response) => {
                         this.chapter_child = response.image_text_detail;
                         console.log(51,response);

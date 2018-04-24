@@ -17,11 +17,15 @@
                                         </div>
                                     </router-link>
                                 </div>
+                                <template v-if="tab_items.chapter_list.length == 0">
+                                    <no-data-panel tip="暂无相关章节"></no-data-panel>
+                                </template>
                             </el-tab-pane>
                             <el-tab-pane label="评论" name="comments">
                                 <div class="comments">
                                     <div class="panel">
-                                        <div class="item" v-for="i in tab_items.comment_list">
+                                        <!--如果是course下的评论-->
+                                        <div class="item" v-for="i in tab_items.comment_list" v-if="router_type == 'course_detail'">
                                             <div class="rank-head-img item-l"><img :src="$imgPath+i.headimg" width="100%" height="100%" alt=""></div>
                                             <div class="item-r">
                                                 <div class="row-1">{{i.user_name}}</div>
@@ -37,9 +41,47 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!--如果是chapter下的评论-->
+                                        <div class="item" v-for="i in tab_items.comment_list" v-if="router_type == 'chapter'">
+                                            <div class="rank-head-img item-l"><img :src="$imgPath+i.headimg" width="100%" height="100%" alt=""></div>
+                                            <div class="item-r">
+                                                <div class="row-1">
+                                                    <!--点赞-->
+                                                    <span>{{i.user_name}}</span>
+                                                    <div class="praise-num" @click="praise(i.id)">
+                                                        <i class="icon-font">&#xe672;</i><span>{{i.praise_num}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row-2">{{i.comment_text}}</div>
+                                                <div class="row-3">
+                                                    <div class="time-and-from">
+                                                        <span>时间:{{i.created_at}}</span>
+                                                        <span>源自:{{i.image_text_name}}</span>
+                                                    </div>
+                                                    <!--回复评论-->
+                                                    <span class="reply-btn">
+                                                        <el-popover placement="bottom" width="400" trigger="click" @show="reply.comment_text=''">
+                                                            <div class="reply-panel">
+                                                                <span><span>{{i.user_name}}</span></span>
+                                                                <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="reply.comment_text"></el-input>
+                                                                <el-button type="success" size="mini" @click="">发表</el-button>
+                                                            </div>
+                                                                <el-button slot="reference" size="mini">{{reply.btn_name}}</el-button>
+                                                        </el-popover>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <template v-if="tab_items.comment_list.length == 0">
                                             <no-data-panel tip="暂无评论"></no-data-panel>
                                         </template>
+                                    </div>
+                                </div>
+                                <div class="comment-textarea" v-if="router_type == 'chapter'">
+                                    <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="reply.comment_text"></el-input>
+                                    <div class="out-btn">
+                                        <el-button type="success" >发表评论</el-button>
                                     </div>
                                 </div>
                                 <!--分页-->
@@ -158,10 +200,17 @@
                     similar_course:[]
                 },
                 activeName:'chapter',  //tab选中页面
+                router_type:'course_detail',//是哪个类别 course_detail和chapter
                 paging:{
                     page_all_num:30,//一页多少数据
                     now_page:1,     //当前页码
                     data_number:0 //一共多少数据
+                },
+                //回复
+                reply:{
+                    btn_name:'回复',
+                    comment_text:'',//外层回复
+                    comment_text_child:''//内层回复
                 }
             }
         },
@@ -197,16 +246,24 @@
                 })
             },
             getCommentList(){
-                this.$fetch('/course/getCommentList',{
-                    id: this.course.id,
+                //course和chapter的评论格式不一样
+                let post_data= {
                     num: this.paging.page_all_num,
-                    pagenow:this.paging.now_page
-                    })
+                    pagenow: this.paging.now_page
+                },url;
+                if(this.router_type === 'course_detail'){
+                    post_data.id= this.course.id;
+                    url = "/course/getCommentList";
+                }else if(this.router_type === 'chapter'){
+                    post_data.id = this.$state.current.chapter_child_id;
+                    url = "/course/getCommentDetailList";
+                }
+                this.$fetch(url, post_data)
                     .then((response) => {
-                    this.tab_items.comment_list = response.comment_list;
-                    this.paging.data_number = response.pageallnum;
-                    //console.log('comment_list',this.tab_items.comment_list);
-                })
+                        this.tab_items.comment_list = response.comment_list;
+                        this.paging.data_number = response.pageallnum;
+                        //console.log('comment_list',this.tab_items.comment_list);
+                    })
             },
             getFileList(){
                 this.$fetch('/course/getFileList',{ id:this.course.id}).then((response) => {
@@ -218,7 +275,7 @@
                 this.$fetch('/course/praise',{comment_id:comment_id,user_id:this.$state.user.user_id}).then((response) => {
                     this.$message.success('点赞成功！');
                 }).catch((err)=>{
-                    this.$message.error('您已经点赞过了！');
+                    this.$message.warning('您已经点赞过了！');
                 });
                 console.log(218,comment_id);
             }
@@ -227,9 +284,11 @@
             if(this.$route.params.course_id){
                 this.setCourseId(this.$route.params.course_id);
             }
-            console.log(197,'course_id:',this.$state.current.course_id);
+            //console.log(197,'course_id:',this.$state.current.course_id);
+            //console.log(this.router_type);
+            this.router_type = this.$route.path.substring(1);
             this.getCourseInfo();   //获取课程基本信息
-            this.getUserRank();     //获取用户排名列表
+            //this.getUserRank();     //获取用户排名列表
             this.getSimilarCourse();//类似课程
             this.getCommentList();  //获取评论
             this.getFileList();
@@ -296,7 +355,7 @@
                             display: flex;
                             align-items: center;
                             border-bottom: solid 1px $light;
-                            padding: 10px 10px 10px 0;
+                            padding: 10px 10px 20px 0;
                             height: 100px;
                             .item-l{
                                 margin-top: -30px;
@@ -310,6 +369,16 @@
                                 width: 100%;
                                 .row-1{
                                     font-size: 18px;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    .praise-num{
+                                        cursor: pointer;
+                                        font-size: 14px;
+                                    }
+                                    i{
+                                        padding-right: 6px;
+                                        font-size: 14px;
+                                    }
                                 }
                                 .row-2{
                                     font-size: 16px;
@@ -321,16 +390,24 @@
                                             margin-left: 30px;
                                         }
                                     }
-                                    .praise-num{
-                                        cursor: pointer;
-                                    }
-                                    i{
-                                        padding-right: 6px;
-                                    }
                                     display: flex;
                                     justify-content: space-between;
                                 }
                             }
+                        }
+                    }
+                }
+                .comment-textarea{
+                    margin: 30px 0;
+                    display: flex;
+                    justify-content: flex-end;
+                    flex-direction: column;
+                    .out-btn{
+                        display: flex;
+                        justify-content: flex-end;
+                        .el-button{
+                            margin-top: 30px;
+                            width: 30%;
                         }
                     }
                 }
@@ -445,6 +522,24 @@
                     }
                 }
             }
+        }
+    }
+</style>
+<style lang="scss" type="text/scss">
+    //element 样式重置
+    .reply-panel{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end!important;
+        padding: 6px;
+        >span{
+            padding-bottom: 6px;
+            >span{
+                font-weight: 600;
+            }
+        }
+        .el-button{
+            margin-top: 16px;
         }
     }
 </style>

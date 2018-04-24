@@ -125,7 +125,7 @@ ajax({
 //课程评论接口
 ajax({
     title:'获取课程评论列表',
-    url:'http://127.0.0.1/teachep/public/course/getCourseCommentList',
+    url:'http://127.0.0.1/teachep/public/course/getCommentList',
     type:'get',
     request:{
         id:id,//课程ID
@@ -142,7 +142,7 @@ ajax({
                     image_text_name:'来自的子章节名称',
                     praise_num:'点赞数',
                     created_at:'评论时间',
-
+                    comment_text:'评论的内容'
                 }
             ],
             pageallnum:"100",//一共多少条数据

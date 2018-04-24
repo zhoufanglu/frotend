@@ -115,6 +115,7 @@
                 this.$fetch('/getCourseList',data)
                     .then((response) => {
                         this.course = response.course;
+                        this.data_number = response.pageallnum;
                         //console.log(101,response.course);
                     })
                     .catch(err =>{
