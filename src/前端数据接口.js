@@ -161,7 +161,8 @@ ajax({
     url:'http://127.0.0.1/teachep/public/course/getHomeCourseDetail',
     type:'get',
     request:{
-        id:id//课程ID
+        id:id,//课程ID
+        user_id:"",//如果在登录状态就给用id，不然就给空
     },
     res:{
         ok:{
@@ -173,7 +174,8 @@ ajax({
                     course_learn_people: '',      //课程所学习人数
                     course_type: ['a类', 'b类'],             //所属类别(s数组)
                     course_difficult: '初级',    //难度级别
-                    course_introduction: '简介'   //简介
+                    course_introduction: '简介',   //简介
+                    learn_status:1/2/3//1:未开始 2：学习中  3已完成
                 },
             chapter_list: [
                 { //章节列表
@@ -372,10 +374,10 @@ ajax({
         }
     }
 });
-//开始学习课程接口
+//收藏课程接口
 ajax({
-    title:'开始学习课程接口',
-    url:'http://127.0.0.1/teachep/public/course/setUserStartCourse',
+    title:'收藏课程接口',
+    url:'http://127.0.0.1/teachep/public/course/setUserCollection',
     type:'post',
     request:{
         course_id:"课程id",
@@ -395,7 +397,7 @@ ajax({
     url:'http://127.0.0.1/teachep/public/course/setUserStartCourse',
     type:'post',
     request:{
-        comment_id:"评论id",
+        course_id:"课程id",
         user_id:"用户id",
     },
     res:{
@@ -409,7 +411,7 @@ ajax({
 
 //完成课程接口
 ajax({
-    title:'收藏课程接口',
+    title:'完成课程接口',
     url:'http://127.0.0.1/teachep/public/course/setUserFinish',
     type:'post',
     request:{
@@ -549,6 +551,23 @@ ajax({
         },
         err:{
             msg:'报错信息'
+        }
+    }
+});
+//修改头像接口
+ajax({
+    title:'修改头像',
+    url:'http://127.0.0.1/teachep/public/user/setMyHeadimg',
+    type:'post',
+    request:{
+        user_id:id,//用户ID
+        user_headimg:'用户头像',
+    },
+    res:{
+        ok:{
+        },
+        err:{
+            msg:''
         }
     }
 });
