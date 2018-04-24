@@ -6,41 +6,21 @@
                 <div class="first-row">
                     <el-row>
                         <el-col :span="6">
+                            <!--top左边标题-->
                             <div class="grid-content">
-                                <div class="s-row">
-                                    <el-popover class="show-panel"  :visible-arrow="false" trigger="hover" ref="popover1" placement="right" @show="isHover1=true" @hide="isHover1=false" >
+                                <div class="s-row" v-for="(i,index) in top_title" v-if="index < 4">
+                                    <el-popover placement="right"  trigger="hover" :visible-arrow="false">
                                         <div class="top-title-detail">
-                                            <template v-for="j in top_title[0].couser_type_detail">
+                                            <template v-for="j in i.couser_type_detail">
                                                 <div @click="link('course',j.id,j.couser_level)">{{j.couser_type_name}}</div>
                                             </template>
                                         </div>
+                                        <el-button class="left-title"   :open-delay="0" slot="reference">{{i.couser_type_name}}<i class="el-icon-arrow-right"></i></el-button>
                                     </el-popover>
-                                    <el-button :open-delay="0" v-popover:popover1 class="left-title" :class="{hover:isHover1}">{{top_title[0].couser_type_name}}<i class="el-icon-arrow-right"></i></el-button>
                                 </div>
-                                <div class="s-row">
-                                    <el-popover class="show-panel"  :visible-arrow="false" trigger="hover" ref="popover2" placement="right" @show="isHover2=true" @hide="isHover2=false" >
-                                        <div class="top-title-detail">
-                                            <template v-for="j in top_title[1].couser_type_detail">
-                                                <div @click="link('course',j.id,j.couser_level)">{{j.couser_type_name}}</div>
-                                            </template>
-                                        </div>
-                                    </el-popover>
-                                    <el-button :open-delay="0" v-popover:popover2 class="left-title" :class="{hover:isHover2}">{{top_title[1].couser_type_name}}<i class="el-icon-arrow-right"></i></el-button>
-                                </div>
-                                <!--<div class="s-row">
-                                    <el-popover class="show-panel"  :visible-arrow="false" trigger="hover" ref="popover3" placement="right" @show="isHover3=true" @hide="isHover3=false" >
-                                        <div>内容3</div>
-                                    </el-popover>
-                                    <el-button :open-delay="0" v-popover:popover3 class="left-title" :class="{hover:isHover3}">{{top_title[2].couser_type_name}}<i class="el-icon-arrow-right"></i></el-button>
-                                </div>
-                                <div class="s-row">
-                                    <el-popover class="show-panel"  :visible-arrow="false" trigger="hover" ref="popover4" placement="right" @show="isHover4=true" @hide="isHover4=false" >
-                                        <div>内容4</div>
-                                    </el-popover>
-                                    <el-button :open-delay="0" v-popover:popover4 class="left-title" :class="{hover4:isHover4}">{{top_title[3].couser_type_name}}<i class="el-icon-arrow-right"></i></el-button>
-                                </div>-->
                             </div>
                         </el-col>
+                        <!--轮播-->
                         <el-col :span="18">
                             <div class="grid-content">
                                 <div class="shuffling">
@@ -124,10 +104,6 @@
                 bg_color:'fn-bg-white',
                 text_color:'fn-color-black',
                 //content-top
-                isHover1:false,
-                isHover2:false,
-                isHover3:false,
-                isHover4:false,
                 //content-panel
                 top_title:[],             //轮播左边的标题
                 shuffling_img_link:[],    //轮播图

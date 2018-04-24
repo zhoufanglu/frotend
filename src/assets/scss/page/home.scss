@@ -16,6 +16,9 @@ $content-top-height:300px;
                 .s-row {
                     height: calc(#{$content-top-height}/4);
                     @include vertical-center;
+                    >span{
+                        @extend .left-title;
+                    }
                     .left-title {
                         background-color: $theme;
                         width: 100%;
@@ -70,6 +73,9 @@ $content-top-height:300px;
     }
 }
 //element 组件初始化
+.shuffling{
+    cursor: pointer;
+}
 .el-popover {
     background-color: $white!important;
     position: absolute!important;
