@@ -161,7 +161,8 @@ ajax({
     url:'http://127.0.0.1/teachep/public/course/getHomeCourseDetail',
     type:'get',
     request:{
-        id:id//课程ID
+        id:id,//课程ID
+        user_id:"",//如果在登录状态就给用id，不然就给空
     },
     res:{
         ok:{
@@ -550,6 +551,23 @@ ajax({
         },
         err:{
             msg:'报错信息'
+        }
+    }
+});
+//修改头像接口
+ajax({
+    title:'修改头像',
+    url:'http://127.0.0.1/teachep/public/user/setMyHeadimg',
+    type:'post',
+    request:{
+        user_id:id,//用户ID
+        user_headimg:'用户头像',
+    },
+    res:{
+        ok:{
+        },
+        err:{
+            msg:''
         }
     }
 });
