@@ -217,7 +217,7 @@
                 activeName:'chapter',  //tab选中页面
                 router_type:'course_detail',//是哪个类别 course_detail和chapter
                 paging:{
-                    page_all_num:30,//一页多少数据
+                    page_all_num:8,//一页多少数据
                     now_page:1,     //当前页码
                     data_number:0 //一共多少数据
                 },
@@ -234,31 +234,44 @@
                 setCourseId: 'setCourseId',
             }),
             getCourseInfo(){
-                this.$fetch('/course/getHomeCourseDetail',{id:this.$state.current.course_id}).then((response) => {
-                    this.types = response;
-                    //console.log(45,response);
-                    this.course = response.course;
-                    this.$emit('transferCourse',response.course);//把课程信息传输给course_detail路由
-                    this.tab_items.chapter_list = response.chapter_list;
-                })
-                    .catch(err =>{
-                        console.log(err);
-                    });
+                return new Promise((resolve,reject)=>{
+                    this.$fetch('/course/getHomeCourseDetail',{id:this.$state.current.course_id}).then((response) => {
+                        this.types = response;
+                        //console.log(45,response);
+                        this.course = response.course;
+                        this.$emit('transferCourse',response.course);//把课程信息传输给course_detail路由
+                        this.tab_items.chapter_list = response.chapter_list;
+                        resolve(response);
+                    })
+                        .catch(err =>{
+                            reject(err);
+                            console.log(err);
+                        });
+                });
             },
             getUserRank(){
-                this.$fetch('course/getUserSortList',{num:5,type:1,pagenow:1}).then((response) => {
-                    this.right_data.user_rank = response.user;
-                    //console.log('user_rank',this.right_data.user_rank);
-                })
+                return new Promise((resolve,reject)=>{
+                    this.$fetch('course/getUserSortList', {num: 5, type: 1, pagenow: 1})
+                        .then((response) => {
+                            this.right_data.user_rank = response.user;
+                            //console.log('user_rank',this.right_data.user_rank);
+                        })
+                        .catch(err => {
+                            reject(err);
+                            console.log(err);
+                        });
+                });
             },
             handleClick(tab, event) {
                 //console.log( 105,tab, event);
             },
             getSimilarCourse(){
-                this.$fetch('/course/getCourseSortList',{num:5,id:this.course.id}).then((response) => {
-                    this.right_data.similar_course = response.course;
-                    //console.log('similar_course',this.right_data.similar_course);
-                })
+                return new Promise((resolve,reject)=>{
+                    this.$fetch('/course/getCourseSortList',{num:5,id:this.course.id}).then((response) => {
+                        this.right_data.similar_course = response.course;
+                        //console.log('similar_course',this.right_data.similar_course);
+                    })
+                });
             },
             getCommentList(){
                 //course和chapter的评论格式不一样
@@ -273,24 +286,28 @@
                     post_data.id = this.$state.current.chapter_child_id;
                     url = "/course/getCommentDetailList";
                 }
-                this.$fetch(url, post_data)
-                    .then((response) => {
-                        this.tab_items.comment_list = response.comment_list;
-                        //初始化下数组
-                        let comments = this.tab_items.comment_list;
-                        for(let i in comments){
-                            Object.assign(comments[i],{'btn_name':'回复'});
-                        }
-                        this.paging.data_number = response.pageallnum;
-                        this.tab_items.comment_list=comments;
-                        //console.log('comment_list',this.tab_items.comment_list);
-                    })
+                return new Promise((resolve,reject)=>{
+                    this.$fetch(url, post_data)
+                        .then((response) => {
+                            this.tab_items.comment_list = response.comment_list;
+                            //初始化下数组
+                            let comments = this.tab_items.comment_list;
+                            for(let i in comments){
+                                Object.assign(comments[i],{'btn_name':'回复'});
+                            }
+                            this.paging.data_number = response.pageallnum;
+                            this.tab_items.comment_list=comments;
+                            //console.log('comment_list',this.tab_items.comment_list);
+                        })
+                });
             },
             getFileList(){
-                this.$fetch('/course/getFileList',{ id:this.course.id}).then((response) => {
-                    this.tab_items.file_list = response.file_list;
-                    //console.log('file_list',this.tab_items.file_list);
-                })
+                return new Promise((resolve,reject)=>{
+                    this.$fetch('/course/getFileList',{ id:this.course.id}).then((response) => {
+                        this.tab_items.file_list = response.file_list;
+                        //console.log('file_list',this.tab_items.file_list);
+                    })
+                });
             },
             praise(comment_id){
                 if(this.$state.user.is_login === false){
@@ -299,6 +316,7 @@
                 }
                 this.$post('/course/praise',{comment_id:comment_id,user_id:this.$state.user.user_id}).then((response) => {
                     this.$message.success('点赞成功！');
+                    this.getCommentList();
                 }).catch((err)=>{
                     this.$message.warning('您已经点赞过了！');
                 });
@@ -349,11 +367,18 @@
             //console.log(197,'course_id:',this.$state.current.course_id);
             //console.log(this.router_type);
             this.router_type = this.$route.path.substring(1);
-            this.getCourseInfo();   //获取课程基本信息
+            Promise.all([ //解决请求响应时间不统一问题 -->此方法只是测试
+                this.getCourseInfo(), //获取课程基本信息
+                //this.getUserRank(),  //获取用户排行表
+                this.getSimilarCourse(), //类似课程
+                this.getCommentList(), //获取评论
+                this.getFileList()//类似课程
+            ])
+            /*this.getCourseInfo();   //获取课程基本信息
             //this.getUserRank();     //获取用户排名列表
             this.getSimilarCourse();//类似课程
             this.getCommentList();  //获取评论
-            this.getFileList();
+            this.getFileList();*/
         },
         computed:{
 

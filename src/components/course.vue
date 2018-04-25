@@ -36,9 +36,9 @@
                 </div>
             </div>
             <div class="panel">
-                    <el-row class="course-row s-course-panel" :gutter="40" justify="center">
+                    <el-row class="course-row s-course-panel" :gutter="40" justify="center" v-if="course.length !== 0">
                         <el-col :span="4" v-for="(j,index) in course" :key="index">
-                            <router-link :to="{name:'course_detail',params:{course_id:j.id}}" class="grid-content course-item bg-purple" >
+                            <router-link :to="{name:'course_detail',params:{course_id:j.id}}" class="grid-content course-item bg-purple">
                                 <div class="bg-img">
                                     <img :src="$imgPath+j.course_img" alt="" width="100%" height="100%">
                                     <div class="course-type">
@@ -53,7 +53,7 @@
                             </router-link>
                         </el-col>
                     </el-row>
-                <template v-if="course.length == 0">
+                <template v-if="course.length === 0">
                     <no-data-panel tip="暂无课程信息"></no-data-panel>
                 </template>
             </div>
@@ -95,12 +95,17 @@
         },
         methods:{
             getCourseTypes(){
-                this.$fetch('/indexCourseTypeList').then((response) => {
-                    this.types = response;
-                })
-                    .catch(err =>{
-                        console.log(err);
-                    });
+                return new Promise((resolve,reject)=>{ //resolve正确的结果,reject错误的结果
+                    this.$fetch('/indexCourseTypeList')
+                        .then((response) => {
+                            resolve(response);
+                            this.types = response;
+                        })
+                        .catch(err =>{
+                            reject(err);
+                            console.log(err);
+                        });
+                });
             },
             getCourse(){
                let data={
@@ -112,15 +117,19 @@
                    now_page:this.now_page,//当前页码
                    page_num:this.page_all_num//每页多少数据
                 };
-                this.$fetch('/getCourseList',data)
-                    .then((response) => {
-                        this.course = response.course;
-                        this.data_number = response.pageallnum;
-                        //console.log(101,response.course);
-                    })
-                    .catch(err =>{
-                        console.log(err);
-                    });
+                return new Promise((resolve,reject)=>{//resolve正确的结果,reject错误的结果
+                    this.$fetch('/getCourseList',data)
+                        .then((response) => {
+                            resolve(response);
+                            this.course = response.course;
+                            this.data_number = response.pageallnum;
+                            //console.log(101,response.course);
+                        })
+                        .catch(err =>{
+                            reject(err);
+                        });
+                });
+
             },
             initFilter(){
                 if(this.$route.params.hasOwnProperty('couser_level_name')){
@@ -133,8 +142,13 @@
         },
         created() {
             this.initFilter();
-            this.getCourseTypes();  //获取课程类别信息
-            this.getCourse();  //获取课程类别信息
+            //利用promise.all来监听ajax
+            Promise.all([
+                this.getCourseTypes(), //获取课程类别
+                this.getCourse(),       //获取课程信息
+            ]).then((res)=>{
+
+            })
         }
     }
 </script>

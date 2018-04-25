@@ -87,6 +87,69 @@ let usePrototype = () =>{
         })
     }
 
+    /*
+        * 多个ajax函数的请求方法（对Vue.prototype._ajax的简单封装）
+        *
+        * 封装目的：多个ajax函数的请求方法时加载动画会在第一个回调中被关闭掉。
+        * 这样不符合逻辑，加载框需要在最后一个回调中被关闭掉，未了实现这个目的，我使用了Promise.all()方法；
+        *
+        *
+        * 用法参考如下：
+        *   this._allAjax([{
+        *       url : '/apis/evaluation/schedules',
+        *       params : {
+        *       },
+        *       success : (data)=>{
+        *           console.log(data);
+        *       },
+        *       fail : (err)=>{
+        *           console.log(err);
+        *       },
+        *   },{
+        *       url : '/apis/evaluation/schedules',
+        *       params : {
+        *       },
+        *       success : (data)=>{
+        *           console.log(data);
+        *       },
+        *       fail : (err)=>{
+        *           console.log(err);
+        *       },
+        * }])
+        *
+        */
+    /*Vue.prototype.$PromiseAllAjax = function (arr,fn,type) {
+        Promise.all(arr.map(i=>{
+                return new Promise(
+                    function (resolve, reject) {
+                        Vue.prototype.$fetch({
+                            url : i.url,
+                            params : i.params,
+                            success : (data,loading)=>{
+                                i.success(data);
+                                resolve(loading);
+                            },
+                            fail : (err,loading)=>{
+                                i.fail(err);
+                                resolve(loading);
+                            },
+                            testDelay : i.testDelay,
+                            showLoadingClose :false,
+                        })
+                    })
+            })
+        ).then(function (results) {
+            for (var x=0; x<results.length; x++) {
+                if(results[x]){
+                    results[x].close();
+                    break ;
+                }
+            }
+            fn && fn();
+        });
+    }*/
+
+
 }
 
 export default usePrototype;
