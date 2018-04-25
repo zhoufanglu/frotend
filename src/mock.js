@@ -309,5 +309,46 @@ let useMock = (isOpenMock) =>{
         ],
     });
     /** study_data_detail.html  学习资料详情页面**/
+    //获取学习详细资料
+    Mock.mock('/getChapterDetailInfo',{
+        chapter_detail:
+            {
+                id:()=>Random.integer( 1, 100 ),
+                chapter_img:() =>Random.dataImage(),
+                chapter_name:()=>Random.ctitle(10,20),
+                chapter_writer:()=>Random.ctitle(2,4),
+                created_at:()=>Random.date('yyyy-MM-dd HH:mm:ss '),
+                chapter_introduction:()=>Random.ctitle(20,30),
+                look_times:()=>Random.integer( 1, 100 ),
+                comment_times:()=>Random.integer( 1, 100 ),
+                chapter_type:['WEB安全','漏洞'],
+                chapter_text:()=>Random.ctitle(500,800),
+                chapter_second_name:'二级标题',
+            },
+        other_chapter_info:{
+            previous_id:'1',//上一篇id
+            previous_name:'啊啊',//上一篇名称
+            previous_type:'web前端',//所属类别
+            next_id:'2',//上一篇id
+            next_name:'啊啊',//上一篇名称
+            next_type:'后端'//所属类别
+        }
+    });
+
+    //评论接口
+    Mock.mock('/chapter/getCommentList',{
+        "comment_list|10": [ // 评论列表信息
+            {
+                user_name:()=>Random.ctitle(),
+                head_img:() =>Random.dataImage(),
+                image_text_name:()=>Random.ctitle(3,12),
+                praise_num:()=>Random.integer( 1, 1000 ),
+                created_at:Random.date('yyyy-MM-dd HH:mm:ss '),
+                comment_text:()=>Random.ctitle(60,100),
+            }
+        ],
+        page_all_num:"100",//一共多少条数据
+    });
+
 }
 export default useMock;

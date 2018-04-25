@@ -1,0 +1,164 @@
+.study-data-detail{
+    .content{
+        display: flex;
+        .content-left{
+            border: solid 1px $light;
+            width: 70%;
+            .study-data-info{
+                .top{
+                    display: flex;
+                    flex-direction: column;
+                    border-bottom: solid 1px $light;
+                    margin-bottom: 30px;
+                    .name{
+                        @include ellipsis(1);
+                        white-space: nowrap;
+                        font-size: 32px;
+                        font-weight: bolder;
+                        padding: 20px 30px 10px 30px;
+                    }
+                    .info{
+                        width: 60%;
+                        i{
+                            margin-right: 10px;
+                        }
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 0 30px 20px 30px;
+                        .study-type{
+                            display: flex;
+                            >div{
+                                border: solid 1px $light;
+                                padding: 2px 6px;
+                                margin-left: 30px;
+                            }
+                        }
+                    }
+                }
+                .study-data-content{
+                    border-bottom: solid 1px $light;
+                    margin-bottom: 30px;
+                    .title{
+                        font-size: 16px;
+                        font-weight: bolder;
+                        padding: 0 30px 10px 30px;
+                    }
+                    .text{
+                        padding: 0 30px 10px 30px;
+                        line-height: 24px;
+                    }
+                }
+                .previous-or-next-panel{
+                    padding: 0 30px 10px 30px;
+                    margin: 0 auto;
+                    @include vertical-center;
+                    width: 95%;
+                    .previous-or-next{
+                        box-shadow: 0 5px 30px #ddd;
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between!important;
+                        padding: 0 30px;
+                        align-items: center;
+                        //border: solid 1px $light;
+                        //border-radius: 12px;
+                        //background-color: #F6F7FB;
+                        height: 56px;
+                        >div:first-child>span{
+                            margin-left: 30px;
+                        }
+                        >div:last-child>span{
+                            margin-right: 30px;
+                        }
+                    }
+                }
+                .comment{
+                    padding: 0 30px 10px 30px;
+                    margin-top: 30px;
+                    .paging{
+                        text-align: center;
+                        margin-top: 30px;
+                    }
+                    .comment-row{
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        border-bottom: solid 1px $light;
+                        padding: 26px 10px;
+                        .comment-l{
+                            padding-right: 20px;
+                            >div{
+                                width: 64px;
+                                height: 64px;
+                                border-radius: 50%;
+                                overflow: hidden;
+                            }
+                        }
+                        .comment-r{
+                            >div:first-child{
+                                span:last-child{
+                                    margin-left: 20px;
+                                    font-size: 14px;
+                                    color: $stable;
+                                }
+                            }
+                            >div:last-child{
+                                margin-top: 10px;
+                                line-height: 24px;
+                            }
+                        }
+                    }
+                    .comment-textarea{
+                        margin: 30px 0;
+                        display: flex;
+                        justify-content: flex-end;
+                        flex-direction: column;
+                        .out-btn{
+                            display: flex;
+                            justify-content: flex-end;
+                            .el-button{
+                                margin-top: 30px;
+                                width: 30%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .content-right{
+            width: 30%;
+            margin-left: 30px;
+            display: flex;
+            flex-direction: column;
+            .hot-recommended{
+                .head{
+                    padding: 15px;
+                    border: solid 1px $light;
+                    border-bottom: none;
+                    font-size: 20px;
+                }
+                .body{
+                    border: solid 1px $light;
+                    padding: 10px;
+                    .row{
+                        display: flex;
+                        cursor: pointer;
+                        div:first-child{
+                            margin-right: 16px;
+                        }
+                        div:last-child{
+                            @include ellipsis(1)
+                        }
+                        &:hover{
+                            color: $black;
+                        }
+                    }
+                    .row:not(:first-child){
+                        margin-top: 16px;
+                    }
+                }
+            }
+        }
+    }
+}

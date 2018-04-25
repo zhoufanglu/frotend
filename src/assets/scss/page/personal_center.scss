@@ -15,7 +15,13 @@
                 width: 90px;
                 height: 90px;
                 overflow: hidden;
-                .el-upload{
+                .avatar-uploader{
+                    height: 100%;
+                    .el-upload{
+                        height: 100%;
+                    }
+                }
+                /*.el-upload{
                     border-radius: 50%;
                     width: 90px;
                     height: 90px;
@@ -24,19 +30,20 @@
                 .head-img-tip{
                     visibility: visible;
                     position: absolute;
-                    background-color: rgba(0,0,0,.2);
+                    background-color: rgba(0,0,0,.1);
                     bottom: 0;
                     font-size: 15px;
                     height: 100%;
                     @include vertical-center;
                     color: white;
+                    text-shadow: 2px 2px 2px $dark;
                 }
                 &:hover{
                     .head-img-tip{
                         visibility: visible;
                         cursor: pointer;
                     }
-                }
+                }*/
             }
             .personal-info{
                 display: flex;

@@ -1,16 +1,16 @@
 <template>
     <div class="personal-center">
-        <teach-head :nickName="nickName" :headSrcLink="headSrcLink" :show_hide_vis="show_hide_vis" ></teach-head>
+        <teach-head :show_hide_vis="show_hide_vis" ></teach-head>
         <div class="content">
             <div class="content-top">
                 <div class="top-l">
                     <div class="head-img">
-                        <el-upload  class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                        <el-upload class="avatar-uploader" :action="head_img_action" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
                             <img v-if="user_data.user_headimg" :src="$imgPath+user_data.user_headimg" width="100%" height="100%" class="avatar">
                             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
-                        <div class="head-img-tip">点击上传头像</div>
                     </div>
+                   <!-- <div class="head-img-tip">点击修改头像</div>-->
                     <div class="personal-info">
                         <span>{{user_data.user_name}}</span>
                         <span>{{user_data.user_sex}}&nbsp;&nbsp;{{getCity}}</span>
@@ -33,7 +33,7 @@
                         <el-tabs v-model="activeName" tab-position="left" @tab-click="tabClick()">
                             <el-tab-pane label="我的课程" name="course">
                                 <div class="nav-content">
-                                    <el-row class="nav-course-row" v-for="(i,index) in course_list" :key="index">
+                                    <el-row v-if="course_list.length != 0" class="nav-course-row" v-for="(i,index) in course_list" :key="index">
                                         <el-col :span="6"><div class="grid-content item-left "><img :src="$imgPath+i.course_img" width="100%" height="100%" alt=""></div></el-col>
                                         <el-col :span="12"><div class="grid-content item-mid ">
                                             <span class="title">{{i.course_name}}</span>
@@ -49,6 +49,9 @@
                                             <router-link  to="/course"target="_blank" class="grid-content continue-study  remove-a-css-darker">继续学习</router-link>
                                         </div></el-col>
                                     </el-row>
+                                    <template v-if="course_list.length == 0">
+                                        <no-data-panel tip="暂无课程"></no-data-panel>
+                                    </template>
                                 </div>
                                 <!--分页-->
                                 <div class="paging">
@@ -57,7 +60,7 @@
                             </el-tab-pane>
                             <el-tab-pane label="我的收藏" name="book_marks">
                                 <div class="nav-content">
-                                    <el-row class="nav-course-row" v-for="(i,index) in collection_list" :key="index">
+                                    <el-row v-if="collection_list.length != 0" class="nav-course-row" v-for="(i,index) in collection_list" :key="index">
                                         <el-col :span="6"><div class="grid-content item-left "><img :src="$imgPath+i.course_img" width="100%" height="100%" alt=""></div></el-col>
                                         <el-col :span="12"><div class="grid-content item-mid ">
                                             <span class="title">{{i.course_name}}</span>
@@ -72,6 +75,9 @@
                                             <router-link  to="/course"target="_blank" class="grid-content continue-study  remove-a-css-darker">继续学习</router-link>
                                         </div></el-col>
                                     </el-row>
+                                    <template v-if="collection_list.length == 0">
+                                        <no-data-panel tip="暂无收藏"></no-data-panel>
+                                    </template>
                                 </div>
                                 <!--分页-->
                                 <div class="paging">
@@ -223,8 +229,6 @@
         name: 'personal-center',
         data(){
             return{
-                nickName:'tog',
-                headSrcLink:require('@/assets/images/dogHead.jpg'),
                 //css
                 show_hide_vis:'show-vis',
                 //用户信息
@@ -233,17 +237,18 @@
                 user_edit_data:{
                     user_city:[]
                 },
+                head_img_action:''+this.$imgPath+'user/setMyHeadimg',
                 //left_nav
                 activeName:'course',
                 course_list:[],
                 collection_list:[],
                 //分页
-                paging1:{
+                paging1:{  //课程
                     page_all_num:5,//一页多少数据
                     now_page:1,     //当前页码
                     data_number:30 //一共多少数据
                 },
-                paging2:{
+                paging2:{   //收藏
                     page_all_num:5,//一页多少数据
                     now_page:1,     //当前页码
                     data_number:30 //一共多少数据
@@ -278,20 +283,30 @@
         },
         methods:{
             getUserList(){
-                this.$fetch('/user/getMyUserData').then((response) => {
-                    this.user_data = response.user_data;                                     //直接赋值
-                    this.user_edit_data = JSON.parse(JSON.stringify( response.user_data));  //开辟了新的赋值地址
+                this.$post('/user/getMyUserData',{id:this.$state.user.user_id}).then((response) => {
+                    this.user_data = response;                                     //直接赋值
+                    this.user_edit_data = JSON.parse(JSON.stringify( response));  //开辟了新的赋值地址
                     console.log('user_data',this.user_data);
                 })
             },
             getMyCourseList(){
-                this.$fetch('/user/getMyCourseList').then((response) => {
+                let send_data= {
+                    id:this.$state.user.user_id,//用户id
+                    num:this.paging1.page_all_num,
+                    pagenow:this.paging1.now_page//当前页面
+                };
+                this.$fetch('/user/getMyCourseList',send_data).then((response) => {
                     this.course_list = response.course_list;
                     console.log('course_list',this.course_list);
                 })
             },
             getCollectionList(){
-                this.$fetch('/user/getMyCollectionList').then((response) => {
+                let send_data= {
+                    id:this.$state.user.user_id,//用户id
+                    num:this.paging2.page_all_num,
+                    pagenow:this.paging2.now_page//当前页面
+                };
+                this.$fetch('/user/getMyCollectionList',send_data).then((response) => {
                     this.collection_list = response.collection_list;
                     console.log('collection_list',this.collection_list);
                 })
@@ -326,15 +341,15 @@
                     user_autograph:this.user_data.user_autograph,
                     user_headimg:'用户头像',
                 };
-                this.user_data = JSON.parse(JSON.stringify( this.user_edit_data));;
-                /*this.$post('/api/user/setMyUserData',sendData).then((response) => {
+                this.user_data = JSON.parse(JSON.stringify( this.user_edit_data));
+                this.$post('/user/setMyUserData',sendData).then((response) => {
                     console.log(response);
                     this._message("修改成功",{
                         type: 'success'
                     })
                 }).catch((err)=>{
                     console.log(329,err);
-                })*/
+                })
             },
             //提交审核
             submitRealName(){
@@ -385,8 +400,8 @@
         },
         created(){
             this.getUserList();         //获取用户信息
-            this.getMyCourseList();     //我的课程
-            this.getCollectionList();   //我的收藏
+            //this.getMyCourseList();     //我的课程
+            //this.getCollectionList();   //我的收藏
         },
         computed:{
             getCity(){
