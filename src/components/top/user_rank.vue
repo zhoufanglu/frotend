@@ -44,7 +44,7 @@
         },
         methods:{
             getUserRank(){
-                this.$fetch('/course_detail/user_rank_all').then((response) => {
+                this.$fetch('course/getUserSortList', {num: this.paging.page_all_num, type: 2, pagenow: this.paging.now_page}).then((response) => {
                     this.user_data = response.user;
                     this.paging.page_all_num = response.page_all_num;
                     console.log(this.user_data)

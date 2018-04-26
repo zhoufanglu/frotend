@@ -251,7 +251,7 @@
             },
             getUserRank(){
                 return new Promise((resolve,reject)=>{
-                    this.$fetch('course/getUserSortList', {num: 5, type: 1, pagenow: 1})
+                    this.$fetch('/course/getUserSortList', {num: 5, type: 1, pagenow: 1})
                         .then((response) => {
                             this.right_data.user_rank = response.user;
                             //console.log('user_rank',this.right_data.user_rank);
@@ -279,6 +279,7 @@
                     num: this.paging.page_all_num,
                     pagenow: this.paging.now_page
                 },url;
+                console.log(282,this.router_type);
                 if(this.router_type === 'course_detail'){
                     post_data.id= this.course.id;
                     url = "/course/getCommentList";
@@ -369,7 +370,7 @@
             this.router_type = this.$route.path.substring(1);
             Promise.all([ //解决请求响应时间不统一问题 -->此方法只是测试
                 this.getCourseInfo(), //获取课程基本信息
-                //this.getUserRank(),  //获取用户排行表
+                this.getUserRank(),  //获取用户排行表
                 this.getSimilarCourse(), //类似课程
                 this.getCommentList(), //获取评论
                 this.getFileList()//类似课程
