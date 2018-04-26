@@ -18,7 +18,10 @@
                         padding: 20px 30px 10px 30px;
                     }
                     .info{
-                        width: 60%;
+                        >div{
+                            white-space: nowrap;
+                        }
+                        width: 80%;
                         i{
                             margin-right: 10px;
                         }
@@ -150,9 +153,7 @@
                         div:last-child{
                             @include ellipsis(1)
                         }
-                        &:hover{
-                            color: $black;
-                        }
+                        @extend .need-hover;
                     }
                     .row:not(:first-child){
                         margin-top: 16px;

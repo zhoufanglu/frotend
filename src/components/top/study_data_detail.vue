@@ -27,18 +27,18 @@
                     <div class="previous-or-next-panel">
                         <div class="previous-or-next">
                             <div>
-                                <el-button  circle>上一篇</el-button>
+                                <el-button @click="getChapterDetailInfo(other_chapter_info.previous_id)" circle>上一篇</el-button>
                                 <span>{{other_chapter_info.previous_type}}:{{other_chapter_info.previous_name}}</span>
                             </div>
                             <div>
                                 <span>{{other_chapter_info.next_type}}:{{other_chapter_info.next_name}}</span>
-                                <el-button  circle>下一篇</el-button>
+                                <el-button  circle @click="getChapterDetailInfo(other_chapter_info.next_id)">下一篇</el-button>
                             </div>
                         </div>
                     </div>
                     <!--评论-->
                     <div class="comment">
-                        <div class="comment-row">共有x条评论</div>
+                        <div class="comment-row">共有{{paging.data_number}}条评论</div>
                         <div class="comment-row" v-for="i in comment_list">
                             <div class="comment-l">
                                 <div><img :src="i.head_img" alt="" width="100%" height="100%"></div>
@@ -73,7 +73,7 @@
                     <div class="body">
                         <div class="row" v-for="(i,index) in hot_chapter_list">
                             <div>{{index+1}}</div>
-                            <div :title="i.chapter_name">{{i.chapter_name}}</div>
+                            <div :title="i.chapter_name" @click="getChapterDetailInfo(i.id)">{{i.chapter_name}}</div>
                             <!--<router-link class="remove-a-css">内容</router-link>-->
                         </div>
                     </div>
@@ -103,7 +103,9 @@
             }
         },
         methods:{
-            getChapterDetailInfo(){
+            getChapterDetailInfo(id){
+                if(id)
+                    this.study_data_id = id;
                 this.$fetch('/getChapterDetailInfo'/*,{id:this.study_data_id}*/)
                     .then((response) => {
                         this.chapter_detail_info = response.chapter_detail;
@@ -115,7 +117,7 @@
                 this.$fetch('/chapter/getCommentList'/*,{id:this.study_data_id}*/)
                     .then((response) => {
                         this.comment_list=response.comment_list;
-                        console.log(this.comment_list)
+                        this.paging.data_number = response.page_all_num;
                     })
             },
             getHotChapterList(){
@@ -126,11 +128,11 @@
                     })
             },
             sendComment(){ //发表评论
-                /*let post_data = {
-                    id: this.$state.current.chapter_child_id,
+                let post_data = {
+                    id: this.study_data_id,
                     user_id: this.$state.user.user_id,
-                    comment_text: this.reply.comment_text,
-                    project_class:'1'
+                    comment_text: this.comment_text,
+                    project_class:'2'
                 };
                 if(post_data.comment_text === ''){
                     this.$message.warning('评论不能为空！');
@@ -139,12 +141,11 @@
                 this.$post('/course/setUserComment',post_data).then((response) => {
                     this.$message.success('评论成功！');
                     this.reply.comment_text="";
-                    this.getCommentList();
+                    this.getChapterDetailInfo();
                 }).catch((err)=>{
 
-                });*/
+                });
             },
-
         },
         created(){
             this.getChapterDetailInfo();

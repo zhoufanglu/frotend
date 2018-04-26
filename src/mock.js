@@ -347,7 +347,7 @@ let useMock = (isOpenMock) =>{
                 comment_text:()=>Random.ctitle(60,100),
             }
         ],
-        page_all_num:"100",//一共多少条数据
+        page_all_num:100,//一共多少条数据
     });
 
 }

@@ -137,5 +137,6 @@ $head-height:80px;
     cursor: pointer;
     &:hover{
         color: $black;
+        text-shadow: 0 5px 30px #ddd;
     }
 }
