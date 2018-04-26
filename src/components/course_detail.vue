@@ -74,7 +74,7 @@
             }
         },
         created(){
-
+            console.log(77,this.course.id);
         },
         components:{chapter_comment_file},
     }

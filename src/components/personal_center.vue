@@ -46,7 +46,7 @@
                                         </div></el-col>
                                         <el-col :span="6"><div class="grid-content item-right ">
                                             <div class="start-time">学习时间：{{i.created_at}}</div>
-                                            <router-link  to="/course"target="_blank" class="grid-content continue-study  remove-a-css-darker">继续学习</router-link>
+                                            <router-link  :to="{name:'course_detail',params:{course_id:i.id}}" class="grid-content continue-study  remove-a-css-darker">继续学习{{i.id}}</router-link>
                                         </div></el-col>
                                     </el-row>
                                     <template v-if="course_list.length == 0">
@@ -72,7 +72,7 @@
                                         </div></el-col>
                                         <el-col :span="6"><div class="grid-content item-right ">
                                             <div class="start-time">学习时间：{{i.created_at}}</div>
-                                            <router-link  to="/course"target="_blank" class="grid-content continue-study  remove-a-css-darker">继续学习</router-link>
+                                            <router-link  :to="{name:'course_detail',params:{course_id:i.id}}" class="grid-content continue-study  remove-a-css-darker">开始学习</router-link>
                                         </div></el-col>
                                     </el-row>
                                     <template v-if="collection_list.length == 0">
@@ -174,7 +174,7 @@
                                                 <div class="title">认证须知</div>
                                                 <ul>
                                                     <li>你提交学籍证明后的5个工作日（不包含节假日）内完成审核，审核结果将会以系统通知的形式发送给你；</li>
-                                                    <li>学籍证明中的身份证号码必须与实名认证中身份证信息保持一致。如有误，将无法通过审核。• 学籍认证审核完成后，将无法修改和删除，请谨慎填写。同时系统将自动发放10个积分作为奖励；查看积分；</li>
+                                                    <li>学籍证明中的身份证号码必须与实名认证中身份证信息保持一致。如有误，将无法通过审核。 学籍认证审核完成后，将无法修改和删除，请谨慎填写。同时系统将自动发放10个积分作为奖励；查看积分；</li>
                                                     <li>上传学籍证明文件格式为PDF或JPG格式。请确保学籍文件清晰可见，具体可参考实名认证 常见问题；</li>
                                                     <li>如存在恶意乱填写姓名，上传假信息，改动学籍证明内容或上传无关图片者，一经发现将冻结慕课网账号。</li>
                                                     <li>我们会确保你所提供的信息均处于严格的保密状态，不会泄露</li>
@@ -297,7 +297,8 @@
                 };
                 this.$fetch('/user/getMyCourseList',send_data).then((response) => {
                     this.course_list = response.course_list;
-                    console.log('course_list',this.course_list);
+                    this.paging1.data_number = response.pageallnum;
+                    //console.log('course_list',this.course_list);
                 })
             },
             getCollectionList(){
@@ -308,7 +309,8 @@
                 };
                 this.$fetch('/user/getMyCollectionList',send_data).then((response) => {
                     this.collection_list = response.collection_list;
-                    console.log('collection_list',this.collection_list);
+                    this.paging2.data_number = response.pageallnum;
+                    //console.log('collection_list',this.collection_list);
                 })
             },
             tabClick(){
@@ -400,8 +402,8 @@
         },
         created(){
             this.getUserList();         //获取用户信息
-            //this.getMyCourseList();     //我的课程
-            //this.getCollectionList();   //我的收藏
+            this.getMyCourseList();     //我的课程
+            this.getCollectionList();   //我的收藏
         },
         computed:{
             getCity(){

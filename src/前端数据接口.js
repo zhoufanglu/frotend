@@ -514,6 +514,7 @@ ajax({
                     course_progress:'课程学习进度',
                     course_introduction:'课程简介',
                     created_at:'收藏时间',
+                    course_learn_people:10,
                 }
             ],
             page_all_num:"100",//一共多少条数据
