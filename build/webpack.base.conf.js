@@ -22,10 +22,10 @@ const createLintingRule = () => ({
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    app: './src/main.js'//webpack入口文件
   },
   output: {
-    path: config.build.assetsRoot,
+    path: config.build.assetsRoot, //设置了打包之后文件存放的路径
     filename: '[name].js',
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath

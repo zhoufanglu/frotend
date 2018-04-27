@@ -4,8 +4,8 @@
         <div class="content">
             <div class="user-table">
                 <template>
-                    <el-table :data="user_data" style="width: 100%">
-                        <el-table-column prop="rank_number" label="名次" width="100">
+                    <el-table :data="user_data" style="width: 100%" header-align="center">
+                        <el-table-column prop="rank_number" label="名次" width="100" center>
                         </el-table-column>
                         <el-table-column prop="user_name" label="姓名" width="200">
                         </el-table-column>
@@ -44,9 +44,9 @@
         },
         methods:{
             getUserRank(){
-                this.$fetch('course/getUserSortList', {num: this.paging.page_all_num, type: 2, pagenow: this.paging.now_page}).then((response) => {
+                this.$fetch('course/getUserSortList', {num: this.paging.page_all_num, type: '', pagenow: this.paging.now_page}).then((response) => {
                     this.user_data = response.user;
-                    this.paging.page_all_num = response.page_all_num;
+                    this.paging.page_all_num = response.pageallnum;
                     console.log(this.user_data)
                 })
                     .catch(err =>{
@@ -69,6 +69,11 @@
         .el-pagination {
             text-align: center;
             margin-top: 30px;
+        }
+    }
+    .personal-center{
+        .cell{
+            text-align: center;
         }
     }
 </style>

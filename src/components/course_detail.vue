@@ -68,6 +68,7 @@
                     return false;
                 }else{
                     this.$post('/course/setUserStartCourse',{ course_id:this.course.id,user_id:this.$state.user.user_id}).then((response) => {
+                        this.$message.success(response.msg)
                         //console.log('file_list',this.tab_items.file_list);
                     })
                 }

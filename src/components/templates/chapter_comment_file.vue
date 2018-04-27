@@ -60,7 +60,7 @@
                                                     </div>
                                                     <!--回复评论-->
                                                     <span class="reply-btn">
-                                                        <el-popover placement="bottom" width="400" trigger="click" @show="reply.comment_text=''">
+                                                        <el-popover placement="bottom" width="400" trigger="click" @show="reply.comment_text_child=''">
                                                             <div class="reply-panel">
                                                                 <span><span>{{i.user_name}}</span></span>
                                                                 <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="reply.comment_text_child"></el-input>
@@ -358,6 +358,7 @@
                     }).catch((err)=>{
 
                     });
+                    document.querySelector("body").click();
                 }
             }
         },

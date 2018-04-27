@@ -103,10 +103,10 @@
             }
         },
         methods:{
-            getChapterDetailInfo(id){
+            getArticleList(id){
                 if(id)
                     this.study_data_id = id;
-                this.$fetch('/getChapterDetailInfo'/*,{id:this.study_data_id}*/)
+                this.$fetch('/getArticleList'/*,{id:this.study_data_id}*/)
                     .then((response) => {
                         this.chapter_detail_info = response.chapter_detail;
                         this.other_chapter_info = response.other_chapter_info;
@@ -140,15 +140,15 @@
                 }
                 this.$post('/course/setUserComment',post_data).then((response) => {
                     this.$message.success('评论成功！');
-                    this.reply.comment_text="";
-                    this.getChapterDetailInfo();
+                    this.comment_text="";
+                    this.getArticleList();
                 }).catch((err)=>{
 
                 });
             },
         },
         created(){
-            this.getChapterDetailInfo();
+            this.getArticleList();
             this.getCommentList();
             this.getHotChapterList();
         },

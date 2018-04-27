@@ -5,7 +5,7 @@
             <div class="content-top">
                 <div class="top-l">
                     <div class="head-img">
-                        <el-upload class="avatar-uploader" :action="head_img_action" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                        <el-upload class="avatar-uploader" name="user_headimg"  :action="head_img_action" :data="head_img_data" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
                             <img v-if="user_data.user_headimg" :src="$imgPath+user_data.user_headimg" width="100%" height="100%" class="avatar">
                             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
@@ -221,7 +221,8 @@
 <script>
     import ElCol from "element-ui/packages/col/src/col";
     import ElRow from "element-ui/packages/row/src/row";
-    import { provinceAndCityData, regionData, CodeToText, TextToCode } from 'element-china-area-data'
+    import { provinceAndCityData, regionData, CodeToText, TextToCode } from 'element-china-area-data'//省市区组件
+    import { mapMutations } from 'vuex'
     export default {
         components: {
             ElRow,
@@ -237,7 +238,11 @@
                 user_edit_data:{
                     user_city:[]
                 },
-                head_img_action:''+this.$imgPath+'user/setMyHeadimg',
+                //修改头像
+                head_img_action:''+this.$imgPath+'user/setMyHeadimg',//头像请求路径
+                head_img_data:{
+                    user_id:this.$state.user.user_id,
+                },
                 //left_nav
                 activeName:'course',
                 course_list:[],
@@ -282,10 +287,16 @@
             }
         },
         methods:{
+            ...mapMutations({
+                setUserInfo:'setUserInfo'
+            }),
             getUserList(){
                 this.$post('/user/getMyUserData',{id:this.$state.user.user_id}).then((response) => {
                     this.user_data = response;                                     //直接赋值
                     this.user_edit_data = JSON.parse(JSON.stringify( response));  //开辟了新的赋值地址
+                    this.setUserInfo(
+                        this.user_data
+                    );
                     console.log('user_data',this.user_data);
                 })
             },
@@ -384,7 +395,12 @@
             },
             //头像
             handleAvatarSuccess(res, file) {
-                this.imageUrl = URL.createObjectURL(file.raw);
+                this.getUserList();
+                setTimeout(()=>{
+                    this._message("修改成功",{
+                        type: 'success'
+                    });
+                },400);
             },
             beforeAvatarUpload(file) {
                 const isJPG = file.type === 'image/jpeg';

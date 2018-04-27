@@ -310,7 +310,7 @@ let useMock = (isOpenMock) =>{
     });
     /** study_data_detail.html  学习资料详情页面**/
     //获取学习详细资料
-    Mock.mock('/getChapterDetailInfo',{
+    Mock.mock('/getArticleList',{
         chapter_detail:
             {
                 id:()=>Random.integer( 1, 100 ),
