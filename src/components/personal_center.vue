@@ -345,21 +345,27 @@
             editPersonalInfo(){
                 this.personal_mask = false;
                 //sendAjax
+                //后端user_city需要改为user_province:'',//省user_city:'',//市
                 let sendData = {
-                    id:this.user_data.id,//用户ID
-                    user_name:this.user_data.user_name,
-                    user_job:this.user_data.user_job,
-                    user_sex:this.user_data.user_sex,
-                    user_city:this.user_data.user_city,//数组格式，省市区
-                    user_autograph:this.user_data.user_autograph,
+                    id:this.user_edit_data.id,//用户ID
+                    user_name:this.user_edit_data.user_name,
+                    user_job:this.user_edit_data.user_job,
+                    user_sex:this.user_edit_data.user_sex,
+                    //user_city:this.user_data.user_city,//数组格式，省市区
+                    user_autograph:this.user_edit_data.user_autograph,
                     user_headimg:'用户头像',
                 };
-                this.user_data = JSON.parse(JSON.stringify( this.user_edit_data));
+                sendData.user_province = this.user_edit_data.user_city[0];
+                sendData.user_city = this.user_edit_data.user_city[1];
+                //this.user_data = JSON.parse(JSON.stringify( this.user_edit_data));
+                //console.log(359,this.user_edit_data);
+                //return false;
                 this.$post('/user/setMyUserData',sendData).then((response) => {
                     console.log(response);
                     this._message("修改成功",{
                         type: 'success'
                     })
+                    this.getUserList();
                 }).catch((err)=>{
                     console.log(329,err);
                 })

@@ -5,40 +5,45 @@
             <div class="content-l">
                 <div class="filter-title">
                     <div>
-                        <el-radio-group v-model="filter_type" @change="getChapterList(0)">
+                        <el-radio-group v-model="filter_type" @change="getArticleList(0)">
                             <el-radio-button label="">全部</el-radio-button>
                             <el-radio-button :label="i.id" v-for="(i,index) in chapter_type_list" :key="index">{{i.name}}</el-radio-button>
                         </el-radio-group>
                     </div>
                 </div>
                 <div class="study-data">
-                    <el-row class="row" @click.native="link('study_data_detail','study_data_id',i.id)" v-for="(i,index) in chapter_list" :key="index">
-                        <el-col :span="8" class="bg-img">
-                            <img :src="i.chapter_img" alt="" width="100%" height="100%">
-                        </el-col>
-                        <el-col :span="16">
-                            <div class="data-r">
-                                <div>{{i.chapter_name}}</div>
-                                <div>
-                                    <div class="name"><i class="icon-font">&#xe6b3;</i>{{i.chapter_writer}}</div>
-                                    <div class="time"><i class="icon-font">&#xe78b;</i>{{i.created_at}}</div>
-                                </div>
-                                <div>{{i.chapter_introduction}}</div>
-                                <div class="type-and-comment">
-                                    <div class="type">
-                                        <div v-for="j in i.chapter_type">{{j}}</div>
+                    <template v-if="chapter_list.length!==0">
+                        <el-row class="row" @click.native="link('study_data_detail','study_data_id',i.id)" v-for="(i,index) in chapter_list" :key="index">
+                            <el-col :span="8" class="bg-img">
+                                <img :src="i.chapter_img" alt="" width="100%" height="100%">
+                            </el-col>
+                            <el-col :span="16">
+                                <div class="data-r">
+                                    <div>{{i.chapter_name}}</div>
+                                    <div>
+                                        <div class="name"><i class="icon-font">&#xe6b3;</i>{{i.chapter_writer}}</div>
+                                        <div class="time"><i class="icon-font">&#xe78b;</i>{{i.created_at}}</div>
                                     </div>
-                                    <div class="comment">
-                                        <span>{{i.look_times}}&nbsp;次查看</span>
-                                        <span>{{i.comment_times}}&nbsp;次评论</span>
+                                    <div>{{i.chapter_introduction}}</div>
+                                    <div class="type-and-comment">
+                                        <div class="type">
+                                            <div v-for="j in i.chapter_type">{{j}}</div>
+                                        </div>
+                                        <div class="comment">
+                                            <span>{{i.look_times}}&nbsp;次查看</span>
+                                            <span>{{i.comment_times}}&nbsp;次评论</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </el-col>
-                    </el-row>
-                    <div class="look-more" @click="getChapterList()">
-                        点击查看更多
-                    </div>
+                            </el-col>
+                        </el-row>
+                        <div class="look-more" @click="getArticleList()">
+                            点击查看更多
+                        </div>
+                    </template>
+                    <template v-else>
+                        <no-data-panel tip="暂无学习资料"></no-data-panel>
+                    </template>
                 </div>
             </div>
             <div class="content-r">
@@ -92,17 +97,17 @@
             }
         },
         methods:{
-            getChapterTypeList(){
-                this.$fetch('/getChapterTypeList')
+            getArticleTypeList(){
+                this.$fetch('/article/getArticleTypeList')
                     .then((response) => {
                         this.chapter_type_list = response.chapter_type_list;
                     })
             },
-            getChapterList(index){
+            getArticleList(index){
                 if(index === 0){
                     this.index = 0;
                 }
-                this.$fetch('/getChapterList'/*,{index:this.index}*/)
+                this.$fetch('article/getArticleList',{index:this.index,type_id:this.filter_type})
                     .then((response) => {
                         if(this.index === 0){
                             this.chapter_list = response.chapter_list;
@@ -112,15 +117,15 @@
                         this.index += 5;
                     })
             },
-            getHotChapterList(){
-                this.$fetch('/getHotChapterList')
+            getHotArticleList(){
+                this.$fetch('/article/getHotArticleList',{num:10})
                     .then((response) => {
                         this.hot_chapter_list = response.hot_chapter_list;
                        // console.log(114,response);
                     })
             },
             getLastCommentList(){
-                this.$fetch('/getLastCommentList')
+                this.$fetch('/article/getLastCommentList')
                     .then((response) => {
                         this.last_comment_list = response.last_comment_list;
                         // console.log(114,response);
@@ -139,9 +144,9 @@
             }
         },
         created(){
-            this.getChapterTypeList();//章节类别list
-            this.getChapterList();//章节list
-            this.getHotChapterList();//热门文章
+            this.getArticleTypeList();//章节类别list
+            this.getArticleList();//章节list
+            this.getHotArticleList();//热门文章
             this.getLastCommentList();//最新评论
         }
     }
@@ -162,7 +167,7 @@
             .el-radio-button__inner {
                 border: solid 1px $stable;
                 border-radius: 0;
-                width: 100px;
+                min-width: 100px;
             }
         }
     }
