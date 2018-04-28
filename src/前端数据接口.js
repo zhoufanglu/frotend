@@ -652,7 +652,6 @@ ajax({
        id:"认证信息id",//如郭第一次提交认证信息这个值为空
        user_id:"用户id",//用户ID
        identity_name:'真实名字',
-       school_name:'学校名字',
        school_id:'学校id',
        identiy_education:'学历（1中专 2大专 3本科）<直接传的数字>',
        graduation_time:'毕业时间',
