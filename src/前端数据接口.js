@@ -625,7 +625,7 @@ ajax({
 ajax({
     title:'获取学校列表',
     url:'http://127.0.0.1/teachep/public/user/getSchoolList',
-    type:'post',
+    type:'get',
     request:{
     },
     res:{
