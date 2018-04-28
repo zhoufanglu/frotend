@@ -544,7 +544,7 @@ ajax({
                     user_autograph:'个性签名',
                    // user_score:'用户积分',
                     user_headimg:'用户头像',
-                    is_identity:'是否认证',
+                    is_identity:'0未认证--1认证',
                     user_learning_course_num:"学习课程数"
                 }
             ,
@@ -614,7 +614,7 @@ ajax({
             identiy_education:'学历（1中专 2大专 3本科）<直接传的数字>',
             graduation_time:'毕业时间',
             identity_file:'认证文件资料地址',
-            identity_status:'认证状态（0 不合格 1合格 2待审核）'
+            identity_status:'认证状态（0 不合格 1合格 2待审核 null未认证）'
         },
         err:{
             msg:''
