@@ -644,27 +644,29 @@ ajax({
     }
 });
 //认证信息修改接口
+//认证信息修改接口
 ajax({
-    title:'认证信息获取接口',
-    url:'http://127.0.0.1/teachep/public/user/setMyIdentity',
-    type:'post',
-    request:{
-        id:"认证信息id",
-        user_id:"用户id",//用户ID
-        identity_name:'真实名字',
-        school_name:'学校名字',
-        school_id:'学校id',
-        identiy_education:'学历（1中专 2大专 3本科）<直接传的数字>',
-        graduation_time:'毕业时间',
-        identity_file:'认证文件资料地址',
+  title:'认证信息获取接口',
+  url:'http://127.0.0.1/teachep/public/user/setMyIdentity',
+  type:'post',
+  request:{
+    id:"认证信息id",
+    user_id:"用户id",//用户ID
+    identity_name:'真实名字',
+    school_name:'学校名字',
+    school_id:'学校id',
+    identiy_education:'学历（1中专 2大专 3本科）<直接传的数字>',
+    graduation_time:'毕业时间',
+    identity_file:'认证文件资料地址',
+    type:"1:第一次提交认证 2:修改认证信息"//如果identity_status=1表认证通过无需再次提交信息
+  },
+  res:{
+    ok:{
     },
-    res:{
-        ok:{
-        },
-        err:{
-            msg:''
-        }
+    err:{
+      msg:''
     }
+  }
 });
 /****************************登陆注册接口**********************/
 //注册信息接口
@@ -735,165 +737,165 @@ ajax({
 /***************************学习资料study_data******************************************/
 //获取文章类别接口
 ajax({
-    title:'获取文章类别接口',
-    url:'/getChapterTypeList',
-    type:'get',
-    request:{
+  title:'获取文章类别接口',
+  url:'/getArticleTypeList',
+  type:'get',
+  request:{
+  },
+  res:{
+    ok:{
+      //文章
+      chapter_type_list:[
+        {id:11,name:'类别名称'}
+      ],
     },
-    res:{
-        ok:{
-            //文章
-            chapter_type_list:[
-                {id:11,name:'类别名称'}
-            ],
-        },
-        err:{
-            msg:''
-        }
+    err:{
+      msg:''
     }
+  }
 });
 //获取文章接口
 ajax({
-    title:'获取文章列表',
-    url:'/getChapterList',
-    type:'get',
-    request:{
-        index:0, //文章个数的索引  从0开始0,5,10  (后端每次取 索引之后的5个)
-        type_id:'id' //类型 空代表全部
-    },
-    res:{
-        ok:{
-            //文章
-            chapter_list:[
-                {
-                    id:'1',
-                    chapter_img:'图片路径',
-                    chapter_name:'文章名',
-                    chapter_writer:'作者',
-                    created_at:'创建时间',
-                    chapter_introduction:'简介',
-                    look_times:'查看数',
-                    comment_times:'评论数',
-                    chapter_type:['WEB安全','漏洞']
-                },
-            ],
+  title:'获取文章列表',
+  url:'/getArticleList',
+  type:'get',
+  request:{
+    index:0, //文章个数的索引  从0开始0,5,10  (后端每次取 索引之后的5个)
+    type_id:'id' //类型 空代表全部
+  },
+  res:{
+    ok:{
+      //文章
+      chapter_list:[
+        {
+          id:'1',
+          chapter_img:'图片路径',
+          chapter_name:'文章名',
+          chapter_writer:'作者',
+          created_at:'创建时间',
+          chapter_introduction:'简介',
+          look_times:'查看数',
+          comment_times:'评论数',
+          chapter_type:['WEB安全','漏洞']
         },
-        err:{
-            msg:''
-        }
+      ],
+    },
+    err:{
+      msg:''
     }
+  }
 });
 //获取热门推荐
 ajax({
-    title:'获取热门推荐',
-    url:'/getHotChapterList',
-    type:'post',
-    request:{
-       num:10//个数
+  title:'获取热门推荐',
+  url:'/getHotArticleList',
+  type:'post',
+  request:{
+    num:10//个数
+  },
+  res:{
+    ok:{
+      //热门推荐
+      hot_chapter_list:[
+        {id:1,chapter_name:'名称'}
+      ],
     },
-    res:{
-        ok:{
-            //热门推荐
-            hot_chapter_list:[
-                {id:1,chapter_name:'名称'}
-            ],
-        },
-        err:{
-            msg:''
-        }
+    err:{
+      msg:''
     }
+  }
 });
-//获取热门推荐
+//最新评论
 ajax({
-    title:'最新评论',
-    url:'/getLastCommentList',
-    type:'post',
-    request:{
-        num:10//个数
-    },
-    res:{
-        ok:{
-            //最新评论
-            last_comment_list:[
-                {
-                    id:'',
-                    user_name:'',//昵称
-                    head_img:'',//头像
-                    content:''//评论内容
-                }
-            ]
-        },
-        err:{
-            msg:''
+  title:'最新评论',
+  url:'/getLastCommentList',
+  type:'post',
+  request:{
+    num:10//个数
+  },
+  res:{
+    ok:{
+      //最新评论
+      last_comment_list:[
+        {
+          id:'',
+          user_name:'',//昵称
+          head_img:'',//头像
+          content:''//评论内容
         }
+      ]
+    },
+    err:{
+      msg:''
     }
+  }
 });
 /***************************学习资料study_data_detail******************************************/
-//获取文章接口
+//获取文章详情接口
 ajax({
-    title:'获取文章列表详情',
-    url:'/getChapterDetail',
-    type:'get',
-    request:{
-        id:66//文章id
-    },
-    res:{
-        ok:{
-            //文章
-            chapter_detail:
-                {
-                    id:'66',
-                    chapter_img:'图片路径',
-                    chapter_name:'文章名',
-                    chapter_second_name:'文章二级标题',
-                    chapter_writer:'作者',
-                    created_at:'创建时间',
-                    chapter_introduction:'简介',
-                    look_times:'查看数',
-                    comment_times:'评论数',
-                    chapter_type:['WEB安全','漏洞'],
-                    chapter_text:'文章内容',
-                },
-            other_chapter_info:{ //上一篇 下一篇信息
-                previous_id:'1',//上一篇id
-                previous_name:'啊啊',//上一篇名称
-                previous_type:'web前端',//所属类别
-                next_id:'2',//上一篇id
-                next_name:'啊啊',//上一篇名称
-                next_type:'web前端'//所属类别
-            }
+  title:'获取文章详情接口',
+  url:'/getArticleDetail',
+  type:'get',
+  request:{
+    id:66//文章id
+  },
+  res:{
+    ok:{
+      //文章
+      chapter_detail:
+        {
+          id:'66',
+          chapter_img:'图片路径',
+          chapter_name:'文章名',
+          chapter_second_name:'文章二级标题',
+          chapter_writer:'作者',
+          created_at:'创建时间',
+          chapter_introduction:'简介',
+          look_times:'查看数',
+          comment_times:'评论数',
+          chapter_type:['WEB安全','漏洞'],
+          chapter_text:'文章内容',
         },
-        err:{
-            msg:''
-        }
+      other_chapter_info:{ //上一篇 下一篇信息
+        previous_id:'1',//上一篇id
+        previous_name:'啊啊',//上一篇名称
+        previous_type:'web前端',//所属类别
+        next_id:'2',//上一篇id
+        next_name:'啊啊',//上一篇名称
+        next_type:'web前端'//所属类别
+      }
+    },
+    err:{
+      msg:''
     }
+  }
 });
 
 //获取文章评论接口
 ajax({
-    title:'获取文章评论列表',
-    url:'/chapter/getCommentList',//你自己定义
-    type:'get',
-    request:{
-        id:id,//文章ID
-        num:num,//几条数据
-        pagenow:""//当前页面
-    },
-    res:{
-        ok:{
-            comment_list: [ // 评论列表信息
-                {
-                    id:"评论id",
-                    user_name:'会员名称',
-                    headimg:'会员头像地址',
-                    created_at:'评论时间',
-                    comment_text:'评论的内容'
-                }
-            ],
-            pageallnum:"100",//一共多少条数据
-        },
-        err:{
-            msg:'报错信息'
+  title:'获取文章评论列表',
+  url:'getArticleCommentList',//你自己定义
+  type:'get',
+  request:{
+    id:id,//文章ID
+    num:num,//几条数据
+    pagenow:""//当前页面
+  },
+  res:{
+    ok:{
+      comment_list: [ // 评论列表信息
+        {
+          id:"评论id",
+          user_name:'会员名称',
+          headimg:'会员头像地址',
+          created_at:'评论时间',
+          comment_text:'评论的内容'
         }
+      ],
+      pageallnum:"100",//一共多少条数据
+    },
+    err:{
+      msg:'报错信息'
     }
+  }
 });
