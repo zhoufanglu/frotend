@@ -607,10 +607,9 @@ ajax({
     },
     res:{
         ok:{
-            id:"认证信息id",
+            id:"认证信息id",//
             user_id:"用户id",//用户ID
             identity_name:'真实名字',
-            school_name:'学校名字',
             school_id:'学校id',
             identiy_education:'学历（1中专 2大专 3本科）<直接传的数字>',
             graduation_time:'毕业时间',
@@ -646,25 +645,25 @@ ajax({
 //认证信息修改接口
 //认证信息修改接口
 ajax({
-  title:'认证信息获取接口',
-  url:'http://127.0.0.1/teachep/public/user/setMyIdentity',
-  type:'post',
-  request:{
-    id:"认证信息id",
-    user_id:"用户id",//用户ID
-    identity_name:'真实名字',
-    school_name:'学校名字',
-    school_id:'学校id',
-    identiy_education:'学历（1中专 2大专 3本科）<直接传的数字>',
-    graduation_time:'毕业时间',
-    identity_file:'认证文件资料地址',
-    type:"1:第一次提交认证 2:修改认证信息"//如果identity_status=1表认证通过无需再次提交信息
-  },
-  res:{
-    ok:{
+   title:'认证信息获取接口',
+   url:'http://127.0.0.1/teachep/public/user/setMyIdentity',
+   type:'post',
+   request:{
+       id:"认证信息id",//如郭第一次提交认证信息这个值为空
+       user_id:"用户id",//用户ID
+       identity_name:'真实名字',
+       school_name:'学校名字',
+       school_id:'学校id',
+       identiy_education:'学历（1中专 2大专 3本科）<直接传的数字>',
+       graduation_time:'毕业时间',
+       identity_file:'认证文件资料地址',
+       type:"1:第一次提交认证 2:修改认证信息"//如果identity_status=1表认证通过无需再次提交信息
+    },
+    res:{
+        ok:{
     },
     err:{
-      msg:''
+        msg:''
     }
   }
 });
