@@ -144,15 +144,15 @@
                                                     <el-row>
                                                         <el-col class="name" :span="8">入学时间<span class="fn-color-danger">*</span></el-col>
                                                         <el-col :span="16">
-                                                            <el-date-picker v-model="real_name.graduation_time" :disabled="isDisableForForm" align="right" type="date" placeholder="选择日期" :picker-options="pickerDateOptions">
+                                                            <el-date-picker v-model="real_name.graduation_time" :disabled="isDisableForForm" align="right" type="date" placeholder="选择日期" :picker-options="pickerDateOptions" value-format="yyyy-MM-dd">
                                                             </el-date-picker>
                                                         </el-col>
                                                     </el-row>
                                                     <el-row>
                                                         <el-col class="name" :span="8">学历层次<span class="fn-color-danger">*</span></el-col>
                                                         <el-col :span="16">
-                                                            <el-select v-model="real_name.identiy_education_text" placeholder="请选择" :disabled="isDisableForForm">
-                                                                <el-option v-for="item in real_name.identiy_education_arr" :key="item.value"
+                                                            <el-select v-model="real_name.identiy_education" placeholder="请选择" :disabled="isDisableForForm">
+                                                                <el-option v-for="item in identiy_education_arr" :key="item.value"
                                                                            :label="item.label" :value="item.value">
                                                                 </el-option>
                                                             </el-select>
@@ -161,23 +161,24 @@
                                                     <el-row>
                                                         <el-col class="name" :span="8">学籍证明<span class="fn-color-danger">*</span></el-col>
                                                         <el-col :span="16">
-                                                            <!--<el-upload :on-exceed="onExceed" class="upload-demo":limit="1" ref="upload" :data="real_name" :on-change="studyFileChange" name="identity_file" :action="identity_file_action" :on-preview="handlePreview2" :on-remove="handleRemove2" :file-list="study_file_list" :auto-upload="true">
+                                                            <el-upload :data="real_name" name="identity_file" :limit="1" :on-exceed="onExceed":on-change="identityFileChange"
+                                                                        :on-error="catchErr"
+                                                                        :on-success ="catchSuccess"
+                                                                        :disabled="isDisableForForm"
+                                                                        class="upload-demo" ref="upload" :action="identity_file_action" :file-list="study_file_list" :auto-upload="false">
                                                                 <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-                                                                <el-button style="margin-left: 10px;" size="small" type="success" @click="submitRealName">上传到服务器</el-button>
-                                                                <div slot="tip" class="el-upload__tip">请上传学籍证明</div>
-                                                            </el-upload>-->
-                                                            <el-upload :data="real_name" name="identity_file" :limit="1" :on-exceed="onExceed" class="upload-demo" ref="upload" :action="identity_file_action" :file-list="study_file_list" :auto-upload="false">
-                                                                <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-                                                                <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-                                                                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                                                                <!--<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>-->
+                                                                <!--<div slot="tip" class="el-upload__tip">不超过500kb</div>-->
                                                             </el-upload>
                                                         </el-col>
                                                     </el-row>
                                                     <!--v-if="real_name.identity_status === 3"-->
-                                                    <el-button type="danger" v-if="real_name.identity_status === ''" class="commit-btn" round @click="submitRealName()">提交审核</el-button>
+                                                    <el-button type="danger" v-if="real_name.identity_status === ''|| real_name.identity_status === undefined" class="commit-btn" round @click="submitRealName()">提交审核</el-button>
+                                                    <!--<button @click="submitRealName()">测试btn</button>-->
                                                     <el-button type="warning" v-if="real_name.identity_status === 2" class="commit-btn" round disabled>审核中...</el-button>
                                                     <el-button type="success" v-if="real_name.identity_status === 1" class="commit-btn" round disabled >认证成功</el-button>
-                                                    <el-button type="danger" v-if="real_name.identity_status === 0" class="commit-btn" round >认证失败</el-button>
+                                                    <el-button type="warning" v-if="real_name.identity_status === 0" class="commit-btn" round  @click="$refs.upload.clearFiles();isDisableForForm=false">认证失败,点击修改</el-button>
+                                                    <el-button type="danger" v-if="real_name.identity_status === 0" :disabled="isDisableForForm" class="commit-btn" round @click="submitRealName()" >重新提交审核</el-button>
                                                 </div>
                                             </el-col>
                                             <el-col :span="12" class="right">
@@ -261,31 +262,22 @@
                 paging1:{  //课程
                     page_all_num:5,//一页多少数据
                     now_page:1,     //当前页码
-                    data_number:30 //一共多少数据
+                    data_number:0 //一共多少数据
                 },
                 paging2:{   //收藏
                     page_all_num:5,//一页多少数据
                     now_page:1,     //当前页码
-                    data_number:30 //一共多少数据
+                    data_number:0 //一共多少数据
                 },
-                //实名认证
+                //实名认证数据
                 real_name:{
                     identity_name:'',
                     school_name:'',
                     identiy_education:'',
-                    identiy_education_arr:[{
-                        value: '1',
-                        label: '中专'
-                    }, {
-                        value: '2',
-                        label: '大专'
-                    }, {
-                        value: '3',
-                        label: '本科'
-                    }],//学历（1中专 2大专 3本科）
                     graduation_time:'',
                     identity_file:'',
                     fileList: [],
+                    user_id:this.$state.user.user_id
                 },
                 //学历等级数据;
                 identiy_education_arr:[{
@@ -309,10 +301,7 @@
                 isDisableForForm:false,
                 //学籍证明
                 identity_file_action:''+this.$imgPath+'user/setMyIdentity',//学籍证明请求地址
-                study_file_list: [/*{
-                    name: 'food.jpeg',
-                    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-                }*/]
+                study_file_list: []
             }
         },
         methods:{
@@ -359,6 +348,10 @@
                         return false;
                     this.real_name = response;
                     this.real_name.identiy_education_arr = this.identiy_education_arr;
+                    if(response.identity_file!==''){
+                        this.study_file_list = [{name:response.identity_file.split('/')[response.identity_file.split('/').length-1]}];//文件名赋值
+                        //console.log(350,response.identity_file.split('/')[response.identity_file.split('/').length-1]);
+                    }
                     //初始化学历等级--后端传的12,前端需要转换 妈的
                         if(this.real_name.identiy_education === 1){
                             this.real_name.identiy_education_text = '中专'
@@ -370,7 +363,7 @@
                             this.real_name.identiy_education_text = ''
                         }
                      //判断认证状态
-                    if(this.real_name.identity_status === 1 || this.real_name.identity_status === 2 ){
+                    if(this.real_name.identity_status === 1 || this.real_name.identity_status === 2 || this.real_name.identity_status === 0 ){
                             this.isDisableForForm = true;
                     }else{
                         this.isDisableForForm = false;
@@ -435,22 +428,26 @@
                 }else if(this.real_name.graduation_time === ''){
                     msg="请输入学时间";
                     flag = false;
-                }/*else if(this.real_name.identiy_education === ''){
+                }else if(this.real_name.identiy_education === ''){
                     msg="请输入学历";
                     flag = false;
-                }*//*else if(this.real_name.fileList.length === 0){
+                }else if((this.isDisableForForm === false) && (this.real_name.fileList === undefined || this.real_name.fileList.length === 0) ){
                     msg="请上传学历证明";
                     flag = false;
-                }*/
+                }
+                //数据初始化
+                this.real_name.user_id = this.$state.user.user_id;
+                //console.log(427,this.real_name.fileList);
                 if(flag === false){
                     this._message(msg,{
                         type: 'error'
                     })
                 }else{
                     //sendAjax;
+                    console.log(434,this.real_name);
                     this.$refs.upload.submit();
                 }
-                console.log(342,this.identity_file_action);
+                //console.log(342,this.identity_file_action);
             },
             //头像
             handleAvatarSuccess(res, file) {
@@ -474,31 +471,39 @@
                 }
                 return isJPG && isLt2M;
             },
-            //学籍认证
-            submitUpload() {
-                this.$refs.upload.submit();
-            },
+            /****************实名认证操作***********************/
             handleRemove2(file, fileList) {
                 console.log(481,file, fileList);
             },
             handlePreview2(file) {
                 console.log(484,file);
             },
-            studyFileChange(file, fileList){
-                console.log(487,file,fileList);
-            },
             onExceed(file,fileList){
-                //this.study_file_list = [];
-                //file.clearFiles
-                console.log(493,fileList);
-                /*this.study_file_list[0].name = file[0].name;
-                this.study_file_list[0].url= file[0].webkitRelativePath;*/
+                fileList[0].raw = file[0];
+                fileList[0].name = file[0].name;
+                fileList[0].size = file[0].size;
+                //fileList[0].status = 'ready';
+                //this.$refs.upload.clearFiles();
+               // console.log(490,file,fileList);
+            },
+            //文件上传监听
+            identityFileChange(file,fileList){
+                this.real_name.fileList = [file.name];//给一个实名认证已经有的标记
+
+                //console.log(476,this.real_name.fileList);
+            },
+            catchErr(err, file, fileList){
+                this.$message.err('信息出错,请稍后操作！');
+            },
+            catchSuccess(response, file, fileList){
+                this.getMyIdentity();
+                this.$message.success('修改成功！请等待认证！');
             }
         },
         created(){
             this.getUserList();         //获取用户信息
-            //this.getMyCourseList();     //我的课程
-            //this.getCollectionList();   //我的收藏
+            this.getMyCourseList();     //我的课程
+            this.getCollectionList();   //我的收藏
             this.getMyIdentity();       //获取认证信息
         },
         computed:{
@@ -508,6 +513,11 @@
                     city_name += CodeToText[this.user_data.user_city[i]] + "/";
                 }
                 return city_name.substring(0,city_name.length-1);
+                /*let city_name = "";
+                for(let i in this.user_data.user_city){
+                    city_name += this.user_data.user_city[i] + "/";
+                }
+                return city_name.substring(0,city_name.length-1);*/
             },
         }
     }

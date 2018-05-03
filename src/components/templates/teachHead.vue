@@ -62,7 +62,7 @@
                 this.setLoginState(false);
                 this.user_info.is_login = false;
                 this.$message.success('注销成功！');
-                //this.$router.push({path:'/login'});
+                this.$router.push({path:'/home'});
             },
             checkIsLogin(){
                 let is_login = this.$state.user.is_login;

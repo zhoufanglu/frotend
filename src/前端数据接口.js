@@ -656,7 +656,7 @@ ajax({
        identiy_education:'学历（1中专 2大专 3本科）<直接传的数字>',
        graduation_time:'毕业时间',
        identity_file:'认证文件资料地址',
-       type:"1:第一次提交认证 2:修改认证信息"//如果identity_status=1表认证通过无需再次提交信息
+       //type:"1:第一次提交认证 2:修改认证信息"//如果identity_status=1表认证通过无需再次提交信息
     },
     res:{
         ok:{
