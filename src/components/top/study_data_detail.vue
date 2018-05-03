@@ -27,12 +27,14 @@
                     <div class="previous-or-next-panel">
                         <div class="previous-or-next">
                             <div>
-                                <el-button @click="getChapterDetailInfo(other_chapter_info.previous_id)" circle>上一篇</el-button>
-                                <span>{{other_chapter_info.previous_type}}:{{other_chapter_info.previous_name}}</span>
+                                <el-button v-if="other_chapter_info.previous_name" @click="getArticleInfo(other_chapter_info.previous_id)" circle>上一篇</el-button>
+                                <el-button v-else disabled circle>没有更多了</el-button>
+                                <span><!--{{other_chapter_info.previous_type}}:-->{{other_chapter_info.previous_name}}</span>
                             </div>
                             <div>
-                                <span>{{other_chapter_info.next_type}}:{{other_chapter_info.next_name}}</span>
-                                <el-button  circle @click="getChapterDetailInfo(other_chapter_info.next_id)">下一篇</el-button>
+                                <span><!--{{other_chapter_info.next_type}}:-->{{other_chapter_info.next_name}}</span>
+                                <el-button v-if="other_chapter_info.next_name" circle @click="getArticleInfo(other_chapter_info.next_id)">下一篇</el-button>
+                                <el-button v-else disabled circle>没有更多了</el-button>
                             </div>
                         </div>
                     </div>
@@ -41,7 +43,7 @@
                         <div class="comment-row">共有{{paging.data_number}}条评论</div>
                         <div class="comment-row" v-for="i in comment_list">
                             <div class="comment-l">
-                                <div><img :src="i.head_img" alt="" width="100%" height="100%"></div>
+                                <div><img :src="$imgPath+i.head_img" alt="" width="100%" height="100%"></div>
                             </div>
                             <div class="comment-r">
                                 <div>
@@ -51,6 +53,9 @@
                                 <div>{{i.comment_text}}</div>
                             </div>
                         </div>
+                        <template v-if="comment_list.length === 0">
+                            <no-data-panel tip="暂无评论"></no-data-panel>
+                        </template>
                         <!--分页-->
                         <div class="paging">
                             <el-pagination background layout="prev, pager, next"@current-change="getCommentList()" :page-size="paging.page_all_num" :current-page.sync="paging.now_page"  :total="paging.data_number"></el-pagination>
@@ -73,7 +78,7 @@
                     <div class="body">
                         <div class="row" v-for="(i,index) in hot_chapter_list">
                             <div>{{index+1}}</div>
-                            <div :title="i.chapter_name" @click="getChapterDetailInfo(i.id)">{{i.chapter_name}}</div>
+                            <div :title="i.chapter_name" @click="getArticleInfo(i.id)">{{i.chapter_name}}</div>
                             <!--<router-link class="remove-a-css">内容</router-link>-->
                         </div>
                     </div>
@@ -97,16 +102,16 @@
                 paging:{
                     page_all_num:8,//一页多少数据
                     now_page:1,     //当前页码
-                    data_number:30 //一共多少数据
+                    data_number:0 //一共多少数据
                 },
                 comment_text:""
             }
         },
         methods:{
-            getArticleList(id){
+            getArticleInfo(id){
                 if(id)
                     this.study_data_id = id;
-                this.$fetch('/getArticleList'/*,{id:this.study_data_id}*/)
+                this.$fetch('/article/getArticleDetail',{id:this.study_data_id})
                     .then((response) => {
                         this.chapter_detail_info = response.chapter_detail;
                         this.other_chapter_info = response.other_chapter_info;
@@ -114,20 +119,21 @@
                     })
             },
             getCommentList(){
-                this.$fetch('/chapter/getCommentList'/*,{id:this.study_data_id}*/)
+                this.$fetch('/article/getArticleCommentList',{id:this.study_data_id,num:8})
                     .then((response) => {
                         this.comment_list=response.comment_list;
-                        this.paging.data_number = response.page_all_num;
+                        this.paging.data_number = response.pageallnum;
                     })
             },
             getHotChapterList(){
-                this.$fetch('/getHotChapterList')
+                this.$fetch('/article/getHotArticleList',{num:10})
                     .then((response) => {
                         this.hot_chapter_list = response.hot_chapter_list;
                         // console.log(114,response);
                     })
             },
             sendComment(){ //发表评论
+               // 111.230.100.91/teachep/public/course/setUserComment
                 let post_data = {
                     id: this.study_data_id,
                     user_id: this.$state.user.user_id,
@@ -141,14 +147,14 @@
                 this.$post('/course/setUserComment',post_data).then((response) => {
                     this.$message.success('评论成功！');
                     this.comment_text="";
-                    this.getArticleList();
+                    this.getCommentList();
                 }).catch((err)=>{
 
                 });
             },
         },
         created(){
-            this.getArticleList();
+            this.getArticleInfo();
             this.getCommentList();
             this.getHotChapterList();
         },

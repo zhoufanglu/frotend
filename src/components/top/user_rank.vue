@@ -46,7 +46,7 @@
             getUserRank(){
                 this.$fetch('course/getUserSortList', {num: this.paging.page_all_num, type: '', pagenow: this.paging.now_page}).then((response) => {
                     this.user_data = response.user;
-                    this.paging.page_all_num = response.pageallnum;
+                    this.paging.data_number = response.pageallnum;
                     console.log(this.user_data)
                 })
                     .catch(err =>{

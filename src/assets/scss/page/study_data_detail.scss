@@ -70,6 +70,9 @@
                         height: 56px;
                         >div:first-child>span{
                             margin-left: 30px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
                         }
                         >div:last-child>span{
                             margin-right: 30px;

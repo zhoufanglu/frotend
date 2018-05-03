@@ -56,6 +56,9 @@
                             <div>{{index+1}}</div>
                             <div :title="i.chapter_name">{{i.chapter_name}}</div>
                             <!--<router-link class="remove-a-css">内容</router-link>-->
+                            <template v-if="hot_chapter_list.length == 0">
+                                <no-data-panel tip="暂无推荐"></no-data-panel>
+                            </template>
                         </div>
                     </div>
                 </div>
@@ -115,6 +118,9 @@
                             this.chapter_list = this.chapter_list.concat(response.chapter_list);
                         }
                         this.index += 5;
+                        if(response.chapter_list.length === 0){
+                            this.$message.warning('没有更多了!');
+                        }
                     })
             },
             getHotArticleList(){
