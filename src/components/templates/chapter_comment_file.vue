@@ -11,7 +11,7 @@
                             <el-tab-pane label="章节" name="chapter">
                                 <div class="chapter-list" v-for=" (i,index) in tab_items.chapter_list">
                                     <i class="icon-font">&#xe60a;</i><span>第{{index + 1}}章&nbsp;&nbsp;&nbsp;{{i.chapter_name}}</span>
-                                    <router-link  :to="{name:'chapter',params:{chapter_child_id:i.id}}"  class="detail-list remove-a-css "v-for="(j,index) in i.detail_list" :key="index">
+                                    <router-link  :to="{name:'chapter',params:{chapter_child_id:j.id}}"  class="detail-list remove-a-css "v-for="(j,index) in i.detail_list" :key="index">
                                         <div class="row">
                                             <i class="icon-font">&#xe6b7;</i><span>{{j.name}}</span>
                                         </div>
@@ -104,7 +104,7 @@
                                     <el-pagination background layout="prev, pager, next"@current-change="getCommentList()" :page-size="paging.page_all_num" :current-page.sync="paging.now_page"  :total="paging.data_number"></el-pagination>
                                 </div>
                             </el-tab-pane>
-                            <el-tab-pane label="文件" name="file">
+                            <el-tab-pane v-if="$state.user.is_login === true" label="文件" name="file">
                                 <div class="file-table">
                                     <el-row>
                                         <el-col :span="4">
@@ -120,7 +120,7 @@
                                             <div class="grid-content ">文件大小</div>
                                         </el-col>
                                         <el-col :span="4">
-                                            <div class="grid-content ">下载地址</div>
+                                            <div class="grid-content ">下载/上传</div>
                                         </el-col>
                                     </el-row>
                                     <el-row v-for="(i,index) in tab_items.file_list" :key="index">
@@ -138,8 +138,60 @@
                                             <div class="grid-content" v-else>--</div>
                                         </el-col>
                                         <el-col :span="4">
-                                            <router-link  to="/course"target="_blank" class="grid-content remove-a-css" :title="i.file_address">{{i.file_address}}</router-link>
+                                           <!--router_type == 'chapter'&&-->
+                                            <template v-if="i.isHasReport === false && router_type === 'chapter'"><!--无报告-->
+                                                <div class="grid-content upload-btn" v-if="i.file_type === 2 && router_type === 'chapter'" @click="report.dialogVisible=true">上传</div>
+                                            </template>
+                                            <template v-if="i.isHasReport === true && router_type === 'chapter'"><!--有报告--> <!--1学习资料 2作业  3已经打完分可以被查看 4未打完分不能被查看 -->
+                                                <div class="grid-content upload-btn" v-if="i.file_type === 4 && router_type === 'chapter'"  @click="report.dialogVisible=true">修改报告</div>
+                                                <div class="grid-content upload-btn" v-if="i.file_type === 3 && router_type === 'chapter'" @click="lookUserFile(i.id)">
+                                                    <el-popover placement="bottom" title="报告信息" width="260" trigger="click">
+                                                        <div>
+                                                            <el-form label-position="right" label-width="80px" :model="report.info">
+                                                                <el-form-item label="分数">
+                                                                    <el-input disabled v-model="report.info.file_score"></el-input>
+                                                                </el-form-item>
+                                                                <el-form-item label="打分者">
+                                                                    <el-input disabled v-model="report.info.admin_name"></el-input>
+                                                                </el-form-item>
+                                                                <el-form-item label="评语">
+                                                                    <el-input disabled type="textarea" v-model="report.info.file_comment"></el-input>
+                                                                </el-form-item>
+                                                                <el-form-item label="打分时间">
+                                                                    <el-input disabled v-model="report.info.updated_at"></el-input>
+                                                                </el-form-item>
+                                                            </el-form>
+                                                        </div>
+                                                        <el-button slot="reference">查看分数</el-button>
+                                                    </el-popover>
+                                                </div>
+                                            </template>
+                                            <div class="grid-content" v-if="i.file_type === 2 && router_type === 'course_detail'">--</div>
+                                            <router-link v-if="i.file_type === 1" :download="$imgPath+i.file_address"  :to="$imgPath+i.file_address" class="grid-content remove-a-css" :title="i.file_address">下载</router-link>
+                                           <!-- <div @click="downLoad(i.file_address)">下载666</div>-->
                                         </el-col>
+                                        <!--上传列表dialog-->
+                                        <el-dialog title="上传报告"
+                                                   :visible.sync="report.dialogVisible" width="30%"
+                                                   >
+                                            <div class="report-upload">
+                                                <input type="file" hidden  id="report_file" @change="reportChange()">
+
+                                                <div class="file-panel">
+                                                    <div class="file-row">
+                                                        <label for="">选择报告：</label>
+                                                        <div>
+                                                            <div class="file-name">{{report.name ? report.name:'还未上传报告'}}</div>
+                                                        </div>
+                                                        <el-button type="info" size="small" @click="openFile()">选择文件</el-button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span slot="footer" class="dialog-footer">
+                                        <el-button type="danger" @click="reportUpload()" cicle>确认上传</el-button>
+                                        </span>
+                                        </el-dialog>
+                                        <!--E-->
                                     </el-row>
                                     <template v-if="tab_items.file_list.length == 0">
                                         <no-data-panel tip="暂无文件"></no-data-panel>
@@ -157,7 +209,7 @@
                 <div class="rank-list">
                     <div class="panel">
                         <div class="list-title">排行榜</div>
-                        <router-link target="_blank" :to="{path:'/course_detail', query:{id:i.id}}" class="item remove-a-css" v-for="(i,index) in right_data.user_rank" :key="index">
+                        <router-link target="_blank"  to="/user_rank" class="item remove-a-css" v-for="(i,index) in right_data.user_rank" :key="index">
                             <div>{{index + 1}}</div>
                             <div>
                                 <div class="rank-head-img"><img :src="$imgPath+i.head_img" height="100%" width="100%"></div>
@@ -226,7 +278,14 @@
                     btn_name:'回复',
                     comment_text:'',//外层回复
                     comment_text_child:''//内层回复
-                }
+                },
+                //报告上传
+                report:{
+                    name:"",
+                    dialogVisible:false,
+                    info:{},
+                },
+
             }
         },
         methods: {
@@ -302,10 +361,24 @@
                         })
                 });
             },
+
             getFileList(){
                 return new Promise((resolve,reject)=>{
-                    this.$fetch('/course/getFileList',{ id:this.course.id}).then((response) => {
+                    let url = "",data = {};
+                    if(this.router_type === 'course_detail' ){
+                        url = "/course/getFileList";
+                        data.id = this.course.id;
+                    }else if(this.router_type === 'chapter'){
+                        url = "/course/getImageTextFileList";
+                        data.id = this.$state.current.chapter_child_id;
+                        data.user_id=this.$state.user.user_id;
+                    }
+
+                    this.$fetch(url,data).then((response) => {
                         this.tab_items.file_list = response.file_list;
+                        if(response.file_list[0].report_name){
+                            this.report.name = response.file_list[0].report_name.split('/')[response.file_list[0].report_name.split('/').length-1];
+                        }
                         //console.log('file_list',this.tab_items.file_list);
                     })
                 });
@@ -360,7 +433,51 @@
                     });
                     document.querySelector("body").click();
                 }
-            }
+            },
+            /****上传报告****/
+            openFile(){
+                document.querySelector('#report_file').click();
+            },
+            //报告监听
+            reportChange(){
+                let file = document.querySelector('#report_file').files[0];
+                if(file)
+                    this.report.name= file.name;
+                else
+                    this.report.name= "还未上传报告";
+                //console.log(382,file);
+            },
+            //上传报告
+            reportUpload(){
+                let formData = new FormData();
+                let file = document.querySelector('#report_file').files[0];
+                formData.append('user_file_name',file);
+                formData.append('user_id',this.$state.user.user_id);
+                formData.append('image_text_id',this.$state.current.chapter_child_id);
+                formData.append('file_id',this.tab_items.file_list[0].id);//文件id
+                if(file === undefined){
+                    this.$message.warning('请先选择报告!');
+                    return false;
+                }
+                this.$post('/user/uploadUserFile',formData).then((response) => {
+                    this.$message.success('报告上传成功!');
+                    this.report.dialogVisible = false;
+                }).catch((err)=>{
+
+                });
+            },
+            lookUserFile(){
+                this.$post('/user/lookUserFile',{ user_id:this.$state.user.user_id,
+                    image_text_id:this.$state.current.chapter_child_id}).then((response) => {
+                    this.report.info = response.user_file;
+                    console.log(449,response);
+                }).catch((err)=>{
+
+                });
+            },
+            /*downLoad(path){
+                location.href = this.$imgPath+path;
+            }*/
         },
         created(){
             if(this.$route.params.course_id){
@@ -376,11 +493,6 @@
                 this.getCommentList(), //获取评论
                 this.getFileList()//类似课程
             ])
-            /*this.getCourseInfo();   //获取课程基本信息
-            //this.getUserRank();     //获取用户排名列表
-            this.getSimilarCourse();//类似课程
-            this.getCommentList();  //获取评论
-            this.getFileList();*/
         },
         computed:{
 
@@ -565,6 +677,30 @@
                         border-bottom: solid 1px $light;
                         padding: 0 20px;
                     }
+                    .upload-btn{
+                        cursor: pointer;
+                    }
+                }
+                .report-upload{
+                    font-size: 18px;
+                    font-weight: 600;
+                    @include vertical-center;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    height: 180px;
+                    .file-panel{
+                        margin-top: 80px;
+                        .file-row{
+                            @include vertical-center;
+                            width: 400px;
+                            justify-content: space-around;
+                            .file-name{
+                                font-size: 16px;
+                                font-weight: normal;
+                                @include ellipsis(1);
+                            }
+                        }
+                    }
                 }
             }
             .content-panel{
@@ -683,6 +819,25 @@
         }
         .el-button{
             margin-top: 16px;
+        }
+    }
+    .content-tab {
+        #tab-report-upload{
+            font-size: 18px!important;
+            font-weight: 600!important;
+        }
+        .el-tag{
+            margin-top: 10px;
+            font-size: 18px!important;
+            font-weight: 600!important;
+        }
+    }
+    .course_detail{
+        .el-dialog__header{
+            border-bottom:solid 1px $light;
+        }
+        .el-input__inner{
+            color: $danger!important;
         }
     }
 </style>

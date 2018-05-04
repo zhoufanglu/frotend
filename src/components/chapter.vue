@@ -4,6 +4,13 @@
         <div>
             <div class="content">
                 <div class="content-top">
+                    <!--面包屑-->
+                    <el-breadcrumb separator="/">
+                        <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+                        <el-breadcrumb-item :to="{ path: '/course' }">课程中心</el-breadcrumb-item>
+                        <el-breadcrumb-item :to="{ path: '/course_detail' }">{{chapter_child.course_name}}</el-breadcrumb-item>
+                        <el-breadcrumb-item>{{chapter_child.chapter_name}}</el-breadcrumb-item>
+                    </el-breadcrumb>
                     <div class="chapter">
                         <div class="chapter-l">
                             <div class="title">
@@ -46,7 +53,7 @@
                 //css
                 show_hide_vis:'show-vis',
                 chapter_child:{
-                    id:this.$state.current.chapter_child_id,
+                    id:this.$route.params.chapter_child_id
                 },
             }
         },
@@ -55,7 +62,7 @@
                 setChapterChildId: 'setChapterChildId',
             }),
             getChapterChildInfo(){
-                this.$fetch('/course/getImageTextDetail',{id:this.chapter_child.id})
+                this.$fetch('/course/getImageTextDetail',{id:this.$state.current.chapter_child_id})
                     .then((response) => {
                         this.chapter_child = response.image_text_detail;
                         console.log(51,response);
@@ -76,6 +83,7 @@
         },
         mounted(){
             //存子章节id
+            console.log(86,this.$route.params.chapter_child_id);
            if(this.chapter_child.id){
                this.setChapterChildId(this.chapter_child.id);
            }

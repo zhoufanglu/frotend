@@ -233,6 +233,37 @@ ajax({
         }
     }
 });
+//子章节文件接口 getImageTextFileList
+ajax({
+    title:'子章节文件接口',
+    url:'http://127.0.0.1/teachep/public/course/getImageTextFileList',
+    type:'get',
+    request:{
+        id:1,//子章节id
+        user_id:'用户id'
+    },
+    res:{
+        ok:{
+            file_list: [ // 课程文件信息
+                {
+                    id:'',
+                    chapter_name:'所属章节名称',       //文件名称
+                    file_name:'文件名称',       //文件名称
+                    file_address:'文件地址',        //文件地址
+                    file_from:'第一章',        //所属章节
+                    created_at:'上传时间',        //文件地址
+                    file_size:'100kb',              //文件大小
+                    file_type:'1学习资料 2作业  3已经打完分可以被查看 4未打完分不能被查看 ',
+                    isHasReport:"true/false"
+                }
+            ]
+        },
+        err:{
+            msg:'报错信息'
+        }
+    }
+});
+
 //课程相似课程接口
 ajax({
     title:'课程相似课程接口',
@@ -906,6 +937,7 @@ ajax({
      user_id:"用户id",
      user_file_name:"提交的报告文件",
      image_text_id:"子章节id",
+     file_id:"",
      remark:"",//可以传也可以不传置空就好了
   },
   res:{
@@ -918,7 +950,7 @@ ajax({
 });
 //用户报告评分查看接口
 ajax({
-  title:'用户报告上传接口',
+  title:'用户报告评分查看接口',
   url:'http://127.0.0.1/teachep/public/user/lookUserFile',
   type:'post',
   request:{
