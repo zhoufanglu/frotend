@@ -897,3 +897,49 @@ ajax({
     }
   }
 });
+//用户报告上传接口
+ajax({
+  title:'用户报告上传接口',
+  url:'http://127.0.0.1/teachep/public/user/uploadUserFile',//你自己定义
+  type:'post',
+  request:{//每个子章节对应一个文件报告，用户提交后无法撤回修改，重复提交不会覆盖将会返回报错信息
+     user_id:"用户id",
+     user_file_name:"提交的报告文件",
+    image_text_id:"子章节id",
+  },
+  res:{
+    ok:{
+
+    },
+    err:{
+    }
+  }
+});
+//用户报告评分查看接口
+ajax({
+  title:'用户报告上传接口',
+  url:'http://127.0.0.1/teachep/public/user/lookUserFile',//你自己定义
+  type:'post',
+  request:{
+     user_id:"用户id",
+    image_text_id:"子章节id",
+  },
+  res:{
+    ok:{
+      user_file:{
+        id:"文件id",
+        user_id:"用户id",
+        image_text_id:"子章节id",
+        remark:"备注",
+        admin_name:"打分者名称",
+        file_score:"报告分数",
+        file_comment:"报告评语",
+        created_at:"报告上传时间",
+        updated_at:"报告评分时间",
+        user_file_status:"0未打分 1已打分"
+      }
+    },
+    err:{
+    }
+  }
+});
