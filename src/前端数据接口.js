@@ -900,12 +900,13 @@ ajax({
 //用户报告上传接口
 ajax({
   title:'用户报告上传接口',
-  url:'http://127.0.0.1/teachep/public/user/uploadUserFile',//你自己定义
+  url:'http://127.0.0.1/teachep/public/user/uploadUserFile',
   type:'post',
   request:{//每个子章节对应一个文件报告，用户提交后无法撤回修改，重复提交不会覆盖将会返回报错信息
      user_id:"用户id",
      user_file_name:"提交的报告文件",
-    image_text_id:"子章节id",
+     image_text_id:"子章节id",
+     remark:"",//可以传也可以不传置空就好了
   },
   res:{
     ok:{
@@ -918,7 +919,7 @@ ajax({
 //用户报告评分查看接口
 ajax({
   title:'用户报告上传接口',
-  url:'http://127.0.0.1/teachep/public/user/lookUserFile',//你自己定义
+  url:'http://127.0.0.1/teachep/public/user/lookUserFile',
   type:'post',
   request:{
      user_id:"用户id",
