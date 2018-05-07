@@ -140,6 +140,14 @@
                     comment_text: this.comment_text,
                     project_class:'2'
                 };
+                if(this.$state.user.is_login === false){
+                    this.$message.warning('请先登陆后评论！');
+                    setTimeout(()=>{
+                        this.$state.maskType = 'login';
+                        this.$state.isShowLoginMask = true;
+                    },1000);
+                    return false;
+                }
                 if(post_data.comment_text === ''){
                     this.$message.warning('评论不能为空！');
                     return false;

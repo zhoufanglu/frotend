@@ -68,6 +68,9 @@
                         //border-radius: 12px;
                         //background-color: #F6F7FB;
                         height: 56px;
+                        >div:first-child{
+                            display: flex;
+                        }
                         >div:first-child>span{
                             margin-left: 30px;
                             display: flex;

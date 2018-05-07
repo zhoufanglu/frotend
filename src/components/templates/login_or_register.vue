@@ -1,6 +1,6 @@
 <template>
     <div class="login-or-register-f" v-show="$state.isShowLoginMask">
-        <el-dialog :title="$state.maskType == 'login'?'登录':'注册'" :visible.sync="$state.isShowLoginMask" width="30%" center class="login-or-register">
+        <el-dialog :title="$state.maskType == 'login'?'登录':'注册'" @close="loginDialogClose()" :visible.sync="$state.isShowLoginMask" width="30%" center class="login-or-register">
             <el-tabs v-model="$state.maskType" @tab-click="loginTitleClick()">
                 <el-tab-pane label="登录" name="login">
                     <div class="mask-login">
@@ -107,8 +107,8 @@
                         });
                 }
             },
-            closeLoginMask(){
-                //this.$state.isShowLoginMask = false;
+            loginDialogClose(){
+                this.$state.isShowLoginMask = false;
             },
             maskSure(){
                 //this.$state.isShowLoginMask = false;

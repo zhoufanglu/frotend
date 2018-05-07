@@ -1,5 +1,5 @@
 <template>
-    <div class="content-body">
+    <div class="content-body chapter-comment-file">
         <el-row>
             <el-col class="content-body-l" :span="16">
                 <div class="introduction">
@@ -167,8 +167,7 @@
                                                 </div>
                                             </template>
                                             <div class="grid-content" v-if="i.file_type === 2 && router_type === 'course_detail'">--</div>
-                                            <router-link v-if="i.file_type === 1" :download="$imgPath+i.file_address"  :to="$imgPath+i.file_address" class="grid-content remove-a-css" :title="i.file_address">下载</router-link>
-                                           <!-- <div @click="downLoad(i.file_address)">下载666</div>-->
+                                            <a v-if="i.file_type === 1"  :download="$imgPath+i.file_address"  :title="i.file_address" :href="$imgPath+i.file_address" class="grid-content remove-a-css" >下载</a>
                                         </el-col>
                                         <!--上传列表dialog-->
                                         <el-dialog title="上传报告"
@@ -376,7 +375,7 @@
 
                     this.$fetch(url,data).then((response) => {
                         this.tab_items.file_list = response.file_list;
-                        if(response.file_list[0].report_name){
+                        if(response.file_list.length !== 0 && response.file_list[0].report_name){
                             this.report.name = response.file_list[0].report_name.split('/')[response.file_list[0].report_name.split('/').length-1];
                         }
                         //console.log('file_list',this.tab_items.file_list);
@@ -385,7 +384,11 @@
             },
             praise(comment_id){
                 if(this.$state.user.is_login === false){
-                    this.$message.warning('请先登陆！');
+                    this.$message.warning('请先登陆后再点赞！');
+                    setTimeout(()=>{
+                        this.$state.maskType = 'login';
+                        this.$state.isShowLoginMask = true;
+                    },1000);
                     return false;
                 }
                 this.$post('/course/praise',{comment_id:comment_id,user_id:this.$state.user.user_id}).then((response) => {
@@ -405,6 +408,14 @@
                 };
                 if(post_data.comment_text === ''){
                     this.$message.warning('评论不能为空！');
+                    return false;
+                }
+                if(this.$state.user.is_login === false){
+                    this.$message.warning('请先登录后评论！');
+                    setTimeout(()=>{
+                        this.$state.maskType = 'login';
+                        this.$state.isShowLoginMask = true;
+                    },1000);
                     return false;
                 }
                 this.$post('/course/setUserComment',post_data).then((response) => {
@@ -475,9 +486,6 @@
 
                 });
             },
-            /*downLoad(path){
-                location.href = this.$imgPath+path;
-            }*/
         },
         created(){
             if(this.$route.params.course_id){
@@ -832,12 +840,14 @@
             font-weight: 600!important;
         }
     }
-    .course_detail{
-        .el-dialog__header{
-            border-bottom:solid 1px $light;
-        }
-        .el-input__inner{
-            color: $danger!important;
+    .chapter-comment-file{
+        .course_detail{
+            .el-dialog__header{
+                border-bottom:solid 1px $light;
+            }
+            .el-input__inner{
+                color: $danger!important;
+            }
         }
     }
 </style>

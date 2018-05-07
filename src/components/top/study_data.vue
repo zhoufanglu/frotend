@@ -52,7 +52,7 @@
                         热门推荐
                     </div>
                     <div class="body">
-                        <div class="row" v-for="(i,index) in hot_chapter_list">
+                        <div class="row" v-for="(i,index) in hot_chapter_list" @click="link('study_data_detail','study_data_id',i.id)">
                             <div>{{index+1}}</div>
                             <div :title="i.chapter_name">{{i.chapter_name}}</div>
                             <!--<router-link class="remove-a-css">内容</router-link>-->

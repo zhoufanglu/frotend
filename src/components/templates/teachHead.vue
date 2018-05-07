@@ -68,9 +68,10 @@
                 let is_login = this.$state.user.is_login;
                 this.user_info = this.$state.user;
                 if(is_login === false){
-                    this._message("登录过期，请重新登录",{
+                    /*this._message("登录过期，请重新登录",{
                         type : "warning"
-                    });
+                    });*/
+                    console.log("登录过期，请重新登录");
                     //this.$router.push({path:'/login'});
                 }
             },
