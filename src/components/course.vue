@@ -1,6 +1,6 @@
 <template>
     <div class="course">
-        <teach-head :nickName="nickName" :headSrcLink="headSrcLink" :show_hide_vis="show_hide_vis" ></teach-head>
+        <teach-head @transferSearchCourse="getCourseSearchName" :nickName="nickName" :headSrcLink="headSrcLink" :show_hide_vis="show_hide_vis" ></teach-head>
         <div class="content">
             <!--筛选部分-->
             <div class="content-head">
@@ -82,7 +82,8 @@
                     direction: '',
                     classify: '',
                     type: '',
-                    difficult:''
+                    difficult:'',
+                    name:''
                 },
                 sort:'last',
                 //body
@@ -112,6 +113,7 @@
                    filter_direction: this.filter.direction, //传的是id,如果为空,就是全部（方向-->一级分类）
                    filter_classify:this.filter.classify , //传的是id,如果为空,就是全部（分类-->二级级分类）
                    filter_type: this.filter.type, //传的是id,如果为空,就是全部（类型-->三级分类）
+                   filter_name:this.filter.name,
                    sort:this.sort,//排序----默认是最新，最新/最热（这个最新最热数据没有这个标签）
                    hard:this.filter.difficult,//难度----默认全部(为空),分为初级，中级，高级
                    now_page:this.now_page,//当前页码
@@ -138,9 +140,17 @@
                     this.filter[filter_name] = id;
                     console.log(126,this.filter);
                 }
+            },
+            getCourseSearchName(courseName){ //搜索课程
+                if(courseName !== undefined){
+                    this.filter.name=courseName;
+                    this.getCourse();
+                }
+               // console.log(143,courseName);
             }
         },
         created() {
+            this.getCourseSearchName();//获取课程搜索名
             this.initFilter();
             //利用promise.all来监听ajax
             Promise.all([

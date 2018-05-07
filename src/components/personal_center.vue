@@ -46,7 +46,7 @@
                                         </div></el-col>
                                         <el-col :span="6"><div class="grid-content item-right ">
                                             <div class="start-time">学习时间：{{i.created_at}}</div>
-                                            <router-link  :to="{name:'course_detail',params:{course_id:i.id}}" class="grid-content continue-study  remove-a-css-darker">继续学习{{i.id}}</router-link>
+                                            <router-link  :to="{name:'course_detail',params:{course_id:i.id}}" class="grid-content continue-study  remove-a-css-darker">继续学习</router-link>
                                         </div></el-col>
                                     </el-row>
                                     <template v-if="course_list.length == 0">
@@ -195,7 +195,7 @@
                                     </div>
                                 </div>
                             </el-tab-pane>
-                            <el-tab-pane label="其它设置" name="other_set">其它设置</el-tab-pane>
+                            <!--<el-tab-pane label="其它设置" name="other_set">其它设置</el-tab-pane>-->
                         </el-tabs>
                     </div>
                 </div>

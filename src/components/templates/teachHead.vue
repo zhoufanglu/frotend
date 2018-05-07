@@ -8,10 +8,12 @@
             <span><router-link class="remove-a-css no-warp" to="/study_data">学习资料</router-link></span>
             <span><router-link class="remove-a-css no-warp" to="/user_rank">排行榜</router-link></span>
             <el-input class="head-search"
-                    placeholder="搜索"
+                    placeholder="搜索课程,按回车搜索"
                     prefix-icon="el-icon-search"
-                    v-model="head_search">
+                    @keyup.enter.native="searchCourse()"
+                    v-model="s_course_name">
             </el-input>
+            <!--@blur="searchCourse()"-->
         </div>
         <div class="user-info">
             <el-dropdown trigger="click" v-if="user_info.is_login == true">
@@ -43,10 +45,11 @@
     import { mapMutations } from 'vuex'
     export default {
         name: "teachHead",
-        props:['head_search','show_hide_vis','bg_color','text_color'],
+        props:['show_hide_vis','bg_color','text_color'],
         data(){
             return{
                 user_info:'',
+                s_course_name:''
             }
         },
         computed:{
@@ -78,6 +81,13 @@
             showLoginMask(type){
                 this.setIsShowLoginMask(true);
                 this.setMaskType(type);
+            },
+            searchCourse(){
+                if(this.$route.name !== 'course'){
+                    this.$router.push('/course');
+                }
+                this.$emit('transferSearchCourse',this.s_course_name);
+                console.log(this.$route.name);
             }
         },
         mounted(){

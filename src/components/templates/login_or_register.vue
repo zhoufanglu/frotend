@@ -120,7 +120,7 @@
             checkRegisterUserInfo(){
                 let reg = /^[a-zA-Z\d\_\u2E80-\u9FFF]{0,16}$/;
                 if(!reg.test(this.r_user_name) || this.r_user_name === ''){
-                    this.$message.error('昵称只能使用字母、数字、下划线、汉字且长度不能超过16！');
+                    this.$message.error('昵称只能使用字母、数字、下划线、汉字且长度不能超过16位！');
                     return false;
                 }
                 let password_reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,21}$/

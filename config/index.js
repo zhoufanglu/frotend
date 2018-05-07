@@ -58,13 +58,13 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps
      */
 
-    productionSourceMap: true,
+    productionSourceMap: true,//打包后文件体积可以减少百分之八十 如何是false
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 
