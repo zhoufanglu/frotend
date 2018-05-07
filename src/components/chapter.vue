@@ -18,7 +18,9 @@
                                     <i class="icon-font">&#xe78a;</i>
                                     <div>{{chapter_child.course_name}}</div>
                                 </div>
-                                <div>{{chapter_child.chapter_name}}</div>
+                                <div class="s-title">{{chapter_child.chapter_name}}</div>
+                                <el-button v-if="chapter_child.image_text_status===0" type="danger">完成学习</el-button>
+                                <el-button v-if="chapter_child.image_text_status===1" type="info" disabled>已学习</el-button>
                             </div>
                             <div class="chapter-child-body">
                                 <div class="title">{{chapter_child.image_text_name}}</div>
@@ -119,9 +121,12 @@
                     @include vertical-center;
                     cursor: pointer;
                 }
-                >div:last-child{
+                .s-title{
                     font-size: 16px;
                     margin-left: 20px;
+                }
+                .el-button{
+                    margin-left: 100px;
                 }
             }
             .chapter-child-body{

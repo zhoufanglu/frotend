@@ -16,7 +16,7 @@
             window.addEventListener("beforeunload",()=>{
                 localStorage.setItem("vuex_store",JSON.stringify(this.$store.state))
             });
-            this.$router.push({path:'/home'})
+            //this.$router.push({path:'/home'})
         }
     }
 </script>

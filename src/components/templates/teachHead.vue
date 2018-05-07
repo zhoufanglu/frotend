@@ -56,7 +56,7 @@
         },
         methods:{
             ...mapMutations({
-                //setUserInfo: 'setUserInfo',
+                setUserInfo: 'setUserInfo',
                 setLoginState: 'setLoginState',
                 setIsShowLoginMask: 'setIsShowLoginMask',
                 setMaskType:'setMaskType'
@@ -64,6 +64,12 @@
             logout(){
                 this.setLoginState(false);
                 this.user_info.is_login = false;
+                let user_data = {
+                    id:'',
+                    user_name:'',
+                    user_data:''
+                };
+                this.setUserInfo(user_data);
                 this.$message.success('注销成功！');
                 this.$router.push({path:'/home'});
             },
@@ -83,11 +89,10 @@
                 this.setMaskType(type);
             },
             searchCourse(){
-                if(this.$route.name !== 'course'){
+                if(this.$route.name !== 'course' && this.s_course_name!==''){
                     this.$router.push('/course');
                 }
                 this.$emit('transferSearchCourse',this.s_course_name);
-                console.log(this.$route.name);
             }
         },
         mounted(){

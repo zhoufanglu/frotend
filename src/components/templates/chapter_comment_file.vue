@@ -14,6 +14,8 @@
                                     <router-link  :to="{name:'chapter',params:{chapter_child_id:j.id}}"  class="detail-list remove-a-css "v-for="(j,index) in i.detail_list" :key="index">
                                         <div class="row">
                                             <i class="icon-font">&#xe6b7;</i><span>{{j.name}}</span>
+                                            <div class="status" v-if="j.chapter_status === 1"><i class="el-icon-success"></i>已学习</div>
+                                            <div class="status" v-if="j.chapter_status === 0"><i class="el-icon-error"></i>未学习</div>
                                         </div>
                                     </router-link>
                                 </div>
@@ -293,7 +295,7 @@
             }),
             getCourseInfo(){
                 return new Promise((resolve,reject)=>{
-                    this.$fetch('/course/getHomeCourseDetail',{id:this.$state.current.course_id}).then((response) => {
+                    this.$fetch('/course/getHomeCourseDetail',{id:this.$state.current.course_id,user_id:this.$state.user.user_id}).then((response) => {
                         this.types = response;
                         //console.log(45,response);
                         this.course = response.course;
@@ -542,8 +544,18 @@
                             padding: 6px;
                             background-color: #F6F7FB;
                             margin-top: 16px;
+                            display: flex;
                             i {
                                 font-size: 20px !important;
+                            }
+                        }
+                        .status{
+                            @include vertical-center;
+                            width: 100%;
+                            justify-content: flex-end;
+                            padding-right: 30px;
+                            i{
+                                margin-right: 6px;
                             }
                         }
                     }
