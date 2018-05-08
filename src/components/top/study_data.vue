@@ -82,6 +82,7 @@
 
             </div>
         </div>
+        <teach-foot></teach-foot>
     </div>
 </template>
 <script>
