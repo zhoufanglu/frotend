@@ -14,8 +14,8 @@
                                     <router-link  :to="{name:'chapter',params:{chapter_child_id:j.id}}"  class="detail-list remove-a-css "v-for="(j,index) in i.detail_list" :key="index">
                                         <div class="row">
                                             <i class="icon-font">&#xe6b7;</i><span>{{j.name}}</span>
-                                            <div class="status" v-if="j.chapter_status === 1"><i class="el-icon-success"></i>已学习</div>
-                                            <div class="status" v-if="j.chapter_status === 0"><i class="el-icon-error"></i>未学习</div>
+                                            <div class="status" v-if="j.chapter_status === 1"><i class="el-icon-success fn-color-notStart "></i>已学习</div>
+                                            <div class="status" v-if="j.chapter_status === 0"><i class="el-icon-error fn-color-danger"></i>未学习</div>
                                         </div>
                                     </router-link>
                                 </div>

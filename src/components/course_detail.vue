@@ -17,8 +17,8 @@
                         <div class="title-b">
                             <div class="start">
                                 <el-button v-if="course.learn_status === 1" class="start-btn" type="danger" @click="startStudy()">开始学习</el-button>
-                                <el-button v-if="course.learn_status === 2" class="start-btn" type="success">学习中</el-button>
-                                <el-button v-if="course.learn_status === 3" class="start-btn" type="info">已学习完成</el-button>
+                                <el-button v-if="course.learn_status === 2" class="start-btn" type="success" disabled>学习中</el-button>
+                                <el-button v-if="course.learn_status === 3" class="start-btn" type="info" disabled>已学习完成</el-button>
                             </div>
                             <div class="course-info">
                                 <div>

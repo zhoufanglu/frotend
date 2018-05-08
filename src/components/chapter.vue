@@ -9,21 +9,30 @@
                         <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
                         <el-breadcrumb-item :to="{ path: '/course' }">课程中心</el-breadcrumb-item>
                         <el-breadcrumb-item :to="{ path: '/course_detail' }">{{chapter_child.course_name}}</el-breadcrumb-item>
-                        <el-breadcrumb-item>{{chapter_child.chapter_name}}</el-breadcrumb-item>
+                        <el-breadcrumb-item :to="{ path: '/course_detail' }">{{chapter_child.chapter_name}}</el-breadcrumb-item>
+                        <el-breadcrumb-item>{{chapter_child.image_text_name}}</el-breadcrumb-item>
                     </el-breadcrumb>
                     <div class="chapter">
                         <div class="chapter-l">
                             <div class="title">
-                                <div @click="back()">
-                                    <i class="icon-font">&#xe78a;</i>
-                                    <div>{{chapter_child.course_name}}</div>
+                                <div class="title-l">
+                                    <div @click="back()">
+                                        <i class="icon-font">&#xe78a;</i>
+                                        <div>{{chapter_child.course_name}}</div>
+                                    </div>
+                                    <div class="s-title">{{chapter_child.chapter_name}}</div>
                                 </div>
-                                <div class="s-title">{{chapter_child.chapter_name}}</div>
-                                <el-button v-if="chapter_child.image_text_status===0" type="danger">完成学习</el-button>
-                                <el-button v-if="chapter_child.image_text_status===1" type="info" disabled>已学习</el-button>
                             </div>
                             <div class="chapter-child-body">
-                                <div class="title">{{chapter_child.image_text_name}}</div>
+                                <div class="title">
+                                    <div>
+                                        {{chapter_child.image_text_name}}
+                                    </div>
+                                    <div>
+                                        <el-button v-if="chapter_child.image_text_status===0" @click="finishChapter()" type="danger">完成学习</el-button>
+                                        <el-button v-if="chapter_child.image_text_status===1" type="info" disabled>已学习</el-button>
+                                    </div>
+                                </div>
                                 <div class="bottom">
                                     <div v-if="chapter_child.image_text_type == 1">
                                         <video src="../assets/video/vue-2-power-model.mp4" style="width: 100%" controls="controls">
@@ -81,6 +90,24 @@
                         //id: this.course_id,
                     }
                 })
+            },
+            finishChapter(){
+                if(this.$state.user.is_login === false){
+                    this.$message.warning('请先登录后才能完成！');
+                    return false;
+                }
+                if(this.chapter_child.learn_status === 1 ){
+                    this.$message.warning('您的课程还未开始，请先开始课程再进行学习！');
+                    return false;
+                }
+                this.$post('/course/setUserFinish',{id:this.chapter_child.id,user_id:this.$state.user.user_id})
+                    .then((response) => {
+                       this.$message.success('您已成功完成此章节');
+                        this.getChapterChildInfo();
+                    })
+                    .catch(error =>{
+                        console.log(err);
+                    });
             }
         },
         mounted(){
@@ -109,10 +136,15 @@
             padding: 16px;
             .title{
                 @include vertical-center;
-                justify-content: flex-start;
+                justify-content: space-between;
                 border-bottom: solid 1px $light;
                 padding-bottom: 16px;
                 padding-left: 16px;
+                .title-l{
+                    >div:first-child{
+                        @include vertical-center;
+                    }
+                }
                 i{
                     font-size: 26px;
                     margin-right: 10px;
@@ -126,7 +158,7 @@
                     margin-left: 20px;
                 }
                 .el-button{
-                    margin-left: 100px;
+                    margin-right: 30px;
                 }
             }
             .chapter-child-body{

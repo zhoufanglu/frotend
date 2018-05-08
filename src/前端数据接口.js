@@ -363,7 +363,8 @@ ajax({
                     image_text_detail:'子章节详情',
                     image_text_video:'视频地址',
                     image_text_type:'1<图文>2<视频>',
-                    finish_score:"完成分数"
+                    finish_score:"完成分数",
+                    image_text_status:'0未完成  1完成'
                 },
         },
         err:{
@@ -442,7 +443,7 @@ ajax({
     }
 });
 
-//完成课程接口
+//完成章节接口
 ajax({
     title:'完成课程接口',
     url:'http://127.0.0.1/teachep/public/course/setUserFinish',
