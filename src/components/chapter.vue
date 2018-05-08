@@ -73,7 +73,7 @@
                 setChapterChildId: 'setChapterChildId',
             }),
             getChapterChildInfo(){
-                this.$fetch('/course/getImageTextDetail',{id:this.$state.current.chapter_child_id})
+                this.$fetch('/course/getImageTextDetail',{id:this.$state.current.chapter_child_id,user_id:this.$state.user.user_id})
                     .then((response) => {
                         this.chapter_child = response.image_text_detail;
                         console.log(51,response);
