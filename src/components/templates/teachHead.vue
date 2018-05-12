@@ -141,6 +141,8 @@
             }
             .head-search{
                 width: 50%;
+                min-width:200px;
+                margin-left:16px;
             }
         }
         .name{
