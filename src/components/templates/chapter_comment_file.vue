@@ -210,37 +210,37 @@
                 <div class="rank-list">
                     <div class="panel">
                         <div class="list-title">排行榜</div>
-                        <router-link target="_blank"  to="/user_rank" class="item remove-a-css" v-for="(i,index) in right_data.user_rank" :key="index">
+                        <router-link target="_blank"  to="/user_rank" class="item remove-a-css need-hover" v-for="(i,index) in right_data.user_rank" :key="index">
                             <div>{{index + 1}}</div>
                             <div>
                                 <div class="rank-head-img"><img :src="$imgPath+i.head_img" height="100%" width="100%"></div>
                             </div>
-                            <div class="user-name" :title="i.user_name">{{i.user_name}}</div>
-                            <div>{{i.score}}分</div>
+                            <div class="user-name need-hover" :title="i.user_name">{{i.user_name}}</div>
+                            <div class="need-hover">{{i.score}}分</div>
                         </router-link>
                         <template v-if="right_data.user_rank.length == 0">
                             <no-data-panel tip="暂无用户信息"></no-data-panel>
                         </template>
                         <div class="see-more">
-                            <router-link to="/user_rank" class="remove-a-css" target="_blank">查看更多&nbsp;></router-link>
+                            <router-link to="/user_rank" class="remove-a-css" target="_blank"><span class="need-hover">查看更多&nbsp;></span></router-link>
                         </div>
                     </div>
                 </div>
                 <div class="similar-course-list">
                     <div class="panel">
                         <div class="list-title">相似课程推荐</div>
-                        <router-link target="_blank" :to="{path:'/course', query:{id:i.id}}" class="item remove-a-css" v-for="(i,index) in right_data.similar_course" :key="index">
+                        <router-link target="_blank" :to="{path:'/course', query:{id:i.id}}" class="item remove-a-css need-hover" v-for="(i,index) in right_data.similar_course" :key="index">
                             <div class="item-l"><img :src="$imgPath+i.course_img" width="100%" height="100%" alt=""></div>
                             <div class="item-r">
-                                <div class="list-title">{{i.course_name}}</div>
-                                <div>{{i.course_introduction}}</div>
+                                <div class="similar-list-title need-hover">{{i.course_name}}</div>
+                                <div class="need-hover">{{i.course_introduction}}</div>
                             </div>
                         </router-link>
                         <template v-if="right_data.similar_course.length == 0">
                             <no-data-panel tip="暂无相关课程"></no-data-panel>
                         </template>
                         <div class="see-more">
-                            <router-link  to="/course" class="remove-a-css" target="_blank">查看更多&nbsp;></router-link>
+                            <router-link  to="/course" class="remove-a-css" target="_blank"><span class="need-hover">查看更多&nbsp;></span></router-link>
                         </div>
                     </div>
                 </div>
@@ -749,10 +749,16 @@
                     width: 90%;
                     display: flex;
                     flex-direction: column;
-                    justify-content: space-around;
-                    min-height: 400px;
-                    border: solid 1px $light;
                     padding-bottom: 20px;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 16px 0 rgba(7,17,27,.1);
+                    .list-title{
+                        padding-top: 16px;
+                        border: none!important;
+                    }
+                    >a{
+                        min-height: 60px;
+                    }
                     >div:first-child{
                         border-bottom: solid 1px $light;
                     }
@@ -793,8 +799,14 @@
                 justify-content: flex-end;
                 margin-top: 60px;
                 .panel{
-                    border: solid 1px $light;
                     width: 90%;
+                    >a{
+                        border: none!important;
+                    }
+                    .list-title{
+                        padding-top: 16px;
+                        border: none!important;
+                    }
                     .see-more{
                         width: 100%;
                         text-align: center;
@@ -805,13 +817,24 @@
                         padding: 16px 10px;
                         border-top: solid 1px $light ;
                         .item-l{
-                            width: 100%;
+                            width: 220px;
                             height: 100px;
+                            img{
+                                border-radius: 12px;
+                            }
                         }
                         .item-r{
+                            .similar-list-title{
+                                font-weight: bolder;
+                                font-size: 16px;
+                                height: 40px;
+                            }
+                            padding-left: 30px;
                             width:100%;
+                            height: 100px;
                             display: flex;
                             flex-direction: column;
+                            justify-content: space-around;
                             margin-left: 10px;
                             @include ellipsis(3);
                             div:first-child{

@@ -11,6 +11,7 @@
 
 <style scoped type="text/scss" lang="scss">
     .teach-foot{
+        margin-top: 30px;
         text-align: center;
         height: 80px;
         line-height: 80px;

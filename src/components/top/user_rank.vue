@@ -78,5 +78,12 @@
                 text-align: center;
             }
         }
+        .cell{
+            font-size: 16px;
+            color: $dark;
+        }
+        tr{
+            height: 60px;
+        }
     }
 </style>

@@ -85,6 +85,7 @@
         flex-direction: column;
         .hot-recommended{
             .head{
+                font-weight: bolder;
                 padding: 15px;
                 border: solid 1px $light;
                 border-bottom: none;
@@ -96,6 +97,8 @@
                 .row{
                     display: flex;
                     cursor: pointer;
+                    height: 30px;
+                    line-height: 30px;
                     div:first-child{
                         margin-right: 16px;
                     }
@@ -114,6 +117,7 @@
         .last-comment{
             margin-top: 60px;
             .head{
+                font-weight: bolder;
                 padding: 15px;
                 border: solid 1px $light;
                 border-bottom: none;
@@ -131,10 +135,8 @@
                         border-radius: 50%;
                         height: 60px!important;
                         width: 60px!important;
-                        border: solid 1px $stable;
                         overflow: hidden;
                         margin: 0 16px;
-                        width: 20%
                     }
                     .person-info{
                         width: 80%;

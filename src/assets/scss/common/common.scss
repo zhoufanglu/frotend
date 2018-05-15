@@ -136,7 +136,7 @@ $head-height:80px;
 .need-hover{
     cursor: pointer;
     &:hover{
-        color: $black;
+        color: $selectColor!important;
         text-shadow: 0 5px 30px #ddd;
     }
 }

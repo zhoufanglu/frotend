@@ -43,7 +43,7 @@
                         <div class="comment-row">共有{{paging.data_number}}条评论</div>
                         <div class="comment-row" v-for="i in comment_list">
                             <div class="comment-l">
-                                <div><img :src="$imgPath+i.head_img" alt="" width="100%" height="100%"></div>
+                                <div><img :src="$imgPath+i.headimg" alt="" width="100%" height="100%"></div>
                             </div>
                             <div class="comment-r">
                                 <div>

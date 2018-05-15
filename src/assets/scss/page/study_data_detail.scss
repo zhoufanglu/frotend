@@ -142,6 +142,7 @@
             flex-direction: column;
             .hot-recommended{
                 .head{
+                    font-weight: bolder;
                     padding: 15px;
                     border: solid 1px $light;
                     border-bottom: none;
@@ -151,6 +152,8 @@
                     border: solid 1px $light;
                     padding: 10px;
                     .row{
+                        height: 30px;
+                        line-height: 30px;
                         display: flex;
                         cursor: pointer;
                         div:first-child{

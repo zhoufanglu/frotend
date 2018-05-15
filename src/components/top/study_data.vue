@@ -52,7 +52,7 @@
                         热门推荐
                     </div>
                     <div class="body">
-                        <div class="row" v-for="(i,index) in hot_chapter_list" @click="link('study_data_detail','study_data_id',i.id)">
+                        <div class="row need-hover" v-for="(i,index) in hot_chapter_list" @click="link('study_data_detail','study_data_id',i.id)">
                             <div>{{index+1}}</div>
                             <div :title="i.chapter_name">{{i.chapter_name}}</div>
                             <!--<router-link class="remove-a-css">内容</router-link>-->
@@ -68,9 +68,9 @@
                         最新评论
                     </div>
                     <div class="body">
-                        <div class="comment-row" v-for="(i,index) in last_comment_list">
+                        <div class="comment-row" v-for="(i,index) in last_comment_list" v-if="index<5">
                             <div class="head-img">
-                                <img :src="i.head_img" alt="" width="100%" height="100%">
+                                <img :src="$imgPath+i.headimg" alt="" width="100%" height="100%">
                             </div>
                             <div class="person-info">
                                 <span>{{i.user_name}}</span>
