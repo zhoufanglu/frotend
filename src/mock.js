@@ -8,7 +8,7 @@ let useMock = (isOpenMock) =>{
     /**
      * home.html
      */
-    Mock.mock('indexRotation',{
+    Mock.mock('/indexRotation',{
         'top_title|4':[()=>Random.ctitle()],
         'module|2': [
             {

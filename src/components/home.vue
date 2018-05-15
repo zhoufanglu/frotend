@@ -9,7 +9,7 @@
                             <!--top左边标题-->
                             <div class="grid-content">
                                 <div class="s-row" v-for="(i,index) in top_title" v-if="index < 4">
-                                    <el-popover placement="right"  trigger="hover" :visible-arrow="false">
+                                    <el-popover class="home-popover" placement="right"  trigger="hover" :visible-arrow="false">
                                         <div class="top-title-detail">
                                             <template v-for="j in i.couser_type_detail">
                                                 <div @click="link('course',j.id,j.couser_level)">{{j.couser_type_name}}</div>
@@ -40,7 +40,7 @@
             </div>
             <div class="content-panel">
                 <div class="title">
-                    <div>{{module[0]&&module[0].name}}</div>
+                    <div><i class="icon-font">&#xe618;</i>{{module[0]&&module[0].name}}</div>
                     <div @click="link('course')">···</div>
                 </div>
                 <div content="body">
@@ -65,7 +65,7 @@
 
             <div class="content-panel">
                 <div class="title">
-                    <div>{{module[1]&&module[1].name}}</div>
+                    <div><i class="icon-font">&#xe618;</i>{{module[1]&&module[1].name}}</div>
                     <div @click="link('course_center')">···</div>
                 </div>
                 <div content="body">

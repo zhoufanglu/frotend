@@ -47,6 +47,12 @@ $content-top-height:300px;
             border-radius: 12px;
             margin-top: 40px;
             .title{
+                i{
+                    font-size: 24px;
+                    font-weight: normal;
+                    color: $danger;
+                    margin-right: 20px;
+                }
                 margin-top: 20px;
                 text-align: center;
                 height: $head-height;

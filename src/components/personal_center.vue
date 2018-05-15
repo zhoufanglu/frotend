@@ -522,6 +522,39 @@
         }
     }
 </script>
-<style type="text/scss" lang="scss">
+<style scoped type="text/scss" lang="scss">
     @import "~@/assets/scss/page/personal_center.scss";
+</style>
+<style type="text/scss" lang="scss">
+    .personal-center{
+        //element
+        .left-nav{
+            .el-tabs__nav{
+                min-height: 800px;
+            }
+            .el-tabs__item{
+                height: 100px;
+                line-height: 100px;
+                font-size: 20px;
+                font-weight: 600;
+                width: 180px;
+                text-align: center!important;
+            }
+            .el-tabs__active-bar{
+                background-color: $selectColor;
+            }
+            .is-active{
+                color: $selectColor;
+            }
+            .is-left{
+
+            }
+        }
+        .personal-dialog{
+            margin-top: 15vh;
+            .el-form{
+                padding-right: 30px;
+            }
+        }
+    }
 </style>

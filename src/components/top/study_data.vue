@@ -162,19 +162,21 @@
     @import "~@/assets/scss/page/study_data.scss";
 </style>
 <style type="text/scss" lang="scss">
-    .filter-title{
-        .el-radio-group {
-            /*.el-radio-button:not(:first-child) {
-                margin-left: 30px;
-            }*/
-            .el-radio-button{
-                margin-top: 16px;
-                margin-left: 30px;
-            }
-            .el-radio-button__inner {
-                border: solid 1px $stable;
-                border-radius: 0;
-                min-width: 100px;
+    .personal-center{
+        .filter-title{
+            .el-radio-group {
+                /*.el-radio-button:not(:first-child) {
+                    margin-left: 30px;
+                }*/
+                .el-radio-button{
+                    margin-top: 16px;
+                    margin-left: 30px;
+                }
+                .el-radio-button__inner {
+                    border: solid 1px $stable;
+                    border-radius: 0;
+                    min-width: 100px;
+                }
             }
         }
     }

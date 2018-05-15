@@ -841,15 +841,17 @@
             margin-top: 16px;
         }
     }
-    .content-tab {
-        #tab-report-upload{
-            font-size: 18px!important;
-            font-weight: 600!important;
-        }
-        .el-tag{
-            margin-top: 10px;
-            font-size: 18px!important;
-            font-weight: 600!important;
+    .chapter-comment-file{
+        .content-tab {
+            #tab-report-upload{
+                font-size: 18px!important;
+                font-weight: 600!important;
+            }
+            .el-tag{
+                margin-top: 10px;
+                font-size: 18px!important;
+                font-weight: 600!important;
+            }
         }
     }
     .chapter-comment-file{

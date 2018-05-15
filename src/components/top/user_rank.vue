@@ -1,5 +1,5 @@
 <template>
-    <div class="personal-center">
+    <div class="user-rank">
         <teach-head  :show_hide_vis="show_hide_vis" ></teach-head>
         <div class="content">
             <div class="user-table">
@@ -66,15 +66,17 @@
    }
 </style>
 <style  type="text/scss" lang="scss">
-    .paging{
-        .el-pagination {
-            text-align: center;
-            margin-top: 30px;
+    .user-rank{
+        .paging{
+            .el-pagination {
+                text-align: center;
+                margin-top: 30px;
+            }
         }
-    }
-    .personal-center{
-        .cell{
-            text-align: center;
+        .personal-center{
+            .cell{
+                text-align: center;
+            }
         }
     }
 </style>

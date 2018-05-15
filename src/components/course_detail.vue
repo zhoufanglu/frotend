@@ -27,7 +27,9 @@
                                 </div>
                                 <div>
                                     <span>难度级别</span>
-                                    <span>{{course.course_difficult}}</span>
+                                    <span v-if="course.course_difficult===1">初级</span>
+                                    <span v-if="course.course_difficult===2">中级</span>
+                                    <span v-if="course.course_difficult===3">高级</span>
                                 </div>
                                 <!--<div>
                                     <span>综合评分</span>
@@ -80,6 +82,40 @@
         components:{chapter_comment_file},
     }
 </script>
-<style type="text/scss" lang="scss">
+<style scoped type="text/scss" lang="scss">
     @import "~@/assets/scss/page/course_detail.scss";
+</style>
+<style type="text/scss" lang="scss">
+    .course_detail{
+        //element-ui reset
+        .content-tab{
+            .is-top{
+                border: none!important;
+            }
+            .el-tabs__nav-wrap{
+                position: relative;
+                left: -20px!important;
+            }
+            .el-tabs__nav{
+                border: none!important;
+                #tab-chapter{
+                    font-weight: 600;
+                    font-size: 18px;
+                }
+                #tab-comments{
+                    @extend #tab-chapter
+                }
+                #tab-file{
+                    @extend #tab-chapter
+                }
+            }
+            .is-active{
+                color: $selectColor!important;
+            }
+            .el-tabs__header{
+                border-bottom: solid 1px $light!important;
+                padding-bottom: 20px;
+            }
+        }
+    }
 </style>

@@ -5,7 +5,7 @@
             <!--筛选部分-->
             <div class="content-head">
                 <el-radio-group v-model="filter.direction" @change="getCourse()">
-                    <el-radio-button  :disabled="true" class="item-title" label="方向"></el-radio-button>
+                    <el-radio-button  :disabled="true" class="item-title" label="方向:"></el-radio-button>
                     <el-radio-button class="item" label="">全部</el-radio-button>
                     <el-radio-button class="item" v-for="i in types.direction" :key="i.id" :label="i.id">{{i.name}}</el-radio-button>
                 </el-radio-group>
@@ -162,6 +162,29 @@
         }
     }
 </script>
-<style  type="text/scss" lang="scss">
+<style scoped  type="text/scss" lang="scss">
     @import "~@/assets/scss/page/course.scss";
+</style>
+<style type="text/scss" lang="scss">
+    .course{
+        //element初始化
+        .el-radio-button{
+            span{
+                border: none!important;
+                border-radius: 6px;
+                color: $darker;
+                font-size: 16px;
+                font-weight: 600;
+            }
+            span:not(:first-child){
+                font-weight: normal;
+            }
+        }
+        //element 组件初始化
+        .el-radio-group:not(:last-of-type){
+            border-bottom: solid 1px $light;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+        }
+    }
 </style>

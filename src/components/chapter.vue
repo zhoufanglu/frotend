@@ -122,7 +122,7 @@
         components:{chapter_comment_file}
     }
 </script>
-<style type="text/scss" lang="scss">
+<style scoped type="text/scss" lang="scss">
     @import "~@/assets/scss/page/course_detail.scss";
     .introduction{
         display: none!important;

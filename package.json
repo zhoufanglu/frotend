@@ -14,6 +14,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "anywhere": "^1.5.0",
     "appium-chromedriver": "^3.0.1",
     "babel-runtime": "^6.26.0",
     "element-china-area-data": "^4.0.0",
