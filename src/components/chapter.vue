@@ -16,7 +16,7 @@
                         <div class="chapter-l">
                             <div class="title">
                                 <div class="title-l">
-                                    <div @click="back()">
+                                    <div class="need-hover" @click="back()">
                                         <i class="icon-font">&#xe78a;</i>
                                         <div>{{chapter_child.course_name}}</div>
                                     </div>

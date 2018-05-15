@@ -74,7 +74,7 @@
                             </div>
                             <div class="person-info">
                                 <span>{{i.user_name}}</span>
-                                <span>{{i.content}}</span>
+                                <span :title="i.content">{{i.content}}</span>
                             </div>
                         </div>
                     </div>
