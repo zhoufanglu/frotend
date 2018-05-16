@@ -35,7 +35,7 @@
                     <el-radio @change="getCourse()" v-model="filter.difficult" label="3">高级</el-radio>
                 </div>
             </div>
-            <div class="panel">
+            <div class="panel" v-if="isLoad">
                     <el-row class="course-row s-course-panel" :gutter="40" justify="center" v-if="course.length !== 0">
                         <el-col :span="4" v-for="(j,index) in course" :key="index">
                             <router-link :to="{name:'course_detail',params:{course_id:j.id}}" class="grid-content course-item bg-purple">
@@ -91,7 +91,8 @@
                 //分页
                 page_all_num:30,//一页多少数据
                 now_page:1,     //当前页码
-                data_number:300 //一共多少数据
+                data_number:300, //一共多少数据
+                isLoad:false,
             }
         },
         methods:{
@@ -125,6 +126,7 @@
                             resolve(response);
                             this.course = response.course;
                             this.data_number = response.pageallnum;
+                            this.isLoad = true;
                             //console.log(101,response.course);
                         })
                         .catch(err =>{
@@ -162,29 +164,6 @@
         }
     }
 </script>
-<style scoped  type="text/scss" lang="scss">
+<style  type="text/scss" lang="scss">
     @import "~@/assets/scss/page/course.scss";
-</style>
-<style type="text/scss" lang="scss">
-    .course{
-        //element初始化
-        .el-radio-button{
-            span{
-                border: none!important;
-                border-radius: 6px;
-                color: $darker;
-                font-size: 16px;
-                font-weight: 600;
-            }
-            span:not(:first-child){
-                font-weight: normal;
-            }
-        }
-        //element 组件初始化
-        .el-radio-group:not(:last-of-type){
-            border-bottom: solid 1px $light;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-        }
-    }
 </style>

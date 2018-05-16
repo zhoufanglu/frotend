@@ -8,7 +8,7 @@
                 <div class="router-link-c">
                     <template>
                         <el-tabs class="content-tab" v-model="activeName"  @tab-click="handleClick">
-                            <el-tab-pane label="章节" name="chapter">
+                            <el-tab-pane label="章节" name="chapter" v-show="isLoad">
                                 <div class="chapter-list" v-for=" (i,index) in tab_items.chapter_list">
                                     <i class="icon-font">&#xe60a;</i><span>第{{index + 1}}章&nbsp;&nbsp;&nbsp;{{i.chapter_name}}</span>
                                     <router-link  :to="{name:'chapter',params:{chapter_child_id:j.id}}" @click.native="linkChapter(j.id)" class="detail-list remove-a-css "v-for="(j,index) in i.detail_list" :key="index">
@@ -286,7 +286,7 @@
                     dialogVisible:false,
                     info:{},
                 },
-
+                isLoad: false
             }
         },
         methods: {
@@ -298,6 +298,7 @@
                     this.$fetch('/course/getHomeCourseDetail',{id:this.$state.current.course_id,user_id:this.$state.user.user_id}).then((response) => {
                         this.types = response;
                         //console.log(45,response);
+                        this.isLoad= true;
                         this.course = response.course;
                         this.$emit('transferCourse',response.course);//把课程信息传输给course_detail路由
                         this.tab_items.chapter_list = response.chapter_list;
