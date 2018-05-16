@@ -19,6 +19,9 @@ Vue.use(usePrototype);
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/assets/scss/common/element_modify.scss';
 Vue.use(ElementUI);
+//音频
+import VideoPlayer from 'vue-video-player'
+Vue.use(VideoPlayer);
 
 
 

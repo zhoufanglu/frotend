@@ -7,12 +7,12 @@
                 </div>
                 <div class="router-link-c">
                     <template>
-                        <el-tabs class="content-tab" v-model="activeName" type="card" @tab-click="handleClick">
+                        <el-tabs class="content-tab" v-model="activeName"  @tab-click="handleClick">
                             <el-tab-pane label="章节" name="chapter">
                                 <div class="chapter-list" v-for=" (i,index) in tab_items.chapter_list">
                                     <i class="icon-font">&#xe60a;</i><span>第{{index + 1}}章&nbsp;&nbsp;&nbsp;{{i.chapter_name}}</span>
-                                    <router-link  :to="{name:'chapter',params:{chapter_child_id:j.id}}"  class="detail-list remove-a-css "v-for="(j,index) in i.detail_list" :key="index">
-                                        <div class="row">
+                                    <router-link  :to="{name:'chapter',params:{chapter_child_id:j.id}}" @click.native="linkChapter(j.id)" class="detail-list remove-a-css "v-for="(j,index) in i.detail_list" :key="index">
+                                        <div class="row need-hover">
                                             <i class="icon-font">&#xe6b7;</i><span>{{j.name}}</span>
                                             <div class="status" v-if="j.chapter_status === 1"><i class="el-icon-success fn-color-notStart "></i>已学习</div>
                                             <div class="status" v-if="j.chapter_status === 0"><i class="el-icon-error fn-color-danger"></i>未学习</div>
@@ -229,7 +229,7 @@
                 <div class="similar-course-list">
                     <div class="panel">
                         <div class="list-title">相似课程推荐</div>
-                        <router-link target="_blank" :to="{path:'/course', query:{id:i.id}}" class="item remove-a-css need-hover" v-for="(i,index) in right_data.similar_course" :key="index">
+                        <router-link target="_blank" :to="{name:'course_detail', params:{course_id:i.id}}" class="item remove-a-css need-hover" v-for="(i,index) in right_data.similar_course" :key="index">
                             <div class="item-l"><img :src="$imgPath+i.course_img" width="100%" height="100%" alt=""></div>
                             <div class="item-r">
                                 <div class="similar-list-title need-hover">{{i.course_name}}</div>
@@ -488,6 +488,16 @@
 
                 });
             },
+            linkChapter(chapter_chiid_id){
+                //console.log(492,this.router_type);
+                if(this.router_type === 'chapter'){
+                    //点击子章节，重新刷新数据
+                    if(this.$state.current.chapter_child_id !== chapter_chiid_id){
+                        this.$state.current.chapter_child_id = chapter_chiid_id;
+                        location.reload();
+                    }
+                }
+            },
         },
         created(){
             if(this.$route.params.course_id){
@@ -545,6 +555,9 @@
                             background-color: #F6F7FB;
                             margin-top: 16px;
                             display: flex;
+                            span{
+                                width: 100%;
+                            }
                             i {
                                 font-size: 20px !important;
                             }
@@ -845,6 +858,9 @@
                 }
             }
         }
+        .paging{
+            margin-top: 20px;
+        }
     }
 </style>
 <style lang="scss" type="text/scss">
@@ -866,6 +882,9 @@
     }
     .chapter-comment-file{
         .content-tab {
+            .el-tabs__header{
+                border: none!important;
+            }
             #tab-report-upload{
                 font-size: 18px!important;
                 font-weight: 600!important;
@@ -874,6 +893,18 @@
                 margin-top: 10px;
                 font-size: 18px!important;
                 font-weight: 600!important;
+            }
+            //tabs
+            .el-tabs__nav{
+                .el-tabs__active-bar{
+                    background-color: $selectColor;
+                }
+                .el-tabs__item{
+                    font-size: 18px;
+                }
+                .is-active{
+                    color: $selectColor;
+                }
             }
         }
     }
