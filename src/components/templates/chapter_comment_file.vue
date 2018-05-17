@@ -300,7 +300,7 @@
                         //console.log(45,response);
                         this.isLoad= true;
                         this.course = response.course;
-                        this.$emit('transferCourse',response.course);//把课程信息传输给course_detail路由
+                        this.$emit('transferCourse',response.course);//把课程信息传输给course_detail路由 和 chapter路由
                         this.tab_items.chapter_list = response.chapter_list;
                         resolve(response);
                     })

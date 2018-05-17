@@ -399,7 +399,7 @@
                     user_sex:this.user_edit_data.user_sex,
                     //user_city:this.user_data.user_city,//数组格式，省市区
                     user_autograph:this.user_edit_data.user_autograph,
-                    user_headimg:'用户头像',
+                    //user_headimg:'用户头像',
                 };
                 sendData.user_province = this.user_edit_data.user_city[0];
                 sendData.user_city = this.user_edit_data.user_city[1];
@@ -509,7 +509,8 @@
         computed:{
             getCity(){
                 let city_name = "";
-                if(this.user_data.user_city[0] === null){
+                //console.log(512,this.user_data.user_city)
+                if(this.user_data.user_city && this.user_data.user_city[0] === null){
                     return "暂无信息";
                 }
                 for(let i in this.user_data.user_city){

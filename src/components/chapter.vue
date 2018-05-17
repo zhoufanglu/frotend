@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <chapter_comment_file></chapter_comment_file>
+                <chapter_comment_file @transferCourse="getCourseInfoFromChapter"></chapter_comment_file>
         </div>
         </div>
         <teach-foot></teach-foot>
@@ -78,6 +78,7 @@
                 chapter_child:{
                     id:this.$route.params.chapter_child_id
                 },
+                course:{},//课程信息
                 playerOptions : {
                     playbackRates: [1.0], //播放速度
                     autoplay: false, //如果true,浏览器准备好时开始回放。
@@ -136,7 +137,7 @@
                     this.$message.warning('请先登录后才能完成！');
                     return false;
                 }
-                if(this.chapter_child.learn_status === 1 ){
+                if(this.course.learn_status === 1 ){
                     this.$message.warning('您的课程还未开始，请先开始课程再进行学习！');
                     return false;
                 }
@@ -148,7 +149,10 @@
                     .catch(error =>{
                         console.log(err);
                     });
-            }
+            },
+            getCourseInfoFromChapter(data){
+                this.course = data;
+            },
         },
         mounted(){
             //存子章节id
@@ -158,6 +162,8 @@
            }
             //console.log(36,this.$state.current);
             this.getChapterChildInfo();
+            this.getCourseInfoFromChapter();//获取子组件的信息 子组件-》父组件  获取课程信息
+
         },
         components:{chapter_comment_file}
     }
