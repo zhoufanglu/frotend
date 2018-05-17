@@ -146,7 +146,7 @@
         }
     }
 </script>
-<style scoped  lang="scss" type="text/scss">
+<style  lang="scss" type="text/scss">
     .login-or-register-f{
         .el-dialog{
             width: 380px!important;

@@ -509,6 +509,9 @@
         computed:{
             getCity(){
                 let city_name = "";
+                if(this.user_data.user_city[0] === null){
+                    return "暂无信息";
+                }
                 for(let i in this.user_data.user_city){
                     city_name += CodeToText[this.user_data.user_city[i]] + "/";
                 }
@@ -522,39 +525,6 @@
         }
     }
 </script>
-<style scoped type="text/scss" lang="scss">
-    @import "~@/assets/scss/page/personal_center.scss";
-</style>
 <style type="text/scss" lang="scss">
-    .personal-center{
-        //element
-        .left-nav{
-            .el-tabs__nav{
-                min-height: 800px;
-            }
-            .el-tabs__item{
-                height: 100px;
-                line-height: 100px;
-                font-size: 20px;
-                font-weight: 600;
-                width: 180px;
-                text-align: center!important;
-            }
-            .el-tabs__active-bar{
-                background-color: $selectColor;
-            }
-            .is-active{
-                color: $selectColor;
-            }
-            .is-left{
-
-            }
-        }
-        .personal-dialog{
-            margin-top: 15vh;
-            .el-form{
-                padding-right: 30px;
-            }
-        }
-    }
+    @import "~@/assets/scss/page/personal_center.scss";
 </style>

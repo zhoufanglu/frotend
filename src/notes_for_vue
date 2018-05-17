@@ -8,9 +8,10 @@
 1.就是当你给一个vue组件绑定事件时候，要加上native！如果是普通的html元素！就不需要
 2，对于字符串类型，浅复制是对值的复制，对于对象来说，浅复制是对对象地址的复制，并没   有开辟新的栈，也就是复制的结果是两个对象指向同一个地址，修改其中一个对象的属性， 
 则另一个对象的属性也会改变，而深复制则是开辟新的栈，两个对象对应两个不同的地址，修改一个对象的属性，不会改变另一个对象的属性。深复制实现代码如下：可以从两个方法进行解决。 
-:to="{path:'/chapter',query:{id:i.id}}"传参   
-:to="{path:'/chapter',params:{id:i.id}}"传参  
-this.$route.query.id,取参数  
+```javascript
+//:to="{path:'/chapter',query:{id:i.id}}"//传参   
+//:to="{path:'/chapter',params:{id:i.id}}//"传参  
+this.$route.query.id,//取参数  
 this.$router.push({
             path: 'yourPath', 
             name: '要跳转的路径的 name,在 router 文件夹下的 index.js 文件内找',
@@ -23,18 +24,25 @@ this.$router.push({
                 dataObj: this.msg
             }*/
         }) 
-        decodeuricomponent 
+        //decodeuricomponent 
+```
+
          
 3.组件传值--子组件传值个给父组件  
-**子组件**  
-this.$emit('transferCourse',response.course);//把课程信息传输给course_detail路由 
+**子组件**    
+```javascript
+    this.$emit('transferCourse',response.course);//把课程信息传输给course_detail路由 
+```
 **父组件**  
-@transferCourse = 'getCourse' //记住 不要加括号
+```javascript
+    @transferCourse = 'getCourse' //记住 不要加括号
+```
 
 ###promise
 1.创建一个promise实例 
 2.用promise.all();
 //定义 promise
+```javascript
 return new Promise((resolve,reject)=>{//resolve正确的结果,reject错误的结果
                     this.$fetch('/getCourseList',data)
                         .then((response) => {
@@ -47,3 +55,4 @@ return new Promise((resolve,reject)=>{//resolve正确的结果,reject错误的�
                             reject(err);
                         });
                 });
+```
