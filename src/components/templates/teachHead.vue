@@ -1,7 +1,7 @@
 <template>
     <div class="teach-head" :class="bg_color" >
         <div class="name">
-            <router-link class="remove-a-css" to="/home" :class="text_color">教学管理系统</router-link>
+            <router-link class="remove-a-css home-name" to="/home" :class="text_color">教学管理系统</router-link>
         </div>
         <div class="is-show-head" :class="show_hide_vis">
             <span><router-link class="remove-a-css no-warp" to="/course">课程中心</router-link></span>
@@ -103,13 +103,17 @@
 
 <style scoped lang="scss" type="text/scss">
     .teach-head{
+        .home-name{
+            color: white!important;
+            background-color: $theme;
+        }
         background-color: $theme;
         color: $white;
        @include vertical-center;
         justify-content: space-between;
         padding: 0 40px;
         height: $head-height;
-        border-bottom: solid 1px $stable;
+        border-bottom: none!important;
         .is-show-head{
             @include vertical-center;
             justify-content: space-between;
@@ -146,7 +150,7 @@
             }
         }
         .name{
-            font-size: 24px;
+            font-size: 18px;
             font-weight: bolder;
             letter-spacing: 6px;
             a{

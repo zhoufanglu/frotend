@@ -57,13 +57,13 @@
                         </div>
                         <div class="chapter-r">
                             <div>我是VM</div>
+                            <iframe height="100%" width="100%" src="www.baidu.com" frameborder="0"></iframe>
                         </div>
                     </div>
                 </div>
                 <chapter_comment_file @transferCourse="getCourseInfoFromChapter"></chapter_comment_file>
         </div>
         </div>
-        <teach-foot></teach-foot>
     </div>
 </template>
 <script>

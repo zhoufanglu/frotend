@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <router-view/>
+        <teach-foot></teach-foot>
     </div>
 </template>
 
@@ -23,6 +24,9 @@
 
 <style lang="scss">
     #app {
-    
+        position: relative;
+        height: auto !important;
+        height: 100%;
+        min-height: 100%;
     }
 </style>

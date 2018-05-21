@@ -6,7 +6,7 @@ body{
     padding: 0;
 }
 //动态数据
-$head-height:80px;
+$head-height:60px;
 @mixin vertical-center { // 垂直水平居中
     display: flex;
     align-items: center;

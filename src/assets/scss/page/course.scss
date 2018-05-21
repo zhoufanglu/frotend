@@ -1,4 +1,5 @@
 .course{
+    padding-bottom: 100px;
     .content-head{
         display: flex;
         flex-direction: column;
@@ -58,6 +59,9 @@
 }
 .course-row{
     width: 100%;
+    .el-col-4{
+        min-width: 216px!important;
+    }
 }
 .course-item{
     display: flex;

@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <teach-head :nickName="nickName" :headSrcLink="headSrcLink" :show_hide_vis="show_hide_vis" :bg_color="bg_color" :text_color="text_color"></teach-head>
+        <teach-head :show_hide_vis="show_hide_vis" ></teach-head>
         <div class="content">
             <div class="content-top">
                 <div class="first-row">
@@ -100,9 +100,9 @@
                 headSrcLink:require('@/assets/images/dogHead.jpg'),
                 headSrcLink2:require('@/assets/images/14岁程序员.jpg'),
                 //css
-                show_hide_vis:'hide-vis',
-                bg_color:'fn-bg-white',
-                text_color:'fn-color-black',
+                show_hide_vis:'show-vis',
+                /*bg_color:'fn-bg-white',
+                text_color:'fn-color-black',*/
                 //content-top
                 //content-panel
                 top_title:[],             //轮播左边的标题

@@ -125,6 +125,9 @@
             }
             .body{
                 border: solid 1px $light;
+                .comment-row:last-child{
+                    border-bottom: none;
+                }
                 .comment-row{
                     @extend .need-hover;
                     padding: 10px;
