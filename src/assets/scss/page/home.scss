@@ -9,6 +9,7 @@ $content-top-height:300px;
             background-color: $theme;
             color: $white;
             min-height:$content-top-height;
+            margin-top: 30px;
             .el-col-6 {
                 padding: 0 0 0 16px;
                 .grid-content{
@@ -86,7 +87,7 @@ $content-top-height:300px;
 .el-popover {
     background-color: $white!important;
     position: absolute!important;
-    top:calc(#{$head-height} + 10px)!important;
+    top:calc(#{$head-height} + 40px)!important;
     width: 40%;
     padding: 30px;
     margin: 0;

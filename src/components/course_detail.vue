@@ -2,8 +2,8 @@
     <div class="course_detail">
         <teach-head :nickName="nickName" :headSrcLink="headSrcLink" :show_hide_vis="show_hide_vis" ></teach-head>
         <div>
-            <div class="content">
-                <div class="content-top">
+            <div class="course-detail-top" :style="top_style">
+                <div class="content">
                     <!--面包屑-->
                     <el-breadcrumb separator="/">
                         <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
@@ -11,7 +11,7 @@
                         <el-breadcrumb-item>{{course.course_name}}</el-breadcrumb-item>
                     </el-breadcrumb>
                     <div class="title">
-                        <div>
+                        <div class="course-name">
                             {{course.course_name}}
                         </div>
                         <div class="title-b">
@@ -37,8 +37,13 @@
                                 </div>-->
                             </div>
                         </div>
+                        <div class="introduction">
+                            简介: {{course.course_introduction}}
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="content">
                 <chapter_comment_file @transferCourse="getCourseInfoFromChapter"></chapter_comment_file>
             </div>
         </div>
@@ -55,6 +60,10 @@
                 headSrcLink:require('@/assets/images/dogHead.jpg'),
                 //css
                 show_hide_vis:'show-vis',
+                top_style:{
+                    "background":"url("+require('../assets/images/gaosimohu.jpg')+") -30% -50%",
+                    "background-size":"cover"
+                },
                 course: {
                     id: this.$route.params.course_id,
                 },
@@ -114,9 +123,13 @@
                 color: $selectColor!important;
             }
             .el-tabs__header{
+                margin-left: 10px!important;
                 border-bottom: solid 1px $light!important;
-                padding-bottom: 20px;
+                //padding-bottom: 20px;
             }
+        }
+        .el-breadcrumb__inner{
+            color: $white!important;
         }
     }
 </style>

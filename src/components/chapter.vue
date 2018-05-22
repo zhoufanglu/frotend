@@ -2,65 +2,75 @@
     <div class="course_detail">
         <teach-head :show_hide_vis="show_hide_vis" ></teach-head>
         <div>
-            <div class="content">
-                <div class="content-top">
-                    <!--面包屑-->
-                    <el-breadcrumb separator="/">
-                        <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-                        <el-breadcrumb-item :to="{ path: '/course' }">课程中心</el-breadcrumb-item>
-                        <el-breadcrumb-item :to="{ path: '/course_detail' }">{{chapter_child.course_name}}</el-breadcrumb-item>
-                        <el-breadcrumb-item :to="{ path: '/course_detail' }">{{chapter_child.chapter_name}}</el-breadcrumb-item>
-                        <el-breadcrumb-item>{{chapter_child.image_text_name}}</el-breadcrumb-item>
-                    </el-breadcrumb>
-                    <div class="chapter">
-                        <div class="chapter-l">
+            <div class="content-top">
+                <!--面包屑-->
+                <!--<el-breadcrumb separator="/">
+                    <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+                    <el-breadcrumb-item :to="{ path: '/course' }">课程中心</el-breadcrumb-item>
+                    <el-breadcrumb-item :to="{ path: '/course_detail' }">{{chapter_child.course_name}}</el-breadcrumb-item>
+                    <el-breadcrumb-item :to="{ path: '/course_detail' }">{{chapter_child.chapter_name}}</el-breadcrumb-item>
+                    <el-breadcrumb-item>{{chapter_child.image_text_name}}</el-breadcrumb-item>
+                </el-breadcrumb>-->
+                <div class="chapter">
+                    <div class="chapter-l">
+                        <!--<div class="title">
+                            <div class="title-l">
+                                <div class="need-hover" @click="back()">
+                                    <i class="icon-font">&#xe78a;</i>
+                                    <div>{{chapter_child.course_name}}</div>
+                                </div>
+                                <div class="s-title">{{chapter_child.chapter_name}}</div>
+                            </div>
+                        </div>-->
+                        <div class="chapter-child-body">
                             <div class="title">
-                                <div class="title-l">
-                                    <div class="need-hover" @click="back()">
-                                        <i class="icon-font">&#xe78a;</i>
-                                        <div>{{chapter_child.course_name}}</div>
-                                    </div>
-                                    <div class="s-title">{{chapter_child.chapter_name}}</div>
+                                <div class="need-hover" @click="back()">
+                                    <i class="icon-font" style="font-size: 20px">&#xe78a;</i>
+                                    <!--<div>{{chapter_child.course_name}}</div>-->
+                                </div>
+                                <div>
+                                    {{chapter_child.image_text_name}}
+                                </div>
+                                <div>
+                                    <el-button v-if="chapter_child.image_text_status===0" @click="finishChapter()" type="danger">完成学习</el-button>
+                                    <el-button v-if="chapter_child.image_text_status===1" type="info" disabled>已学习</el-button>
                                 </div>
                             </div>
-                            <div class="chapter-child-body">
-                                <div class="title">
-                                    <div>
-                                        {{chapter_child.image_text_name}}
-                                    </div>
-                                    <div>
-                                        <el-button v-if="chapter_child.image_text_status===0" @click="finishChapter()" type="danger">完成学习</el-button>
-                                        <el-button v-if="chapter_child.image_text_status===1" type="info" disabled>已学习</el-button>
-                                    </div>
+                            <div class="bottom">
+                                <div v-if="chapter_child.image_text_type === 1">
+                                    这是一张图片
                                 </div>
-                                <div class="bottom">
-                                    <div v-if="chapter_child.image_text_type === 1">
-                                        这是一张图片
-                                    </div>
-                                    <div v-if="chapter_child.image_text_type === 2">
-                                        <!--<video src="../assets/video/vue-2-power-model.mp4" style="width: 100%" controls="controls">
-                                            您的浏览器不支持 video 标签。
-                                        </video>
-                                        <video :src="$imgPath+chapter_child.image_text_video" style="width: 100%" controls="controls">
-                                            您的浏览器不支持 video 标签。
-                                        </video>-->
-                                        <video-player  class="video-player vjs-custom-skin"
-                                                       ref="videoPlayer"
-                                                       :playsinline="true"
-                                                       :options="playerOptions"
-                                        ></video-player>
+                                <div v-if="chapter_child.image_text_type === 2">
+                                    <!--<video src="../assets/video/vue-2-power-model.mp4" style="width: 100%" controls="controls">
+                                        您的浏览器不支持 video 标签。
+                                    </video>
+                                    <video :src="$imgPath+chapter_child.image_text_video" style="width: 100%" controls="controls">
+                                        您的浏览器不支持 video 标签。
+                                    </video>-->
+                                    <video-player  class="video-player vjs-custom-skin"
+                                                   ref="videoPlayer"
+                                                   :playsinline="true"
+                                                   :options="playerOptions"
+                                    ></video-player>
 
-                                    </div>
-                                    <div class="body-vm">{{chapter_child.image_text_detail}}</div>
                                 </div>
+                                <div class="body-vm">{{chapter_child.image_text_detail}}</div>
                             </div>
                         </div>
-                        <div class="chapter-r">
-                            <div>我是VM</div>
-                            <iframe height="100%" width="100%" src="www.baidu.com" frameborder="0"></iframe>
+                    </div>
+                    <div class="chapter-r">
+                        <div>我是VM</div>
+                        <iframe height="100%" width="100%" src="www.baidu.com" frameborder="0"></iframe>
+                        <div class="vm-state-btn">
+                            <el-button >重启</el-button>
+                            <el-button >挂起</el-button>
+                            <el-button >启动</el-button>
+                            <el-button >暂停</el-button>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="content">
                 <chapter_comment_file @transferCourse="getCourseInfoFromChapter"></chapter_comment_file>
         </div>
         </div>
@@ -175,6 +185,9 @@
     }
     .chapter{
         display: flex;
+        height: 92vh;
+        border-bottom: solid 1px $light;
+        padding-bottom: 8px;
         .chapter-l{
             width: 50%;
             display: flex;
@@ -183,9 +196,9 @@
             .title{
                 @include vertical-center;
                 justify-content: space-between;
-                border-bottom: solid 1px $light;
-                padding-bottom: 16px;
-                padding-left: 16px;
+                //border-bottom: solid 1px $light;
+                padding: 16px 16px 16px 0;
+                font-size: 20px;
                 .title-l{
                     >div:first-child{
                         @include vertical-center;
@@ -212,7 +225,7 @@
                     font-size: 18px;
                 }
                 .bottom{
-                    font-size: 18px;
+                    font-size: 15px;
                     letter-spacing: 6px;
                     display: flex;
                     flex-direction: column;
@@ -221,6 +234,8 @@
             }
         }
         .chapter-r{
+            display: flex;
+            flex-direction: column;
             width: 50%;
             padding: 16px;
             border-left: solid 1px $light;

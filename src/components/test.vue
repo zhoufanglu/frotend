@@ -1,22 +1,7 @@
 <template>
-    <div class="personal-center">
-        <teach-head :nickName="nickName" :headSrcLink="headSrcLink" :show_hide_vis="show_hide_vis" ></teach-head>
-        <div class="content">
-            <div class="content-top">
-                <div class="top-l">
-                    <div class="head-img">
-                        <img src="" alt="">
-                    </div>
-                    <div class="personal-info">
-                        <span>男</span>
-                        <span>tog ...</span>
-                    </div>
-                </div>
-                <div class="top-r">
-                    2
-                </div>
-            </div>
-        </div>
+    <div class="test">
+        <div class="bg bg-blur"></div>
+        <div class="content content-front">我是内容</div>
     </div>
 </template>
 <script>
@@ -38,6 +23,38 @@
         }
     }
 </script>
-<style type="text/scss" lang="scss">
-    @import "~@/assets/scss/page/personal_center.scss";
+<style scoped type="text/scss" lang="scss">
+    .test{
+        .content {
+            color: #ffffff;
+            font-size: 40px;
+        }
+        .bg {
+            background: url('../assets/images/gaosimohu.jpg');
+            //background-color: #172a34;
+            height:600px;
+            text-align: center;
+            line-height: 600px;
+        }
+        .bg-blur {
+            float: left;
+            width: 100%;
+           /* background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;*/
+            /*-webkit-filter: blur(15px);
+            -moz-filter: blur(15px);
+            -o-filter: blur(15px);
+            -ms-filter: blur(15px);*/
+            //filter: blur(4px);
+        }
+        .content-front {
+            position:absolute;
+            left: 10px;
+            right: 10px;
+            height:600px;
+            line-height: 600px;
+            text-align: center;
+        }
+    }
 </style>

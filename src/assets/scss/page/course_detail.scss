@@ -1,14 +1,20 @@
 .course_detail{
     padding-bottom: 100px;
-    .content-top{
+    .course-detail-top{
         padding:20px 0 20px 0;
         border-bottom: solid 1px $light;
+        color: white;
+        box-shadow: 0 4px 16px 0 rgba(7, 17, 27, 0.1);
         .title{
             margin-top: 20px;
             font-size: 26px;
             font-weight: bolder;
             letter-spacing: 6px;
             color: $darker;
+            .course-name{
+                color: $light;
+                font-size: 20px;
+            }
             .title-b{
                 display: flex;
                 margin-top: 15px;
@@ -19,10 +25,11 @@
                     }
                 }
                 .course-info{
+                    color: $light;
                     margin-left: 30px;
                     @include vertical-center;
                     font-size: 15px;
-                    font-weight: normal;
+                    font-weight: bolder;
                     >div{
                         border-right: solid 1px $stable;
                         padding: 10px 20px 10px 20px;
@@ -37,6 +44,12 @@
                         border: none!important;
                     }
                 }
+            }
+            .introduction{
+                font-size: 15px;
+                color: $white;
+                font-weight: normal;
+                margin-top: 20px;
             }
         }
     }
@@ -69,7 +82,6 @@
         color: $selectColor!important;
     }
     .el-tabs__header{
-        //border-bottom: solid 1px $light!important;
         padding-bottom: 20px;
     }
 }

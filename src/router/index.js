@@ -13,6 +13,8 @@ import chapter from '@/components/chapter'
 
 import login from '@/components/login'
 
+import test from '@/components/test' //测试vue
+
 Vue.use(Router)
 
 export default new Router({
@@ -66,6 +68,11 @@ export default new Router({
             path: '/chapter',
             name: 'chapter',
             component: chapter,
+        },
+        {
+            path: '/test',
+            name: 'test',
+            component: test,
         }
     ]
 })

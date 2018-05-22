@@ -105,9 +105,9 @@
     .teach-head{
         .home-name{
             color: white!important;
-            background-color: $theme;
+            background-color: #0D0206;
         }
-        background-color: $theme;
+        background-color: #0D0206;
         color: $white;
        @include vertical-center;
         justify-content: space-between;

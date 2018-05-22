@@ -2,9 +2,9 @@
     <div class="content-body chapter-comment-file">
         <el-row>
             <el-col class="content-body-l" :span="16">
-                <div class="introduction">
+                <!--<div class="introduction">
                     简介: {{course.course_introduction}}
-                </div>
+                </div>-->
                 <div class="router-link-c">
                     <template>
                         <el-tabs class="content-tab" v-model="activeName"  @tab-click="handleClick">
@@ -14,7 +14,7 @@
                                     <router-link  :to="{name:'chapter',params:{chapter_child_id:j.id}}" @click.native="linkChapter(j.id)" class="detail-list remove-a-css "v-for="(j,index) in i.detail_list" :key="index">
                                         <div class="row need-hover">
                                             <i class="icon-font">&#xe6b7;</i><span>{{j.name}}</span>
-                                            <div class="status" v-if="j.chapter_status === 1"><i class="el-icon-success fn-color-notStart "></i>已学习</div>
+                                            <div class="status" v-if="j.chapter_status === 1"><i class="el-icon-success fn-color-balanced "></i>已学习</div>
                                             <div class="status" v-if="j.chapter_status === 0"><i class="el-icon-error fn-color-danger"></i>未学习</div>
                                         </div>
                                     </router-link>
@@ -221,7 +221,7 @@
                         <template v-if="right_data.user_rank.length == 0">
                             <no-data-panel tip="暂无用户信息"></no-data-panel>
                         </template>
-                        <div class="see-more">
+                        <div class="see-more" v-if="right_data.user_rank.length != 0">
                             <router-link to="/user_rank" class="remove-a-css" target="_blank"><span class="need-hover">查看更多&nbsp;></span></router-link>
                         </div>
                     </div>
@@ -239,7 +239,7 @@
                         <template v-if="right_data.similar_course.length == 0">
                             <no-data-panel tip="暂无相关课程"></no-data-panel>
                         </template>
-                        <div class="see-more">
+                        <div class="see-more" v-if="right_data.similar_course.length != 0">
                             <router-link  to="/course" class="remove-a-css" target="_blank"><span class="need-hover">查看更多&nbsp;></span></router-link>
                         </div>
                     </div>
@@ -520,7 +520,7 @@
         }
     }
 </script>
-<style scoped lang="scss" type="text/scss">
+<style  lang="scss" type="text/scss">
     .content-body{
         .el-row{
             width: 100%;
@@ -547,10 +547,11 @@
                     .detail-list {
                         cursor: pointer;
                         padding-left: 30px;
+                        font-size: 16px;
                         .row {
                             padding-left: 20px !important;
-                            height: 46px;
-                            line-height: 46px;
+                            height: 38px;
+                            line-height: 38px;
                             border-radius: 6px;
                             padding: 6px;
                             background-color: #F6F7FB;
@@ -600,7 +601,7 @@
                                 justify-content: space-between;
                                 height: 100%;
                                 margin-left: 30px;
-                                width: 100%;
+                                width: 80%;
                                 .row-1{
                                     font-size: 18px;
                                     display: flex;
@@ -700,7 +701,8 @@
                 }
                 .file-table{
                     border: solid 1px $light;
-                    border-bottom: none;
+                    //border-bottom: none;
+                    font-size: 15px;
                     .remove-a-css{
                         color: $darker;
                     }
@@ -745,7 +747,7 @@
             display: flex;
             flex-direction: column;
             .list-title{
-                font-size: 20px;
+                font-size: 16px;
                 height:44px;
                 line-height: 44px;
                 padding-left: 16px;
@@ -759,6 +761,7 @@
             .rank-list{
                 display: flex;
                 justify-content: flex-end;
+                font-size: 15px;
                 .panel{
                     width: 90%;
                     display: flex;
@@ -803,6 +806,7 @@
                         }
                     }
                     .see-more{
+                        font-size: 14px;
                         width: 100%;
                         text-align: center;
                     }
@@ -812,8 +816,11 @@
                 display: flex;
                 justify-content: flex-end;
                 margin-top: 60px;
+                font-size: 15px;
                 .panel{
                     width: 90%;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 16px 0 rgba(7,17,27,.1);
                     >a{
                         border: none!important;
                     }
@@ -822,6 +829,7 @@
                         border: none!important;
                     }
                     .see-more{
+                        font-size: 14px;
                         width: 100%;
                         text-align: center;
                         padding-bottom: 20px;

@@ -13,7 +13,7 @@
 <style scoped type="text/scss" lang="scss">
     .no-data-panel{
         width: 100%;
-        height: 500px;
+        min-height: 200px;
         @include vertical-center;
         justify-content: center!important;
         font-size: 24px;
