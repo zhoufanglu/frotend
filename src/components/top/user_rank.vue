@@ -21,7 +21,7 @@
                 </template>
                 <!--分页-->
                 <div class="paging">
-                    <el-pagination background layout="prev, pager, next"@current-change="getUserRank()" :page-size="paging.page_all_num" :current-page.sync="paging.now_page"  :total="paging.data_number"></el-pagination>
+                    <el-pagination v-if="paging.data_number !== 0" background layout="prev, pager, next"@current-change="getUserRank()" :page-size="paging.page_all_num" :current-page.sync="paging.now_page"  :total="paging.data_number"></el-pagination>
                 </div>
             </div>
         </div>

@@ -55,7 +55,7 @@
                                 </div>
                                 <!--分页-->
                                 <div class="paging">
-                                    <el-pagination background layout="prev, pager, next" @current-change="pageChange1()" :page-size="paging1.page_all_num" :current-page.sync="paging1.now_page"  :total="paging1.data_number"></el-pagination>
+                                    <el-pagination v-if="paging1.data_number" background layout="prev, pager, next" @current-change="pageChange1()" :page-size="paging1.page_all_num" :current-page.sync="paging1.now_page"  :total="paging1.data_number"></el-pagination>
                                 </div>
                             </el-tab-pane>
                             <el-tab-pane label="我的收藏" name="book_marks">
@@ -81,7 +81,7 @@
                                 </div>
                                 <!--分页-->
                                 <div class="paging">
-                                    <el-pagination background layout="prev, pager, next" @current-change="pageChange2()" :page-size="paging2.page_all_num" :current-page.sync="paging2.now_page"  :total="paging2.data_number"></el-pagination>
+                                    <el-pagination v-if="paging2.data_number!== 0" background layout="prev, pager, next" @current-change="pageChange2()" :page-size="paging2.page_all_num" :current-page.sync="paging2.now_page"  :total="paging2.data_number"></el-pagination>
                                 </div>
                             </el-tab-pane>
                             <el-tab-pane label="个人信息" name="personal_info">

@@ -59,7 +59,7 @@
             </div>
             <!--分页-->
             <div class="paging">
-                <el-pagination background layout="prev, pager, next"@current-change="getCourse()" :page-size="page_all_num" :current-page.sync="now_page"  :total="data_number"></el-pagination>
+                <el-pagination v-if="data_number !== 0" background layout="prev, pager, next"@current-change="getCourse()" :page-size="page_all_num" :current-page.sync="now_page"  :total="data_number"></el-pagination>
             </div>
         </div>
         <teach-foot></teach-foot>
