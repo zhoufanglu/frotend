@@ -14,10 +14,10 @@
                 <div class="study-data">
                     <template v-if="chapter_list.length!==0">
                         <el-row class="row" @click.native="link('study_data_detail','study_data_id',i.id)" v-for="(i,index) in chapter_list" :key="index">
-                            <el-col :span="8" class="bg-img">
+                            <el-col :span="10" class="bg-img">
                                 <img :src="i.chapter_img" alt="" width="100%" height="100%">
                             </el-col>
-                            <el-col :span="16">
+                            <el-col :span="14">
                                 <div class="data-r">
                                     <div>{{i.chapter_name}}</div>
                                     <div>

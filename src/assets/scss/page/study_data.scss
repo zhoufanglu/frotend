@@ -17,15 +17,18 @@
                 padding: 30px;
                 cursor: pointer;
                 .bg-img{
-                    height: 160px;
-                    padding: 0 30px 16px 0;
+                    width: 210px;
+                    height: 120px;
                 }
             }
             .data-r{
                 display: flex;
                 flex-direction: column;
+                height: 120px;
+                padding-left: 30px;
                 >div:not(:first-child){
                     margin-top: 16px;
+                    font-size: 15px;
                 }
                 >div:first-child{
                     font-weight: bolder;
@@ -46,6 +49,7 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                    font-size: 14px;
                     .type{
                         display: flex;
                         >div{
