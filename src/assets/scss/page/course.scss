@@ -1,5 +1,5 @@
 .course{
-    padding-bottom: 100px;
+
     .content-head{
         display: flex;
         flex-direction: column;
@@ -81,7 +81,7 @@
     }
     .bg-img{
         border-radius: 12px;
-        height: 80%;
+        height: 110px!important;
         border: solid 1px $stable;
         overflow: hidden;
         position: relative;

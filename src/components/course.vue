@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="panel" v-if="isLoad">
-                    <el-row class="course-row s-course-panel" :gutter="40" justify="center" v-if="course.length !== 0">
+                    <el-row class="course-row s-course-panel" :gutter="30" justify="center" v-if="course.length !== 0">
                         <el-col :span="4" v-for="(j,index) in course" :key="index">
                             <router-link :to="{name:'course_detail',params:{course_id:j.id}}" class="grid-content course-item bg-purple">
                                 <div class="bg-img">
