@@ -26,6 +26,13 @@
                 flex-direction: column;
                 height: 120px;
                 padding-left: 30px;
+                .time{
+                    white-space: nowrap;
+                }
+                .text-content{
+                    @include ellipsis(1);
+                    height: 30px;
+                }
                 >div:not(:first-child){
                     margin-top: 16px;
                     font-size: 15px;
@@ -53,13 +60,19 @@
                     .type{
                         display: flex;
                         >div{
+                            white-space: nowrap;
                             padding: 3px 6px;
                             border: solid 1px $light;
                             margin-right: 16px;
+                            font-size: 14px;
                         }
                     }
                     .comment{
                         display: flex;
+                        span{
+                            white-space: nowrap;
+                            font-size: 14px;
+                        }
                         >span:first-child{
                             margin-right: 16px;
                         }

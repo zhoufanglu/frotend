@@ -24,7 +24,7 @@
                                         <div class="name"><i class="icon-font">&#xe6b3;</i>{{i.chapter_writer}}</div>
                                         <div class="time"><i class="icon-font">&#xe78b;</i>{{i.created_at}}</div>
                                     </div>
-                                    <div>{{i.chapter_introduction}}</div>
+                                    <div class="text-content">{{i.chapter_introduction}}</div>
                                     <div class="type-and-comment">
                                         <div class="type">
                                             <div v-for="j in i.chapter_type">{{j}}</div>
@@ -176,6 +176,7 @@
                     border: solid 1px $stable;
                     border-radius: 0;
                     min-width: 100px;
+                    font-size: 15px;
                 }
             }
         }
