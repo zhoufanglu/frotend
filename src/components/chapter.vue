@@ -199,12 +199,12 @@
                 if(type === "updateVirtual"){ //重置需要加上uerid
                     url ="/virtual/"+type+"/"+this.virtual.kvm_id+"/"+this.virtual.kvmbase_id+"/"+this.$state.user.user_id+""
                 }
-                console.log(198,url);
+                //console.log(198,url);
                 this.$fetch(url)
                     .then((response) => {
                         //console.log(173,response)
                         if(response.status === 1){
-
+                            this.getUserVirtual();
                         }else if(response.status === 0){
                             this.$message.success(response.msg);
                         }
