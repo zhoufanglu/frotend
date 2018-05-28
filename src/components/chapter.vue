@@ -62,10 +62,18 @@
                         <div>我是VM</div>
                         <iframe height="100%" width="100%" src="www.baidu.com" frameborder="0"></iframe>
                         <div class="vm-state-btn">
-                            <el-button >重启</el-button>
-                            <el-button >挂起</el-button>
-                            <el-button >启动</el-button>
-                            <el-button >暂停</el-button>
+                            <el-button :disabled="virtual.status === 1"
+                                       @click="virtualOperate('startVirtual')">启动</el-button>
+                            <el-button :disabled="virtual.status === 0"
+                                       @click="virtualOperate('closeVirtual')">关闭</el-button>
+                            <el-button :disabled="virtual.status === 2 || virtual.status === 0"
+                                       @click="virtualOperate('suspendVirtual')">挂起</el-button>
+                            <el-button :disabled="virtual.status === 0"
+                                       @click="virtualOperate('resumeVirtual')">恢复</el-button>
+                            <el-button :disabled="virtual.status === 0"
+                                       @click="virtualOperate('resetVirtual')">重启</el-button>
+                            <el-button :disabled="virtual.status === 0"
+                                       @click="virtualOperate('updateVirtual')">重置</el-button>
                         </div>
                     </div>
                 </div>
@@ -111,6 +119,11 @@
                         remainingTimeDisplay: false,
                         fullscreenToggle: true  //全屏按钮
                     }
+                },
+                virtual:{//虚拟机对象
+                    status:0,//1:开机状态 2：挂起状态 0：关机状态
+                    kvm_id:"",//虚拟机id
+                    kvmbase_id:'',//虚拟机模板id
                 }
             }
         },
@@ -163,6 +176,56 @@
             getCourseInfoFromChapter(data){
                 this.course = data;
             },
+            getUserVirtual(){ //获取虚拟机
+                this.$fetch('/virtual/getUserVirtual',{user_id:this.$state.user.user_id})
+                    .then((response) => {
+                        //console.log(173,response)
+                        if(response.status === 1){
+                            //this.virtual.status = Number(response.data.virtual_status);
+                            this.virtual.status=2;
+                            this.virtual.kvm_id = response.data.kvm_id;
+                            this.virtual.kvmbase_id = response.data.kvmbase_id;
+                        }else if(response.status === 0){
+                            this.$message.success(response.msg);
+                        }
+                    })
+                    .catch(error =>{
+                        console.log(err);
+                    });
+            },
+            virtualOperate(type){  //虚拟机操作按钮
+                let url = '';
+                url ="/virtual/"+type+"/"+this.virtual.kvm_id+"/"+this.virtual.kvmbase_id+""
+                if(type === "updateVirtual"){ //重置需要加上uerid
+                    url ="/virtual/"+type+"/"+this.virtual.kvm_id+"/"+this.virtual.kvmbase_id+"/"+this.$state.user.user_id+""
+                }
+                console.log(198,url);
+                this.$fetch(url)
+                    .then((response) => {
+                        //console.log(173,response)
+                        if(response.status === 1){
+
+                        }else if(response.status === 0){
+                            this.$message.success(response.msg);
+                        }
+                    })
+                    .catch(error =>{
+                        console.log(err);
+                    });
+                /*if(type === 'startVirtual'){ //启动
+                    url ="/virtual/startVirtual/"+this.virtual.kvm_id+"/"+this.virtual.kvmbase_id+""
+                }else if(type === 'closeVirtual'){ //关闭
+
+                }else if(type === 'suspendVirtual'){ //挂起
+
+                }else if(type === 'resumeVirtual'){ //恢复
+
+                }else if(type === 'resetVirtual'){ //重启
+
+                }else if(type === 'UpdateVirtual'){ //重启
+
+                }*/
+            }
         },
         mounted(){
             //存子章节id
@@ -173,7 +236,7 @@
             //console.log(36,this.$state.current);
             this.getChapterChildInfo();
             this.getCourseInfoFromChapter();//获取子组件的信息 子组件-》父组件  获取课程信息
-
+            this.getUserVirtual();
         },
         components:{chapter_comment_file}
     }
@@ -240,6 +303,9 @@
             padding: 16px;
             border-left: solid 1px $light;
             .body-vm{
+            }
+            .vm-state-btn{
+                margin-top: 30px;
             }
         }
     }

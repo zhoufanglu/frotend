@@ -979,3 +979,149 @@ ajax({
     }
   }
 });
+/***************************************用户虚拟机操作接口******************************************/
+//获取指定用户id的虚拟机信息
+ajax({
+    title:'12',
+    url:'http://127.0.0.1/teachep/public/virtual/getUserVirtual',
+    type:'post',
+    request:{
+        user_id:"用户id",
+    },
+    res:{
+        status:"0:失败 1:成功",
+        data:{
+            user_id:"用户id",
+            kvm_id:"虚拟机id",
+            kvmbase_id:"虚拟机模板id",
+            virtual_status:"虚拟机状态（1:开机状态 2：挂起状态 0：关机状态）",
+        },
+        msg:"错误信息或者正确信息提示（建议直接显示msg）",
+    }
+});
+
+/*开机接口（接口采用的格式 http://127.0.0.1/teachep/public/admin/virtual/startVirtual/104/1）
+  建议写法：
+ url="http://127.0.0.1/teachep/public/admin/virtual/startVirtual/x1/x2";
+ url = url.replace('x1',id);//虚拟机id
+ url = url.replace('x2',mid);//虚拟机模板id
+*/
+ajax({
+    title:'开机接口',
+    url:'http://127.0.0.1/teachep/public/virtual/startVirtual/x1/x2',
+    type:'get',
+    request:{
+        //一下参数对应的就是url后面的x1，x2 这个几个值request不用传参，以下只是注释一下
+        id:"虚拟机id",
+        mid:"虚拟机模板id",
+    },
+    res:{
+        status:"0:失败 1:成功",
+        msg:"错误信息或者正确信息提示（建议直接显示msg）",
+    }
+});
+
+/*关机机接口（接口采用的格式 http://127.0.0.1/teachep/public/admin/virtual/closeVirtual/104/1）
+ 建议写法：
+ url="http://127.0.0.1/teachep/public/admin/virtual/closeVirtual/x1/x2";
+ url = url.replace('x1',id);//虚拟机id
+ url = url.replace('x2',mid);//虚拟机模板id
+ */
+ajax({
+    title:'关机机接口',
+    url:'http://127.0.0.1/teachep/public/virtual/closeVirtual/x1/x2',
+    type:'get',
+    request:{
+        //一下参数对应的就是url后面的x1，x2 这个几个值request不用传参，以下只是注释一下
+        id:"虚拟机id",
+        mid:"虚拟机模板id",
+    },
+    res:{
+        status:"0:失败 1:成功",
+        msg:"错误信息或者正确信息提示（建议直接显示msg）",
+    }
+});
+/*挂起接口（接口采用的格式 http://127.0.0.1/teachep/public/admin/virtual/suspendVirtual/104/1）
+ 建议写法：
+ url="http://127.0.0.1/teachep/public/admin/virtual/suspendVirtual/x1/x2";
+ url = url.replace('x1',id);//虚拟机id
+ url = url.replace('x2',mid);//虚拟机模板id
+ */
+ajax({
+    title:'挂起接口',
+    url:'http://127.0.0.1/teachep/public/virtual/suspendVirtual/x1/x2',
+    type:'get',
+    request:{
+        //一下参数对应的就是url后面的x1，x2 这个几个值request不用传参，以下只是注释一下
+        id:"虚拟机id",
+        mid:"虚拟机模板id",
+    },
+    res:{
+        status:"0:失败 1:成功",
+        msg:"错误信息或者正确信息提示（建议直接显示msg）",
+    }
+});
+/*恢复接口（接口采用的格式 http://127.0.0.1/teachep/public/admin/virtual/resumeVirtual/104/1）
+ 建议写法：
+ url="http://127.0.0.1/teachep/public/admin/virtual/resumeVirtual/x1/x2";
+ url = url.replace('x1',id);//虚拟机id
+ url = url.replace('x2',mid);//虚拟机模板id
+ */
+ajax({
+    title:'恢复接口',
+    url:'http://127.0.0.1/teachep/public/virtual/resumeVirtual/x1/x2',
+    type:'get',
+    request:{
+        //一下参数对应的就是url后面的x1，x2 这个几个值request不用传参，以下只是注释一下
+        id:"虚拟机id",
+        mid:"虚拟机模板id",
+    },
+    res:{
+        status:"0:失败 1:成功",
+        msg:"错误信息或者正确信息提示（建议直接显示msg）",
+    }
+});
+
+/*重启接口（接口采用的格式 http://127.0.0.1/teachep/public/admin/virtual/resetVirtual/104/1）
+ 建议写法：
+ url="http://127.0.0.1/teachep/public/admin/virtual/resetVirtual/x1/x2";
+ url = url.replace('x1',id);//虚拟机id
+ url = url.replace('x2',mid);//虚拟机模板id
+ */
+ajax({
+    title:'重启接口',
+    url:'http://127.0.0.1/teachep/public/virtual/resetVirtual/x1/x2',
+    type:'get',
+    request:{
+        //一下参数对应的就是url后面的x1，x2 这个几个值request不用传参，以下只是注释一下
+        id:"虚拟机id",
+        mid:"虚拟机模板id",
+    },
+    res:{
+        status:"0:失败 1:成功",
+        msg:"错误信息或者正确信息提示（建议直接显示msg）",
+    }
+});
+
+/*重置接口（接口采用的格式 http://127.0.0.1/teachep/public/admin/virtual/UpdateVirtual/104/1/1）
+ 建议写法：
+ url="http://127.0.0.1/teachep/public/admin/virtual/UpdateVirtual/x1/x2/x3";
+ url = url.replace('x1',id);//虚拟机id
+ url = url.replace('x2',mid);//虚拟机模板id
+ url = url.replace('x3',userid);//用户id
+ */
+ajax({
+    title:'重置接口',
+    url:'http://127.0.0.1/teachep/public/virtual/updateVirtual/x1/x2/x3',
+    type:'get',
+    request:{
+        //一下参数对应的就是url后面的x1，x2，x3 这个几个值request不用传参，以下只是注释一下
+        id:"虚拟机id",
+        mid:"虚拟机模板id",
+        userid:"用户id",
+    },
+    res:{
+        status:"0:失败 1:成功",
+        msg:"错误信息或者正确信息提示（建议直接显示msg）",
+    }
+});

@@ -111,7 +111,7 @@
                 if(index === 0){
                     this.index = 0;
                 }
-                this.$fetch('article/getArticleList',{index:this.index,type_id:this.filter_type})
+                this.$fetch('/article/getArticleList',{index:this.index,type_id:this.filter_type})
                     .then((response) => {
                         if(this.index === 0){
                             this.chapter_list = response.chapter_list;
