@@ -151,8 +151,8 @@
         }
         .name{
             font-size: 18px;
-            font-weight: bolder;
-            letter-spacing: 6px;
+            //font-weight: bolder;
+            letter-spacing: 12px;
             a{
                 text-decoration: none;
                 cursor: $white;

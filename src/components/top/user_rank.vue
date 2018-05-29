@@ -7,9 +7,16 @@
                     <el-table :data="user_data" style="width: 100%" header-align="center">
                         <el-table-column prop="rank_number" label="名次" width="100" center>
                         </el-table-column>
+                        <el-table-column label="头像" width="100">
+                            <template slot-scope="scope">
+                                <div class="head-img">
+                                    <img :src="$imgPath+scope.row.headimg" alt="" width="100%" height="100%">
+                                </div>
+                            </template>
+                        </el-table-column>
                         <el-table-column prop="user_name" label="姓名" width="200">
                         </el-table-column>
-                        <el-table-column prop="score"label="积分" width="200">
+                        <el-table-column prop="score"label="积分" width="100">
                         </el-table-column>
                         <el-table-column prop="unit" width="300" label="单位">
                         </el-table-column>
@@ -67,6 +74,12 @@
 </style>
 <style  type="text/scss" lang="scss">
     .user-rank{
+        .head-img{
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
         .paging{
             .el-pagination {
                 text-align: center;

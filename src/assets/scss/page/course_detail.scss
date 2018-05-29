@@ -18,6 +18,7 @@
             .title-b{
                 display: flex;
                 margin-top: 15px;
+                justify-content: space-between;
                 .start{
                     @include vertical-center;
                     .start-btn{
@@ -46,6 +47,7 @@
                 }
             }
             .introduction{
+                letter-spacing: 2px;
                 font-size: 15px;
                 color: $white;
                 font-weight: normal;

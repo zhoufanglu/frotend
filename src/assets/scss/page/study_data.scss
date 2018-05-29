@@ -4,7 +4,6 @@
         width: 70%;
         display: flex;
         flex-direction: column;
-        border: solid 1px $light;
         padding: 30px;
         .filter-title{
             border-bottom: solid 1px $light;
@@ -101,16 +100,17 @@
         display: flex;
         flex-direction: column;
         .hot-recommended{
+            font-size: 15px;
+            box-shadow: 0 4px 16px 0 rgba(7, 17, 27, 0.1);
+            border-radius: 12px;
             .head{
                 font-weight: bolder;
                 padding: 15px;
-                border: solid 1px $light;
                 border-bottom: none;
                 font-size: 16px;
             }
             .body{
-                border: solid 1px $light;
-                padding: 10px;
+                padding: 10px 10px 10px 20px;
                 .row{
                     display: flex;
                     cursor: pointer;
@@ -133,15 +133,15 @@
         }
         .last-comment{
             margin-top: 60px;
+            box-shadow: 0 4px 16px 0 rgba(7, 17, 27, 0.1);
+            border-radius: 12px;
             .head{
                 font-weight: bolder;
                 padding: 15px;
-                border: solid 1px $light;
                 border-bottom: none;
                 font-size: 16px;
             }
             .body{
-                border: solid 1px $light;
                 .comment-row:last-child{
                     border-bottom: none;
                 }
@@ -149,7 +149,6 @@
                     @extend .need-hover;
                     padding: 10px;
                     display: flex;
-                    border-bottom: solid 1px $light;
                     align-items: center;
                     .head-img{
                         border-radius: 50%;
@@ -159,6 +158,7 @@
                         margin: 0 16px;
                     }
                     .person-info{
+                        font-size: 15px;
                         display: flex;
                         flex-direction: column;
                         span:first-child{

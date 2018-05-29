@@ -851,7 +851,6 @@
                                 font-size: 16px;
                                 height: 40px;
                             }
-                            padding-left: 30px;
                             width:100%;
                             height: 100px;
                             display: flex;

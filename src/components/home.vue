@@ -66,7 +66,7 @@
             <div class="content-panel">
                 <div class="title">
                     <div><i class="icon-font">&#xe618;</i>{{module[1]&&module[1].name}}</div>
-                    <div @click="link('course_center')">···</div>
+                    <div @click="link('course')">···</div>
                 </div>
                 <div content="body">
                     <el-row class="course-row" :gutter="40" justify="center">
