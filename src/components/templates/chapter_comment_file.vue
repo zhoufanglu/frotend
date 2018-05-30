@@ -655,7 +655,6 @@
                                             padding-right: 0;
                                             display: flex;
                                             align-items: center;
-                                            justify-content: flex-end;
                                             width: 98%;
                                             .row-l{
                                                 border-radius: 50%;
@@ -666,8 +665,8 @@
                                             .row-r{
                                                 display: flex;
                                                 flex-direction: column;
-                                                width: 100%;
                                                 padding-left: 16px;
+                                                width: 80%;
                                                 .user-name{
                                                     color: $positive;
                                                     cursor: pointer;

@@ -35,7 +35,7 @@
                                 <div class="nav-content">
                                     <el-row v-if="course_list.length != 0" class="nav-course-row" v-for="(i,index) in course_list" :key="index">
                                         <el-col :span="6"><div class="grid-content item-left "><img :src="$imgPath+i.course_img" width="100%" height="100%" alt=""></div></el-col>
-                                        <el-col :span="12"><div class="grid-content item-mid ">
+                                        <el-col :span="10"><div class="grid-content item-mid ">
                                             <span class="title">{{i.course_name}}</span>
                                             <span class="introduction">{{i.course_introduction}}</span>
                                             <!--<span>-人名</span>-->
@@ -44,7 +44,7 @@
                                                 <span>学习至{{i.chapter_name}}</span>
                                             </div>
                                         </div></el-col>
-                                        <el-col :span="6"><div class="grid-content item-right ">
+                                        <el-col :span="8" :pull="2"><div class="grid-content item-right ">
                                             <div class="start-time">学习时间：{{i.created_at}}</div>
                                             <router-link  :to="{name:'course_detail',params:{course_id:i.id}}" class="grid-content continue-study  remove-a-css-darker">继续学习</router-link>
                                         </div></el-col>
@@ -62,7 +62,7 @@
                                 <div class="nav-content">
                                     <el-row v-if="collection_list.length != 0" class="nav-course-row" v-for="(i,index) in collection_list" :key="index">
                                         <el-col :span="6"><div class="grid-content item-left "><img :src="$imgPath+i.course_img" width="100%" height="100%" alt=""></div></el-col>
-                                        <el-col :span="12"><div class="grid-content item-mid ">
+                                        <el-col :span="10"><div class="grid-content item-mid ">
                                             <span class="title">{{i.course_name}}</span>
                                             <span class="introduction">{{i.course_introduction}}</span>
                                             <div class="study-state">
@@ -70,7 +70,7 @@
                                                 <span></span>
                                             </div>
                                         </div></el-col>
-                                        <el-col :span="6"><div class="grid-content item-right ">
+                                        <el-col :span="8" :pull="2"><div class="grid-content item-right ">
                                             <div class="start-time">学习时间：{{i.created_at}}</div>
                                             <router-link  :to="{name:'course_detail',params:{course_id:i.id}}" class="grid-content continue-study  remove-a-css-darker">开始学习</router-link>
                                         </div></el-col>
@@ -94,26 +94,26 @@
                                     </div>
                                     <div class="main">
                                         <el-row class="row">
-                                            <el-col class="title" :span="4">用户昵称</el-col>
-                                            <el-col class="row-content" :span="20">{{user_data.user_name}}</el-col>
+                                            <el-col class="title" :span="4">用户昵称：</el-col>
+                                            <el-col class="row-content" :span="20" :pull="1">{{user_data.user_name}}</el-col>
                                         </el-row>
                                         <el-row class="row">
-                                            <el-col class="title" :span="4">所在职位</el-col>
-                                            <el-col class="row-content" :span="20">{{user_data.user_job}}</el-col>
+                                            <el-col class="title" :span="4">所在职位：</el-col>
+                                            <el-col class="row-content" :span="20" :pull="1">{{user_data.user_job}}</el-col>
                                         </el-row >
                                         <el-row class="row">
-                                            <el-col class="title" :span="4">所在城市</el-col>
-                                            <el-col class="row-content" :span="20">
+                                            <el-col class="title" :span="4">所在城市：</el-col>
+                                            <el-col class="row-content" :span="20" :pull="1">
                                                 {{getCity}}
                                             </el-col>
                                         </el-row>
                                         <el-row class="row">
-                                            <el-col class="title" :span="4">用户性别</el-col>
-                                            <el-col class="row-content" :span="20">{{user_data.user_sex}}</el-col>
+                                            <el-col class="title" :span="4">用户性别：</el-col>
+                                            <el-col class="row-content" :span="20" :pull="1">{{user_data.user_sex}}</el-col>
                                         </el-row>
                                         <el-row class="row">
-                                            <el-col class="title" :span="4">个性签名</el-col>
-                                            <el-col class="row-content" :span="20">{{user_data.user_autograph}}</el-col>
+                                            <el-col class="title" :span="4" >个性签名：</el-col>
+                                            <el-col class="row-content" :span="20" :pull="1">{{user_data.user_autograph}}</el-col>
                                         </el-row>
                                     </div>
                                 </div>
