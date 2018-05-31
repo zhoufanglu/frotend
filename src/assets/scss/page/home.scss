@@ -5,7 +5,7 @@ $content-top-height:300px;
         padding-bottom: 30px;
         .content-top {
             box-shadow: 0 4px 8px 0 rgba(7, 17, 27, .1);
-            //border-radius: 12px;
+            border-radius: 6px;
             background-color: $theme;
             color: $white;
             min-height:$content-top-height;
@@ -16,7 +16,8 @@ $content-top-height:300px;
                     height: $content-top-height;
                 }
                 .s-row {
-                    height: calc(#{$content-top-height}/4);
+                    //height: calc(#{$content-top-height}/4);
+                    height: 60px;
                     @include vertical-center;
                     >span{
                         @extend .left-title;
@@ -34,7 +35,13 @@ $content-top-height:300px;
                         color: $light;
                         cursor: pointer;
                         &:hover {
+                            color: $white;
                             background-color: $theme_lighter;
+                        }
+                        .left-title-row{
+                            display: flex;
+                            justify-content: space-between;
+                            margin-left: 36%;
                         }
                     }
                     .hover {
@@ -94,16 +101,29 @@ $content-top-height:300px;
     .top-title-detail{
         display: flex;
         align-items: center;
-        >div{
-            border: solid 1px $light;
-            padding: 10px;
-            margin-left: 30px;
+        margin-top: 16px;
+        .content-title-item{
+           margin-left: 30px;
             cursor: pointer;
             font-size: 16px;
             &:hover{
                 color: $danger;
-                border: solid 1px $danger;
             }
+        }
+    }
+    .content-title{
+        display: flex;
+        align-items: center;
+        span{
+            margin-left: 30px;
+            font-weight: bolder;
+            font-size: 14px;
+        }
+        div{
+            width: 90%;
+            height: 1px;
+            margin-left: 12px;
+            background-color: rgba(77,85,93,.08);
         }
     }
 }
@@ -132,7 +152,7 @@ $content-top-height:300px;
         }
     }
     .bg-img{
-        border-radius: 12px;
+        border-radius: 6px;
         height: 110px!important;
         width: 192px;
         border: solid 1px $stable;

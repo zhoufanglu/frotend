@@ -10,12 +10,20 @@
                             <div class="grid-content">
                                 <div class="s-row" v-for="(i,index) in top_title" v-if="index < 4">
                                     <el-popover class="home-popover" placement="right"  trigger="hover" :visible-arrow="false">
+                                        <div class="content-title">
+                                            <span>全部</span>
+                                            <div></div>
+                                        </div>
                                         <div class="top-title-detail">
                                             <template v-for="j in i.couser_type_detail">
-                                                <div @click="link('course',j.id,j.couser_level)">{{j.couser_type_name}}</div>
+                                                <div class="content-title-item" @click="link('course',j.id,j.couser_level)">{{j.couser_type_name}}</div>
                                             </template>
                                         </div>
-                                        <el-button class="left-title"   :open-delay="0" slot="reference">{{i.couser_type_name}}<i class="el-icon-arrow-right"></i></el-button>
+                                        <el-button class="left-title"   :open-delay="0" slot="reference">
+                                            <div class="left-title-row">
+                                                <span>{{i.couser_type_name}}</span><i class="el-icon-arrow-right"></i>
+                                            </div>
+                                        </el-button>
                                     </el-popover>
                                 </div>
                             </div>
