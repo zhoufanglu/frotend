@@ -184,8 +184,7 @@
                     .then((response) => {
                         //console.log(173,response)
                         if(response.status === 1){
-                            //this.virtual.status = Number(response.data.virtual_status);
-                            this.virtual.status=2;
+                            this.virtual.status = Number(response.data.virtual_status);
                             this.virtual.kvm_id = response.data.kvm_id;
                             this.virtual.kvmbase_id = response.data.kvmbase_id;
                         }else if(response.status === 0){

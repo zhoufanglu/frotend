@@ -5,7 +5,7 @@
             <div class="content-top">
                 <div class="first-row">
                     <el-row>
-                        <el-col :span="6">
+                        <el-col :span="5">
                             <!--top左边标题-->
                             <div class="grid-content">
                                 <div class="s-row" v-for="(i,index) in top_title" v-if="index < 4">
@@ -29,7 +29,7 @@
                             </div>
                         </el-col>
                         <!--轮播-->
-                        <el-col :span="18">
+                        <el-col :span="19">
                             <div class="grid-content">
                                 <div class="shuffling">
                                     <el-carousel>

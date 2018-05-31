@@ -3,6 +3,7 @@ $content-top-height:300px;
     padding-bottom: 100px;
     .content {
         padding-bottom: 30px;
+        width: 1152px!important;
         .content-top {
             box-shadow: 0 4px 8px 0 rgba(7, 17, 27, .1);
             border-radius: 6px;
@@ -10,7 +11,7 @@ $content-top-height:300px;
             color: $white;
             min-height:$content-top-height;
             margin-top: 30px;
-            .el-col-6 {
+            .el-col-5 {
                 padding: 0 0 0 16px;
                 .grid-content{
                     height: $content-top-height;
@@ -31,7 +32,7 @@ $content-top-height:300px;
                         border-top-left-radius: 10px;
                         border-bottom-left-radius: 10px;
                         padding-left: 10px;
-                        font-size: 18px;
+                        font-size: 16px;
                         color: $light;
                         cursor: pointer;
                         &:hover {
@@ -41,7 +42,7 @@ $content-top-height:300px;
                         .left-title-row{
                             display: flex;
                             justify-content: space-between;
-                            margin-left: 36%;
+                            margin-left: 26%;
                         }
                     }
                     .hover {

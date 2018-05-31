@@ -117,7 +117,7 @@
         .is-show-head{
             @include vertical-center;
             justify-content: space-between;
-            width: 40%;
+            width: 50%;
             height: 100%;
             padding: 0 10px;
             .no-warp{
@@ -152,7 +152,7 @@
         .name{
             font-size: 18px;
             //font-weight: bolder;
-            letter-spacing: 12px;
+            letter-spacing: 2px;
             a{
                 text-decoration: none;
                 cursor: $white;
