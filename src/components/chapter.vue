@@ -62,17 +62,20 @@
                         <div>我是VM</div>
                         <iframe height="100%" width="100%" src="www.baidu.com" frameborder="0"></iframe>
                         <div class="vm-state-btn">
-                            <el-button :disabled="virtual.status === 1"
+                            <!--1:开机状态
+                                2：挂起状态
+                                0：关机状态-->
+                            <el-button :disabled="virtual.status === 1 || virtual.status === 2"
                                        @click="virtualOperate('startVirtual')">启动</el-button>
-                            <el-button :disabled="virtual.status === 0"
+                            <el-button :disabled="virtual.status === 0 || virtual.status === 2"
                                        @click="virtualOperate('closeVirtual')">关闭</el-button>
-                            <el-button :disabled="virtual.status === 2 || virtual.status === 0"
+                            <el-button :disabled="virtual.status === 0 || virtual.status === 2"
                                        @click="virtualOperate('suspendVirtual')">挂起</el-button>
-                            <el-button :disabled="virtual.status === 0"
+                            <el-button :disabled="virtual.status === 0 || virtual.status === 1"
                                        @click="virtualOperate('resumeVirtual')">恢复</el-button>
-                            <el-button :disabled="virtual.status === 0"
+                            <el-button :disabled="virtual.status === 0 || virtual.status === 2"
                                        @click="virtualOperate('resetVirtual')">重启</el-button>
-                            <el-button :disabled="virtual.status === 0"
+                            <el-button :disabled="virtual.status === 1 || virtual.status === 2"
                                        @click="virtualOperate('updateVirtual')">重置</el-button>
                         </div>
                     </div>
@@ -212,19 +215,6 @@
                     .catch(error =>{
                         console.log(err);
                     });
-                /*if(type === 'startVirtual'){ //启动
-                    url ="/virtual/startVirtual/"+this.virtual.kvm_id+"/"+this.virtual.kvmbase_id+""
-                }else if(type === 'closeVirtual'){ //关闭
-
-                }else if(type === 'suspendVirtual'){ //挂起
-
-                }else if(type === 'resumeVirtual'){ //恢复
-
-                }else if(type === 'resetVirtual'){ //重启
-
-                }else if(type === 'UpdateVirtual'){ //重启
-
-                }*/
             }
         },
         mounted(){
