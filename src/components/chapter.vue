@@ -59,8 +59,8 @@
                         </div>
                     </div>
                     <div class="chapter-r">
-                        <div>我是VM</div>
-                        <iframe height="100%" width="100%" src="www.baidu.com" frameborder="0"></iframe>
+                        <iframe v-if="virtual.status !== 0" height="100%" width="100%" src="www.baidu.com" frameborder="0"></iframe>
+                        <div v-if="virtual.status === 0" class="virtual-close-info" ><i class="icon-font">&#xe60d;</i><span>虚拟机未开启，请先开启。。。</span></div>
                         <div class="vm-state-btn">
                             <!--1:开机状态
                                 2：挂起状态
@@ -291,7 +291,16 @@
             width: 50%;
             padding: 16px;
             border-left: solid 1px $light;
-            .body-vm{
+            .virtual-close-info{
+                width: 100%;
+                height: 100%;
+                font-size: 20px;
+                color: $dark;
+                @include vertical-center;
+                i{
+                    font-size: 30px;
+                    margin-right: 16px;
+                }
             }
             .vm-state-btn{
                 margin-top: 30px;
