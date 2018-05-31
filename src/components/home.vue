@@ -49,7 +49,7 @@
             <div class="content-panel">
                 <div class="title">
                     <div><i class="icon-font">&#xe618;</i>{{module[0]&&module[0].name}}</div>
-                    <div @click="link('course')">···</div>
+                    <div @click="link('course')" class="see-more-circle">···</div>
                 </div>
                 <div content="body">
                     <el-row class="course-row" :gutter="40" justify="center">
@@ -74,7 +74,7 @@
             <div class="content-panel">
                 <div class="title">
                     <div><i class="icon-font">&#xe618;</i>{{module[1]&&module[1].name}}</div>
-                    <div @click="link('course')">···</div>
+                    <div class="see-more-circle" @click="link('course')">···</div>
                 </div>
                 <div content="body">
                     <el-row class="course-row" :gutter="40" justify="center">
