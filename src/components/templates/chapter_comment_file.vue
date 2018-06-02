@@ -848,15 +848,18 @@
                             .similar-list-title{
                                 font-weight: bolder;
                                 font-size: 16px;
-                                height: 40px;
+                                @include ellipsis(1);
                             }
                             width:100%;
                             height: 100px;
                             display: flex;
                             flex-direction: column;
-                            justify-content: space-around;
+                            //justify-content: space-around;
                             margin-left: 10px;
-                            @include ellipsis(3);
+                            div:last-child{
+                                margin-top:6px;
+                                @include ellipsis(3);
+                            }
                             div:first-child{
                                 padding-left: 0;
                             }

@@ -27,14 +27,14 @@
                     <div class="previous-or-next-panel">
                         <div class="previous-or-next">
                             <div>
-                                <el-button v-if="other_chapter_info.previous_name" @click="getArticleInfo(other_chapter_info.previous_id)" circle>上一篇</el-button>
-                                <el-button v-else disabled circle>没有更多了</el-button>
+                                <el-button v-if="other_chapter_info.previous_name" @click="getArticleInfo(other_chapter_info.previous_id)" >上一篇</el-button>
+                                <el-button v-else disabled >没有更多了</el-button>
                                 <span><!--{{other_chapter_info.previous_type}}:-->{{other_chapter_info.previous_name}}</span>
                             </div>
                             <div>
                                 <span><!--{{other_chapter_info.next_type}}:-->{{other_chapter_info.next_name}}</span>
-                                <el-button v-if="other_chapter_info.next_name" circle @click="getArticleInfo(other_chapter_info.next_id)">下一篇</el-button>
-                                <el-button v-else disabled circle>没有更多了</el-button>
+                                <el-button v-if="other_chapter_info.next_name"  @click="getArticleInfo(other_chapter_info.next_id)">下一篇</el-button>
+                                <el-button v-else disabled >没有更多了</el-button>
                             </div>
                         </div>
                     </div>

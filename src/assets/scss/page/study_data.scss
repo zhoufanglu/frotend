@@ -1,5 +1,6 @@
 .content{
     display: flex;
+    padding-bottom:60px;
     .content-l{
         width: 70%;
         display: flex;
@@ -16,7 +17,6 @@
                 padding: 30px;
                 cursor: pointer;
                 .bg-img{
-                    width: 210px;
                     height: 120px;
                 }
             }
@@ -166,6 +166,7 @@
                             padding: 10px 0;
                         }
                         span:last-child{
+                            font-size:14px;
                             @include ellipsis(2);
                         }
                     }

@@ -16,7 +16,7 @@
         min-height: 200px;
         @include vertical-center;
         justify-content: center!important;
-        font-size: 24px;
+        font-size: 20px;
         color: $stable;
         //background-color: $white;
         i{
