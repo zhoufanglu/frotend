@@ -46,14 +46,14 @@
                 <div>
                 </div>
             </div>
-            <div class="content-panel">
+            <div class="content-panel" v-for="(m,index) in module">
                 <div class="title">
-                    <div><i class="icon-font">&#xe618;</i>{{module[0]&&module[0].name}}</div>
+                    <div><i class="icon-font">&#xe618;</i>{{m.name}}</div>
                     <div @click="link('course')" class="see-more-circle">···</div>
                 </div>
                 <div content="body">
                     <el-row class="course-row" :gutter="40" justify="center">
-                        <el-col :span="4" v-for="(j,index) in course_one" :key="index">
+                        <el-col :span="4" v-for="(j,index) in m.course"  :key="index">
                             <router-link :to="{name:'course_detail', params:{course_id:j.id}}" class="grid-content course-item bg-purple" >
                                 <div class="bg-img">
                                     <img :src="$imgPath+j.course_img" alt="" width="100%" height="100%">
@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="content-panel">
+            <!--<div class="content-panel">
                 <div class="title">
                     <div><i class="icon-font">&#xe618;</i>{{module[1]&&module[1].name}}</div>
                     <div class="see-more-circle" @click="link('course')">···</div>
@@ -94,7 +94,7 @@
                         </el-col>
                     </el-row>
                 </div>
-            </div>
+            </div>-->
         </div>
         <teach-foot></teach-foot>
     </div>

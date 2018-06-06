@@ -22,26 +22,29 @@ ajax({
                     {id:1,couser_type_name:''}
                 ]
             }],  //轮播左边的标题内容，个数需要固定
-            module:[{id:1,name:'一级标题1'},{id:2,name:'一级标题2'}],//一级课题标题（模块列表）
+            module:[
+                    {
+                        id:1,
+                        name:'一级标题1',
+                        course: [ // 12项  一级标题1下的课程
+                            {
+                                id:'',
+                                course_name:'我是课程',       //名字
+                                course_img:'img_src',        //图片路径
+                                course_learn_people:'',      //所学习人数
+                                course_type:['a类','b类'],             //所属类别(s数组)
+                                course_difficult:'初级',    //难度级别
+                                course_introduction:'入门',   //入门
+                            },
+                        ],
+                    },
+                ],//一级课题标题（模块列表）
             shuffling_img_link:[{
                 id:"",
                 picture_name:"图片名称",
                 picture_address:"图片地址",
                 picture_href:"图片链接",
             }],//轮播图片路径
-            course: [ // 12项  一级标题1下的课程
-                {
-                    id:'',
-                    course_name:'我是课程',       //名字
-                    course_img:'img_src',        //图片路径
-                    course_learn_people:'',      //所学习人数
-                    course_type:['a类','b类'],             //所属类别(s数组)
-                    course_difficult:'初级',    //难度级别
-                    course_introduction:'入门',   //入门
-                    course_module:'所属模块'
-                },
-
-            ],
         },
         err:{
             msg:'报错信息'
