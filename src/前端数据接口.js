@@ -29,7 +29,7 @@ ajax({
                 picture_address:"图片地址",
                 picture_href:"图片链接",
             }],//轮播图片路径
-            course_one: [ // 12项  一级标题1下的课程
+            course: [ // 12项  一级标题1下的课程
                 {
                     id:'',
                     course_name:'我是课程',       //名字
@@ -37,21 +37,11 @@ ajax({
                     course_learn_people:'',      //所学习人数
                     course_type:['a类','b类'],             //所属类别(s数组)
                     course_difficult:'初级',    //难度级别
-                    course_introduction:'入门'   //入门
+                    course_introduction:'入门',   //入门
+                    course_module:'所属模块'
                 },
 
             ],
-            course_two: [ // 12项 一级标题2下的课程
-                {
-                    id:'',
-                    course_name:'我是课程',       //名字
-                    course_img:'img_src',        //图片路径
-                    course_learn_people:'',      //所学习人数
-                    course_type:['A类'],             //所属类别
-                    course_difficult:'初级',    //难度级别
-                    course_introduction:'入门'   //入门
-                },
-            ]
         },
         err:{
             msg:'报错信息'

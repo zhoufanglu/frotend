@@ -11,13 +11,14 @@
                             <el-tab-pane label="章节" name="chapter" v-show="isLoad">
                                 <div class="chapter-list" v-for=" (i,index) in tab_items.chapter_list">
                                     <i class="icon-font">&#xe60a;</i><span>第{{index + 1}}章&nbsp;&nbsp;&nbsp;{{i.chapter_name}}</span>
-                                    <router-link  :to="{name:'chapter',params:{chapter_child_id:j.id}}" @click.native="linkChapter(j.id)" class="detail-list remove-a-css "v-for="(j,index) in i.detail_list" :key="index">
+                                    <!--:to="{name:'chapter',params:{chapter_child_id:j.id}}"-->
+                                    <div  @click="linkChapter(j.id)" class="detail-list remove-a-css "v-for="(j,index) in i.detail_list" :key="index">
                                         <div class="row need-hover">
                                             <i class="icon-font">&#xe6b7;</i><span>{{j.name}}</span>
                                             <div class="status" v-if="j.chapter_status === 1"><i class="el-icon-success fn-color-balanced "></i>已学习</div>
                                             <div class="status" v-if="j.chapter_status === 0"><i class="el-icon-error fn-color-danger"></i>未学习</div>
                                         </div>
-                                    </router-link>
+                                    </div>
                                 </div>
                                 <template v-if="tab_items.chapter_list.length == 0">
                                     <no-data-panel tip="暂无相关章节"></no-data-panel>
@@ -490,14 +491,27 @@
                 });
             },
             linkChapter(chapter_chiid_id){
-                //console.log(492,this.router_type);
+            //:to="{name:'chapter',params:{chapter_child_id:j.id}}
+            if(this.$state.user.is_login === false){ //未登录 给提示
+                this.$message.warning("请先登录后查看");
+                return false;
+            }else{ //登录后跳转
                 if(this.router_type === 'chapter'){
                     //点击子章节，重新刷新数据
                     if(this.$state.current.chapter_child_id !== chapter_chiid_id){
                         this.$state.current.chapter_child_id = chapter_chiid_id;
                         location.reload();
                     }
+                }else if (this.router_type === 'course_detail'){
+                    this.$router.push({
+                        //path: 'yourPath',
+                        name: 'chapter',
+                        params: {
+                            chapter_child_id:chapter_chiid_id,
+                        }
+                    })
                 }
+            }
             },
         },
         created(){
