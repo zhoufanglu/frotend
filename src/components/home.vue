@@ -70,31 +70,6 @@
                     </el-row>
                 </div>
             </div>
-
-            <!--<div class="content-panel">
-                <div class="title">
-                    <div><i class="icon-font">&#xe618;</i>{{module[1]&&module[1].name}}</div>
-                    <div class="see-more-circle" @click="link('course')">···</div>
-                </div>
-                <div content="body">
-                    <el-row class="course-row" :gutter="40" justify="center">
-                        <el-col :span="4" v-for="(j,index) in course_two" :key="index">
-                            <router-link :to="{name:'course_detail',params:{course_id:j.id}}" class="grid-content course-item bg-purple" >
-                                <div class="bg-img">
-                                    <img :src="$imgPath+j.course_img" alt="" width="100%" height="100%">
-                                    <div class="course-type">
-                                        <span :title="k" v-for="k in j.course_type">{{k}}</span>
-                                    </div>
-                                </div>
-                                <div class="name">{{j.course_name}}</div>
-                                <div class="small-item">
-                                    <span>{{j.course_difficult}}</span><i class="icon-font">&#xe623;</i>{{j.course_learn_people}}
-                                </div>
-                            </router-link>
-                        </el-col>
-                    </el-row>
-                </div>
-            </div>-->
         </div>
         <teach-foot></teach-foot>
     </div>
