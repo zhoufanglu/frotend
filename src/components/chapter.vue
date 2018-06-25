@@ -38,15 +38,9 @@
                             </div>
                             <div class="bottom">
                                 <div v-if="chapter_child.image_text_type === 1">
-                                    这是一张图片
+
                                 </div>
                                 <div v-if="chapter_child.image_text_type === 2">
-                                    <!--<video src="../assets/video/vue-2-power-model.mp4" style="width: 100%" controls="controls">
-                                        您的浏览器不支持 video 标签。
-                                    </video>
-                                    <video :src="$imgPath+chapter_child.image_text_video" style="width: 100%" controls="controls">
-                                        您的浏览器不支持 video 标签。
-                                    </video>-->
                                     <video-player  class="video-player vjs-custom-skin"
                                                    ref="videoPlayer"
                                                    :playsinline="true"
@@ -54,12 +48,12 @@
                                     ></video-player>
 
                                 </div>
-                                <div class="body-vm">{{chapter_child.image_text_detail}}</div>
+                                <div v-html="chapter_child.image_text_detail" class="body-vm">{{chapter_child.image_text_detail}}</div>
                             </div>
                         </div>
                     </div>
                     <div class="chapter-r">
-                        <iframe v-if="virtual.status !== 0" height="100%" width="100%" src="www.baidu.com" frameborder="0"></iframe>
+                        <iframe v-if="virtual.status !== 0" height="100%" width="100%" :src="virtual.virtual_url" frameborder="0"></iframe>
                         <div v-if="virtual.status === 0" class="virtual-close-info" ><i class="icon-font">&#xe60d;</i><span>虚拟机未开启，请先开启。。。</span></div>
                         <div class="vm-state-btn">
                             <!--1:开机状态
@@ -127,6 +121,7 @@
                     status:0,//1:开机状态 2：挂起状态 0：关机状态
                     kvm_id:"",//虚拟机id
                     kvmbase_id:'',//虚拟机模板id
+                    virtual_url:""
                 }
             }
         },
@@ -187,6 +182,7 @@
                             this.virtual.status = Number(response.data.virtual_status);
                             this.virtual.kvm_id = response.data.kvm_id;
                             this.virtual.kvmbase_id = response.data.kvmbase_id;
+                            this.virtual.virtual_url = response.data.virtual_url;
                         }else if(response.status === 0){
                             this.$message.success(response.msg);
                         }

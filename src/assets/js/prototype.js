@@ -12,7 +12,7 @@ let usePrototype = () =>{
     Vue.prototype.$fetch = fetch;
     Vue.prototype.$patch = patch;
     Vue.prototype.$put = put;
-    Vue.prototype.$imgPath = 'http://111.231.75.123/';
+    Vue.prototype.$imgPath = 'http://10.7.5.34/';
     //Vue.prototype.$imgPath = 'http://111.230.100.91/teachep/public/';
     /**
      * 请求头设置

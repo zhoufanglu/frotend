@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
       proxyTable: {
           '/': {
-              target: 'http://111.231.75.123/',//设置你调用的接口域名和端口号 别忘了加http
+              target: 'http://10.7.5.34/',//设置你调用的接口域名和端口号 别忘了加http
               changeOrigin: true,
               pathRewrite: {
                   '^/': '/'//这里理解成用‘/api’代替target里面的地址，后面组件中我们掉接口时直接用api代替 比如我要调用'http://40.00.100.100:3002/user/add'，直接写‘/api/user/add’即可
@@ -64,7 +64,7 @@ module.exports = {
      * Source Maps
      */
 
-    productionSourceMap: true,//打包后文件体积可以减少百分之八十 如何是false
+    productionSourceMap: false,//打包后文件体积可以减少百分之八十 false减少体积
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 

@@ -18,7 +18,7 @@
                     </div>
                     <div class="study-data-content">
                         <div class="title">{{chapter_detail_info.chapter_second_name}}</div>
-                        <div class="text">
+                        <div class="text" v-html="chapter_detail_info.chapter_text">
                             {{chapter_detail_info.chapter_text}}
                             <img :src="chapter_detail_info.chapter_img" alt="">
                         </div>
