@@ -4,6 +4,7 @@ import axios from 'axios';
 
 let loadinginstace;
 axios.defaults.timeout = 10000;
+axios.default = IPCONFIG;
 // http请求拦截器
 axios.interceptors.request.use(config => {
     // element ui Loading方法
