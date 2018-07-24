@@ -241,6 +241,7 @@
             display: flex;
             flex-direction: column;
             padding: 16px;
+            overflow: auto;
             .title{
                 @include vertical-center;
                 justify-content: space-between;

@@ -74,6 +74,9 @@
 </style>
 <style  type="text/scss" lang="scss">
     .user-rank{
+        .user-table{
+            width: 100%;
+        }
         .head-img{
             width: 36px;
             height: 36px;
